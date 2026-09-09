@@ -1,0 +1,24 @@
+__pycache__/
+.venv/
+.streamlit/
+.cache/
+*.pyc
+.DS_Store
+data/player_stats.csv
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.vercel/
+frontend/app/page 2.tsx
+
+# Python artifacts
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Local secrets
+.env
+.env.*
+!.env.example
