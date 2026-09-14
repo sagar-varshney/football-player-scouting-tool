@@ -4,6 +4,26 @@ This project should move away from generated metrics. The scouting engine needs 
 
 ## Recommended Path
 
+## Scout-Grade Reality Check
+
+If the goal is accurate player scouting, generated data and fantasy data are not enough. The dataset needs to represent actual football actions by player, club, season, and ideally match context. That means minutes, positions played, team, competition, shot quality, passing profile, carrying, defensive events, pressure events, and role context.
+
+The serious options are:
+
+| Tier | Source | Best Use | Fit |
+| --- | --- | --- | --- |
+| Professional | Wyscout | Player scouting, advanced player stats, player career, competition-season data | Very strong |
+| Professional | Hudl StatsBomb | Event data, xG, pressures, carries, freeze frames, advanced analysis | Very strong |
+| Professional | Opta / Stats Perform | Live and historical event/stat feeds, Opta Vision tracking, recruitment profiling | Very strong |
+| Professional | SkillCorner | Tracking, physical data, off-ball runs, game intelligence | Strong add-on |
+| Paid API | Sportmonks | Structured player statistics, detailed positions, transfers, expected endpoints | Good if plan coverage is enough |
+| Paid/free API | API-FOOTBALL / API-Sports | Broad football API with player/team/fixture stats | Good first API to test |
+| Free | FPL API | Real current PL player data, xG/xA, minutes, fantasy-oriented form | Useful bridge, not pure scouting |
+| Free | StatsBomb Open Data | Event-data prototyping on selective competitions | Great learning source, incomplete EPL coverage |
+| Reference only | football-data.org | Teams, fixtures, squads, scorer lists, person-match metadata | Not enough for scouting metrics |
+
+Recommendation: use **API-FOOTBALL or Sportmonks** if we want an affordable working app soon. Use **Wyscout, StatsBomb, or Opta** if we want the tool to be genuinely scout-grade.
+
 ### 1. API-FOOTBALL / API-Sports
 
 Best fit for the next implementation pass.
