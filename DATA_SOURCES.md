@@ -124,6 +124,31 @@ Gaps:
 
 For the next real data implementation, start with **API-FOOTBALL** if the goal is a usable Premier League player scouting prototype quickly. Use **Sportmonks** if we decide to pay for a more production-oriented provider. Use **FPL API** as the free fallback to replace obviously fake output metrics while we evaluate paid APIs.
 
+## Local Test Results
+
+Run:
+
+```bash
+python scripts/test_data_sources.py
+```
+
+Latest local report:
+
+- `data/source_tests/REPORT.md`
+- `data/source_tests/summary.json`
+- `data/source_tests/fpl_players_normalized_sample.csv`
+- `data/source_tests/fpl_bootstrap_sample.json`
+- `data/source_tests/fpl_element_1_sample.json`
+- `data/source_tests/statsbomb_competitions_sample.json`
+
+Current findings:
+
+- FPL Public API works without a key and returned current player rows with real minutes, starts, goals, assists, expected goals, expected assists, CBI, recoveries, tackles, influence, creativity, and threat.
+- FPL player history works without a key and returned gameweek-level player rows plus past-season summaries.
+- StatsBomb Open Data works without a key and returned real event-data competition metadata.
+- FBref direct access returned `403` from the local probe, so do not build the product around scraping it.
+- football-data.org, API-FOOTBALL/API-Sports, and Sportmonks need credentials before we can judge actual plan coverage.
+
 ## Import Plan
 
 1. Create provider-specific raw importers.

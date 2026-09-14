@@ -1,0 +1,184 @@
+[
+  {
+    "provider": "FPL Public API",
+    "status": "ok",
+    "verdict": "best free bridge for real current PL player stats, but fantasy-shaped",
+    "url": "https://fantasy.premierleague.com/api/bootstrap-static/",
+    "http_status": 200,
+    "rows": 658,
+    "useful_fields": [
+      "id",
+      "first_name",
+      "second_name",
+      "web_name",
+      "team",
+      "element_type",
+      "minutes",
+      "goals_scored",
+      "assists",
+      "expected_goals",
+      "expected_assists",
+      "ict_index",
+      "influence",
+      "creativity",
+      "threat"
+    ],
+    "missing_for_scouting": [
+      "progressive_passes",
+      "progressive_carries",
+      "pressures",
+      "detailed tactical position"
+    ],
+    "notes": [
+      "Normalized CSV sample: data/source_tests/fpl_players_normalized_sample.csv"
+    ],
+    "sample_file": "data/source_tests/fpl_bootstrap_sample.json",
+    "elapsed_ms": 503
+  },
+  {
+    "provider": "FPL Player History",
+    "status": "ok",
+    "verdict": "useful for player-gameweek time series and past-season summaries",
+    "url": "https://fantasy.premierleague.com/api/element-summary/1/",
+    "http_status": 200,
+    "rows": 4,
+    "useful_fields": [
+      "round",
+      "opponent_team",
+      "minutes",
+      "goals_scored",
+      "assists",
+      "expected_goals",
+      "expected_assists",
+      "expected_goal_involvements",
+      "expected_goals_conceded",
+      "starts",
+      "total_points"
+    ],
+    "missing_for_scouting": [
+      "passing detail",
+      "carries",
+      "pressures",
+      "true event locations"
+    ],
+    "notes": [],
+    "sample_file": "data/source_tests/fpl_element_1_sample.json",
+    "elapsed_ms": 276
+  },
+  {
+    "provider": "StatsBomb Open Data",
+    "status": "ok",
+    "verdict": "excellent event-data sandbox, not complete modern EPL coverage",
+    "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/competitions.json",
+    "http_status": 200,
+    "rows": 80,
+    "useful_fields": [
+      "competition_id",
+      "season_id",
+      "competition_name",
+      "season_name",
+      "match_updated",
+      "match_available_360"
+    ],
+    "missing_for_scouting": [
+      "complete current Premier League coverage",
+      "licensed production feed"
+    ],
+    "notes": [
+      "Relevant competition-season rows in sample filter: 32"
+    ],
+    "sample_file": "data/source_tests/statsbomb_competitions_sample.json",
+    "elapsed_ms": 69
+  },
+  {
+    "provider": "FBref-Style Public Tables",
+    "status": "failed",
+    "verdict": "check access terms or use licensed/exported datasets",
+    "url": "https://fbref.com/en/comps/9/stats/Premier-League-Stats",
+    "http_status": 403,
+    "rows": null,
+    "useful_fields": [],
+    "missing_for_scouting": [],
+    "notes": [
+      "Forbidden"
+    ],
+    "sample_file": null,
+    "elapsed_ms": null
+  },
+  {
+    "provider": "Kaggle Public Datasets",
+    "status": "manual_review",
+    "verdict": "possible historical CSV source, but dataset freshness and license vary per upload",
+    "url": "https://www.kaggle.com/datasets?search=premier+league+player+stats+xg",
+    "http_status": null,
+    "rows": null,
+    "useful_fields": [],
+    "missing_for_scouting": [
+      "stable API provider",
+      "guaranteed current/live updates",
+      "consistent schema"
+    ],
+    "notes": [
+      "Kaggle API/download requires a Kaggle account token and manual dataset choice.",
+      "Use only datasets with clear license, season coverage, and field definitions."
+    ],
+    "sample_file": null,
+    "elapsed_ms": null
+  },
+  {
+    "provider": "football-data.org",
+    "status": "needs_key",
+    "verdict": "identity/fixtures/squads only; not enough scouting metrics",
+    "url": "https://api.football-data.org/v4/competitions/PL/teams?season=2025",
+    "http_status": null,
+    "rows": null,
+    "useful_fields": [],
+    "missing_for_scouting": [
+      "xG",
+      "xA",
+      "key passes",
+      "dribbles",
+      "progressive actions",
+      "pressures"
+    ],
+    "notes": [
+      "Set FOOTBALL_DATA_TOKEN to test authenticated responses."
+    ],
+    "sample_file": null,
+    "elapsed_ms": null
+  },
+  {
+    "provider": "API-FOOTBALL / API-Sports",
+    "status": "needs_key",
+    "verdict": "likely best next paid/free-key prototype source for player-season and fixture-player stats",
+    "url": "https://v3.football.api-sports.io/players?league=39&season=2025&page=1",
+    "http_status": null,
+    "rows": null,
+    "useful_fields": [],
+    "missing_for_scouting": [
+      "must verify xG/xA availability on your plan"
+    ],
+    "notes": [
+      "Set one of: API_FOOTBALL_KEY, APISPORTS_KEY, RAPIDAPI_KEY."
+    ],
+    "sample_file": null,
+    "elapsed_ms": null
+  },
+  {
+    "provider": "Sportmonks",
+    "status": "needs_key",
+    "verdict": "best structured paid candidate; test statistics, transfers, detailed positions, xG includes",
+    "url": "https://api.sportmonks.com/v3/football/players?per_page=5&include=statistics.details.type",
+    "http_status": null,
+    "rows": null,
+    "useful_fields": [],
+    "missing_for_scouting": [
+      "must verify Premier League historical depth and xG package"
+    ],
+    "notes": [
+      "Set SPORTMONKS_TOKEN to test authenticated responses."
+    ],
+    "sample_file": null,
+    "elapsed_ms": null
+  }
+]
