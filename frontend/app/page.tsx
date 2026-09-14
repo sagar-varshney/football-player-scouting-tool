@@ -19,31 +19,22 @@ import {
   ZAxis,
 } from "recharts";
 
-type Feature =
-  | "goals_p90"
-  | "xg_p90"
-  | "assists_p90"
-  | "xa_p90"
-  | "shots_p90"
-  | "key_passes_p90"
-  | "pass_accuracy_pct"
-  | "dribbles_p90"
-  | "tackles_interceptions_p90"
-  | "clearances_p90"
-  | "progressive_passes_p90";
+type Feature = string;
 
 type Player = {
   player_id: number;
   player_name: string;
   position: string;
-  age: number;
+  age?: number;
   club: string;
   season?: string;
+  minutes?: number;
+  matches?: number;
+  source_provider?: string;
   cluster: number;
   archetype: string;
-} & Record<Feature, number> &
-  Record<`scaled_${Feature}`, number> &
-  Record<`pct_${Feature}`, number>;
+  [key: string]: number | string | undefined;
+};
 
 type Payload = {
   metadata: {
@@ -52,6 +43,7 @@ type Payload = {
     clubs: string[];
     seasons?: string[];
     features: Feature[];
+    source_provider?: string;
     data_note: string;
   };
   players: Player[];
@@ -71,11 +63,8 @@ const metricLabels: Record<Feature, string> = {
   xa_p90: "xA",
   shots_p90: "Shots",
   key_passes_p90: "Key Passes",
-  pass_accuracy_pct: "Pass Accuracy",
-  dribbles_p90: "Dribbles",
-  tackles_interceptions_p90: "Tkl + Int",
-  clearances_p90: "Clearances",
-  progressive_passes_p90: "Progressive Passes",
+  xg_chain_p90: "xGChain",
+  xg_buildup_p90: "xGBuildup",
 };
 
 const compactLabels: Record<Feature, string> = {
@@ -85,11 +74,8 @@ const compactLabels: Record<Feature, string> = {
   xa_p90: "xA",
   shots_p90: "Shots",
   key_passes_p90: "KeyP",
-  pass_accuracy_pct: "Pass%",
-  dribbles_p90: "Drib",
-  tackles_interceptions_p90: "DefAct",
-  clearances_p90: "Clr",
-  progressive_passes_p90: "ProgP",
+  xg_chain_p90: "Chain",
+  xg_buildup_p90: "Build",
 };
 
 const radarMetrics: Feature[] = [
@@ -99,11 +85,8 @@ const radarMetrics: Feature[] = [
   "assists_p90",
   "xa_p90",
   "key_passes_p90",
-  "dribbles_p90",
-  "progressive_passes_p90",
-  "pass_accuracy_pct",
-  "tackles_interceptions_p90",
-  "clearances_p90",
+  "xg_chain_p90",
+  "xg_buildup_p90",
 ];
 
 const clusterColors = ["#42c95a", "#245a7b", "#c48a28", "#b64b3d", "#5e5aa7", "#607066"];
@@ -120,14 +103,16 @@ function cosineSimilarity(a: number[], b: number[]) {
 }
 
 function scaledVector(player: Player, features: Feature[]) {
-  return features.map((feature) => player[`scaled_${feature}`]);
+  return features.map((feature) => metricValue(player, `scaled_${feature}`));
 }
 
 function metricOverlap(target: Player, candidate: Player, features: Feature[]) {
   return (
     features.reduce((sum, feature) => {
-      const denominator = Math.abs(target[feature]) || 1;
-      const gap = Math.min(Math.abs(candidate[feature] - target[feature]) / denominator, 1);
+      const targetValue = metricValue(target, feature);
+      const candidateValue = metricValue(candidate, feature);
+      const denominator = Math.abs(targetValue) || 1;
+      const gap = Math.min(Math.abs(candidateValue - targetValue) / denominator, 1);
       return sum + (1 - gap) * 100;
     }, 0) / features.length
   );
@@ -151,7 +136,21 @@ function findMatches(players: Player[], target: Player, topN: number, features: 
     .slice(0, topN);
 }
 
-function numberFormat(value: number, digits = 2) {
+function metricLabel(feature: Feature) {
+  return metricLabels[feature] ?? feature.replaceAll("_", " ").replace(" p90", " /90");
+}
+
+function compactLabel(feature: Feature) {
+  return compactLabels[feature] ?? metricLabel(feature);
+}
+
+function metricValue(player: Player | undefined, feature: Feature) {
+  if (!player) return 0;
+  const value = player[feature];
+  return typeof value === "number" ? value : Number(value ?? 0);
+}
+
+function numberFormat(value: number | string | undefined, digits = 2) {
   return Number(value).toFixed(digits);
 }
 
@@ -170,7 +169,7 @@ export default function Page() {
   const [targetKey, setTargetKey] = useState("");
   const [topN, setTopN] = useState(5);
   const [compareKey, setCompareKey] = useState("");
-  const [xMetric, setXMetric] = useState<Feature>("dribbles_p90");
+  const [xMetric, setXMetric] = useState<Feature>("shots_p90");
   const [yMetric, setYMetric] = useState<Feature>("key_passes_p90");
   const [shortlist, setShortlist] = useState<string[]>([]);
 
@@ -223,21 +222,19 @@ export default function Page() {
   }, [target, targetKey]);
 
   useEffect(() => {
-    if (!target) return;
-    if (target.position === "Defender") {
-      setXMetric("tackles_interceptions_p90");
-      setYMetric("clearances_p90");
-    } else if (target.position === "Winger") {
-      setXMetric("dribbles_p90");
-      setYMetric("key_passes_p90");
-    } else if (target.position === "Midfielder") {
-      setXMetric("progressive_passes_p90");
-      setYMetric("key_passes_p90");
-    } else {
+    if (!target || !payload) return;
+    const hasFeature = (feature: Feature) => payload.metadata.features.includes(feature);
+    if (target.position === "Forward" && hasFeature("goals_p90") && hasFeature("shots_p90")) {
       setXMetric("goals_p90");
       setYMetric("shots_p90");
+    } else if (hasFeature("shots_p90") && hasFeature("key_passes_p90")) {
+      setXMetric("shots_p90");
+      setYMetric("key_passes_p90");
+    } else {
+      setXMetric(payload.metadata.features[0]);
+      setYMetric(payload.metadata.features[1] ?? payload.metadata.features[0]);
     }
-  }, [target?.player_id]);
+  }, [target?.player_id, payload]);
 
   const pool = useMemo(() => {
     if (!payload || !target) return [];
@@ -261,29 +258,34 @@ export default function Page() {
   const clubs = new Set(payload.players.map((player) => player.club));
   const isShortlisted = shortlist.includes(playerKey(target));
 
-  const radarData = radarMetrics.map((feature) => ({
-    metric: compactLabels[feature],
-    target: target[`pct_${feature}`],
-    compare: comparePlayer?.[`pct_${feature}`] ?? 0,
+  const visibleRadarMetrics = radarMetrics.filter((feature) => payload.metadata.features.includes(feature));
+  const tableMetrics = ["goals_p90", "xg_p90", "assists_p90", "xa_p90", "shots_p90", "key_passes_p90"].filter((feature) =>
+    payload.metadata.features.includes(feature),
+  );
+
+  const radarData = visibleRadarMetrics.map((feature) => ({
+    metric: compactLabel(feature),
+    target: metricValue(target, `pct_${feature}`),
+    compare: metricValue(comparePlayer, `pct_${feature}`),
   }));
 
   const strongestSignals = payload.metadata.features
-    .map((feature) => ({ feature, value: target[`pct_${feature}`] }))
+    .map((feature) => ({ feature, value: metricValue(target, `pct_${feature}`) }))
     .sort((a, b) => b.value - a.value)
     .slice(0, 4);
 
   const metricData = comparedPlayers.map((player) => ({
     ...player,
     key: playerKey(player),
-    x: player[xMetric],
-    y: player[yMetric],
+    x: metricValue(player, xMetric),
+    y: metricValue(player, yMetric),
     fill: playerKey(player) === playerKey(target) ? "#101914" : clusterColors[player.cluster % clusterColors.length],
     size: playerKey(player) === playerKey(target) ? 210 : 130,
   }));
 
   const differenceData = payload.metadata.features.map((feature) => ({
-    metric: compactLabels[feature],
-    gap: comparePlayer ? Math.abs(target[`pct_${feature}`] - comparePlayer[`pct_${feature}`]) : 0,
+    metric: compactLabel(feature),
+    gap: comparePlayer ? Math.abs(metricValue(target, `pct_${feature}`) - metricValue(comparePlayer, `pct_${feature}`)) : 0,
   }));
 
   function toggleShortlist(player: Player) {
@@ -311,6 +313,7 @@ export default function Page() {
           <span>{payload.metadata.row_count} season rows</span>
           <span>{clubs.size} clubs</span>
           <span>{payload.metadata.features.length} metrics</span>
+          <span>{payload.metadata.source_provider ?? "local"} source</span>
         </div>
       </header>
 
@@ -370,8 +373,8 @@ export default function Page() {
             <span className="kicker">Premier League Recruitment Intelligence</span>
             <h2>{target.player_name}</h2>
             <p>
-              {target.club} · {target.position} · {target.season ?? "current sample"} · age {target.age}. The workspace
-              now focuses on scout decisions: explain the match, compare the profile, then shortlist the player.
+              {target.club} · {target.position} · {target.season ?? "current sample"} · {target.minutes ?? 0} minutes. This
+              view now uses real free Understat player-season metrics for attacking and creative similarity.
             </p>
             <div className="hero-pills">
               <span>{target.archetype}</span>
@@ -389,8 +392,8 @@ export default function Page() {
           <Kpi label="Goals /90" value={numberFormat(target.goals_p90)} detail={`xG ${numberFormat(target.xg_p90)}`} />
           <Kpi label="Assists /90" value={numberFormat(target.assists_p90)} detail={`xA ${numberFormat(target.xa_p90)}`} />
           <Kpi label="Creation" value={numberFormat(target.key_passes_p90)} detail="key passes /90" />
-          <Kpi label="Ball Carrying" value={numberFormat(target.dribbles_p90)} detail="dribbles /90" />
-          <Kpi label="Defensive Work" value={numberFormat(target.tackles_interceptions_p90)} detail="tackles + interceptions" />
+          <Kpi label="Shot Volume" value={numberFormat(target.shots_p90)} detail="shots /90" />
+          <Kpi label="Buildup" value={numberFormat(target.xg_buildup_p90)} detail="xGBuildup /90" />
         </section>
 
         <section className="analysis-card">
@@ -398,9 +401,10 @@ export default function Page() {
           <h2>Why these players match</h2>
           <p>
             {target.player_name} profiles as a {target.archetype}. The strongest percentile signals are{" "}
-            {strongestSignals.map((signal) => metricLabels[signal.feature]).join(", ")}. The model compares scaled
+            {strongestSignals.map((signal) => metricLabel(signal.feature)).join(", ")}. The model compares scaled
             per-90 profiles inside the {target.position.toLowerCase()} pool for {selectedSeason ?? "the selected season"}.
-            The closest match is {matches[0]?.player_name} at {matches[0]?.similarityPct.toFixed(1)}% similarity.
+            The closest match is {matches[0]?.player_name} at {matches[0]?.similarityPct.toFixed(1)}% similarity. Defensive,
+            carrying, pressure, and progressive-pass metrics are intentionally excluded until we add a free source for them.
           </p>
         </section>
 
@@ -430,11 +434,9 @@ export default function Page() {
                 <th>Role</th>
                 <th>Similarity</th>
                 <th>Overlap</th>
-                <th>Goals</th>
-                <th>Ast</th>
-                <th>KeyP</th>
-                <th>Drib</th>
-                <th>DefAct</th>
+                {tableMetrics.map((feature) => (
+                  <th key={feature}>{compactLabel(feature)}</th>
+                ))}
                 <th></th>
               </tr>
             </thead>
@@ -452,11 +454,9 @@ export default function Page() {
                     <b className="score-pill">{match.similarityPct.toFixed(1)}%</b>
                   </td>
                   <td>{match.overlap.toFixed(1)}%</td>
-                  <td>{numberFormat(match.goals_p90)}</td>
-                  <td>{numberFormat(match.assists_p90)}</td>
-                  <td>{numberFormat(match.key_passes_p90)}</td>
-                  <td>{numberFormat(match.dribbles_p90)}</td>
-                  <td>{numberFormat(match.tackles_interceptions_p90)}</td>
+                  {tableMetrics.map((feature) => (
+                    <td key={feature}>{numberFormat(metricValue(match, feature))}</td>
+                  ))}
                   <td>
                     <button className="mini-action" onClick={() => toggleShortlist(match)}>
                       {shortlist.includes(playerKey(match)) ? "Saved" : "Shortlist"}
@@ -530,14 +530,14 @@ export default function Page() {
               <select value={xMetric} onChange={(event) => setXMetric(event.target.value as Feature)}>
                 {payload.metadata.features.map((feature) => (
                   <option key={feature} value={feature}>
-                    X · {metricLabels[feature]}
+                    X · {metricLabel(feature)}
                   </option>
                 ))}
               </select>
               <select value={yMetric} onChange={(event) => setYMetric(event.target.value as Feature)}>
                 {payload.metadata.features.map((feature) => (
                   <option key={feature} value={feature}>
-                    Y · {metricLabels[feature]}
+                    Y · {metricLabel(feature)}
                   </option>
                 ))}
               </select>
@@ -545,8 +545,8 @@ export default function Page() {
             <div className="chart-box">
               <ResponsiveContainer width="100%" height={430}>
                 <ScatterChart>
-                  <XAxis dataKey="x" name={metricLabels[xMetric]} tick={{ fill: "#526358", fontSize: 11 }} />
-                  <YAxis dataKey="y" name={metricLabels[yMetric]} tick={{ fill: "#526358", fontSize: 11 }} />
+                  <XAxis dataKey="x" name={metricLabel(xMetric)} tick={{ fill: "#526358", fontSize: 11 }} />
+                  <YAxis dataKey="y" name={metricLabel(yMetric)} tick={{ fill: "#526358", fontSize: 11 }} />
                   <ZAxis dataKey="size" range={[80, 210]} />
                   <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<PlayerTooltip />} />
                   <Scatter data={metricData} shape={<ClusterDot targetKey={playerKey(target)} matchKeys={matchKeys} />} />
@@ -594,7 +594,7 @@ export default function Page() {
           <div className="raw-grid">
             {payload.metadata.features.map((feature) => (
               <div key={feature}>
-                <span>{metricLabels[feature]}</span>
+                <span>{metricLabel(feature)}</span>
                 <strong>{numberFormat(target[feature])}</strong>
               </div>
             ))}
