@@ -1,0 +1,659 @@
+fpl_player_id,opta_code,player_name,web_name,club,position,minutes,starts,goals,assists,xg,xa,xg_p90,xa_p90,expected_goal_involvements,expected_goal_involvements_p90,clearances_blocks_interceptions,recoveries,tackles,defensive_contribution,influence,creativity,threat,form,selected_by_percent,now_cost,status,source_provider
+10,p198869,Benjamin White,White,Arsenal,Defender,315,4,0.0,1.0,0.18,0.29,0.05,0.08,0.47,0.13,12,9,6,18,65.4,52.2,23.0,5.2,6.9,5.5,a,fpl
+11,p500040,Cristhian Mosquera,Mosquera,Arsenal,Defender,168,2,0.0,0.0,0.0,0.01,0.0,0.01,0.01,0.01,10,3,0,10,24.6,2.0,0.0,3.0,2.1,5.4,d,fpl
+31,p199798,Ezri Konsa Ngoyo,Konsa,Arsenal,Defender,191,2,0.0,0.0,0.0,0.01,0.0,0.0,0.01,0.0,14,6,5,19,22.6,1.5,4.0,2.8,17.7,4.5,a,fpl
+4,p226597,Gabriel dos Santos Magalhães,Gabriel,Arsenal,Defender,360,4,0.0,0.0,0.51,0.06,0.13,0.02,0.57,0.15,29,13,3,32,48.4,7.4,83.0,6.0,23.6,8.0,a,fpl
+5,p445122,Jurriën Timber,J.Timber,Arsenal,Defender,45,0,0.0,0.0,0.0,0.01,0.0,0.02,0.01,0.02,2,5,1,3,0.0,0.0,0.0,0.2,0.2,6.5,a,fpl
+9,p448104,Piero Hincapié,Hincapie,Arsenal,Defender,32,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,0,1,3,6.4,1.0,2.0,0.5,1.0,5.3,a,fpl
+8,p466075,Riccardo Calafiori,Calafiori,Arsenal,Defender,326,4,0.0,2.0,0.6,0.59,0.17,0.16,1.19,0.33,10,8,3,13,51.6,27.3,39.0,7.0,49.9,5.8,a,fpl
+6,p462424,William Saliba,Saliba,Arsenal,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,5.9,i,fpl
+27,p205651,Gabriel Fernando de Jesus,G.Jesus,Arsenal,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,5.9,u,fpl
+26,p219847,Kai Havertz,Havertz,Arsenal,Forward,347,4,2.0,0.0,0.89,0.35,0.23,0.09,1.24,0.32,4,6,0,10,82.6,53.6,105.0,4.2,8.0,7.6,a,fpl
+25,p224117,Viktor Gyökeres,Gyökeres,Arsenal,Forward,12,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,1,0.0,0.1,0.0,0.2,3.4,7.2,a,fpl
+1,p154561,David Raya Martín,Raya,Arsenal,Goalkeeper,360,4,0.0,0.0,0.0,0.01,0.0,0.0,0.01,0.0,6,44,0,0,46.2,0.0,0.0,7.2,40.0,6.0,a,fpl
+3,p437495,Illan Meslier,Meslier,Arsenal,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,a,fpl
+2,p109745,Kepa Arrizabalaga Revuelta,Arrizabalaga,Arsenal,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.9,a,fpl
+452,p208706,Bruno Guimarães Rodriguez Moura,Bruno G.,Arsenal,Midfielder,64,0,1.0,0.0,0.09,0.15,0.13,0.21,0.24,0.34,1,4,1,6,1.4,0.8,2.0,2.0,1.7,6.7,a,fpl
+12,p223340,Bukayo Saka,Saka,Arsenal,Midfielder,336,4,3.0,0.0,2.88,0.43,0.77,0.12,3.31,0.89,8,16,5,29,94.4,61.9,147.0,7.5,11.9,9.5,a,fpl
+557,p439509,Christos Tzolis,Tzolis,Arsenal,Midfielder,290,4,0.0,2.0,0.19,0.48,0.06,0.15,0.67,0.21,6,11,3,20,47.6,101.6,38.0,3.5,15.1,6.4,a,fpl
+13,p204480,Declan Rice,Rice,Arsenal,Midfielder,321,4,0.0,2.0,0.1,0.63,0.03,0.18,0.73,0.21,16,13,5,34,64.6,53.9,4.0,4.8,12.8,7.4,a,fpl
+14,p232413,Eberechi Eze,Eze,Arsenal,Midfielder,68,0,0.0,0.0,0.04,0.07,0.05,0.09,0.11,0.14,0,5,0,5,1.6,3.8,3.0,0.8,1.1,6.3,a,fpl
+22,p499175,Ethan Nwaneri,Nwaneri,Arsenal,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.4,u,fpl
+23,p438098,Fábio Ferreira Vieira,Fábio Vieira,Arsenal,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.5,u,fpl
+18,p444145,Gabriel Martinelli Silva,Martinelli,Arsenal,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,6.3,u,fpl
+15,p184029,Martin Ødegaard,Ødegaard,Arsenal,Midfielder,305,4,2.0,0.0,1.01,1.3,0.3,0.38,2.31,0.68,4,11,6,21,102.4,102.5,66.0,6.8,19.0,6.7,a,fpl
+19,p481655,Martín Zubimendi Ibáñez,Zubimendi,Arsenal,Midfielder,59,0,0.0,0.0,0.08,0.04,0.12,0.06,0.12,0.18,4,3,4,11,10.0,4.0,11.0,1.0,0.6,5.3,a,fpl
+20,p616077,Max Dowman,Dowman,Arsenal,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.3,a,fpl
+17,p195384,Mikel Merino Zazón,Merino,Arsenal,Midfielder,51,0,0.0,0.0,0.14,0.02,0.25,0.04,0.16,0.29,0,6,0,6,6.4,3.3,14.0,0.8,0.4,5.8,a,fpl
+7,p499169,Myles Lewis-Skelly,Lewis-Skelly,Arsenal,Midfielder,271,4,0.0,0.0,0.16,0.23,0.05,0.08,0.39,0.13,5,8,1,14,21.6,38.8,16.0,2.2,0.6,5.5,a,fpl
+16,p248857,Noni Madueke,Madueke,Arsenal,Midfielder,23,0,0.0,0.0,0.0,0.05,0.0,0.2,0.05,0.2,0,2,1,3,11.6,43.9,0.0,0.5,0.2,6.3,a,fpl
+24,p200641,Reiss Nelson,Nelson,Arsenal,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.5,u,fpl
+611,p214590,Aaron Wan-Bissaka,Wan-Bissaka,Aston Villa,Defender,107,1,0.0,0.0,0.0,0.06,0.0,0.05,0.06,0.05,8,1,7,15,6.4,1.7,0.0,1.7,0.2,4.5,a,fpl
+38,p606798,Andrés García,A.García,Aston Villa,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.6,4.0,a,fpl
+36,p441302,Ian Maatsen,Maatsen,Aston Villa,Defender,335,4,0.0,0.0,0.28,0.45,0.08,0.12,0.73,0.2,17,10,7,24,24.6,21.1,19.0,2.2,0.8,4.5,d,fpl
+39,p578545,Kosta Nedeljkovic,Nedeljkovic,Aston Villa,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+30,p101188,Lucas Digne,Digne,Aston Villa,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,u,fpl
+596,p487992,Matteo Ruggeri,Ruggeri,Aston Villa,Defender,23,0,0.0,0.0,0.0,0.01,0.0,0.04,0.01,0.04,1,2,2,3,6.6,2.6,0.0,0.5,0.1,4.5,a,fpl
+32,p199796,Matty Cash,Cash,Aston Villa,Defender,251,3,0.0,0.0,0.15,0.04,0.05,0.01,0.19,0.06,8,2,6,14,32.4,19.2,13.0,1.8,5.6,4.5,d,fpl
+34,p244954,Pau Torres,Pau,Aston Villa,Defender,187,3,0.0,0.0,0.0,0.01,0.0,0.0,0.01,0.0,8,9,1,9,11.0,1.5,0.0,0.8,0.4,4.5,d,fpl
+630,p245719,Taylor Harwood-Bellis,Harwood-Bellis,Aston Villa,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+606,p569577,Triston Rowe,Rowe,Aston Villa,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.0,a,fpl
+33,p149484,Tyrone Mings,Mings,Aston Villa,Defender,171,1,0.0,0.0,0.2,0.02,0.11,0.01,0.22,0.12,8,4,3,11,16.8,4.4,13.0,1.8,0.4,4.5,a,fpl
+37,p184667,Victor Lindelöf,Lindelöf,Aston Villa,Defender,360,4,0.0,0.0,0.44,0.17,0.11,0.04,0.61,0.15,15,5,1,16,39.2,26.2,2.0,1.8,0.3,4.5,a,fpl
+582,p690838,Brian Madjo,Madjo,Aston Villa,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,5.4,i,fpl
+166,p517052,Nicolas Jackson,N.Jackson,Aston Villa,Forward,199,3,0.0,0.0,0.24,0.58,0.11,0.26,0.82,0.37,0,5,0,5,5.4,23.4,22.0,1.0,1.2,6.5,a,fpl
+55,p178301,Ollie Watkins,Watkins,Aston Villa,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,2.8,7.8,u,fpl
+56,p173879,Tammy Abraham,Abraham,Aston Villa,Forward,69,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,1,2,2.0,2.3,0.0,0.8,0.2,5.5,a,fpl
+29,p72147,Marco Bizot,M.Bizot,Aston Villa,Goalkeeper,90,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,6,0,0,28.2,0.0,0.0,0.2,0.1,4.5,a,fpl
+597,p433969,Zion Suzuki,Suzuki,Aston Villa,Goalkeeper,270,3,0.0,0.0,0.0,0.01,0.0,0.0,0.01,0.0,5,31,0,0,40.8,0.0,0.0,3.5,1.8,5.0,a,fpl
+160,p493105,Alejandro Garnacho Ferreyra,Garnacho,Aston Villa,Midfielder,31,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,2,0,2,1.2,3.6,0.0,0.8,0.4,5.8,a,fpl
+52,p653481,Alysson Edward Franco da Rocha dos Santos,Alysson,Aston Villa,Midfielder,87,0,1.0,0.0,0.06,0.0,0.06,0.0,0.06,0.06,2,4,2,8,5.4,2.6,2.0,2.0,0.0,5.0,a,fpl
+48,p449871,Amadou Onana,Onana,Aston Villa,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,i,fpl
+47,p226944,Boubacar Kamara,Kamara,Aston Villa,Midfielder,360,4,0.0,0.0,0.0,0.15,0.0,0.04,0.15,0.04,10,13,7,30,35.4,43.2,0.0,2.2,0.3,5.0,a,fpl
+50,p645618,Bradley Burrowes,Burrowes,Aston Villa,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.6,4.5,a,fpl
+41,p195546,Emiliano Buendía Stati,Buendía,Aston Villa,Midfielder,311,4,0.0,0.0,0.78,0.17,0.23,0.05,0.95,0.28,3,14,2,19,5.0,40.3,24.0,2.2,1.0,5.9,a,fpl
+51,p577285,George Hemmings,George Hemmings,Aston Villa,Midfielder,279,4,0.0,0.0,0.07,0.16,0.02,0.05,0.23,0.07,3,10,6,19,23.2,29.4,23.0,2.0,1.3,4.5,a,fpl
+631,p638987,Ibrahim Mbaye,Mbaye,Aston Villa,Midfielder,27,0,0.0,0.0,0.02,0.13,0.07,0.43,0.15,0.5,0,1,1,2,0.0,0.0,0.0,0.5,0.1,6.0,a,fpl
+54,p448089,Joao Gomes,Gomes,Aston Villa,Midfielder,39,1,0.0,0.0,0.0,0.01,0.0,0.02,0.01,0.02,1,2,4,7,1.0,11.0,0.0,-0.5,0.0,5.5,a,fpl
+53,p614071,Johan Manzambi,Manzambi,Aston Villa,Midfielder,27,0,0.0,0.0,0.0,0.08,0.0,0.27,0.08,0.27,0,1,1,2,0.0,0.0,0.0,0.2,0.1,5.9,a,fpl
+45,p122806,John McGinn,McGinn,Aston Villa,Midfielder,351,4,0.0,1.0,0.77,0.2,0.2,0.05,0.97,0.25,6,13,5,24,3.0,20.0,15.0,2.8,2.3,5.4,a,fpl
+35,p515597,Lamare Bogarde,Bogarde,Aston Villa,Midfielder,16,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,0,0,1,2.2,0.5,0.0,0.2,0.1,5.0,a,fpl
+44,p215711,Leon Bailey,Bailey,Aston Villa,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.4,u,fpl
+618,p119090,Leon Goretzka,Goretzka,Aston Villa,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,6.0,i,fpl
+607,p571380,Luka Lynch,Lynch,Aston Villa,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,u,fpl
+46,p88894,Ross Barkley,Barkley,Aston Villa,Midfielder,302,4,0.0,0.0,0.38,0.14,0.11,0.04,0.52,0.15,4,13,7,24,35.8,78.8,24.0,2.2,0.3,5.0,a,fpl
+49,p469247,Samuel Iling-Junior,Iling Jr,Aston Villa,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+64,p54469,Adam Smith,Smith,Bournemouth,Defender,360,4,0.0,0.0,0.01,0.07,0.0,0.02,0.08,0.02,16,13,5,21,32.2,41.6,4.0,0.5,0.1,4.5,a,fpl
+61,p494521,Adrien Truffert,Truffert,Bournemouth,Defender,360,4,0.0,0.0,0.09,0.23,0.02,0.06,0.32,0.08,23,21,15,38,53.4,40.7,6.0,2.0,3.3,5.5,a,fpl
+566,p483067,António João Pereira de Albuquerque Tavares da Silva,Silva,Bournemouth,Defender,360,4,0.0,0.0,0.85,0.27,0.21,0.07,1.12,0.28,38,12,3,41,73.8,3.3,30.0,2.5,0.4,5.0,a,fpl
+62,p242882,Bafodé Diakité,Diakité,Bournemouth,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,5.0,a,fpl
+60,p463981,James Hill,Hill,Bournemouth,Defender,360,4,0.0,0.0,0.0,0.77,0.0,0.19,0.77,0.19,30,8,5,35,54.0,52.8,6.0,2.0,0.8,5.5,a,fpl
+573,p494928,Juanlu Sánchez,Sanchez,Bournemouth,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.4,a,fpl
+66,p575901,Julio Soler Barreto,Soler,Bournemouth,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,4.0,a,fpl
+65,p436893,Julián Araujo Zúñiga,J.Araujo,Bournemouth,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.4,i,fpl
+63,p620487,Veljko Milosavljevic,Milosavljević,Bournemouth,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,i,fpl
+608,p523700,Daniel Jebbison,Jebbison,Bournemouth,Forward,16,0,0.0,0.0,0.1,0.0,0.56,0.0,0.1,0.56,0,1,0,1,3.4,0.8,17.0,0.5,0.1,5.0,a,fpl
+80,p168636,Enes Ünal,Enes Ünal,Bournemouth,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.5,u,fpl
+79,p444102,Francisco Evanilson de Lima Barbosa,Evanilson,Bournemouth,Forward,334,4,0.0,3.0,0.71,0.51,0.19,0.14,1.22,0.33,10,11,1,22,37.6,39.2,45.0,4.0,3.3,6.0,a,fpl
+81,p561245,Álvaro Rodríguez,Rodríguez,Bournemouth,Forward,10,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,1,0.0,0.0,0.0,0.5,0.1,6.0,a,fpl
+58,p40383,Fraser Forster,Forster,Bournemouth,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,3.5,4.0,a,fpl
+615,p230650,Michele Di Gregorio,Di Gregorio,Bournemouth,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+59,p444172,Will Dennis,Dennis,Bournemouth,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+57,p457569,Đorđe Petrović,Petrović,Bournemouth,Goalkeeper,360,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6,31,0,0,74.0,0.0,0.0,1.8,3.2,4.5,a,fpl
+69,p503139,Alex Scott,Scott,Bournemouth,Midfielder,356,4,1.0,2.0,0.52,0.35,0.13,0.09,0.87,0.22,15,28,9,52,72.4,59.8,33.0,7.0,5.9,6.1,a,fpl
+76,p614574,Alex Tóth,Tóth.A,Bournemouth,Midfielder,15,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,1,2,2.8,0.6,0.0,0.2,0.0,5.0,a,fpl
+77,p489888,Amine Adli,Adli,Bournemouth,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,i,fpl
+72,p496208,Ben Gannon-Doak,Gannon-Doak,Bournemouth,Midfielder,10,0,0.0,0.0,0.12,0.03,1.08,0.27,0.15,1.35,0,5,2,7,2.2,0.6,7.0,0.8,0.1,4.9,a,fpl
+74,p111317,David Brooks,Brooks,Bournemouth,Midfielder,30,0,0.0,0.0,0.0,0.01,0.0,0.03,0.01,0.03,2,1,0,3,0.0,1.6,0.0,0.5,0.1,5.0,a,fpl
+78,p560262,Junior Kroupi,Kroupi.Jr,Bournemouth,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,7.4,i,fpl
+70,p222683,Justin Kluivert,Kluivert,Bournemouth,Midfielder,294,4,1.0,0.0,0.99,0.08,0.3,0.02,1.07,0.32,2,16,4,22,22.2,43.2,77.0,3.8,1.0,6.0,a,fpl
+71,p155408,Lewis Cook,Cook,Bournemouth,Midfielder,165,2,0.0,0.0,0.0,0.01,0.0,0.01,0.01,0.01,6,5,1,12,8.4,15.2,0.0,1.8,0.2,5.0,a,fpl
+68,p201658,Marcus Tavernier,Tavernier,Bournemouth,Midfielder,350,4,3.0,0.0,1.7,0.81,0.44,0.21,2.51,0.65,5,23,8,36,101.6,68.7,106.0,7.2,4.8,6.1,a,fpl
+67,p499604,Rayan Vitor Simplício Rocha,Rayan,Bournemouth,Midfielder,347,4,0.0,0.0,0.87,0.08,0.23,0.02,0.95,0.25,5,3,3,11,16.4,15.7,71.0,2.0,1.8,6.4,a,fpl
+75,p158499,Ryan Christie,Christie,Bournemouth,Midfielder,28,0,0.0,0.0,0.0,0.12,0.0,0.39,0.12,0.39,3,5,1,9,2.8,0.3,0.0,0.8,0.0,5.0,a,fpl
+73,p200785,Tyler Adams,Adams,Bournemouth,Midfielder,192,2,0.0,0.0,0.03,0.03,0.01,0.01,0.06,0.02,7,16,5,28,17.4,13.4,0.0,2.0,0.3,5.0,a,fpl
+90,p472713,Aaron Hickey,Hickey,Brentford,Defender,131,1,0.0,0.0,0.03,0.05,0.02,0.03,0.08,0.05,9,8,4,13,11.6,5.4,0.0,1.0,0.1,4.5,a,fpl
+620,p613804,El Hadji Malick Diouf,Diouf,Brentford,Defender,30,0,0.0,0.0,0.0,0.01,0.0,0.03,0.01,0.03,1,1,0,1,0.0,0.0,0.0,0.3,0.1,4.5,a,fpl
+93,p513086,Jannik Schuster,Schuster,Brentford,Defender,163,1,0.0,0.0,0.1,0.02,0.06,0.01,0.12,0.07,20,3,2,22,17.2,0.2,4.0,1.8,0.1,4.5,a,fpl
+92,p570241,Kim Ji-soo,Ji-soo,Brentford,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+87,p191866,Kristoffer Ajer,Ajer,Brentford,Defender,360,4,0.0,0.0,0.13,0.03,0.03,0.01,0.16,0.04,37,8,4,41,69.6,22.2,37.0,3.5,4.5,4.5,a,fpl
+88,p607464,Michael Kayode,Kayode,Brentford,Defender,226,3,1.0,0.0,0.55,0.36,0.22,0.14,0.91,0.36,13,12,1,14,55.8,17.8,56.0,4.2,8.4,4.6,a,fpl
+84,p432830,Nathan Collins,Collins,Brentford,Defender,196,3,0.0,0.0,0.51,0.05,0.23,0.02,0.56,0.25,15,11,2,17,40.6,22.4,51.0,2.5,1.3,5.5,i,fpl
+89,p194010,Rico Henry,Henry,Brentford,Defender,2,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.2,0.2,4.4,a,fpl
+85,p444765,Sepp van den Berg,Van den Berg,Brentford,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.9,i,fpl
+108,p75115,Callum Wilson,Wilson,Brentford,Forward,13,0,0.0,0.0,0.07,0.04,0.48,0.28,0.11,0.76,1,1,0,2,3.2,10.4,12.0,0.8,0.3,5.5,a,fpl
+106,p502500,Igor Thiago Nascimento Rodrigues,Thiago,Brentford,Forward,352,4,0.0,0.0,2.41,0.13,0.62,0.03,2.54,0.65,4,10,2,16,20.6,11.6,106.0,1.2,9.9,7.9,a,fpl
+107,p593174,Kaye Furo,Furo,Brentford,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.1,4.5,i,fpl
+82,p200720,Caoimhín Kelleher,Kelleher,Brentford,Goalkeeper,360,4,0.0,0.0,0.0,0.01,0.0,0.0,0.01,0.0,5,26,0,0,57.6,0.0,0.0,3.5,6.4,5.0,a,fpl
+83,p507433,Hákon Rafn Valdimarsson,Valdimarsson,Brentford,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+99,p543295,Antoni Milambo,Milambo,Brentford,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,i,fpl
+95,p533463,Dango Ouattara,O.Dango,Brentford,Midfielder,170,2,0.0,0.0,0.09,0.39,0.05,0.21,0.48,0.26,9,17,2,28,23.2,57.6,17.0,1.5,0.6,6.4,a,fpl
+100,p244858,Fábio Freitas Gouveia Carvalho,Carvalho,Brentford,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,a,fpl
+657,p626464,Gustavo Nunes Fernandes Gomes,Nunes,Brentford,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+105,p444180,Jaidon Anthony,Anthony,Brentford,Midfielder,187,2,0.0,0.0,0.19,0.52,0.09,0.25,0.71,0.34,5,15,4,24,13.8,63.0,19.0,1.2,0.1,5.9,a,fpl
+103,p183656,Josh Dasilva,Dasilva,Brentford,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,i,fpl
+86,p249231,Keane Lewis-Potter,Lewis-Potter,Brentford,Midfielder,326,4,1.0,1.0,1.06,0.78,0.29,0.22,1.84,0.51,12,12,5,29,93.8,92.6,43.0,4.8,2.0,5.5,a,fpl
+94,p513418,Kevin Schade,Schade,Brentford,Midfielder,357,4,3.0,0.0,0.98,0.3,0.25,0.08,1.28,0.33,4,17,6,27,64.0,36.2,101.0,7.5,5.1,6.0,a,fpl
+565,p513545,Mamadou Sangaré,M.Sangaré,Brentford,Midfielder,300,4,0.0,2.0,0.41,0.65,0.12,0.2,1.06,0.32,11,21,13,45,56.0,48.4,40.0,5.5,12.4,5.7,a,fpl
+97,p207283,Mathias Jensen,Jensen,Brentford,Midfielder,66,1,0.0,1.0,0.08,0.34,0.11,0.46,0.42,0.57,0,3,2,5,12.6,46.2,13.0,1.5,0.1,5.4,i,fpl
+96,p440089,Mikkel Damsgaard,Damsgaard,Brentford,Midfielder,197,2,0.0,1.0,0.13,0.45,0.06,0.21,0.58,0.27,4,14,3,21,34.2,87.2,31.0,3.2,0.5,5.5,a,fpl
+98,p204580,Vitaly Janelt,Janelt,Brentford,Midfielder,360,4,2.0,0.0,0.5,0.4,0.12,0.1,0.9,0.22,25,16,14,55,117.6,77.3,45.0,6.2,2.4,5.0,a,fpl
+102,p508395,Yehor Yarmoliuk,Yarmoliuk,Brentford,Midfielder,148,1,0.0,1.0,0.07,0.24,0.04,0.15,0.31,0.19,4,9,3,16,7.6,16.7,9.0,1.5,0.7,4.9,a,fpl
+117,p550090,Diego Coppola,Coppola,Brighton,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+113,p231416,Ferdi Kadıoğlu,F.Kadıoğlu,Brighton,Defender,257,3,0.0,0.0,0.08,0.11,0.03,0.04,0.19,0.07,6,5,1,7,15.4,29.2,27.0,2.0,1.7,4.4,a,fpl
+118,p223434,Igor Julio dos Santos de Paulo,Igor,Brighton,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+614,p512123,Jaouen Hadjam,Hadjam,Brighton,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+119,p451490,João Pedro Loureiro da Costa,Costinha,Brighton,Defender,54,0,0.0,0.0,0.12,0.16,0.2,0.27,0.28,0.47,5,1,1,6,14.0,16.7,18.0,0.8,0.0,4.5,a,fpl
+116,p83299,Lewis Dunk,Dunk,Brighton,Defender,360,4,1.0,0.0,0.03,0.09,0.01,0.02,0.12,0.03,20,13,3,23,59.0,10.3,4.0,5.5,1.4,4.5,a,fpl
+504,p610799,Luka Vušković,Vuskovic,Brighton,Defender,347,4,1.0,0.0,0.46,0.07,0.12,0.02,0.53,0.14,27,13,4,31,91.4,14.6,57.0,6.0,3.2,5.0,a,fpl
+130,p467779,Mats Wieffer,Wieffer,Brighton,Defender,156,2,0.0,0.0,0.12,0.13,0.07,0.08,0.25,0.15,11,9,4,15,37.0,35.5,10.0,1.8,0.2,5.0,i,fpl
+115,p465730,Maxim De Cuyper,De Cuyper,Brighton,Defender,333,4,1.0,3.0,1.53,0.44,0.41,0.12,1.97,0.53,5,14,4,9,69.0,91.1,50.0,8.0,23.1,4.8,a,fpl
+120,p454490,Michael Svoboda,Svoboda,Brighton,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.0,a,fpl
+114,p204120,Olivier Boscagli,Boscagli,Brighton,Defender,347,4,0.0,0.0,0.06,0.51,0.02,0.13,0.57,0.15,20,15,2,22,52.6,96.2,17.0,3.2,0.3,4.5,a,fpl
+328,p222694,Pascal Struijk,Struijk,Brighton,Defender,13,0,0.0,0.0,0.0,0.01,0.0,0.07,0.01,0.07,4,0,0,4,0.2,0.1,0.0,0.5,0.2,5.0,a,fpl
+138,p647850,Charalampos Kostoulas,Kostoulas,Brighton,Forward,278,3,1.0,2.0,1.17,0.05,0.38,0.02,1.22,0.4,5,15,3,23,14.6,20.8,51.0,4.5,0.7,5.5,a,fpl
+139,p487117,Evan Ferguson,Ferguson,Brighton,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,i,fpl
+125,p463067,Georginio Rutter,Georginio,Brighton,Forward,90,1,0.0,1.0,0.08,0.44,0.08,0.44,0.52,0.52,1,4,2,7,19.8,11.4,15.0,1.2,0.5,5.4,d,fpl
+594,p538007,Promise David,David,Brighton,Forward,23,0,0.0,0.0,0.42,0.0,1.64,0.0,0.42,1.64,0,0,0,0,0.0,3.7,4.0,0.2,0.2,6.0,a,fpl
+137,p608181,Stefanos Tzimas,Tzimas,Brighton,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.4,i,fpl
+109,p489639,Bart Verbruggen,Verbruggen,Brighton,Goalkeeper,360,4,0.0,0.0,0.0,0.2,0.0,0.05,0.2,0.05,3,30,0,0,46.0,3.0,0.0,4.2,22.1,4.5,a,fpl
+111,p49262,Jason Steele,Steele,Brighton,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,4.2,4.0,a,fpl
+624,p519324,Amario Cozier-Duberry,Cozier-Duberry,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+127,p514254,Diego Gómez Amarilla,Gomez,Brighton,Midfielder,348,4,0.0,2.0,0.79,0.76,0.2,0.2,1.55,0.4,6,9,8,23,52.8,71.8,113.0,4.0,4.7,5.0,a,fpl
+128,p536916,Facundo Buonanotte,Buonanotte,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+652,p471551,Femi Azeez,Azeez,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.5,d,fpl
+132,p597320,Harry Howell,Howell,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+600,p612855,Ibrahim Osman,Osman,Brighton,Midfielder,40,0,0.0,0.0,0.05,0.07,0.11,0.16,0.12,0.27,0,3,1,4,7.2,16.7,6.0,0.8,0.0,5.0,a,fpl
+123,p532529,Jack Hinshelwood,Hinshelwood,Brighton,Midfielder,63,1,2.0,0.0,1.41,0.02,2.01,0.03,1.43,2.04,0,1,2,3,72.8,13.4,59.0,4.0,0.8,5.9,i,fpl
+639,p592984,José María Andrés Baixauli,Andrés,Brighton,Midfielder,25,0,0.0,1.0,0.24,0.01,0.86,0.04,0.25,0.9,2,1,1,4,0.0,0.0,0.0,2.0,0.0,5.5,a,fpl
+605,p611695,Malick Yalcouyé,Yalcouyé,Brighton,Midfielder,231,3,2.0,0.0,1.42,0.27,0.55,0.11,1.69,0.66,6,7,5,18,59.6,47.2,62.0,4.8,3.5,4.5,a,fpl
+126,p219249,Matt O'Riley,O'Riley,Brighton,Midfielder,6,0,0.0,0.0,0.0,0.01,0.0,0.15,0.01,0.15,0,1,0,1,0.0,0.0,0.0,0.2,0.1,5.5,a,fpl
+121,p451340,Mitoma Kaoru,Mitoma,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.9,i,fpl
+134,p556637,Nehemiah Oriola,Oriola,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,4.5,a,fpl
+124,p60307,Pascal Groß,Groß,Brighton,Midfielder,360,4,2.0,3.0,1.66,0.61,0.42,0.15,2.27,0.57,6,9,6,21,68.8,106.6,50.0,8.2,17.5,5.6,a,fpl
+133,p549074,Tom Watson,Watson,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+122,p592031,Yankuba Minteh,Minteh,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.9,i,fpl
+129,p509416,Yasin Ayari,Ayari,Brighton,Midfielder,243,3,1.0,0.0,0.59,0.1,0.22,0.04,0.69,0.26,2,11,1,14,11.4,29.8,24.0,3.0,0.4,5.4,a,fpl
+658,p661016,Younes Ibrahim,Ibrahim,Brighton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+135,p700308,Zadok Yohanna,Yohanna,Brighton,Midfielder,12,0,0.0,0.0,0.0,0.03,0.0,0.22,0.03,0.22,0,0,0,0,0.2,1.3,0.0,0.2,0.0,4.9,i,fpl
+561,p622758,Aaron Anselmino,Anselmino,Chelsea,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+146,p242880,Benoît Badiashile Mukinayi,B.Badiashile,Chelsea,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+148,p551210,Jorrel Hato,Hato,Chelsea,Defender,258,4,0.0,2.0,0.01,0.21,0.0,0.07,0.22,0.07,11,9,7,18,73.2,44.2,13.0,2.0,1.0,4.5,a,fpl
+151,p577016,Josh Acheampong,Acheampong,Chelsea,Defender,202,2,0.0,0.0,0.0,0.02,0.0,0.01,0.02,0.01,13,7,6,19,41.6,4.1,6.0,1.2,0.4,4.5,a,fpl
+149,p460028,Levi Samuels Colwill,Colwill,Chelsea,Defender,251,3,0.0,0.0,0.01,0.04,0.0,0.01,0.05,0.01,16,11,3,19,19.2,2.0,7.0,0.5,1.0,4.9,a,fpl
+144,p482609,Malo Gusto,Gusto,Chelsea,Defender,272,3,0.0,0.0,0.08,0.12,0.03,0.04,0.2,0.07,11,13,4,15,18.0,13.9,7.0,1.0,1.0,5.0,a,fpl
+150,p574458,Mamadou Sarr,M.Sarr,Chelsea,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+152,p620109,Marco Palestra,Palestra,Chelsea,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.8,5.3,i,fpl
+200,p437499,Maxence Lacroix,Lacroix,Chelsea,Defender,274,3,0.0,1.0,0.02,0.21,0.01,0.07,0.23,0.08,26,5,9,35,83.2,12.6,10.0,2.5,7.6,6.0,a,fpl
+583,p498444,Pep Chavarría,Chavarria,Chelsea,Defender,118,0,0.0,0.0,0.0,0.03,0.0,0.02,0.03,0.02,5,4,2,7,11.2,2.5,6.0,1.0,0.2,4.9,a,fpl
+142,p225796,Reece James,James,Chelsea,Defender,292,3,0.0,0.0,0.33,0.26,0.1,0.08,0.59,0.18,11,15,2,13,36.4,32.2,34.0,0.8,7.4,5.4,a,fpl
+143,p180736,Trevoh Chalobah,Chalobah,Chelsea,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.5,u,fpl
+145,p444463,Wesley Fofana,Fofana,Chelsea,Defender,242,3,0.0,0.0,0.0,0.08,0.0,0.03,0.08,0.03,27,7,5,32,59.2,23.7,0.0,1.0,0.2,5.0,a,fpl
+136,p50175,Danny Welbeck,Welbeck,Chelsea,Forward,15,0,0.0,0.0,0.0,0.06,0.0,0.36,0.06,0.36,1,0,0,1,0.0,0.3,2.0,0.5,0.8,5.9,a,fpl
+170,p503037,Emmanuel Emegha,Emegha,Chelsea,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.0,i,fpl
+165,p475168,João Pedro Junqueira de Jesus,João Pedro,Chelsea,Forward,360,4,3.0,3.0,2.17,0.19,0.54,0.05,2.36,0.59,3,5,1,9,104.0,74.3,92.0,8.2,74.9,7.8,a,fpl
+168,p499309,Marc Guiu Paz,Marc Guiu,Chelsea,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,5.0,u,fpl
+169,p567119,Shumaira Mheuka,Mheuka,Chelsea,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.4,4.5,a,fpl
+28,p98980,Emiliano Martínez Romero,Martinez,Chelsea,Goalkeeper,270,3,0.0,0.0,0.0,0.01,0.0,0.0,0.01,0.0,1,31,0,0,99.4,20.0,0.0,1.8,5.0,5.0,a,fpl
+141,p508479,Filip Jörgensen,Jörgensen,Chelsea,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+560,p549939,Mike Penders,Penders,Chelsea,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.4,a,fpl
+140,p215059,Robert Lynch Sánchez,Sánchez,Chelsea,Goalkeeper,90,1,0.0,0.0,0.0,0.01,0.0,0.01,0.01,0.01,1,5,0,0,21.4,0.0,0.0,0.5,0.8,4.9,u,fpl
+154,p244851,Cole Palmer,Palmer,Chelsea,Midfielder,352,4,2.0,2.0,1.18,0.61,0.3,0.16,1.79,0.46,2,17,4,23,113.0,82.4,112.0,6.5,26.8,9.7,a,fpl
+163,p491007,Dário Luís Essugo,D.Essugo,Chelsea,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,u,fpl
+157,p624773,Estêvão Almeida de Oliveira Gonçalves,Estêvão,Chelsea,Midfielder,20,0,0.0,0.0,0.07,0.07,0.32,0.32,0.14,0.64,0,1,1,2,3.4,0.8,17.0,0.8,0.7,6.3,a,fpl
+164,p593117,Geovany Quenda,Quenda,Chelsea,Midfielder,8,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,0,0,1,1.2,0.3,2.0,0.2,0.0,5.3,a,fpl
+158,p463936,Jamie Bynoe-Gittens,Gittens,Chelsea,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.9,a,fpl
+101,p56979,Jordan Henderson,Henderson,Chelsea,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,i,fpl
+159,p486672,Moisés Caicedo Corozo,Caicedo,Chelsea,Midfielder,13,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.1,0.0,0.2,1.3,5.4,i,fpl
+40,p244850,Morgan Rogers,Rogers,Chelsea,Midfielder,347,4,3.0,1.0,1.39,1.16,0.36,0.3,2.55,0.66,1,17,5,23,105.8,113.6,68.0,6.8,36.7,7.7,a,fpl
+156,p247632,Pedro Lomba Neto,Neto,Chelsea,Midfielder,246,3,1.0,0.0,0.52,0.53,0.19,0.19,1.05,0.38,8,11,3,22,56.6,53.5,56.0,3.0,1.4,6.5,a,fpl
+161,p514356,Roméo Lavia,Lavia,Chelsea,Midfielder,258,4,1.0,0.0,0.75,0.11,0.26,0.04,0.86,0.3,10,15,6,31,58.4,24.2,66.0,2.8,0.2,5.0,a,fpl
+568,p543158,Valentín Barco,Barco,Chelsea,Midfielder,29,0,0.0,0.0,0.04,0.09,0.12,0.28,0.13,0.4,2,1,0,3,0.0,0.0,4.0,0.2,0.1,5.5,a,fpl
+182,p539142,Aurèle Amenda,Amenda,Coventry City,Defender,360,4,0.0,0.0,0.02,0.39,0.0,0.1,0.41,0.1,23,11,1,24,44.6,4.2,11.0,1.0,0.7,4.0,a,fpl
+173,p461102,Bobby Thomas,Thomas,Coventry City,Defender,347,4,0.0,0.0,0.43,0.26,0.11,0.07,0.69,0.18,37,13,2,39,60.8,32.7,25.0,3.8,9.1,4.0,a,fpl
+91,p231065,Ethan Pinnock,Pinnock,Coventry City,Defender,192,2,0.0,0.0,0.12,0.0,0.06,0.0,0.12,0.06,22,3,3,25,22.0,0.7,6.0,1.5,0.1,4.5,a,fpl
+178,p80178,Jake Bidwell,Bidwell,Coventry City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,a,fpl
+176,p173878,Jay Dasilva,Dasilva,Coventry City,Defender,354,4,0.0,0.0,0.18,0.48,0.05,0.12,0.66,0.17,15,10,4,19,50.8,26.0,17.0,1.2,0.7,4.0,a,fpl
+179,p204813,Joel Latibeaudiere,Latibeaudiere,Coventry City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,a,fpl
+177,p465390,Kaine Kesler-Hayden,Kesler-Hayden,Coventry City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,i,fpl
+174,p436761,Liam Kitching,Kitching,Coventry City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.4,4.0,u,fpl
+180,p220583,Luke Woolfenden,Woolfenden,Coventry City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,i,fpl
+181,p577411,Miguel Brau,Brau,Coventry City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,u,fpl
+175,p451284,Milan van Ewijk,van Ewijk,Coventry City,Defender,360,4,0.0,0.0,0.0,0.3,0.0,0.08,0.3,0.08,21,13,6,27,42.8,41.1,10.0,1.5,10.3,4.0,a,fpl
+656,p566213,Stephen Mfuni,Mfuni,Coventry City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,a,fpl
+194,p230730,Brandon Thomas-Asante,Thomas-Asante,Coventry City,Forward,137,1,0.0,0.0,0.21,0.05,0.14,0.03,0.26,0.17,6,5,0,11,8.0,3.4,4.0,1.2,0.8,5.0,a,fpl
+195,p218997,Ellis Simms,Simms,Coventry City,Forward,88,1,0.0,0.0,0.3,0.01,0.31,0.01,0.31,0.32,1,2,0,3,7.6,22.3,37.0,0.8,0.7,5.0,a,fpl
+193,p176412,Haji Wright,Wright,Coventry City,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.4,i,fpl
+196,p551262,Jahnoah Markelo,Markelo,Coventry City,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+197,p549653,Norman Bassette,Bassette,Coventry City,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+599,p627221,Sidiki Cherif,Cherif,Coventry City,Forward,30,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,0,0,1,0.0,0.0,0.0,0.2,0.1,5.0,a,fpl
+492,p210156,Taiwo Awoniyi,Awoniyi,Coventry City,Forward,232,3,0.0,0.0,1.3,0.04,0.5,0.02,1.34,0.52,3,7,1,11,13.6,35.3,68.0,0.8,0.6,5.5,s,fpl
+172,p110690,Ben Wilson,Wilson,Coventry City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.4,4.5,a,fpl
+110,p472739,Carl Rushworth,Rushworth,Coventry City,Goalkeeper,360,4,0.0,0.0,0.0,0.02,0.0,0.0,0.02,0.0,4,40,0,0,43.6,0.0,0.0,1.2,0.9,4.5,a,fpl
+623,p79602,Dan Bentley,Bentley,Coventry City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.5,4.0,a,fpl
+171,p484389,Oliver Dovin,Dovin,Coventry City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.1,4.0,u,fpl
+575,p661888,Caleb Yirenkyi,Yirenkyi,Coventry City,Midfielder,175,2,0.0,0.0,0.03,0.14,0.02,0.07,0.17,0.09,5,11,0,16,10.4,19.4,7.0,1.5,0.2,4.9,a,fpl
+186,p241293,Ephron Mason-Clark,Mason-Clark,Coventry City,Midfielder,186,3,0.0,0.0,0.49,0.07,0.24,0.03,0.56,0.27,6,7,0,13,4.2,16.8,2.0,1.0,0.1,5.4,a,fpl
+104,p428580,Frank Onyeka,Onyeka,Coventry City,Midfielder,224,3,0.0,0.0,0.03,0.02,0.01,0.01,0.05,0.02,5,11,3,19,4.0,2.0,0.0,1.5,0.1,4.9,a,fpl
+189,p684268,George Shepherd,Shepherd,Coventry City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.5,a,fpl
+584,p196100,Gustavo Hamer,Hamer,Coventry City,Midfielder,32,0,0.0,0.0,0.0,0.02,0.0,0.06,0.02,0.06,0,2,1,3,0.6,1.8,0.0,0.8,0.1,5.4,a,fpl
+183,p480457,Jack Rudoni,Rudoni,Coventry City,Midfielder,224,3,0.0,0.0,0.83,0.91,0.33,0.37,1.74,0.7,5,13,3,21,26.8,60.0,54.0,2.0,0.1,5.0,a,fpl
+187,p439668,Josh Eccles,Eccles,Coventry City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,i,fpl
+192,p629397,Kai Andrews,Andrews,Coventry City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,4.5,u,fpl
+190,p469272,Loum Tchaouna,Tchaouna,Coventry City,Midfielder,166,2,0.0,0.0,0.19,0.18,0.1,0.1,0.37,0.2,5,9,1,15,17.0,49.3,29.0,1.0,0.1,5.4,a,fpl
+184,p168144,Matt Grimes,Grimes,Coventry City,Midfielder,353,4,0.0,0.0,0.1,0.07,0.03,0.02,0.17,0.05,9,13,6,28,46.2,26.9,3.0,2.0,0.1,4.9,a,fpl
+191,p492498,Raphael Borges Rodrigues,Borges Rodrigues,Coventry City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,u,fpl
+185,p501459,Tatsuhiro Sakamoto,Sakamoto,Coventry City,Midfielder,31,0,0.0,0.0,0.02,0.02,0.06,0.06,0.04,0.12,0,2,2,4,6.2,5.9,7.0,0.2,0.1,4.9,a,fpl
+188,p226965,Victor Torp,Torp,Coventry City,Midfielder,53,0,0.0,0.0,0.0,0.12,0.0,0.2,0.12,0.2,1,2,0,3,6.8,20.0,0.0,0.8,0.1,5.4,a,fpl
+655,p242893,Yann Gboho,Gboho,Coventry City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.5,a,fpl
+588,p570794,Anan Khalaili,Khalaili,Crystal Palace,Defender,289,3,1.0,0.0,0.96,0.31,0.3,0.1,1.27,0.4,19,15,19,38,72.0,30.3,15.0,3.2,0.3,5.0,a,fpl
+153,p220362,Axel Disasi,Disasi,Crystal Palace,Defender,139,2,0.0,0.0,0.0,0.04,0.0,0.03,0.04,0.03,15,11,5,20,32.6,13.3,2.0,0.2,0.1,4.5,s,fpl
+643,p172850,Ben Chilwell,Chilwell,Crystal Palace,Defender,29,0,1.0,0.0,0.27,0.01,0.84,0.03,0.28,0.87,1,0,0,1,33.2,0.7,17.0,4.0,0.5,4.5,a,fpl
+205,p218364,Borna Sosa,Sosa,Crystal Palace,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+206,p515621,Chadi Riad Dnanou,Chadi Riad,Crystal Palace,Defender,72,1,0.0,0.0,0.0,0.01,0.0,0.01,0.01,0.01,6,3,1,7,12.6,1.3,0.0,0.2,0.0,4.4,i,fpl
+202,p427623,Chris Richards,Richards,Crystal Palace,Defender,360,4,0.0,0.0,0.08,0.06,0.02,0.02,0.14,0.04,38,13,6,44,86.4,1.3,24.0,1.5,0.6,5.0,a,fpl
+633,p605972,Honest Ahanor,Ahanor,Crystal Palace,Defender,90,1,0.0,0.0,0.0,0.01,0.0,0.01,0.01,0.01,9,4,2,11,0.0,0.0,0.0,1.5,0.0,4.5,a,fpl
+203,p651426,Jaydee Canvot,Canvot,Crystal Palace,Defender,270,3,0.0,0.0,0.05,0.01,0.02,0.0,0.06,0.02,17,6,7,24,63.2,8.1,5.0,0.5,0.2,4.9,a,fpl
+207,p242313,Oscar Mingueza,Mingueza,Crystal Palace,Defender,16,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,2,2,3.2,0.4,0.0,0.5,0.1,4.4,a,fpl
+220,p590014,Rio Cardines,Cardines,Crystal Palace,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+577,p223723,Takehiro Tomiyasu,Tomiyasu,Crystal Palace,Defender,144,1,0.0,0.0,0.0,0.02,0.0,0.01,0.02,0.01,12,7,2,14,15.0,3.7,2.0,0.5,0.3,4.5,a,fpl
+204,p244723,Tyrick Mitchell,Mitchell,Crystal Palace,Defender,329,4,2.0,0.0,0.77,0.24,0.21,0.07,1.01,0.28,11,15,6,17,101.2,46.1,56.0,4.2,6.5,4.5,a,fpl
+225,p660392,Christantus Uche,Uche,Crystal Palace,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+224,p205533,Eddie Nketiah,Nketiah,Crystal Palace,Forward,167,3,0.0,1.0,1.1,0.58,0.59,0.31,1.68,0.9,2,5,4,11,34.2,45.8,50.0,1.8,0.7,5.5,d,fpl
+223,p231747,Jean-Philippe Mateta,Mateta,Crystal Palace,Forward,62,1,0.0,0.0,0.7,0.02,1.02,0.03,0.72,1.05,1,2,2,5,1.4,12.3,11.0,0.5,1.6,6.3,i,fpl
+222,p247412,Jørgen Strand Larsen,Strand Larsen,Crystal Palace,Forward,217,2,1.0,0.0,0.39,0.03,0.16,0.01,0.42,0.17,3,5,2,10,8.6,4.6,21.0,3.0,0.6,6.0,a,fpl
+198,p172649,Dean Henderson,Henderson,Crystal Palace,Goalkeeper,270,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6,31,0,0,96.8,0.0,0.0,1.2,1.7,5.0,i,fpl
+555,p169593,Remi Matthews,Matthews,Crystal Palace,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.7,4.0,a,fpl
+199,p121709,Walter Benítez,Benitez,Crystal Palace,Goalkeeper,90,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,7,0,0,0.0,0.0,0.0,0.5,0.1,4.5,a,fpl
+210,p496221,Adam Wharton,Wharton,Crystal Palace,Midfielder,346,4,0.0,0.0,0.08,0.36,0.02,0.09,0.44,0.11,12,14,8,34,47.8,58.4,2.0,2.5,0.8,5.5,a,fpl
+218,p438464,Cheick Doucouré,Doucouré,Crystal Palace,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.9,a,fpl
+214,p209400,Daichi Kamada,Kamada,Crystal Palace,Midfielder,351,4,0.0,3.0,0.05,0.35,0.01,0.09,0.4,0.1,4,14,10,28,57.6,55.3,13.0,4.5,0.5,5.0,a,fpl
+647,p533646,Darío Osorio,Osorio,Crystal Palace,Midfielder,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,1,1,2.0,0.3,0.0,0.5,0.0,5.5,a,fpl
+241,p433154,Dwight McNeil,McNeil,Crystal Palace,Midfielder,84,1,0.0,0.0,0.05,0.02,0.05,0.02,0.07,0.07,4,3,0,7,10.0,5.0,2.0,0.8,0.1,5.4,a,fpl
+42,p485337,Evann Guessand,Guessand,Crystal Palace,Midfielder,54,0,0.0,0.0,0.03,0.03,0.05,0.05,0.06,0.1,1,0,1,2,5.4,2.1,7.0,0.5,0.0,5.5,a,fpl
+208,p232185,Ismaïla Sarr,Sarr,Crystal Palace,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.7,6.2,i,fpl
+213,p152551,Jefferson Lerma Solís,Lerma,Crystal Palace,Midfielder,6,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,0,0,1,0.0,0.0,0.0,0.2,0.1,4.9,a,fpl
+219,p450542,Jesurun Rak-Sakyi,J.Rak-Sakyi,Crystal Palace,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,u,fpl
+221,p672492,Joél Drakes-Thomas,Drakes-Thomas,Crystal Palace,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+215,p489706,Justin Devenny,Devenny,Crystal Palace,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+217,p536694,Matheus França de Oliveira,M.França,Crystal Palace,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,u,fpl
+644,p450063,Quinten Timber,Timber,Crystal Palace,Midfielder,163,2,0.0,0.0,0.12,0.03,0.07,0.02,0.15,0.09,4,9,9,22,4.2,0.2,1.0,3.0,0.0,5.0,a,fpl
+216,p606921,Romain Esse,Esse,Crystal Palace,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+212,p108413,Will Hughes,Hughes,Crystal Palace,Midfielder,29,0,0.0,0.0,0.0,0.04,0.0,0.12,0.04,0.12,3,3,1,7,2.4,0.3,0.0,0.5,8.1,4.5,a,fpl
+211,p488024,Yéremy Pino Santos,Yeremy,Crystal Palace,Midfielder,226,3,0.0,2.0,0.36,0.4,0.14,0.16,0.76,0.3,3,13,5,21,20.8,83.1,21.0,3.0,0.4,5.5,a,fpl
+595,p559152,Zavier Gozo,Gozo,Crystal Palace,Midfielder,28,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,1,1,1.4,1.3,0.0,0.5,0.0,5.0,a,fpl
+235,p499300,Adam Aznou,Aznou,Everton,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+649,p154043,Ainsley Maitland-Niles,Maitland-Niles,Everton,Defender,87,1,1.0,0.0,0.06,0.14,0.06,0.14,0.2,0.2,3,4,2,5,33.4,0.8,7.0,6.5,0.6,4.5,a,fpl
+232,p512462,Jake O'Brien,O'Brien,Everton,Defender,15,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,1,0,1,0.0,0.0,0.0,0.2,0.3,4.9,a,fpl
+229,p17761,James Tarkowski,Tarkowski,Everton,Defender,360,4,1.0,0.0,0.17,0.03,0.04,0.01,0.2,0.05,29,13,10,39,94.4,13.1,29.0,7.2,12.8,6.1,a,fpl
+230,p480455,Jarrad Branthwaite,Branthwaite,Everton,Defender,360,4,0.0,0.0,0.17,0.02,0.04,0.0,0.19,0.04,35,11,5,40,82.8,2.9,73.0,4.8,2.0,5.5,a,fpl
+231,p106611,Michael Keane,Keane,Everton,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.8,4.8,a,fpl
+234,p243571,Nathan Patterson,Patterson,Everton,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+233,p224967,Vitalii Mykolenko,Mykolenko,Everton,Defender,360,4,0.0,0.0,0.0,0.14,0.0,0.04,0.14,0.04,22,19,11,33,62.4,17.3,2.0,5.5,2.7,4.5,a,fpl
+248,p486385,Norberto Bercique Gomes Betuncal,Beto,Everton,Forward,31,0,0.0,0.0,0.09,0.0,0.26,0.0,0.09,0.26,1,0,0,1,3.0,0.3,5.0,0.5,0.8,5.4,u,fpl
+249,p586309,Thierno Barry,Barry,Everton,Forward,327,4,1.0,0.0,2.98,0.14,0.82,0.04,3.12,0.86,3,8,1,12,48.2,45.7,123.0,3.5,6.5,5.6,a,fpl
+226,p111234,Jordan Pickford,Pickford,Everton,Goalkeeper,360,4,0.0,0.0,0.0,0.02,0.0,0.0,0.02,0.0,6,46,0,0,72.6,0.0,0.0,4.2,8.8,5.5,a,fpl
+227,p229600,Mark Travers,Travers,Everton,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,a,fpl
+228,p138001,Tom King,King,Everton,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+654,p629068,Braiden Graham,Graham,Everton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+209,p242898,Brennan Johnson,Johnson,Everton,Midfielder,173,2,0.0,0.0,0.21,0.22,0.11,0.11,0.43,0.22,7,7,4,18,11.8,23.2,9.0,1.5,0.1,5.9,a,fpl
+243,p502697,Carlos Alcaraz Durán,Alcaraz,Everton,Midfielder,5,0,0.0,0.0,0.05,0.02,0.9,0.36,0.07,1.26,0,2,1,3,5.0,0.8,25.0,0.2,0.1,4.9,a,fpl
+21,p128295,Christian Nørgaard,Nørgaard,Everton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,i,fpl
+244,p609873,Harrison Armstrong,Armstrong,Everton,Midfielder,356,4,0.0,1.0,0.09,0.12,0.02,0.03,0.21,0.05,12,17,6,35,45.2,33.7,13.0,3.5,0.4,5.0,a,fpl
+247,p244860,Hayden Hackney,Hackney,Everton,Midfielder,136,1,0.0,1.0,0.05,0.13,0.03,0.09,0.18,0.12,4,5,3,12,37.0,39.1,17.0,2.2,0.2,5.5,a,fpl
+238,p114283,Jack Grealish,Grealish,Everton,Midfielder,57,0,0.0,0.0,0.02,0.14,0.03,0.22,0.16,0.25,2,1,3,6,7.0,12.9,10.0,0.8,0.4,6.5,a,fpl
+239,p232928,James Garner,Garner,Everton,Midfielder,238,3,0.0,0.0,0.04,0.13,0.02,0.05,0.17,0.07,5,20,11,36,17.8,44.0,2.0,2.0,0.1,6.0,a,fpl
+236,p215413,Kiernan Dewsbury-Hall,Dewsbury-Hall,Everton,Midfielder,360,4,1.0,0.0,0.62,0.49,0.16,0.12,1.11,0.28,5,21,9,35,86.2,110.6,69.0,4.2,4.9,6.5,a,fpl
+246,p513466,Merlin Röhl,Röhl,Everton,Midfielder,249,3,0.0,0.0,0.0,0.2,0.0,0.07,0.2,0.07,6,13,5,24,26.6,32.1,2.0,1.5,0.0,4.9,a,fpl
+245,p496661,Tyler Dibling,Dibling,Everton,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.4,a,fpl
+242,p550615,Tyrique George,George,Everton,Midfielder,298,4,1.0,0.0,0.32,0.31,0.1,0.09,0.63,0.19,5,10,1,16,57.2,70.0,66.0,4.5,0.7,5.5,a,fpl
+254,p169528,Antonee Robinson,Robinson,Fulham,Defender,339,4,0.0,0.0,0.26,0.21,0.07,0.06,0.47,0.13,14,16,10,24,46.0,54.6,12.0,2.5,1.4,4.5,a,fpl
+257,p232892,Calvin Bassey,Bassey,Fulham,Defender,360,4,0.0,0.0,0.07,0.07,0.02,0.02,0.14,0.04,17,15,4,21,47.0,12.8,2.0,2.2,0.7,4.5,a,fpl
+650,p442299,David Affengruber,Affengruber,Fulham,Defender,90,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,11,3,1,12,0.0,0.0,0.0,4.0,0.0,4.5,a,fpl
+253,p174874,Joachim Andersen,Andersen,Fulham,Defender,180,2,0.0,0.0,0.0,0.1,0.0,0.05,0.1,0.05,13,9,2,15,42.2,35.8,8.0,0.5,0.1,5.0,a,fpl
+255,p246301,Jorge Cuenca Barreno,J.Cuenca,Fulham,Defender,90,1,0.0,0.0,0.0,0.03,0.0,0.03,0.03,0.03,9,3,1,10,32.8,21.3,0.0,0.8,0.0,4.5,a,fpl
+256,p167074,Kenny Tete,Tete,Fulham,Defender,27,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3,0,0,3,0.0,0.0,0.0,0.0,0.2,4.4,a,fpl
+610,p547686,Luc De Fougerolles,De Fougerolles,Fulham,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+269,p184349,Ryan Sessegnon,Sessegnon,Fulham,Defender,50,0,0.0,0.0,0.13,0.44,0.23,0.79,0.57,1.02,2,3,1,3,17.2,26.3,31.0,0.8,0.3,4.4,d,fpl
+258,p166477,Timothy Castagne,Castagne,Fulham,Defender,318,4,0.0,2.0,0.67,0.38,0.19,0.11,1.05,0.3,14,14,6,20,58.6,52.6,53.0,4.8,0.8,4.5,a,fpl
+569,p551466,Gonzalo García,Gonzalo,Fulham,Forward,346,4,1.0,0.0,1.64,0.25,0.43,0.07,1.89,0.5,6,8,2,16,48.6,21.1,103.0,3.0,3.8,6.0,a,fpl
+272,p631786,Jonah Kusi-Asare,Kusi-Asare,Fulham,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,6.0,4.5,a,fpl
+271,p244042,Rodrigo Muniz Carvalho,Muniz,Fulham,Forward,28,0,0.0,0.0,0.4,0.0,1.29,0.0,0.4,1.29,2,0,0,2,9.2,21.6,34.0,0.8,0.4,5.4,a,fpl
+252,p505079,Alfie McNally,McNally,Fulham,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+251,p86873,Benjamin Lecomte,Lecomte,Fulham,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.1,4.0,a,fpl
+250,p80201,Bernd Leno,Leno,Fulham,Goalkeeper,360,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,4,33,0,0,67.6,0.0,0.0,3.8,3.0,4.5,a,fpl
+261,p153133,Alex Iwobi,Iwobi,Fulham,Midfielder,338,4,0.0,0.0,0.2,0.81,0.05,0.22,1.01,0.27,4,14,4,22,32.0,70.5,13.0,2.2,0.7,5.4,a,fpl
+570,p571779,César Palacios,Palacios,Fulham,Midfielder,207,3,1.0,0.0,0.98,0.03,0.43,0.01,1.01,0.44,3,8,2,13,39.6,22.3,62.0,2.8,0.2,5.4,a,fpl
+262,p209289,Emile Smith Rowe,Smith Rowe,Fulham,Midfielder,38,0,0.0,0.0,0.06,0.02,0.14,0.05,0.08,0.19,1,2,0,3,5.4,23.3,9.0,0.8,0.3,5.4,a,fpl
+270,p153366,Harrison Reed,Reed,Fulham,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.1,4.4,a,fpl
+635,p551050,Hugo Larsson,Larsson,Fulham,Midfielder,24,0,0.0,0.0,0.13,0.23,0.49,0.86,0.36,1.35,0,1,1,2,3.6,1.3,9.0,1.0,0.0,5.0,a,fpl
+268,p577725,Josh King,King,Fulham,Midfielder,346,4,2.0,0.0,1.16,0.43,0.3,0.11,1.59,0.41,4,12,7,23,96.8,46.1,96.0,5.5,1.4,5.5,a,fpl
+263,p560552,Kevin Santos Lopes de Macedo,Kevin,Fulham,Midfielder,42,0,0.0,0.0,0.03,0.12,0.06,0.26,0.15,0.32,0,3,3,6,5.2,3.4,0.0,0.8,0.0,5.3,a,fpl
+626,p616069,Macaulay Zepa,Zepa,Fulham,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,4.5,a,fpl
+636,p500033,Manuel Ángel Morán Ibáñez,Ángel,Fulham,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,a,fpl
+264,p477555,Oscar Bobb,Bobb,Fulham,Midfielder,273,4,0.0,0.0,0.32,1.05,0.11,0.35,1.37,0.46,4,12,6,22,28.0,85.0,65.0,2.5,0.3,5.5,a,fpl
+265,p207189,Sander Berge,Berge,Fulham,Midfielder,273,3,0.0,0.0,0.03,0.34,0.01,0.11,0.37,0.12,5,8,4,17,22.8,53.9,9.0,2.0,0.3,4.9,a,fpl
+580,p463210,Shea Charles,Charles,Fulham,Midfielder,213,2,0.0,0.0,0.09,0.14,0.04,0.06,0.23,0.1,12,19,2,33,16.4,39.3,14.0,2.2,0.1,5.0,a,fpl
+266,p76357,Tom Cairney,Cairney,Fulham,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,i,fpl
+638,p496181,Brooke Norton-Cuffy,Norton-Cuffy,Hull City,Defender,34,0,0.0,0.0,0.05,0.0,0.13,0.0,0.05,0.13,1,4,0,1,2.2,0.3,2.0,0.5,0.3,4.0,a,fpl
+284,p661800,Cathal McCarthy,McCarthy,Hull City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,a,fpl
+278,p501902,Charlie Hughes,Hughes,Hull City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,3.9,i,fpl
+281,p433590,Cody Drameh,Drameh,Hull City,Defender,65,0,0.0,0.0,0.05,0.0,0.07,0.0,0.05,0.07,5,4,1,6,6.4,0.4,1.0,0.5,0.0,4.0,u,fpl
+277,p108416,John Egan,Egan,Hull City,Defender,360,4,0.0,0.0,0.04,0.0,0.01,0.0,0.04,0.01,48,11,7,55,82.6,0.6,2.0,6.2,6.7,4.1,a,fpl
+280,p193278,Lewie Coyle,Coyle,Hull City,Defender,258,4,0.0,0.0,0.13,0.03,0.05,0.01,0.16,0.06,7,8,2,9,11.8,16.2,0.0,3.2,0.6,4.0,a,fpl
+585,p597462,Lucas Herrington,Herrington,Hull City,Defender,107,0,0.0,0.0,0.0,0.01,0.0,0.01,0.01,0.01,7,1,1,8,17.6,0.3,0.0,1.0,0.6,4.0,a,fpl
+556,p169359,Matt Targett,Targett,Hull City,Defender,5,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,0,0.4,0.0,0.0,0.2,1.9,4.0,a,fpl
+283,p449428,Matty Jacob,Jacob,Hull City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,u,fpl
+586,p606930,Nobel Mendy,Mendy,Hull City,Defender,249,4,1.0,0.0,0.32,0.0,0.12,0.0,0.32,0.12,32,6,7,39,95.6,1.2,54.0,6.2,7.6,4.1,d,fpl
+285,p160817,Paddy McNair,McNair,Hull City,Defender,26,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,1,0,2,4.2,0.0,0.0,0.2,0.1,4.0,a,fpl
+282,p232351,Ryan Giles,Giles,Hull City,Defender,354,4,0.0,1.0,0.02,0.35,0.01,0.09,0.37,0.1,15,12,4,19,38.2,60.2,6.0,6.0,2.2,4.0,a,fpl
+279,p146426,Semi Ajayi,Ajayi,Hull City,Defender,333,4,1.0,0.0,0.65,0.0,0.18,0.0,0.65,0.18,19,11,4,23,70.8,1.7,35.0,6.5,13.5,4.2,a,fpl
+298,p500957,Enis Destan,Destan,Hull City,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.5,u,fpl
+632,p626751,Ilyas Ansah,Ansah,Hull City,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,i,fpl
+299,p534392,Mason Burstow,Burstow,Hull City,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+295,p169432,Oli McBurnie,McBurnie,Hull City,Forward,351,4,0.0,2.0,0.87,0.11,0.22,0.03,0.98,0.25,6,6,3,15,20.6,45.7,75.0,3.0,1.9,5.5,a,fpl
+637,p631000,Robinio Vaz,Vaz,Hull City,Forward,8,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,1,0.0,0.0,0.0,0.5,0.1,5.0,a,fpl
+273,p167825,Dillon Phillips,Phillips,Hull City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.4,4.0,a,fpl
+275,p494950,Harvey Cartwright,Cartwright,Hull City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,u,fpl
+274,p105666,Jack Butland,Butland,Hull City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,i,fpl
+572,p473284,Konstantinos Tzolakis,Tzolakis,Hull City,Goalkeeper,360,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,58,0,0,72.4,0.0,0.0,7.0,10.6,4.6,a,fpl
+276,p444307,Thimothée Lo-Tutala,Lo-Tutala,Hull City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,u,fpl
+292,p208481,Abdülkadir Ömür,Ömür,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,a,fpl
+293,p490161,Abu Kamara,Kamara,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+645,p647839,Christos Mouzakitis,Mouzakitis,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,a,fpl
+297,p470294,Darko Gyabi,Gyabi,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,i,fpl
+296,p213292,David Akintola,Akintola,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+291,p465525,Eliot Matazo,Matazo,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,i,fpl
+576,p608227,Elliot Stroud,Stroud,Hull City,Midfielder,249,4,0.0,0.0,0.06,0.05,0.02,0.02,0.11,0.04,3,12,5,20,8.4,20.9,11.0,1.8,0.1,5.0,a,fpl
+563,p445028,Hidemasa Morita,Morita,Hull City,Midfielder,45,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,1,0,3,11.0,13.4,0.0,0.2,0.0,5.0,i,fpl
+574,p552946,Jens Hjertø-Dahl,Hjertø-Dahl,Hull City,Midfielder,8,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,1,0.0,0.0,0.0,0.2,0.1,4.9,a,fpl
+340,p462635,Joe Gelhardt,Gelhardt,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,a,fpl
+288,p171270,Kieran Dowell,Dowell,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,4.5,a,fpl
+287,p232905,Liam Millar,Millar,Hull City,Midfielder,50,0,1.0,0.0,0.58,0.0,1.04,0.0,0.58,1.04,2,1,1,4,36.0,1.1,15.0,1.5,0.0,5.0,u,fpl
+589,p469266,Lucas Gourna-Douath,Gourna-Douath,Hull City,Midfielder,126,1,0.0,0.0,0.0,0.02,0.0,0.01,0.02,0.01,5,7,4,16,26.2,22.5,0.0,0.8,0.0,5.0,a,fpl
+289,p101282,Matt Crooks,Crooks,Hull City,Midfielder,158,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,9,4,6,19,19.0,2.4,0.0,0.8,0.5,4.5,a,fpl
+286,p540324,Mohamed Belloumi,Belloumi,Hull City,Midfielder,312,4,2.0,1.0,0.37,0.12,0.11,0.03,0.49,0.14,14,9,10,33,56.6,26.7,28.0,6.8,2.4,5.0,a,fpl
+617,p490884,Mohamed-Ali Cho,Cho,Hull City,Midfielder,45,0,0.0,0.0,0.52,0.16,1.04,0.32,0.68,1.36,1,1,0,2,3.4,0.3,17.0,1.0,0.0,5.0,a,fpl
+290,p243413,Regan Slater,Slater,Hull City,Midfielder,360,4,0.0,1.0,0.08,0.56,0.02,0.14,0.64,0.16,8,13,9,30,38.8,34.4,10.0,3.2,5.6,4.5,a,fpl
+642,p243951,Sorba Thomas,Thomas,Hull City,Midfielder,57,0,0.0,0.0,0.02,0.07,0.03,0.11,0.09,0.14,0,5,0,5,3.2,10.8,0.0,1.0,0.0,5.5,a,fpl
+240,p490094,Tim Iroegbunam,Iroegbunam,Hull City,Midfielder,25,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,0,1,2,0.0,0.0,0.0,0.2,0.0,5.0,a,fpl
+294,p553783,Óscar Zambrano,Zambrano,Hull City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+592,p572584,Abdoul Ouattara,Ouattara,Ipswich Town,Defender,41,0,0.0,0.0,0.0,0.02,0.0,0.04,0.02,0.04,2,4,1,3,9.4,24.6,0.0,1.0,0.9,4.0,a,fpl
+307,p222018,Ben Johnson,Johnson,Ipswich Town,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+303,p183015,Cédric Kipré,Kipré,Ipswich Town,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.5,3.9,a,fpl
+304,p216616,Dara O'Shea,O'Shea,Ipswich Town,Defender,360,4,0.0,0.0,0.07,0.26,0.02,0.06,0.33,0.08,32,13,7,39,71.8,29.7,15.0,2.0,2.9,4.0,a,fpl
+308,p176420,Darnell Furlong,Furlong,Ipswich Town,Defender,17,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,0,1,3,5.0,0.5,0.0,0.2,0.5,4.0,a,fpl
+259,p219924,Issa Diop,Diop,Ipswich Town,Defender,360,4,0.0,0.0,0.0,0.15,0.0,0.04,0.15,0.04,31,17,4,35,75.2,11.9,2.0,2.0,14.0,4.0,a,fpl
+306,p449429,Jacob Greaves,Greaves,Ipswich Town,Defender,357,4,0.0,0.0,0.0,0.06,0.0,0.02,0.06,0.02,25,12,5,30,49.8,14.9,4.0,0.8,1.2,4.0,a,fpl
+305,p455084,Leif Davis,Davis,Ipswich Town,Defender,360,4,2.0,2.0,1.17,0.44,0.29,0.11,1.61,0.4,17,8,2,19,79.6,38.5,69.0,5.8,5.9,4.0,a,fpl
+322,p462387,Ali Al-Hamadi,Al-Hamadi,Ipswich Town,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.0,u,fpl
+320,p147675,Chuba Akpom,Akpom,Ipswich Town,Forward,69,0,1.0,0.0,0.97,0.0,1.27,0.0,0.97,1.27,0,2,1,3,34.6,1.7,19.0,1.5,1.2,5.0,a,fpl
+316,p543968,Emersonn Correia da Silva,Emersonn,Ipswich Town,Forward,237,4,2.0,1.0,1.48,0.11,0.56,0.04,1.59,0.6,3,4,2,9,49.8,37.4,50.0,6.0,2.4,5.5,a,fpl
+317,p222625,George Hirst,Hirst,Ipswich Town,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.0,u,fpl
+321,p557012,Sindre Walle Egeli,Walle Egeli,Ipswich Town,Forward,10,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.1,0.0,0.2,3.6,4.5,a,fpl
+640,p431639,Zian Flemming,Flemming,Ipswich Town,Forward,51,0,1.0,0.0,0.54,0.01,0.95,0.02,0.55,0.97,1,1,0,2,3.2,0.5,7.0,3.0,0.1,5.5,a,fpl
+301,p112520,Alex Palmer,Palmer,Ipswich Town,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,4.1,4.0,a,fpl
+300,p108813,Christian Walton,Walton,Ipswich Town,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.4,4.4,a,fpl
+302,p50093,David Button,Button,Ipswich Town,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.6,4.0,a,fpl
+554,p546600,Kayne van Oevelen,Van Oevelen,Ipswich Town,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+564,p240514,Kjell Scherpen,Scherpen,Ipswich Town,Goalkeeper,360,4,0.0,0.0,0.0,0.01,0.0,0.0,0.01,0.0,8,39,0,0,88.6,0.0,0.0,1.8,0.6,4.5,a,fpl
+315,p531442,Abdul Fatawu,Fatawu,Ipswich Town,Midfielder,286,4,0.0,1.0,0.03,0.83,0.01,0.26,0.86,0.27,6,9,9,24,55.4,103.6,14.0,2.2,0.2,5.5,a,fpl
+324,p232457,Anis Mehmeti,Mehmeti,Ipswich Town,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,a,fpl
+310,p241117,Azor Matusiwa,Matusiwa,Ipswich Town,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,a,fpl
+602,p524180,Cameron Humphreys,Humphreys,Ipswich Town,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+314,p229164,Chiedozie Ogbene,Ogbene,Ipswich Town,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,u,fpl
+562,p442967,Daizen Maeda,Maeda,Ipswich Town,Midfielder,243,3,0.0,0.0,0.71,0.01,0.26,0.0,0.72,0.26,8,4,7,19,28.8,2.9,43.0,1.8,0.3,5.4,a,fpl
+619,p218543,Exequiel Palacios,Palacios,Ipswich Town,Midfielder,195,2,0.0,0.0,0.0,0.07,0.0,0.03,0.07,0.03,10,20,8,38,27.4,34.5,2.0,3.0,0.0,5.0,a,fpl
+571,p216055,Florentino Ibrain Morris Luís,Florentino,Ipswich Town,Midfielder,13,0,0.0,0.0,0.0,0.01,0.0,0.07,0.01,0.07,1,0,1,2,0.0,0.0,0.0,0.2,0.1,4.9,a,fpl
+313,p443261,Jack Clarke,Clarke,Ipswich Town,Midfielder,105,1,1.0,0.0,0.3,0.04,0.26,0.03,0.34,0.29,1,3,2,6,37.0,12.3,22.0,2.2,0.2,5.4,a,fpl
+312,p231899,Jack Taylor,Taylor,Ipswich Town,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,i,fpl
+318,p481624,Jaden Philogene,Philogene,Ipswich Town,Midfielder,28,0,0.0,0.0,0.02,0.0,0.06,0.0,0.01,0.06,0,3,0,3,0.0,0.0,0.0,0.2,0.1,5.4,a,fpl
+591,p474120,Julio Enciso,Enciso,Ipswich Town,Midfielder,340,4,0.0,2.0,0.92,0.84,0.24,0.22,1.76,0.46,5,19,2,26,53.6,48.9,62.0,3.2,0.9,5.5,a,fpl
+323,p461587,Kasey McAteer,McAteer,Ipswich Town,Midfielder,42,0,0.0,0.0,0.05,0.0,0.11,0.0,0.05,0.11,0,4,1,5,4.6,1.8,7.0,0.8,1.1,4.5,a,fpl
+309,p501390,Marcelino Núñez,Núñez,Ipswich Town,Midfielder,140,2,0.0,0.0,0.03,0.05,0.02,0.03,0.08,0.05,8,10,3,21,24.6,19.4,6.0,1.5,0.1,5.0,a,fpl
+319,p172453,Sam Szmodics,Szmodics,Ipswich Town,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+267,p212314,Saša Lukić,Lukić,Ipswich Town,Midfielder,328,4,0.0,1.0,0.02,0.16,0.01,0.04,0.18,0.05,15,10,6,31,51.2,40.9,4.0,2.2,0.1,5.0,a,fpl
+311,p149929,Wes Burns,Burns,Ipswich Town,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+331,p243526,Gabriel Gudmundsson,Gudmundsson,Leeds,Defender,90,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,9,3,5,12.6,1.2,2.0,0.5,0.1,4.5,a,fpl
+327,p434752,Jaka Bijol,Bijol,Leeds,Defender,164,2,0.0,0.0,0.11,0.0,0.06,0.0,0.11,0.06,18,7,3,21,38.2,0.6,15.0,3.0,0.8,5.0,a,fpl
+332,p220627,James Justin,Justin,Leeds,Defender,270,3,0.0,0.0,0.17,0.02,0.06,0.01,0.19,0.07,19,11,11,30,66.0,15.6,32.0,4.0,1.5,4.5,a,fpl
+330,p226182,Jayden Bogle,Bogle,Leeds,Defender,217,3,1.0,0.0,0.9,0.03,0.37,0.01,0.93,0.38,9,8,3,12,61.0,14.1,37.0,5.5,2.1,4.5,a,fpl
+603,p643970,Jayden Lienou,Lienou,Leeds,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,a,fpl
+329,p214225,Joe Rodon,Rodon,Leeds,Defender,123,2,0.0,0.0,0.03,0.06,0.02,0.04,0.09,0.06,10,2,1,11,23.0,14.7,7.0,1.8,1.1,4.4,i,fpl
+641,p437497,Melvin Bard,Bard,Leeds,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+598,p173774,Nico Elvedi,Elvedi,Leeds,Defender,146,1,0.0,0.0,0.0,0.57,0.0,0.35,0.57,0.35,15,4,1,16,43.6,22.2,12.0,1.2,0.0,4.5,a,fpl
+333,p437738,Sebastiaan Bornauw,Bornauw,Leeds,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+334,p522047,Tarik Muharemović,Muharemović,Leeds,Defender,270,3,0.0,0.0,0.09,0.02,0.03,0.01,0.11,0.04,36,6,3,39,96.4,2.2,21.0,3.5,3.9,5.0,a,fpl
+346,p177815,Dominic Calvert-Lewin,Calvert-Lewin,Leeds,Forward,252,3,1.0,0.0,1.61,0.08,0.58,0.03,1.69,0.61,4,5,0,9,42.8,16.1,67.0,2.5,21.6,6.0,a,fpl
+348,p235826,Joël Piroe,Piroe,Leeds,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.0,u,fpl
+347,p174594,Lukas Nmecha,Nmecha,Leeds,Forward,38,0,0.0,1.0,0.27,0.14,0.64,0.33,0.41,0.97,0,1,0,1,18.2,22.1,15.0,1.2,0.5,5.4,a,fpl
+349,p565297,Mateo Joseph Fernández-Regatillo,Mateo Joseph,Leeds,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,i,fpl
+625,p97846,Alex Cairns,Cairns,Leeds,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.0,a,fpl
+385,p432720,James Trafford,Trafford,Leeds,Goalkeeper,270,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,31,0,0,91.8,0.0,0.0,3.8,5.4,5.0,a,fpl
+326,p201595,Lucas Estella Perri,Perri,Leeds,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,4.5,u,fpl
+629,p155465,Michael Zetterer,Zetterer,Leeds,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.6,4.0,a,fpl
+604,p592740,Alfie Cresswell,Cresswell,Leeds,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+335,p466525,Anton Stach,Stach,Leeds,Midfielder,270,3,1.0,0.0,0.49,0.16,0.16,0.05,0.65,0.21,18,11,9,38,87.8,35.8,39.0,4.8,2.7,6.0,a,fpl
+337,p427637,Brenden Aaronson,Aaronson,Leeds,Midfielder,154,2,0.0,0.0,0.01,0.02,0.01,0.01,0.03,0.02,1,7,2,10,10.2,2.7,7.0,1.2,0.6,5.4,a,fpl
+343,p200617,Daniel James,James,Leeds,Midfielder,22,0,0.0,0.0,0.24,0.01,0.98,0.04,0.25,1.02,0,2,0,2,0.0,1.1,12.0,0.2,0.1,4.9,a,fpl
+338,p199598,Ethan Ampadu,Ampadu,Leeds,Midfielder,270,3,0.0,0.0,0.01,0.14,0.0,0.05,0.15,0.05,17,9,8,34,61.8,41.2,1.0,2.2,1.0,5.4,a,fpl
+260,p153682,Harry Wilson,Wilson,Leeds,Midfielder,127,1,0.0,0.0,0.01,0.06,0.01,0.04,0.07,0.05,2,4,3,9,16.0,47.7,12.0,1.0,2.6,6.3,a,fpl
+344,p486520,Ilia Gruev,Gruev,Leeds,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,d,fpl
+342,p221399,Jack Harrison,Harrison,Leeds,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+648,p587982,Jean-Mattéo Bahoya,Bahoya,Leeds,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,a,fpl
+336,p435997,Noah Okafor,Okafor,Leeds,Midfielder,153,2,0.0,0.0,0.08,0.18,0.05,0.11,0.26,0.16,2,2,3,7,17.8,22.1,16.0,1.5,0.3,5.8,a,fpl
+339,p180135,Sean Longstaff,Longstaff,Leeds,Midfielder,8,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.2,0.0,0.2,0.1,4.9,a,fpl
+345,p248056,Tanaka Ao,Tanaka,Leeds,Midfielder,117,1,0.0,1.0,0.53,0.02,0.41,0.02,0.55,0.43,8,6,5,19,40.8,14.0,13.0,1.5,0.2,4.9,a,fpl
+341,p492859,Wilfried Gnonto,Gnonto,Leeds,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+365,p489580,Calvin Ramsay,Ramsay,Liverpool,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+360,p492777,Conor Bradley,Bradley,Liverpool,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,i,fpl
+363,p647681,Giovanni Leoni,Leoni,Liverpool,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,i,fpl
+357,p216094,Jeremie Frimpong,Frimpong,Liverpool,Defender,178,2,0.0,0.0,0.01,0.23,0.01,0.12,0.24,0.13,8,7,4,12,26.4,51.6,14.0,0.5,2.1,5.4,a,fpl
+362,p606702,Jeremy Jacquet,Jacquet,Liverpool,Defender,325,4,0.0,0.0,0.0,0.12,0.0,0.03,0.12,0.03,20,15,8,28,66.0,39.5,4.0,4.5,3.0,5.0,a,fpl
+359,p171287,Joe Gomez,Gomez,Liverpool,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,d,fpl
+364,p214285,Kostas Tsimikas,Tsimikas,Liverpool,Defender,64,1,0.0,0.0,0.04,0.02,0.06,0.03,0.06,0.09,2,3,1,3,3.6,1.3,9.0,0.5,0.1,4.9,a,fpl
+358,p544877,Milos Kerkez,Kerkez,Liverpool,Defender,295,3,0.0,0.0,0.02,0.07,0.01,0.02,0.09,0.03,16,8,7,23,55.8,37.9,12.0,1.8,2.5,5.4,a,fpl
+579,p445087,Ronald Araujo,Araujo,Liverpool,Defender,194,2,0.0,0.0,0.0,0.05,0.0,0.02,0.05,0.02,16,9,3,19,39.0,5.9,2.0,3.8,2.8,5.4,a,fpl
+356,p97032,Virgil van Dijk,Virgil,Liverpool,Defender,360,4,0.0,0.0,0.25,0.07,0.06,0.02,0.32,0.08,30,16,5,35,73.4,7.7,26.0,4.2,16.8,6.5,a,fpl
+361,p519440,Wellity Lucky,Lucky,Liverpool,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,a,fpl
+379,p219168,Alexander Isak,Isak,Liverpool,Forward,333,4,3.0,0.0,2.79,0.06,0.75,0.02,2.85,0.77,2,3,1,6,112.4,31.3,148.0,6.2,22.4,9.1,a,fpl
+380,p510663,Hugo Ekitiké,Ekitiké,Liverpool,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,7.4,i,fpl
+382,p500058,Jayden Danns,Danns,Liverpool,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+350,p116535,Alisson Becker,A.Becker,Liverpool,Goalkeeper,360,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6,38,0,0,55.8,0.0,0.0,4.8,3.9,5.5,a,fpl
+353,p586268,Armin Pecsi,Pecsi,Liverpool,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,u,fpl
+352,p155503,Freddie Woodman,Woodman,Liverpool,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.0,4.0,a,fpl
+351,p449027,Giorgi Mamardashvili,Mamardashvili,Liverpool,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.9,a,fpl
+355,p464353,Harvey Davies,Davies,Liverpool,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.0,a,fpl
+354,p432987,Vitezslav Jaros,Jaros,Liverpool,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,i,fpl
+372,p243016,Alexis Mac Allister,Mac Allister,Liverpool,Midfielder,216,2,0.0,0.0,0.1,0.44,0.04,0.18,0.54,0.22,7,12,9,28,35.0,21.9,18.0,1.5,1.3,5.4,a,fpl
+627,p482616,Bradley Barcola,Barcola,Liverpool,Midfielder,97,1,0.0,0.0,0.21,0.1,0.19,0.09,0.31,0.28,0,2,3,5,3.0,10.5,2.0,2.0,2.0,8.0,a,fpl
+367,p243298,Cody Gakpo,Gakpo,Liverpool,Midfielder,280,3,1.0,3.0,0.44,1.22,0.14,0.39,1.66,0.53,7,14,6,27,116.8,104.5,56.0,7.2,12.2,7.2,a,fpl
+373,p206915,Curtis Jones,C.Jones,Liverpool,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.5,u,fpl
+368,p424876,Dominik Szoboszlai,Szoboszlai,Liverpool,Midfielder,360,4,1.0,0.0,1.29,0.8,0.32,0.2,2.09,0.52,11,20,4,35,91.2,117.7,46.0,4.5,37.0,7.0,a,fpl
+374,p158983,Endo Wataru,Endo,Liverpool,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.9,a,fpl
+370,p223541,Federico Chiesa,Chiesa,Liverpool,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.4,i,fpl
+366,p494595,Florian Wirtz,Wirtz,Liverpool,Midfielder,332,4,0.0,1.0,0.78,0.35,0.21,0.09,1.13,0.3,2,21,5,28,44.2,76.2,73.0,3.0,7.2,7.4,a,fpl
+383,p444884,Harvey Elliott,Elliott,Liverpool,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.4,u,fpl
+378,p491501,James McConnell,McConnell,Liverpool,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.5,a,fpl
+381,p514514,Lewis Koumas,Koumas,Liverpool,Midfielder,13,0,0.0,0.0,0.03,0.0,0.21,0.0,0.03,0.21,0,1,0,1,1.2,0.5,7.0,0.5,0.0,5.0,a,fpl
+369,p611922,Rio Ngumoha,Ngumoha,Liverpool,Midfielder,99,1,0.0,0.0,0.15,0.05,0.14,0.05,0.2,0.19,1,2,1,4,4.4,7.3,7.0,1.0,0.5,5.8,a,fpl
+371,p441266,Ryan Gravenberch,Gravenberch,Liverpool,Midfielder,181,2,0.0,1.0,0.1,0.07,0.05,0.03,0.17,0.08,10,10,4,24,31.0,29.8,4.0,2.0,1.3,5.9,a,fpl
+376,p535928,Stefan Bajčetić Maquieira,Bajcetic,Liverpool,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+375,p591386,Trey Nyoni,Nyoni,Liverpool,Midfielder,19,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,2,2,5,6.6,2.3,0.0,0.5,0.0,4.9,a,fpl
+377,p551499,Victor Munoz,Munoz,Liverpool,Midfielder,239,3,1.0,1.0,0.52,0.25,0.2,0.09,0.77,0.29,4,7,2,13,47.0,30.0,49.0,3.5,1.1,6.5,a,fpl
+393,p578153,Abdukodir Khusanov,Khusanov,Man City,Defender,268,3,0.0,0.0,0.0,0.06,0.0,0.02,0.06,0.02,9,13,8,17,51.6,12.6,4.0,2.2,1.5,5.5,a,fpl
+391,p477424,Joško Gvardiol,Gvardiol,Man City,Defender,344,4,1.0,2.0,0.22,0.11,0.06,0.03,0.33,0.09,13,15,11,24,94.0,51.0,26.0,8.2,21.9,5.7,a,fpl
+622,p554054,Kaden Braithwaite,Braithwaite,Man City,Defender,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,0,0.6,0.8,0.0,0.3,0.2,4.0,a,fpl
+388,p209036,Marc Guéhi,Guéhi,Man City,Defender,360,4,1.0,0.0,0.89,0.38,0.22,0.1,1.27,0.32,22,17,3,25,96.6,42.9,30.0,6.5,18.5,6.0,a,fpl
+389,p465351,Matheus Nunes,Matheus N.,Man City,Defender,123,1,0.0,0.0,0.0,0.05,0.0,0.04,0.05,0.04,10,10,2,12,3.8,1.5,4.0,2.5,0.9,5.9,a,fpl
+394,p494307,Max Alleyne,Alleyne,Man City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+387,p472769,Nico O'Reilly,O'Reilly,Man City,Defender,158,2,0.0,0.0,0.09,0.43,0.05,0.24,0.52,0.29,1,8,2,3,12.4,38.2,16.0,1.2,12.7,6.4,a,fpl
+392,p448514,Rayan Aït-Nouri,Aït-Nouri,Man City,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.4,5.3,a,fpl
+395,p477064,Rico Lewis,Lewis,Man City,Defender,56,1,0.0,0.0,0.17,0.02,0.27,0.03,0.19,0.3,2,0,0,2,3.8,3.8,39.0,0.2,0.2,4.4,a,fpl
+390,p171314,Rúben dos Santos Gato Alves Dias,Rúben,Man City,Defender,360,4,0.0,0.0,0.09,0.74,0.02,0.18,0.83,0.2,21,16,1,22,72.0,46.8,37.0,4.0,1.8,5.5,a,fpl
+396,p616222,Vitor de Oliveira Nunes dos Reis,Vitor Reis,Man City,Defender,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,1.2,0.9,0.0,0.2,0.0,4.5,a,fpl
+411,p223094,Erling Haaland,Haaland,Man City,Forward,360,4,4.0,0.0,3.33,0.51,0.83,0.13,3.84,0.96,8,10,0,18,121.6,18.9,164.0,8.2,72.0,15.5,a,fpl
+587,p106921,Gerónimo Rulli,Rulli,Man City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,a,fpl
+384,p204936,Gianluigi Donnarumma,Donnarumma,Man City,Goalkeeper,360,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,24,0,0,60.4,0.0,0.0,4.2,7.6,5.5,a,fpl
+386,p122074,Marcus Bettinelli,Bettinelli,Man City,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+628,p624777,Allan Andrade Elias,Allan,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,6.0,a,fpl
+397,p437730,Antoine Semenyo,Semenyo,Man City,Midfielder,360,4,0.0,2.0,0.17,0.99,0.04,0.25,1.16,0.29,0,11,4,15,57.6,97.8,82.0,4.0,15.7,8.4,a,fpl
+616,p637238,Ayyoub Bouaddi,Bouaddi,Man City,Midfielder,22,0,0.0,0.0,0.0,0.12,0.0,0.49,0.12,0.49,3,3,0,6,13.0,4.8,0.0,0.7,0.2,5.5,a,fpl
+407,p575204,Claudio Echeverri,Echeverri,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,u,fpl
+409,p590039,Divine Mukasa,Mukasa,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,u,fpl
+481,p215379,Elliot Anderson,Anderson,Man City,Midfielder,323,4,0.0,0.0,0.09,0.65,0.03,0.18,0.74,0.21,14,20,11,45,58.8,69.1,18.0,3.2,4.2,6.3,a,fpl
+155,p448047,Enzo Fernández,Enzo,Man City,Midfielder,181,2,0.0,0.0,0.31,0.27,0.15,0.13,0.58,0.28,5,8,3,16,13.6,30.9,18.0,1.5,3.3,6.9,a,fpl
+653,p595480,Floyd Samba,Samba,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+237,p440993,Iliman Ndiaye,Ndiaye,Man City,Midfielder,311,3,0.0,1.0,0.28,0.44,0.08,0.13,0.72,0.21,9,23,8,40,60.4,72.2,68.0,4.2,8.2,5.9,a,fpl
+410,p649208,Jeremy Monga,Monga,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,u,fpl
+400,p248875,Jérémy Doku,Doku,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.7,7.4,i,fpl
+408,p155405,Kalvin Phillips,Phillips,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+406,p91651,Mateo Kovačić,Kovačić,Man City,Midfielder,42,0,0.0,0.0,0.0,0.02,0.0,0.04,0.02,0.04,0,2,0,2,4.2,5.2,0.0,0.5,0.1,5.4,a,fpl
+398,p209244,Phil Foden,Foden,Man City,Midfielder,217,3,0.0,2.0,1.61,0.88,0.67,0.36,2.49,1.03,2,8,4,14,57.6,110.2,39.0,2.2,3.3,7.0,s,fpl
+399,p466052,Rayan Cherki,Cherki,Man City,Midfielder,218,3,2.0,2.0,0.59,1.41,0.24,0.58,2.0,0.82,1,6,0,7,121.4,148.8,77.0,6.5,28.8,7.8,a,fpl
+402,p220566,Rodrigo 'Rodri' Hernandez Cascante,Rodrigo,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,6.5,u,fpl
+621,p616288,Ryan McAidoo,McAidoo,Man City,Midfielder,11,0,0.0,0.0,0.1,0.0,0.82,0.0,0.1,0.82,0,2,2,4,5.2,0.5,3.0,0.7,0.1,4.5,a,fpl
+404,p433036,Tijjani Reijnders,Reijnders,Man City,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,6.0,u,fpl
+421,p606745,Ayden Heaven,Heaven,Man Utd,Defender,90,1,0.0,0.0,0.12,0.04,0.12,0.04,0.16,0.16,1,4,1,2,6.8,2.6,11.0,0.2,0.3,4.4,a,fpl
+417,p216051,Diogo Dalot Teixeira,Dalot,Man Utd,Defender,256,3,0.0,0.0,0.18,0.18,0.06,0.06,0.36,0.12,9,14,5,14,28.8,76.2,39.0,1.5,1.8,4.9,a,fpl
+424,p577974,Harry Amass,Amass,Man Utd,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.0,a,fpl
+418,p95658,Harry Maguire,Maguire,Man Utd,Defender,360,4,0.0,1.0,0.19,0.43,0.05,0.11,0.62,0.16,24,17,2,26,59.4,31.4,27.0,2.0,10.4,4.9,a,fpl
+420,p550864,Leny Yoro,Yoro,Man Utd,Defender,22,0,0.0,0.0,0.0,0.02,0.0,0.08,0.02,0.08,3,1,2,5,7.8,2.4,2.0,0.5,0.5,4.9,a,fpl
+419,p221820,Lisandro Martínez,Martinez,Man Utd,Defender,270,3,0.0,0.0,0.06,0.14,0.02,0.05,0.2,0.07,13,13,3,16,33.8,2.1,3.0,1.5,1.3,5.0,a,fpl
+423,p106760,Luke Shaw,Shaw,Man Utd,Defender,252,3,0.0,1.0,0.02,0.51,0.01,0.18,0.53,0.19,14,6,6,20,86.0,85.6,13.0,1.8,10.9,4.4,d,fpl
+416,p209365,Matthijs de Ligt,De Ligt,Man Utd,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,i,fpl
+422,p230001,Noussair Mazraoui,Mazraoui,Man Utd,Defender,97,1,0.0,0.0,0.22,0.06,0.2,0.06,0.28,0.26,4,3,2,6,21.0,31.2,11.0,0.8,0.5,4.4,a,fpl
+425,p547676,Tyler Fredricson,Fredricson,Man Utd,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,u,fpl
+439,p485711,Benjamin Sesko,Šeško,Man Utd,Forward,76,0,1.0,0.0,0.39,0.01,0.46,0.01,0.4,0.47,0,5,0,5,33.4,11.2,32.0,2.0,1.8,7.0,a,fpl
+441,p596047,Chido Obi,Obi,Man Utd,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.2,4.5,a,fpl
+440,p458249,Joshua Zirkzee,Zirkzee,Man Utd,Forward,7,0,0.0,0.0,0.0,0.01,0.0,0.13,0.01,0.13,1,2,0,3,0.0,0.0,0.0,0.2,0.4,5.4,a,fpl
+413,p451302,Altay Bayındır,Bayindir,Man Utd,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+325,p59735,Karl Darlow,Darlow,Man Utd,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+412,p465247,Senne Lammens,Lammens,Man Utd,Goalkeeper,360,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5,33,0,0,79.0,0.0,0.0,1.8,11.0,4.9,a,fpl
+414,p21205,Tom Heaton,Heaton,Man Utd,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,i,fpl
+431,p493250,Amad Diallo,Amad,Man Utd,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,5.8,i,fpl
+162,p532605,Andrey Nascimento dos Santos,Andrey Santos,Man Utd,Midfielder,82,1,0.0,0.0,0.0,0.24,0.0,0.26,0.24,0.26,7,7,4,18,24.8,5.5,8.0,1.0,0.6,4.8,a,fpl
+437,p576620,Bendito Mantato,Bendito Mantato,Man Utd,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.5,a,fpl
+426,p141746,Bruno Borges Fernandes,B.Fernandes,Man Utd,Midfielder,360,4,3.0,1.0,2.28,1.13,0.57,0.28,3.41,0.85,3,16,4,23,156.0,151.5,97.0,7.2,42.2,12.0,a,fpl
+427,p446008,Bryan Mbeumo,Mbeumo,Man Utd,Midfielder,360,4,2.0,1.0,2.8,0.55,0.7,0.14,3.35,0.84,5,13,4,22,95.0,85.1,102.0,5.8,23.2,7.9,a,fpl
+131,p535301,Carlos Baleba,Baleba,Man Utd,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.9,i,fpl
+434,p547037,Jack Fletcher,J.Fletcher,Man Utd,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,a,fpl
+432,p516895,Kobbie Mainoo,Mainoo,Man Utd,Midfielder,275,3,0.0,1.0,0.24,0.42,0.08,0.14,0.66,0.22,9,30,5,44,52.2,34.2,11.0,4.5,1.5,5.5,a,fpl
+433,p232112,Manuel Ugarte Ribeiro,Ugarte,Man Utd,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,i,fpl
+429,p176297,Marcus Rashford,Rashford,Man Utd,Midfielder,275,3,0.0,0.0,0.38,0.29,0.12,0.09,0.67,0.21,2,10,4,16,31.4,95.4,70.0,2.0,1.6,7.0,a,fpl
+430,p184341,Mason Mount,Mount,Man Utd,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.4,a,fpl
+428,p430871,Matheus Santos Carneiro da Cunha,Cunha,Man Utd,Midfielder,317,4,0.0,2.0,0.58,0.44,0.16,0.12,1.02,0.28,0,7,3,10,28.2,62.0,73.0,4.0,6.2,7.9,a,fpl
+415,p596777,Patrick Dorgu,Dorgu,Man Utd,Midfielder,165,2,0.0,0.0,0.65,0.08,0.35,0.04,0.73,0.39,6,4,8,18,11.2,14.2,57.0,1.5,0.6,5.8,a,fpl
+435,p576628,Shea Lacey,Lacey,Man Utd,Midfielder,10,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,1,0.2,0.6,0.0,0.2,0.1,4.9,a,fpl
+436,p490881,Toby Collyer,Collyer,Man Utd,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+438,p519913,Tyler Fletcher,Fletcher,Man Utd,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,4.5,a,fpl
+43,p166989,Youri Tielemans,Tielemans,Man Utd,Midfielder,312,4,0.0,0.0,0.56,0.32,0.16,0.09,0.88,0.25,9,17,4,30,56.8,76.5,33.0,2.5,1.6,5.9,a,fpl
+451,p545477,Alex Murphy,A.Murphy,Newcastle,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+593,p463726,Amar Dedic,Dedić,Newcastle,Defender,270,3,0.0,1.0,0.14,0.08,0.05,0.03,0.22,0.08,13,11,5,18,59.6,38.0,15.0,3.2,2.9,4.5,d,fpl
+448,p78916,Dan Burn,Burn,Newcastle,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.9,4.9,i,fpl
+446,p119471,Fabian Schär,Schär,Newcastle,Defender,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.2,0.2,5.0,a,fpl
+609,p553746,Leo Shahar,Shahar,Newcastle,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.0,u,fpl
+449,p487838,Lewis Hall,Hall,Newcastle,Defender,269,3,0.0,1.0,0.04,0.67,0.01,0.22,0.71,0.23,22,27,8,30,89.0,55.9,7.0,4.5,14.5,5.2,a,fpl
+445,p465642,Malick Thiaw,Thiaw,Newcastle,Defender,270,3,0.0,0.0,0.0,0.07,0.0,0.02,0.07,0.02,21,6,0,21,52.2,14.0,2.0,2.0,2.2,5.0,a,fpl
+447,p220237,Sven Botman,Botman,Newcastle,Defender,270,3,0.0,0.0,0.01,0.17,0.0,0.06,0.18,0.06,22,9,2,24,69.6,3.0,6.0,2.2,0.7,5.0,a,fpl
+450,p441191,Tino Livramento,Livramento,Newcastle,Defender,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.2,0.0,0.0,0.2,0.1,4.9,a,fpl
+634,p613221,Matias Fernandez-Pardo,Fernandez-Pardo,Newcastle,Forward,27,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,1,0.0,0.8,6.0,0.5,0.1,6.0,a,fpl
+463,p470313,Nick Woltemade,Woltemade,Newcastle,Forward,19,0,0.0,1.0,0.02,0.01,0.09,0.05,0.03,0.14,0,0,0,0,18.2,10.5,11.0,1.0,0.6,5.9,u,fpl
+466,p599303,Sean Neave,Neave,Newcastle,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.6,4.5,u,fpl
+465,p538207,William Osula,Osula,Newcastle,Forward,55,1,0.0,1.0,0.06,0.14,0.1,0.23,0.2,0.33,2,2,1,5,28.2,13.7,8.0,1.0,0.4,5.9,i,fpl
+464,p216646,Yoane Wissa,Wissa,Newcastle,Forward,261,3,1.0,1.0,1.35,0.05,0.47,0.02,1.4,0.49,2,10,5,17,55.6,33.9,74.0,3.2,18.6,6.2,a,fpl
+444,p554578,Ewen Jaouen,Jaouen,Newcastle,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,d,fpl
+567,p470551,Lukás Hornícek,Horníček,Newcastle,Goalkeeper,270,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5,15,0,0,109.2,0.0,0.0,2.5,1.5,5.0,a,fpl
+443,p81441,Mark Gillespie,Gillespie,Newcastle,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+442,p98747,Nick Pope,Pope,Newcastle,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.0,4.9,a,fpl
+559,p632794,Aladji Bamba,Bamba,Newcastle,Midfielder,14,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,0,1,2,4.0,0.0,0.0,0.2,0.1,4.9,a,fpl
+454,p449434,Anthony Elanga,Elanga,Newcastle,Midfielder,232,3,2.0,0.0,0.42,0.34,0.16,0.13,0.76,0.29,2,3,4,9,82.6,50.6,61.0,4.5,11.5,6.2,a,fpl
+461,p611665,Bazoumana Touré,Touré,Newcastle,Midfielder,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.2,0.1,5.8,a,fpl
+453,p201666,Harvey Barnes,Barnes,Newcastle,Midfielder,270,3,1.0,1.0,0.22,0.06,0.07,0.02,0.28,0.09,7,8,3,18,45.4,27.3,39.0,4.2,2.9,6.0,a,fpl
+457,p114243,Jacob Murphy,J.Murphy,Newcastle,Midfielder,35,0,0.0,0.0,0.0,0.2,0.0,0.51,0.2,0.51,1,4,1,6,2.4,3.5,4.0,0.5,0.1,5.9,a,fpl
+456,p232653,Jacob Ramsey,J.Ramsey,Newcastle,Midfielder,69,0,1.0,0.0,0.17,0.16,0.22,0.21,0.33,0.43,3,6,2,11,40.4,6.3,21.0,1.8,0.4,4.9,a,fpl
+460,p200089,Joe Willock,Willock,Newcastle,Midfielder,166,2,1.0,0.0,0.52,0.2,0.28,0.11,0.72,0.39,2,3,3,8,44.4,20.4,28.0,2.8,0.5,5.0,a,fpl
+458,p180974,Joelinton Cássio Apolinário de Lira,Joelinton,Newcastle,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.4,i,fpl
+459,p547719,Lewis Miley,L.Miley,Newcastle,Midfielder,227,3,0.0,0.0,0.05,0.07,0.02,0.03,0.12,0.05,10,15,1,26,30.0,37.2,5.0,2.0,0.1,5.5,a,fpl
+405,p465694,Nico González Iglesias,N.Gonzalez,Newcastle,Midfielder,146,2,0.0,0.0,0.0,0.21,0.0,0.13,0.21,0.13,3,8,0,11,13.4,41.9,2.0,1.0,0.3,5.5,a,fpl
+462,p636852,Sean Steur,Steur,Newcastle,Midfielder,87,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,4,3,0,7,7.4,1.7,0.0,0.8,0.1,4.9,a,fpl
+201,p247348,Daniel Muñoz Mejía,Muñoz,Nott'm Forest,Defender,175,2,0.0,0.0,0.48,0.19,0.25,0.1,0.67,0.35,6,5,6,12,3.6,2.6,25.0,0.8,5.5,5.4,a,fpl
+470,p485047,Felipe Rodrigues da Silva,Morato,Nott'm Forest,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,u,fpl
+474,p575458,Jair Paula da Cunha Filho,Jair Cunha,Nott'm Forest,Defender,270,3,0.0,0.0,0.03,0.01,0.01,0.0,0.04,0.01,23,5,5,28,55.4,2.4,1.0,2.5,0.2,4.5,d,fpl
+478,p470315,Luca Netz,Netz,Nott'm Forest,Defender,20,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,1,1,2.0,0.9,0.0,0.5,0.0,4.4,a,fpl
+472,p575476,Murillo Costa dos Santos,Murillo,Nott'm Forest,Defender,359,4,0.0,1.0,0.35,0.29,0.09,0.07,0.64,0.16,34,16,8,42,61.2,27.4,18.0,4.8,1.8,5.5,a,fpl
+469,p215136,Neco Williams,N.Williams,Nott'm Forest,Defender,360,4,0.0,1.0,0.32,0.4,0.08,0.1,0.72,0.18,14,20,13,27,61.0,42.0,16.0,4.2,8.4,5.0,a,fpl
+475,p500151,Nicolò Savona,Savona,Nott'm Forest,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,i,fpl
+471,p227444,Nikola Milenković,Milenković,Nott'm Forest,Defender,270,3,0.0,0.0,0.11,0.03,0.04,0.01,0.14,0.05,26,12,5,31,53.2,1.4,16.0,3.0,1.5,5.5,d,fpl
+473,p159506,Ola Aina,Aina,Nott'm Forest,Defender,306,4,0.0,0.0,0.04,0.53,0.01,0.16,0.57,0.17,12,14,10,22,40.8,51.6,15.0,2.0,2.6,4.5,a,fpl
+476,p204822,Omar Richards,O.Richards,Nott'm Forest,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.0,a,fpl
+581,p568420,Ousmane Diomande,Diomande,Nott'm Forest,Defender,91,1,0.0,0.0,0.11,0.0,0.11,0.0,0.11,0.11,13,3,1,14,0.0,0.0,0.0,1.2,0.5,5.4,a,fpl
+479,p538638,Tyler Bindon,Bindon,Nott'm Forest,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+477,p549067,Zach Abbott,Abbott,Nott'm Forest,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.0,u,fpl
+493,p465680,Arnaud Kalimuendo,Kalimuendo,Nott'm Forest,Forward,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.2,0.1,5.4,a,fpl
+490,p60689,Chris Wood,Wood,Nott'm Forest,Forward,45,0,0.0,0.0,0.12,0.01,0.24,0.02,0.13,0.26,0,1,0,1,0.2,2.5,3.0,0.8,1.0,5.8,a,fpl
+491,p482973,Igor Jesus Maciel da Cruz,Igor Jesus,Nott'm Forest,Forward,226,2,1.0,0.0,1.09,0.07,0.43,0.03,1.16,0.46,5,5,2,12,15.0,20.5,69.0,2.8,2.5,5.8,a,fpl
+167,p463034,Liam Delap,Delap,Nott'm Forest,Forward,187,2,1.0,0.0,0.76,0.14,0.37,0.07,0.9,0.44,3,5,1,9,6.4,30.9,12.0,2.0,1.3,5.5,a,fpl
+468,p221389,John Victor Maciel Furtado,John,Nott'm Forest,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+467,p85633,Matz Sels,Sels,Nott'm Forest,Goalkeeper,360,4,0.0,0.0,0.0,0.01,0.0,0.0,0.01,0.0,6,37,0,0,33.2,0.0,0.0,3.0,1.5,5.0,a,fpl
+590,p428971,Steven Benda,Benda,Nott'm Forest,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+482,p209046,Callum Hudson-Odoi,Hudson-Odoi,Nott'm Forest,Midfielder,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.3,0.0,0.2,0.2,5.8,a,fpl
+483,p456512,Dan Ndoye,Ndoye,Nott'm Forest,Midfielder,258,4,1.0,0.0,1.05,0.88,0.37,0.31,1.93,0.68,2,15,2,19,37.6,25.8,36.0,3.5,0.7,5.5,a,fpl
+485,p476887,Dilane Bakwa,Bakwa,Nott'm Forest,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.5,u,fpl
+488,p210462,Ibrahim Sangaré,I.Sangaré,Nott'm Forest,Midfielder,98,1,0.0,0.0,0.09,0.02,0.08,0.02,0.11,0.1,4,3,1,8,17.8,13.0,3.0,0.8,0.5,4.9,a,fpl
+486,p432714,James McAtee,McAtee,Nott'm Forest,Midfielder,334,4,0.0,0.0,0.16,0.92,0.04,0.25,1.08,0.29,8,19,8,35,34.0,120.5,10.0,2.5,0.1,5.5,a,fpl
+480,p222531,Morgan Gibbs-White,Gibbs-White,Nott'm Forest,Midfielder,360,4,1.0,2.0,1.56,1.02,0.39,0.26,2.58,0.65,2,12,5,19,62.0,24.8,46.0,6.5,10.7,7.9,a,fpl
+487,p250199,Nicolás Domínguez,Dominguez,Nott'm Forest,Midfielder,1,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.2,0.0,0.0,0.2,0.1,4.9,a,fpl
+484,p503301,Omari Hutchinson,Hutchinson,Nott'm Forest,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.4,u,fpl
+489,p204968,Ryan Yates,Yates,Nott'm Forest,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.3,4.5,a,fpl
+558,p204561,Xaver Schlager,Schlager,Nott'm Forest,Midfielder,286,3,0.0,0.0,0.14,0.08,0.04,0.03,0.22,0.07,9,18,15,42,33.0,4.0,10.0,2.8,0.1,5.0,a,fpl
+502,p122798,Andrew Robertson,Robertson,Spurs,Defender,276,3,0.0,0.0,0.13,0.17,0.04,0.06,0.3,0.1,14,8,3,17,49.0,36.3,27.0,3.2,2.7,4.4,a,fpl
+507,p548308,Ashley Phillips,Phillips,Spurs,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+508,p115556,Ben Davies,Davies,Spurs,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.9,4.0,a,fpl
+500,p221632,Cristian Romero,Romero,Spurs,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,5.0,u,fpl
+506,p487053,Destiny Udogie,Udogie,Spurs,Defender,86,1,0.0,0.0,0.0,0.23,0.0,0.24,0.23,0.24,3,4,1,4,9.8,13.5,4.0,1.8,0.4,4.5,d,fpl
+505,p232859,Djed Spence,Spence,Spurs,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.3,4.5,u,fpl
+510,p499716,James Rowswell,Rowswell,Spurs,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,a,fpl
+112,p469142,Jan Paul van Hecke,Van Hecke,Spurs,Defender,360,4,0.0,0.0,0.34,0.12,0.08,0.03,0.46,0.11,27,13,7,34,71.4,29.3,46.0,4.5,6.8,4.9,a,fpl
+511,p616221,João Victor de Souza Menezes,Souza,Spurs,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.0,u,fpl
+509,p640419,Jun'ai Byfield,Byfield,Spurs,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,a,fpl
+498,p221466,Marcos Senesi Barón,Senesi,Spurs,Defender,90,1,0.0,0.0,0.0,0.02,0.0,0.02,0.02,0.02,11,2,5,16,36.6,2.2,0.0,0.8,4.1,5.8,a,fpl
+503,p491279,Micky van de Ven,Van de Ven,Spurs,Defender,270,3,0.0,0.0,0.57,0.04,0.19,0.01,0.61,0.2,19,12,4,23,36.6,3.3,14.0,3.8,3.9,5.0,a,fpl
+499,p441164,Pedro Porro Sauceda,Pedro Porro,Spurs,Defender,180,2,0.0,0.0,0.36,0.16,0.18,0.08,0.52,0.26,6,5,2,8,22.6,43.7,27.0,2.0,9.7,5.5,d,fpl
+147,p109646,Tosin Adarabioyo,Tosin,Spurs,Defender,5,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2,1,2,4,0.0,0.0,0.0,0.2,0.2,4.4,a,fpl
+528,p490145,Dane Scarlett,Scarlett,Spurs,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.3,4.5,u,fpl
+526,p154566,Dominic Solanke-Mitchell,Solanke,Spurs,Forward,105,1,0.0,0.0,0.44,0.01,0.38,0.01,0.45,0.39,1,2,0,3,3.2,0.6,15.0,1.2,0.9,5.9,a,fpl
+401,p438234,Omar Marmoush,Marmoush,Spurs,Forward,249,3,0.0,0.0,0.36,0.11,0.13,0.04,0.47,0.17,0,8,1,9,9.2,37.5,38.0,1.5,2.2,7.0,a,fpl
+527,p212319,Richarlison de Andrade,Richarlison,Spurs,Forward,67,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,0,0,1,0.0,2.2,0.0,0.5,0.8,5.9,u,fpl
+496,p485055,Antonín Kinský,Kinsky,Spurs,Goalkeeper,360,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10,29,0,0,57.8,10.0,0.0,4.0,18.5,4.5,a,fpl
+495,p214572,Brandon Austin,Austin,Spurs,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.0,4.0,a,fpl
+494,p184254,Guglielmo Vicario,Vicario,Spurs,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,u,fpl
+497,p67089,Martin Dubravka,Dubravka,Spurs,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,17.7,4.0,a,fpl
+522,p547701,Archie Gray,Gray,Spurs,Midfielder,236,3,0.0,0.0,0.09,0.04,0.03,0.02,0.13,0.05,9,10,3,22,8.0,4.8,0.0,1.8,0.2,4.9,a,fpl
+524,p499726,Callum Olusesi,Olusesi,Spurs,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,1.0,4.4,a,fpl
+519,p232787,Conor Gallagher,Gallagher,Spurs,Midfielder,128,2,0.0,0.0,0.02,0.12,0.01,0.08,0.14,0.09,1,8,5,14,10.2,9.9,3.0,0.8,0.2,5.4,a,fpl
+521,p445044,Dejan Kulusevski,Kulusevski,Spurs,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,6.5,i,fpl
+515,p172780,James Maddison,Maddison,Spurs,Midfielder,35,0,0.0,0.0,0.0,0.02,0.0,0.05,0.02,0.05,3,2,0,5,4.4,8.3,8.0,0.5,0.4,6.3,a,fpl
+601,p611917,Luca Williams-Barnett,Williams-Barnett,Spurs,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+520,p570526,Lucas Bergvall,Bergvall,Spurs,Midfielder,72,1,0.0,0.0,0.06,0.26,0.08,0.32,0.32,0.4,1,9,2,12,0.0,2.0,2.0,0.5,0.2,5.4,a,fpl
+525,p551226,Mateus Fernandes,Fernandes,Spurs,Midfielder,204,2,0.0,0.0,0.12,0.26,0.05,0.11,0.38,0.16,0,8,6,14,21.2,73.9,3.0,1.5,0.9,5.8,a,fpl
+514,p511499,Mathys Tel,Tel,Spurs,Midfielder,257,3,0.0,0.0,0.21,0.23,0.07,0.08,0.44,0.15,1,11,1,13,21.0,49.5,63.0,2.0,0.2,5.8,a,fpl
+523,p499721,Mikey Moore,Moore,Spurs,Midfielder,89,1,0.0,0.0,0.4,0.02,0.4,0.02,0.42,0.42,0,2,1,3,14.2,6.3,56.0,0.8,0.1,5.0,u,fpl
+512,p460842,Mohammed Kudus,Kudus,Spurs,Midfielder,78,0,0.0,0.0,0.04,0.22,0.05,0.25,0.26,0.3,0,6,1,7,6.4,18.4,13.0,0.8,0.1,6.5,a,fpl
+578,p465920,Mykhailo Mudryk,Mudryk,Spurs,Midfielder,16,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.1,2.0,0.2,0.1,5.4,i,fpl
+518,p482442,Pape Matar Sarr,P.M.Sarr,Spurs,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.9,u,fpl
+516,p202993,Rodrigo Bentancur,Bentancur,Spurs,Midfielder,287,3,0.0,0.0,0.02,0.08,0.01,0.03,0.1,0.04,19,15,9,43,35.8,25.1,6.0,2.8,0.2,5.5,a,fpl
+455,p432422,Sandro Tonali,Tonali,Spurs,Midfielder,344,4,0.0,0.0,0.18,0.4,0.05,0.1,0.58,0.15,10,16,5,31,34.0,40.7,12.0,3.0,2.4,5.4,d,fpl
+403,p510281,Sávio Moreira de Oliveira,Sávio,Spurs,Midfielder,150,2,0.0,0.0,0.12,0.53,0.07,0.32,0.65,0.39,1,5,0,6,6.2,17.3,15.0,1.5,0.7,6.5,a,fpl
+517,p550839,Wilson Odobert,Odobert,Spurs,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.5,i,fpl
+513,p493362,Xavi Simons,Xavi,Spurs,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.9,i,fpl
+540,p105717,Arthur Masuaku,Masuaku,Sunderland,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+532,p223827,Daniel Ballard,Ballard,Sunderland,Defender,360,4,0.0,0.0,0.17,0.16,0.04,0.04,0.33,0.08,29,9,6,35,66.8,12.7,15.0,3.0,3.0,4.9,a,fpl
+612,p638411,Dayann Méthalie,Methalie,Sunderland,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,a,fpl
+537,p519634,Jenson Seelt,Seelt,Sunderland,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.5,u,fpl
+501,p135720,Kevin Danso,Danso,Sunderland,Defender,180,2,0.0,0.0,0.0,0.16,0.0,0.08,0.16,0.08,11,6,1,12,20.8,10.9,0.0,0.8,0.2,5.0,a,fpl
+538,p477547,Leo Fuhr Hjelde,Hjelde,Sunderland,Defender,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.0,u,fpl
+539,p167512,Luke O'Nien,O'Nien,Sunderland,Defender,66,1,0.0,0.0,0.01,0.01,0.01,0.01,0.02,0.02,4,4,1,5,11.4,1.4,4.0,0.2,2.6,4.0,a,fpl
+533,p200834,Nordi Mukiele,Mukiele,Sunderland,Defender,270,3,0.0,0.0,0.7,0.05,0.23,0.02,0.75,0.25,30,13,9,39,75.0,13.0,2.0,3.2,2.1,5.4,a,fpl
+535,p201895,Omar Alderete,Alderete,Sunderland,Defender,23,0,0.0,0.0,0.0,0.01,0.0,0.04,0.01,0.04,0,2,0,0,0.0,0.6,0.0,0.2,0.3,4.9,a,fpl
+536,p434399,Reinildo Mandava,Reinildo,Sunderland,Defender,360,4,0.0,0.0,0.0,0.32,0.0,0.08,0.32,0.08,21,18,8,29,53.8,35.0,6.0,1.8,0.3,4.5,s,fpl
+541,p93605,Thomas Meunier,Meunier,Sunderland,Defender,318,4,0.0,0.0,0.34,0.13,0.1,0.04,0.47,0.14,14,12,2,16,41.6,26.8,26.0,2.8,0.3,4.5,a,fpl
+534,p487676,Trai Hume,Hume,Sunderland,Defender,195,2,0.0,0.0,0.04,0.28,0.02,0.13,0.32,0.15,3,12,9,12,31.8,58.6,15.0,2.2,3.6,4.4,a,fpl
+552,p441264,Brian Brobbey,Brobbey,Sunderland,Forward,309,4,0.0,0.0,0.59,0.07,0.17,0.02,0.66,0.19,1,10,0,11,4.4,41.4,44.0,1.8,6.4,5.8,a,fpl
+651,p661313,Juan Angulo,J.Angulo,Sunderland,Forward,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.6,4.5,a,fpl
+553,p437505,Wilson Isidor,Isidor,Sunderland,Forward,95,0,1.0,1.0,1.49,0.01,1.41,0.01,1.5,1.42,0,2,1,3,29.4,0.6,35.0,3.5,1.5,5.5,a,fpl
+530,p232571,Anthony Patterson,Patterson,Sunderland,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.0,u,fpl
+531,p515046,Melker Ellborg,Ellborg,Sunderland,Goalkeeper,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.1,4.5,a,fpl
+529,p498016,Robin Roefs,Roefs,Sunderland,Goalkeeper,360,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5,31,0,0,31.8,0.0,0.0,2.8,2.8,4.9,a,fpl
+549,p549912,Chemsdine Talbi,Talbi,Sunderland,Midfielder,31,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,2,0,2,0.0,0.9,0.0,0.2,0.1,5.3,a,fpl
+548,p554197,Chris Rigg,Rigg,Sunderland,Midfielder,17,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,1,0,1,0.0,0.3,0.0,0.5,0.0,4.9,a,fpl
+550,p699989,Djiamgone Jocelin Ta Bi,Jocelin.T,Sunderland,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,5.0,a,fpl
+542,p484420,Enzo Le Fée,E.Le Fée,Sunderland,Midfielder,348,4,1.0,0.0,2.06,0.82,0.53,0.21,2.88,0.74,1,11,6,18,48.0,34.8,54.0,3.2,4.1,5.8,a,fpl
+544,p84450,Granit Xhaka,Xhaka,Sunderland,Midfielder,360,4,0.0,1.0,0.06,0.94,0.02,0.24,1.0,0.26,9,31,6,46,54.4,109.8,3.0,4.8,4.1,5.5,a,fpl
+543,p547027,Habib Diarra,Diarra,Sunderland,Midfielder,28,0,0.0,1.0,0.03,0.16,0.1,0.51,0.19,0.61,0,0,0,0,15.6,10.9,2.0,1.2,0.0,5.4,i,fpl
+613,p696104,Jules Ahoka,Ahoka,Sunderland,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.2,4.5,a,fpl
+646,p549940,Malick Fofana,Fofana,Sunderland,Midfielder,30,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.5,0.0,1.0,0.0,5.5,a,fpl
+551,p536661,Nilson Angulo,N.Angulo,Sunderland,Midfielder,254,4,1.0,0.0,0.15,0.12,0.05,0.04,0.27,0.09,2,13,5,20,48.6,25.7,32.0,3.0,0.1,5.0,a,fpl
+545,p577669,Noah Sadiki,Sadiki,Sunderland,Midfielder,343,4,0.0,0.0,0.4,0.23,0.1,0.06,0.63,0.16,10,10,6,26,41.8,54.9,79.0,2.0,0.2,4.9,a,fpl
+547,p461199,Romaine Mundle,Mundle,Sunderland,Midfielder,1,0,0.0,0.0,0.17,0.0,15.3,0.0,0.17,15.3,1,0,0,1,8.0,0.1,17.0,0.2,0.0,4.9,i,fpl
+546,p535818,Simon Adingra,Adingra,Sunderland,Midfielder,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,4.9,u,fpl

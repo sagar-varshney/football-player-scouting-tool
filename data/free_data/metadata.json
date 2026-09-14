@@ -1,0 +1,19 @@
+{
+  "understat_rows": 1854,
+  "understat_unique_players": 817,
+  "understat_seasons": [
+    "2021-2022",
+    "2022-2023",
+    "2023-2024",
+    "2024-2025",
+    "2025-2026"
+  ],
+  "understat_min_minutes": 450,
+  "fpl_rows": 658,
+  "fpl_unique_players": 658,
+  "outputs": {
+    "understat": "data/free_data/understat_epl_player_seasons.csv",
+    "fpl": "data/free_data/fpl_current_players.csv",
+    "quality_report": "data/free_data/QUALITY_REPORT.md"
+  }
+}

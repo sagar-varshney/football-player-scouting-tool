@@ -186,12 +186,23 @@ Latest local report:
 - `data/source_tests/fpl_bootstrap_sample.json`
 - `data/source_tests/fpl_element_1_sample.json`
 - `data/source_tests/statsbomb_competitions_sample.json`
+- `data/source_tests/understat_epl_players_normalized_sample.csv`
+- `data/source_tests/understat_epl_players_sample.json`
+
+Free data build outputs:
+
+- `data/free_data/understat_epl_player_seasons.csv`
+- `data/free_data/fpl_current_players.csv`
+- `data/free_data/QUALITY_REPORT.md`
+- `data/free_data/metadata.json`
 
 Current findings:
 
 - FPL Public API works without a key and returned current player rows with real minutes, starts, goals, assists, expected goals, expected assists, CBI, recoveries, tackles, influence, creativity, and threat.
 - FPL player history works without a key and returned gameweek-level player rows plus past-season summaries.
 - Understat works without a key and returned EPL player-season rows with minutes, goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup.
+- The multi-season free-data builder produced `1,854` Understat player-season rows across `2021-2022` through `2025-2026` after a `450` minute filter.
+- The same builder produced `658` current FPL player rows for current Premier League metadata and availability checks.
 - StatsBomb Open Data works without a key and returned real event-data competition metadata.
 - FBref direct access returned `403` from the local probe, so do not build the product around scraping it.
 - football-data.org, API-FOOTBALL/API-Sports, and Sportmonks need credentials before we can judge actual plan coverage.
