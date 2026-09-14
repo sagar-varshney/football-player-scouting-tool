@@ -33,7 +33,7 @@
       "Normalized CSV sample: data/source_tests/fpl_players_normalized_sample.csv"
     ],
     "sample_file": "data/source_tests/fpl_bootstrap_sample.json",
-    "elapsed_ms": 503
+    "elapsed_ms": 502
   },
   {
     "provider": "FPL Player History",
@@ -63,7 +63,46 @@
     ],
     "notes": [],
     "sample_file": "data/source_tests/fpl_element_1_sample.json",
-    "elapsed_ms": 276
+    "elapsed_ms": 86
+  },
+  {
+    "provider": "Understat",
+    "status": "ok",
+    "verdict": "best free scouting-shaped bridge for EPL xG/xA/shots/key passes since 2014-15, but unofficial",
+    "url": "https://understat.com/getLeagueData/EPL/2025",
+    "http_status": 200,
+    "rows": 537,
+    "useful_fields": [
+      "player_name",
+      "games",
+      "time",
+      "goals",
+      "xG",
+      "assists",
+      "xA",
+      "shots",
+      "key_passes",
+      "position",
+      "team_title",
+      "npg",
+      "npxG",
+      "xGChain",
+      "xGBuildup"
+    ],
+    "missing_for_scouting": [
+      "tackles",
+      "interceptions",
+      "clearances",
+      "progressive passes",
+      "carries",
+      "pressures"
+    ],
+    "notes": [
+      "Normalized CSV sample: data/source_tests/understat_epl_players_normalized_sample.csv",
+      "Unofficial access: use caching and avoid frequent scraping."
+    ],
+    "sample_file": "data/source_tests/understat_epl_players_sample.json",
+    "elapsed_ms": 1062
   },
   {
     "provider": "StatsBomb Open Data",
@@ -88,7 +127,7 @@
       "Relevant competition-season rows in sample filter: 32"
     ],
     "sample_file": "data/source_tests/statsbomb_competitions_sample.json",
-    "elapsed_ms": 69
+    "elapsed_ms": 88
   },
   {
     "provider": "FBref-Style Public Tables",

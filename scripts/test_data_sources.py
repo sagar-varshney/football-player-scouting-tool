@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import json
 import os
 import pathlib
@@ -47,6 +48,8 @@ def fetch_json(url: str, headers: dict[str, str] | None = None, timeout: int = 2
     start = time.monotonic()
     with urllib.request.urlopen(req, timeout=timeout) as response:
         raw = response.read()
+        if response.headers.get("Content-Encoding", "").lower() == "gzip" or raw.startswith(b"\x1f\x8b"):
+            raw = gzip.decompress(raw)
         elapsed_ms = int((time.monotonic() - start) * 1000)
         return response.status, json.loads(raw.decode("utf-8")), elapsed_ms
 
@@ -231,6 +234,65 @@ def probe_statsbomb() -> ProbeResult:
         ],
         missing_for_scouting=["complete current Premier League coverage", "licensed production feed"],
         notes=[f"Relevant competition-season rows in sample filter: {len(competitions)}"],
+        sample_file=sample_file,
+        elapsed_ms=elapsed_ms,
+    )
+
+
+def probe_understat() -> ProbeResult:
+    season = "2025"
+    url = f"https://understat.com/getLeagueData/EPL/{season}"
+    try:
+        http_status, payload, elapsed_ms = fetch_json(
+            url,
+            headers={
+                "Referer": f"https://understat.com/league/EPL/{season}",
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        )
+    except urllib.error.HTTPError as exc:
+        return ProbeResult("Understat", "failed", "check access or use cached/manual export", url, http_status=exc.code, notes=[exc.reason])
+    except Exception as exc:
+        return ProbeResult("Understat", "failed", "retry", url, notes=[repr(exc)])
+
+    players = payload.get("players", [])
+    sample_file = write_sample("understat_epl_players_sample", players[:10])
+    csv_file = write_csv_sample(
+        "understat_epl_players_normalized_sample",
+        players[:100],
+        [
+            "id",
+            "player_name",
+            "games",
+            "time",
+            "goals",
+            "xG",
+            "assists",
+            "xA",
+            "shots",
+            "key_passes",
+            "position",
+            "team_title",
+            "npg",
+            "npxG",
+            "xGChain",
+            "xGBuildup",
+        ],
+    )
+    first = players[0] if players else {}
+    return ProbeResult(
+        "Understat",
+        "ok",
+        "best free scouting-shaped bridge for EPL xG/xA/shots/key passes since 2014-15, but unofficial",
+        url,
+        http_status=http_status,
+        rows=len(players),
+        useful_fields=[field for field in ["player_name", "games", "time", "goals", "xG", "assists", "xA", "shots", "key_passes", "position", "team_title", "npg", "npxG", "xGChain", "xGBuildup"] if field in first],
+        missing_for_scouting=["tackles", "interceptions", "clearances", "progressive passes", "carries", "pressures"],
+        notes=[
+            f"Normalized CSV sample: {csv_file}",
+            "Unofficial access: use caching and avoid frequent scraping.",
+        ],
         sample_file=sample_file,
         elapsed_ms=elapsed_ms,
     )
@@ -473,6 +535,7 @@ def main() -> int:
     results = [
         probe_fpl(),
         probe_fpl_player_history(args.fpl_player_id),
+        probe_understat(),
         probe_statsbomb(),
         probe_fbref_style(),
         probe_kaggle(),

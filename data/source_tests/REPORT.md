@@ -12,7 +12,7 @@ HTTP status: `200`
 
 Rows observed: `658`
 
-Elapsed: `503 ms`
+Elapsed: `502 ms`
 
 Useful fields: id, first_name, second_name, web_name, team, element_type, minutes, goals_scored, assists, expected_goals, expected_assists, ict_index, influence, creativity, threat
 
@@ -35,7 +35,7 @@ HTTP status: `200`
 
 Rows observed: `4`
 
-Elapsed: `276 ms`
+Elapsed: `86 ms`
 
 Useful fields: round, opponent_team, minutes, goals_scored, assists, expected_goals, expected_assists, expected_goal_involvements, expected_goals_conceded, starts, total_points
 
@@ -45,6 +45,30 @@ Sample file: `data/source_tests/fpl_element_1_sample.json`
 
 Notes:
 - No extra notes.
+
+## Understat
+
+Status: `ok`
+
+Verdict: best free scouting-shaped bridge for EPL xG/xA/shots/key passes since 2014-15, but unofficial
+
+URL tested: `https://understat.com/getLeagueData/EPL/2025`
+
+HTTP status: `200`
+
+Rows observed: `537`
+
+Elapsed: `1062 ms`
+
+Useful fields: player_name, games, time, goals, xG, assists, xA, shots, key_passes, position, team_title, npg, npxG, xGChain, xGBuildup
+
+Missing for scouting: tackles, interceptions, clearances, progressive passes, carries, pressures
+
+Sample file: `data/source_tests/understat_epl_players_sample.json`
+
+Notes:
+- Normalized CSV sample: data/source_tests/understat_epl_players_normalized_sample.csv
+- Unofficial access: use caching and avoid frequent scraping.
 
 ## StatsBomb Open Data
 
@@ -58,7 +82,7 @@ HTTP status: `200`
 
 Rows observed: `80`
 
-Elapsed: `69 ms`
+Elapsed: `88 ms`
 
 Useful fields: competition_id, season_id, competition_name, season_name, match_updated, match_available_360
 

@@ -18,11 +18,14 @@ The serious options are:
 | Professional | SkillCorner | Tracking, physical data, off-ball runs, game intelligence | Strong add-on |
 | Paid API | Sportmonks | Structured player statistics, detailed positions, transfers, expected endpoints | Good if plan coverage is enough |
 | Paid/free API | API-FOOTBALL / API-Sports | Broad football API with player/team/fixture stats | Good first API to test |
+| Free unofficial | Understat | EPL player-season xG, xA, shots, key passes, xGChain, xGBuildup | Best free scouting-shaped source |
 | Free | FPL API | Real current PL player data, xG/xA, minutes, fantasy-oriented form | Useful bridge, not pure scouting |
 | Free | StatsBomb Open Data | Event-data prototyping on selective competitions | Great learning source, incomplete EPL coverage |
 | Reference only | football-data.org | Teams, fixtures, squads, scorer lists, person-match metadata | Not enough for scouting metrics |
 
-Recommendation: use **API-FOOTBALL or Sportmonks** if we want an affordable working app soon. Use **Wyscout, StatsBomb, or Opta** if we want the tool to be genuinely scout-grade.
+Recommendation if paid data is allowed later: use **API-FOOTBALL or Sportmonks** if we want an affordable working app soon. Use **Wyscout, StatsBomb, or Opta** if we want the tool to be genuinely scout-grade.
+
+Recommendation if we need free data now: use **Understat as the primary scouting dataset**, **FPL as a current-player/status supplement**, and **StatsBomb Open Data as the event-data learning sandbox**.
 
 ### 1. API-FOOTBALL / API-Sports
 
@@ -90,7 +93,30 @@ Use it for:
 - Temporary replacement for generated goals/xG/xA/minutes.
 - FPL spinoff later.
 
-### 4. FBref-Style Data
+### 4. Understat
+
+Best free scouting-shaped source we tested successfully.
+
+Why:
+
+- No API key required.
+- Covers Premier League seasons through a JSON endpoint used by the site.
+- Provides real player-season data such as minutes, games, goals, xG, assists, xA, shots, key passes, non-penalty goals, non-penalty xG, xGChain, and xGBuildup.
+- Better aligned with player similarity than FPL because it directly includes chance creation and shot-quality metrics.
+
+Gaps:
+
+- It is unofficial access rather than a formal public API.
+- Does not cover defensive detail, progressive passes, carries, pressures, or event locations.
+- Must be cached locally and fetched politely; we should not hammer the endpoint.
+
+Use it for:
+
+- First real replacement for generated attacking/creative metrics.
+- Player-season similarity for forwards, wingers, and attacking midfielders.
+- xG/xA/key-pass based archetypes.
+
+### 5. FBref-Style Data
 
 Best schema for a scout-friendly public-data prototype if we can use a compliant access route.
 
@@ -106,7 +132,7 @@ Gaps:
 - Public Kaggle datasets may have unknown licenses and limited seasons.
 - For production, use licensed/approved access or a third-party API wrapper with clear terms.
 
-### 5. StatsBomb Open Data
+### 6. StatsBomb Open Data
 
 Best for validating advanced event-data features.
 
@@ -126,7 +152,7 @@ Use it for:
 - xG/event model prototypes.
 - Validating tactical/role metrics before production API integration.
 
-### 6. football-data.org
+### 7. football-data.org
 
 Keep as a supporting identity and fixtures source, not the scouting-stat source.
 
@@ -165,6 +191,7 @@ Current findings:
 
 - FPL Public API works without a key and returned current player rows with real minutes, starts, goals, assists, expected goals, expected assists, CBI, recoveries, tackles, influence, creativity, and threat.
 - FPL player history works without a key and returned gameweek-level player rows plus past-season summaries.
+- Understat works without a key and returned EPL player-season rows with minutes, goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup.
 - StatsBomb Open Data works without a key and returned real event-data competition metadata.
 - FBref direct access returned `403` from the local probe, so do not build the product around scraping it.
 - football-data.org, API-FOOTBALL/API-Sports, and Sportmonks need credentials before we can judge actual plan coverage.
