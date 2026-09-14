@@ -4,28 +4,22 @@ Premier League scouting dashboard with a Python ML pipeline and a Next.js produc
 
 ## Important Data Note
 
-This project now uses the stronger local version from `/Users/sagarvarshney/Documents/player-scouting-app`.
+The production UI uses real, free football data with explicit boundaries:
 
-The generated dataset is limited to Premier League clubs and uses real footballer names from a curated PL pool inspired by football-data.org squad data. The current working file covers completed seasons from `2021-2022` through `2025-2026`; the live/current season is intentionally excluded until we connect a live stats feed.
+- Understat EPL player-seasons (`2021-2022` through `2025-2026`) power the current scouting model, percentiles, similarity search, and real shot-location maps.
+- StatsBomb Open Data powers a separate historical EPL `2015/2016` Event Lab with recorded on-ball action coordinates.
+- Shot locations are labelled as attempts, not touches. StatsBomb events are labelled as recorded actions, not touches.
+- Defensive actions, pressures, progressive passes, and carries are never inferred for the Understat model when the source does not provide them.
 
-The advanced per-90 metrics are still generated because football-data.org does not provide xG, xA, key passes, dribbles, progressive passes, or defensive action profiles on its standard endpoints.
-
-In short:
-
-- Real PL player names and PL clubs.
-- Generated model-ready scouting metrics.
-- Optional football-data.org live squad seeding if you provide `FOOTBALL_DATA_TOKEN`.
-- No fabricated random-name players.
-- Row-level role archetypes that can change by player, position, club-season, and statistical profile.
+The legacy synthetic generator remains in the repository for development, but it does not power the production Next.js payload.
 
 ## Stack
 
-- Streamlit
+- Next.js / React / Recharts
 - Pandas
 - Scikit-Learn
-- Matplotlib
 - NumPy
-- Requests
+- Streamlit (legacy prototype)
 
 ## Structure
 
@@ -38,10 +32,15 @@ Player Scouting Tool/
 ├── frontend/              # Next.js production UI
 │   ├── app/
 │   ├── public/
-│   │   └── scouting-data.json
+│   │   ├── scouting-data.json
+│   │   ├── shot-data/       # Lazy-loaded Understat shot files
+│   │   └── event-lab/       # Lazy-loaded StatsBomb action files
 │   └── package.json
 ├── scripts/
-│   └── export_frontend_data.py
+│   ├── build_free_data.py
+│   ├── export_free_frontend_data.py
+│   ├── build_understat_shot_data.py
+│   └── build_statsbomb_event_lab.py
 ├── src/
 │   ├── preprocessing.py
 │   ├── scouting_engine.py
@@ -50,25 +49,16 @@ Player Scouting Tool/
 └── README.md
 ```
 
-## Generate Data
+## Build the Free Production Data
 
 ```bash
-python data/generator.py --output data/players.csv --seed 42 --total 160
+python scripts/build_free_data.py
+python scripts/export_free_frontend_data.py
+python scripts/build_understat_shot_data.py
+python scripts/build_statsbomb_event_lab.py
 ```
 
-Completed-season working dataset:
-
-```bash
-python data/generator.py --source football-data --output data/players.csv --seed 42 --total 160 --seasons 2021-2026
-python scripts/export_frontend_data.py
-```
-
-Optional football-data.org squad seeding:
-
-```bash
-export FOOTBALL_DATA_TOKEN="your-token"
-python data/generator.py --source football-data --output data/players.csv
-```
+The location scripts cache per-player JSON in `frontend/public`, so the browser only downloads the selected player. Understat is a community data source rather than a guaranteed public API; keep the generated cache for reliable local use. StatsBomb data comes from the official [open-data repository](https://github.com/statsbomb/open-data).
 
 ## Run Dashboard
 
@@ -84,7 +74,6 @@ Then open `http://localhost:8501`.
 Next.js product UI:
 
 ```bash
-python scripts/export_frontend_data.py
 cd frontend
 pnpm install
 pnpm dev
@@ -95,17 +84,21 @@ Then open `http://localhost:3000`.
 ## Features
 
 - Main-page workflow controls for position, season, target player, and top-N matches.
-- Overview cards for goals, xG, assists, xA, archetype, and passing.
+- Premium responsive scouting workspace with season, position, and target controls.
+- Overview cards for goals, xG, assists, xA, chance creation, and sequence involvement.
 - Cosine similarity search over `StandardScaler`-scaled per-90 metrics.
 - KMeans clustering for hidden similarity grouping plus position-aware row-level archetype labels.
-- Radar chart comparing percentile profiles.
+- Real Understat shot-density maps for every cached player-season with attempts, plus xG-sized shot markers.
+- A separate StatsBomb Open Event Lab covering 548 players and 380 EPL matches from `2015/2016`.
+- Magenta/lime radar chart comparing percentile profiles.
+- Metric percentile profile heatmaps for the target and closest matches.
 - Scout-friendly 2-metric comparison map.
 - Shortlist utility in the browser.
 
 ## Next Steps
 
-- Connect a true event/stat provider for real xG, xA, carries, pressures, progressive pass data, and minutes.
-- Review `DATA_SOURCES.md` before choosing the first real provider.
-- Add club-season context, league minutes filters, and role weights by position.
+- Add a licensed current-season event provider when true current touch, carry, pressure, and progressive-pass maps become affordable.
+- Add competition/season switching to the StatsBomb Event Lab as more open coverage is released.
+- Add role weights by position and recruitment constraints such as age, contract, and fee.
 - Add shortlist export and player report generation.
 - Deploy the Next.js UI on Vercel using precomputed Python JSON outputs.

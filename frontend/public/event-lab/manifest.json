@@ -1,0 +1,4407 @@
+{
+  "source": "StatsBomb Open Data",
+  "competition": "Premier League",
+  "season": "2015/2016",
+  "competition_id": 2,
+  "season_id": 27,
+  "matches": 380,
+  "players": [
+    {
+      "player_id": 3478,
+      "player_name": "Francesc Fàbregas i Soler",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 8371
+    },
+    {
+      "player_id": 3496,
+      "player_name": "Mesut Özil",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 7787
+    },
+    {
+      "player_id": 3517,
+      "player_name": "Aaron Ramsey",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 7095
+    },
+    {
+      "player_id": 4275,
+      "player_name": "Ross Barkley",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 6658
+    },
+    {
+      "player_id": 3608,
+      "player_name": "Simon Francis",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 6544
+    },
+    {
+      "player_id": 3043,
+      "player_name": "Christian Dannemann Eriksen",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 6334
+    },
+    {
+      "player_id": 3344,
+      "player_name": "Andrew Surman",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 6243
+    },
+    {
+      "player_id": 3294,
+      "player_name": "Juan Manuel Mata García",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 6066
+    },
+    {
+      "player_id": 3345,
+      "player_name": "Charlie Daniels",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 6054
+    },
+    {
+      "player_id": 3436,
+      "player_name": "Idrissa Gana Gueye",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 5971
+    },
+    {
+      "player_id": 20005,
+      "player_name": "Toby Alderweireld",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 5969
+    },
+    {
+      "player_id": 3311,
+      "player_name": "Daley Blind",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 5919
+    },
+    {
+      "player_id": 10956,
+      "player_name": "Eric Dier",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 5900
+    },
+    {
+      "player_id": 3498,
+      "player_name": "Ignacio Monreal Eraso",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 5890
+    },
+    {
+      "player_id": 3511,
+      "player_name": "Héctor Bellerín Moruno",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 5883
+    },
+    {
+      "player_id": 3633,
+      "player_name": "Gareth Barry",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 5844
+    },
+    {
+      "player_id": 3385,
+      "player_name": "Alexis Alejandro Sánchez Sánchez",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 5837
+    },
+    {
+      "player_id": 3662,
+      "player_name": "Danny Drinkwater",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 5815
+    },
+    {
+      "player_id": 3087,
+      "player_name": "Gnégnéri Yaya Touré",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 5805
+    },
+    {
+      "player_id": 9625,
+      "player_name": "Glenn Whelan",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 5766
+    },
+    {
+      "player_id": 3874,
+      "player_name": "Mark Noble",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 5682
+    },
+    {
+      "player_id": 3054,
+      "player_name": "Fernando Luiz Rosa",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 5677
+    },
+    {
+      "player_id": 3091,
+      "player_name": "Moussa Sissoko",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 5639
+    },
+    {
+      "player_id": 3957,
+      "player_name": "César Azpilicueta Tanco",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 5635
+    },
+    {
+      "player_id": 3472,
+      "player_name": "Willian Borges da Silva",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 5615
+    },
+    {
+      "player_id": 3644,
+      "player_name": "Ashley Williams",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 5404
+    },
+    {
+      "player_id": 3493,
+      "player_name": "Emre Can",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 5398
+    },
+    {
+      "player_id": 3462,
+      "player_name": "Jack Frank Porteous Cork",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 5345
+    },
+    {
+      "player_id": 3621,
+      "player_name": "Eden Hazard",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 5322
+    },
+    {
+      "player_id": 3049,
+      "player_name": "Matt Ritchie",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 5307
+    },
+    {
+      "player_id": 3454,
+      "player_name": "Troy Deeney",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 5303
+    },
+    {
+      "player_id": 4590,
+      "player_name": "Nathaniel Edwin Clyne",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 5258
+    },
+    {
+      "player_id": 4429,
+      "player_name": "Yann Gérard M''Vila",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 5186
+    },
+    {
+      "player_id": 3289,
+      "player_name": "Romelu Lukaku Menama",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 5130
+    },
+    {
+      "player_id": 7110,
+      "player_name": "Bacary Sagna",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 5110
+    },
+    {
+      "player_id": 3467,
+      "player_name": "Erik Pieters",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 5071
+    },
+    {
+      "player_id": 3062,
+      "player_name": "Aaron Cresswell",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 5069
+    },
+    {
+      "player_id": 3491,
+      "player_name": "Dimitri Payet",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 5058
+    },
+    {
+      "player_id": 10955,
+      "player_name": "Harry Kane",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 5048
+    },
+    {
+      "player_id": 3721,
+      "player_name": "Etienne Capoue",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 5011
+    },
+    {
+      "player_id": 3290,
+      "player_name": "Federico Fernández",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 4962
+    },
+    {
+      "player_id": 3814,
+      "player_name": "Riyad Mahrez",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 4937
+    },
+    {
+      "player_id": 3828,
+      "player_name": "Steven Davis",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 4893
+    },
+    {
+      "player_id": 3381,
+      "player_name": "Nemanja Matić",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 4889
+    },
+    {
+      "player_id": 3473,
+      "player_name": "James Philip Milner",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 4869
+    },
+    {
+      "player_id": 5596,
+      "player_name": "Aleksandar Kolarov",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 4764
+    },
+    {
+      "player_id": 3394,
+      "player_name": "Laurent Koscielny",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 4738
+    },
+    {
+      "player_id": 6821,
+      "player_name": "Jesús Navas González",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 4714
+    },
+    {
+      "player_id": 3064,
+      "player_name": "David Josué Jiménez Silva",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 4690
+    },
+    {
+      "player_id": 3515,
+      "player_name": "Alberto Moreno Pérez",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 4683
+    },
+    {
+      "player_id": 3583,
+      "player_name": "Ashley Westwood",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 4656
+    },
+    {
+      "player_id": 4022,
+      "player_name": "Darren Fletcher",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 4647
+    },
+    {
+      "player_id": 3629,
+      "player_name": "Sadio Mané",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 4637
+    },
+    {
+      "player_id": 3567,
+      "player_name": "Georginio Wijnaldum",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 4632
+    },
+    {
+      "player_id": 10967,
+      "player_name": "Robert Brady",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 4631
+    },
+    {
+      "player_id": 20039,
+      "player_name": "Anthony Martial",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 4606
+    },
+    {
+      "player_id": 3650,
+      "player_name": "Daryl Janmaat",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 4600
+    },
+    {
+      "player_id": 3205,
+      "player_name": "Kyle Walker",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 4599
+    },
+    {
+      "player_id": 3090,
+      "player_name": "Nicolás Hernán Otamendi",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 4599
+    },
+    {
+      "player_id": 3961,
+      "player_name": "N''Golo Kanté",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 4595
+    },
+    {
+      "player_id": 19688,
+      "player_name": "Jason Puncheon",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 4578
+    },
+    {
+      "player_id": 3960,
+      "player_name": "José Miguel da Rocha Fonte",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 4575
+    },
+    {
+      "player_id": 3244,
+      "player_name": "John Stones",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 4545
+    },
+    {
+      "player_id": 3057,
+      "player_name": "Jonjo Shelvey",
+      "teams": [
+        "Newcastle United",
+        "Swansea City"
+      ],
+      "actions": 4543
+    },
+    {
+      "player_id": 3037,
+      "player_name": "Mousa Sidi Yaya Dembélé",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 4539
+    },
+    {
+      "player_id": 3341,
+      "player_name": "Steve Cook",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 4520
+    },
+    {
+      "player_id": 3325,
+      "player_name": "Marko Arnautović",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 4481
+    },
+    {
+      "player_id": 4884,
+      "player_name": "Pape N''Diaye Souaré",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 4474
+    },
+    {
+      "player_id": 3347,
+      "player_name": "André Ayew Pelé",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 4448
+    },
+    {
+      "player_id": 3538,
+      "player_name": "Wayne Mark Rooney",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 4419
+    },
+    {
+      "player_id": 3094,
+      "player_name": "Bamidele Alli",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 4413
+    },
+    {
+      "player_id": 3944,
+      "player_name": "Gylfi Þór Sigurðsson",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 4364
+    },
+    {
+      "player_id": 4751,
+      "player_name": "Michael Carrick",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 4355
+    },
+    {
+      "player_id": 9627,
+      "player_name": "Neil Taylor",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 4332
+    },
+    {
+      "player_id": 3089,
+      "player_name": "Kevin De Bruyne",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 4312
+    },
+    {
+      "player_id": 4891,
+      "player_name": "Ibrahim Afellay",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 4310
+    },
+    {
+      "player_id": 3600,
+      "player_name": "Morgan Schneiderlin",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 4305
+    },
+    {
+      "player_id": 5458,
+      "player_name": "Odion Jude Ighalo",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 4260
+    },
+    {
+      "player_id": 10958,
+      "player_name": "Chris Smalling",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 4246
+    },
+    {
+      "player_id": 3077,
+      "player_name": "Jan Vertonghen",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 4233
+    },
+    {
+      "player_id": 9578,
+      "player_name": "Jonathan Howson",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 4226
+    },
+    {
+      "player_id": 3501,
+      "player_name": "Philippe Coutinho Correia",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 4198
+    },
+    {
+      "player_id": 4589,
+      "player_name": "Séamus Coleman",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 4194
+    },
+    {
+      "player_id": 3098,
+      "player_name": "Victor Wanyama",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 4189
+    },
+    {
+      "player_id": 3277,
+      "player_name": "Yohan Cabaye",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 4169
+    },
+    {
+      "player_id": 5594,
+      "player_name": "Branislav Ivanović",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 4158
+    },
+    {
+      "player_id": 20045,
+      "player_name": "Ryan Bertrand",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 4128
+    },
+    {
+      "player_id": 3585,
+      "player_name": "Erik Lamela",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 4089
+    },
+    {
+      "player_id": 3669,
+      "player_name": "Virgil van Dijk",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 4068
+    },
+    {
+      "player_id": 10966,
+      "player_name": "Wes Hoolahan",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 4067
+    },
+    {
+      "player_id": 3523,
+      "player_name": "Craig Dawson",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 4062
+    },
+    {
+      "player_id": 3450,
+      "player_name": "Jordan Ayew",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 4062
+    },
+    {
+      "player_id": 3535,
+      "player_name": "Roberto Firmino Barbosa de Oliveira",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 4056
+    },
+    {
+      "player_id": 3343,
+      "player_name": "Dan Gosling",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 4053
+    },
+    {
+      "player_id": 3973,
+      "player_name": "Àngel Rangel Zaragoza",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 4050
+    },
+    {
+      "player_id": 7780,
+      "player_name": "Lucas Pezzini Leiva",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 4046
+    },
+    {
+      "player_id": 3307,
+      "player_name": "Marc Albrighton",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 4038
+    },
+    {
+      "player_id": 3684,
+      "player_name": "Cheikhou Kouyaté",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 4035
+    },
+    {
+      "player_id": 3626,
+      "player_name": "Ben Watson",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 4020
+    },
+    {
+      "player_id": 3607,
+      "player_name": "James McCarthy",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 4018
+    },
+    {
+      "player_id": 5198,
+      "player_name": "Diego da Silva Costa",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 4016
+    },
+    {
+      "player_id": 9533,
+      "player_name": "Leandro Bacuna",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 4011
+    },
+    {
+      "player_id": 3286,
+      "player_name": "Nathan Redmond",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 3995
+    },
+    {
+      "player_id": 3237,
+      "player_name": "Sergio Leonel Agüero del Castillo",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 3945
+    },
+    {
+      "player_id": 3594,
+      "player_name": "Danny Rose",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 3941
+    },
+    {
+      "player_id": 3321,
+      "player_name": "Patrick van Aanholt",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 3929
+    },
+    {
+      "player_id": 3958,
+      "player_name": "Pedro Eliezer Rodríguez Ledesma",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 3917
+    },
+    {
+      "player_id": 3812,
+      "player_name": "Christian Fuchs",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 3873
+    },
+    {
+      "player_id": 4090,
+      "player_name": "Adam David Lallana",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 3863
+    },
+    {
+      "player_id": 3595,
+      "player_name": "Manuel Lanzini",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 3863
+    },
+    {
+      "player_id": 3831,
+      "player_name": "Dušan Tadić",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 3859
+    },
+    {
+      "player_id": 11386,
+      "player_name": "Santiago Cazorla González",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 3819
+    },
+    {
+      "player_id": 3507,
+      "player_name": "Wilfried Zaha",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 3807
+    },
+    {
+      "player_id": 40122,
+      "player_name": "Oscar dos Santos Emboaba Júnior",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 3782
+    },
+    {
+      "player_id": 4629,
+      "player_name": "José Ramiro Funes Mori",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 3777
+    },
+    {
+      "player_id": 3340,
+      "player_name": "Kyle Naughton",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 3706
+    },
+    {
+      "player_id": 3233,
+      "player_name": "Raheem Sterling",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 3691
+    },
+    {
+      "player_id": 4041,
+      "player_name": "José Salomón Rondón Giménez",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 3676
+    },
+    {
+      "player_id": 6409,
+      "player_name": "Adam Smith",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 3674
+    },
+    {
+      "player_id": 10960,
+      "player_name": "Jamie Vardy",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 3660
+    },
+    {
+      "player_id": 11062,
+      "player_name": "Graziano Pellè",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 3610
+    },
+    {
+      "player_id": 6870,
+      "player_name": "José Manuel Jurado Marín",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 3606
+    },
+    {
+      "player_id": 3605,
+      "player_name": "Sung-Yeung Ki",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 3604
+    },
+    {
+      "player_id": 3606,
+      "player_name": "Ander Herrera Agüera",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 3561
+    },
+    {
+      "player_id": 5475,
+      "player_name": "John Michael Nchekwube Obinna",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 3551
+    },
+    {
+      "player_id": 3604,
+      "player_name": "Olivier Giroud",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 3541
+    },
+    {
+      "player_id": 3044,
+      "player_name": "Chancel Mbemba Mangulu",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 3517
+    },
+    {
+      "player_id": 3443,
+      "player_name": "Joel Ward",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 3498
+    },
+    {
+      "player_id": 21212,
+      "player_name": "Russell Martin",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 3465
+    },
+    {
+      "player_id": 3483,
+      "player_name": "Mamadou Sakho",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 3464
+    },
+    {
+      "player_id": 3480,
+      "player_name": "Geoff Cameron",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 3442
+    },
+    {
+      "player_id": 4269,
+      "player_name": "Aleksandar Mitrović",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 3408
+    },
+    {
+      "player_id": 40121,
+      "player_name": "Philipp Wollscheid",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 3401
+    },
+    {
+      "player_id": 3437,
+      "player_name": "Francis Joseph Coquelin",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 3334
+    },
+    {
+      "player_id": 4724,
+      "player_name": "Glen Johnson",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 3329
+    },
+    {
+      "player_id": 3304,
+      "player_name": "Harry Arter",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 3314
+    },
+    {
+      "player_id": 3475,
+      "player_name": "Per Mertesacker",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 3302
+    },
+    {
+      "player_id": 9642,
+      "player_name": "Alan Hutton",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 3300
+    },
+    {
+      "player_id": 9649,
+      "player_name": "Jack Colback",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 3296
+    },
+    {
+      "player_id": 18414,
+      "player_name": "Bastian Schweinsteiger",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 3260
+    },
+    {
+      "player_id": 7153,
+      "player_name": "Jordan Veretout",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 3251
+    },
+    {
+      "player_id": 3991,
+      "player_name": "Allan Romeo Nyom",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 3247
+    },
+    {
+      "player_id": 43081,
+      "player_name": "Almen Abdi",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 3224
+    },
+    {
+      "player_id": 3329,
+      "player_name": "Cédric Ricardo Alves Soares",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 3192
+    },
+    {
+      "player_id": 3464,
+      "player_name": "James McArthur",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 3190
+    },
+    {
+      "player_id": 18872,
+      "player_name": "Martin Škrtel",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 3177
+    },
+    {
+      "player_id": 4587,
+      "player_name": "Matteo Darmian",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 3155
+    },
+    {
+      "player_id": 3533,
+      "player_name": "Xherdan Shaqiri",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 3139
+    },
+    {
+      "player_id": 3967,
+      "player_name": "Claudio Ariel Yacob",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 3137
+    },
+    {
+      "player_id": 3407,
+      "player_name": "Scott Dann",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 3102
+    },
+    {
+      "player_id": 3589,
+      "player_name": "Yannick Bolasie Yala",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 3093
+    },
+    {
+      "player_id": 3099,
+      "player_name": "Hugo Lloris",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 3086
+    },
+    {
+      "player_id": 6746,
+      "player_name": "Gabriel Armando de Abreu",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 3058
+    },
+    {
+      "player_id": 3262,
+      "player_name": "Łukasz Fabiański",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 3047
+    },
+    {
+      "player_id": 16072,
+      "player_name": "Vurnon Anita",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 3019
+    },
+    {
+      "player_id": 9463,
+      "player_name": "Alexander Banor Tettey",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 3015
+    },
+    {
+      "player_id": 3076,
+      "player_name": "Ayoze Pérez Gutiérrez",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 3011
+    },
+    {
+      "player_id": 3514,
+      "player_name": "James McClean",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 2980
+    },
+    {
+      "player_id": 4631,
+      "player_name": "Leon Britton",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 2978
+    },
+    {
+      "player_id": 3693,
+      "player_name": "Damien Delaney",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 2975
+    },
+    {
+      "player_id": 20046,
+      "player_name": "Phil Jagielka",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 2961
+    },
+    {
+      "player_id": 2988,
+      "player_name": "Memphis Depay",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 2951
+    },
+    {
+      "player_id": 3815,
+      "player_name": "Kasper Schmeichel",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 2943
+    },
+    {
+      "player_id": 4913,
+      "player_name": "Bojan Krkíc Pérez",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 2942
+    },
+    {
+      "player_id": 3532,
+      "player_name": "Jordan Brian Henderson",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 2925
+    },
+    {
+      "player_id": 3683,
+      "player_name": "Tom Cleverley",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 2912
+    },
+    {
+      "player_id": 11012,
+      "player_name": "Jonathan Grant Evans",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 2909
+    },
+    {
+      "player_id": 3842,
+      "player_name": "Shane Long",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 2901
+    },
+    {
+      "player_id": 3471,
+      "player_name": "Dejan Lovren",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 2892
+    },
+    {
+      "player_id": 3389,
+      "player_name": "Eliaquim Mangala",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 2886
+    },
+    {
+      "player_id": 3270,
+      "player_name": "Danny Simpson",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 2884
+    },
+    {
+      "player_id": 20285,
+      "player_name": "Joleon Lescott",
+      "teams": [
+        "Aston Villa",
+        "West Bromwich Albion"
+      ],
+      "actions": 2878
+    },
+    {
+      "player_id": 3349,
+      "player_name": "Michail Antonio",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 2874
+    },
+    {
+      "player_id": 3263,
+      "player_name": "Craig Cathcart",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 2842
+    },
+    {
+      "player_id": 9452,
+      "player_name": "Gary O''Neil",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 2795
+    },
+    {
+      "player_id": 6800,
+      "player_name": "Carles Gil de Pareja Vicent",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 2791
+    },
+    {
+      "player_id": 3293,
+      "player_name": "Jesse Lingard",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 2788
+    },
+    {
+      "player_id": 10783,
+      "player_name": "Lee Cattermole",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 2754
+    },
+    {
+      "player_id": 3346,
+      "player_name": "Joshua King",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 2750
+    },
+    {
+      "player_id": 3449,
+      "player_name": "Wayne Routledge",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 2748
+    },
+    {
+      "player_id": 16003,
+      "player_name": "Fernando Francisco Reges",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 2738
+    },
+    {
+      "player_id": 3463,
+      "player_name": "Junior Stanislas",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 2696
+    },
+    {
+      "player_id": 3518,
+      "player_name": "Leighton Baines",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 2686
+    },
+    {
+      "player_id": 3843,
+      "player_name": "Angelo Obinze Ogbonna",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 2685
+    },
+    {
+      "player_id": 3337,
+      "player_name": "Jermain Defoe",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 2676
+    },
+    {
+      "player_id": 3810,
+      "player_name": "Shinji Okazaki",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 2643
+    },
+    {
+      "player_id": 2966,
+      "player_name": "Stéphane Sessègnon",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 2627
+    },
+    {
+      "player_id": 3522,
+      "player_name": "Heurelho da Silva Gomes",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 2625
+    },
+    {
+      "player_id": 31296,
+      "player_name": "Sébastien Aymar Bassong Nguena",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 2602
+    },
+    {
+      "player_id": 4346,
+      "player_name": "Gilbert Gianelli Imbula Wanga",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 2565
+    },
+    {
+      "player_id": 7171,
+      "player_name": "Fabio Borini",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 2545
+    },
+    {
+      "player_id": 3461,
+      "player_name": "Petr Čech",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 2543
+    },
+    {
+      "player_id": 23663,
+      "player_name": "Dieumerci Mbokani Bezua",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 2542
+    },
+    {
+      "player_id": 3726,
+      "player_name": "Gerard Deulofeu Lázaro",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 2521
+    },
+    {
+      "player_id": 40118,
+      "player_name": "Ikechi Anya",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 2513
+    },
+    {
+      "player_id": 3272,
+      "player_name": "Oriol Romeu Vidal",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 2499
+    },
+    {
+      "player_id": 3596,
+      "player_name": "Gareth McAuley",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 2498
+    },
+    {
+      "player_id": 26696,
+      "player_name": "Arouna Koné",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 2488
+    },
+    {
+      "player_id": 20521,
+      "player_name": "Bafétimbi Gomis",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 2488
+    },
+    {
+      "player_id": 3537,
+      "player_name": "Jack Butland",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 2478
+    },
+    {
+      "player_id": 3623,
+      "player_name": "Adrián San Miguel del Castillo",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 2469
+    },
+    {
+      "player_id": 3316,
+      "player_name": "James Tomkins",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 2458
+    },
+    {
+      "player_id": 3813,
+      "player_name": "Wes Morgan",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 2431
+    },
+    {
+      "player_id": 27146,
+      "player_name": "Aly Cissokho",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 2416
+    },
+    {
+      "player_id": 26207,
+      "player_name": "Fabricio Coloccini",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 2410
+    },
+    {
+      "player_id": 9485,
+      "player_name": "Craig Gardner",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 2399
+    },
+    {
+      "player_id": 42900,
+      "player_name": "Cheik Ismaël Tioté",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 2388
+    },
+    {
+      "player_id": 3670,
+      "player_name": "Jonathan Walters",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 2386
+    },
+    {
+      "player_id": 4280,
+      "player_name": "Winston Reid",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 2351
+    },
+    {
+      "player_id": 3539,
+      "player_name": "Simon Mignolet",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 2345
+    },
+    {
+      "player_id": 3333,
+      "player_name": "David de Gea Quintana",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 2344
+    },
+    {
+      "player_id": 20287,
+      "player_name": "John Terry",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 2341
+    },
+    {
+      "player_id": 5685,
+      "player_name": "Carlos Alberto Sánchez Moreno",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 2312
+    },
+    {
+      "player_id": 16334,
+      "player_name": "Graham Dorrans",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 2312
+    },
+    {
+      "player_id": 19362,
+      "player_name": "Rudy Gestede",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 2304
+    },
+    {
+      "player_id": 3328,
+      "player_name": "James Ward-Prowse",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 2289
+    },
+    {
+      "player_id": 42700,
+      "player_name": "Micah Richards",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 2288
+    },
+    {
+      "player_id": 3602,
+      "player_name": "Faustino Marcos Alberto Rojo",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 2285
+    },
+    {
+      "player_id": 3306,
+      "player_name": "Nathan Aké",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 2276
+    },
+    {
+      "player_id": 4630,
+      "player_name": "Saido Berahino",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 2265
+    },
+    {
+      "player_id": 3086,
+      "player_name": "Ben Davies",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 2253
+    },
+    {
+      "player_id": 3380,
+      "player_name": "Christian Benteke Liolo",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 2241
+    },
+    {
+      "player_id": 20302,
+      "player_name": "Gaël Clichy",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 2234
+    },
+    {
+      "player_id": 40123,
+      "player_name": "Robert Huth",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 2221
+    },
+    {
+      "player_id": 16181,
+      "player_name": "Jordy Clasie",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 2216
+    },
+    {
+      "player_id": 3612,
+      "player_name": "Ashley Young",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 2194
+    },
+    {
+      "player_id": 4807,
+      "player_name": "Cameron Jerome",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 2182
+    },
+    {
+      "player_id": 23635,
+      "player_name": "John Ruddy",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 2176
+    },
+    {
+      "player_id": 3568,
+      "player_name": "Mohamed Naser Elsayed Elneny",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 2176
+    },
+    {
+      "player_id": 20074,
+      "player_name": "Artur Boruc",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 2171
+    },
+    {
+      "player_id": 3646,
+      "player_name": "Marc Pugh",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 2165
+    },
+    {
+      "player_id": 3635,
+      "player_name": "Jordon Ibe",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 2163
+    },
+    {
+      "player_id": 3065,
+      "player_name": "Paul Dummett",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 2160
+    },
+    {
+      "player_id": 5489,
+      "player_name": "Mile Jedinak",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 2156
+    },
+    {
+      "player_id": 3645,
+      "player_name": "Gary Cahill",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 2149
+    },
+    {
+      "player_id": 10503,
+      "player_name": "Billy Jones",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 2146
+    },
+    {
+      "player_id": 3962,
+      "player_name": "Diafra Sakho",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 2123
+    },
+    {
+      "player_id": 3541,
+      "player_name": "Chris Brunt",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 2106
+    },
+    {
+      "player_id": 3288,
+      "player_name": "Miguel Ángel Britos Cabrera",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 2102
+    },
+    {
+      "player_id": 3456,
+      "player_name": "Kurt Happy Zouma",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 2094
+    },
+    {
+      "player_id": 3296,
+      "player_name": "Marouane Fellaini-Bakkioui",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 2094
+    },
+    {
+      "player_id": 12608,
+      "player_name": "Bradley Guzan",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 2083
+    },
+    {
+      "player_id": 7063,
+      "player_name": "Jefferson Antonio Montero Vite",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 2070
+    },
+    {
+      "player_id": 3488,
+      "player_name": "Wayne Hennessey",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 2054
+    },
+    {
+      "player_id": 4746,
+      "player_name": "Younes Kaboul",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 2045
+    },
+    {
+      "player_id": 9528,
+      "player_name": "Steven Naismith",
+      "teams": [
+        "Everton",
+        "Norwich City"
+      ],
+      "actions": 2039
+    },
+    {
+      "player_id": 3490,
+      "player_name": "James Morrison",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 2035
+    },
+    {
+      "player_id": 3658,
+      "player_name": "DeAndre Yedlin",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 2030
+    },
+    {
+      "player_id": 3291,
+      "player_name": "Joe Hart",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 2030
+    },
+    {
+      "player_id": 3297,
+      "player_name": "Andros Townsend",
+      "teams": [
+        "Newcastle United",
+        "Tottenham Hotspur"
+      ],
+      "actions": 1986
+    },
+    {
+      "player_id": 3267,
+      "player_name": "Luis Antonio Valencia Mosquera",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 1984
+    },
+    {
+      "player_id": 16457,
+      "player_name": "Jeremain Lens",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1982
+    },
+    {
+      "player_id": 3520,
+      "player_name": "Jeffrey Schlupp",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 1954
+    },
+    {
+      "player_id": 13042,
+      "player_name": "Tim Howard",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 1953
+    },
+    {
+      "player_id": 42902,
+      "player_name": "Adam Johnson",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1941
+    },
+    {
+      "player_id": 3052,
+      "player_name": "Pablo Javier Zabaleta Girod",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 1936
+    },
+    {
+      "player_id": 20641,
+      "player_name": "Connor Wickham",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 1926
+    },
+    {
+      "player_id": 3576,
+      "player_name": "Martin Olsson",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 1924
+    },
+    {
+      "player_id": 3101,
+      "player_name": "Vincent Kompany",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 1920
+    },
+    {
+      "player_id": 3953,
+      "player_name": "Aaron Lennon",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 1899
+    },
+    {
+      "player_id": 4271,
+      "player_name": "Andy Carroll",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 1899
+    },
+    {
+      "player_id": 3083,
+      "player_name": "Heung-Min Son",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 1867
+    },
+    {
+      "player_id": 3598,
+      "player_name": "Wilfried Guemiand Bony",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 1840
+    },
+    {
+      "player_id": 21254,
+      "player_name": "Carl Jenkinson",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 1831
+    },
+    {
+      "player_id": 11117,
+      "player_name": "Scott Sinclair",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 1826
+    },
+    {
+      "player_id": 3525,
+      "player_name": "Alex Oxlade-Chamberlain",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 1824
+    },
+    {
+      "player_id": 12325,
+      "player_name": "Abdul Rahman Baba",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 1813
+    },
+    {
+      "player_id": 30289,
+      "player_name": "Papiss Demba Cissé",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 1797
+    },
+    {
+      "player_id": 13846,
+      "player_name": "Jan Kirchhoff",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1768
+    },
+    {
+      "player_id": 3671,
+      "player_name": "José Leonardo Ulloa",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 1765
+    },
+    {
+      "player_id": 3636,
+      "player_name": "Charlie Adam",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 1760
+    },
+    {
+      "player_id": 6631,
+      "player_name": "Mathieu Flamini",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 1709
+    },
+    {
+      "player_id": 3041,
+      "player_name": "Ciaran Clark",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 1701
+    },
+    {
+      "player_id": 4035,
+      "player_name": "Ryan Shawcross",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 1681
+    },
+    {
+      "player_id": 40127,
+      "player_name": "Ryan Mason",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 1657
+    },
+    {
+      "player_id": 16890,
+      "player_name": "John O''Shea",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1653
+    },
+    {
+      "player_id": 3469,
+      "player_name": "Bakary Sako",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 1637
+    },
+    {
+      "player_id": 3096,
+      "player_name": "Rob Elliot",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 1632
+    },
+    {
+      "player_id": 3668,
+      "player_name": "Theo Walcott",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 1615
+    },
+    {
+      "player_id": 4597,
+      "player_name": "Fabian Delph",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 1596
+    },
+    {
+      "player_id": 19288,
+      "player_name": "Martín Gastón Demichelis",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 1591
+    },
+    {
+      "player_id": 5836,
+      "player_name": "Bryan Oviedo",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 1577
+    },
+    {
+      "player_id": 9930,
+      "player_name": "Ryan Bennett",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 1574
+    },
+    {
+      "player_id": 5108,
+      "player_name": "Glyn Oliver Myhill",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 1567
+    },
+    {
+      "player_id": 4317,
+      "player_name": "Kevin Mirallas",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 1567
+    },
+    {
+      "player_id": 3509,
+      "player_name": "Thibaut Courtois",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 1567
+    },
+    {
+      "player_id": 3265,
+      "player_name": "José Luis Sanmartín Mato",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 1558
+    },
+    {
+      "player_id": 6560,
+      "player_name": "Marc Muniesa Martínez",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 1555
+    },
+    {
+      "player_id": 4347,
+      "player_name": "Jordan Amavi",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 1550
+    },
+    {
+      "player_id": 3529,
+      "player_name": "Daniel Andre Sturridge",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 1548
+    },
+    {
+      "player_id": 3482,
+      "player_name": "James Collins",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 1546
+    },
+    {
+      "player_id": 20527,
+      "player_name": "Jonas Olsson",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 1544
+    },
+    {
+      "player_id": 3196,
+      "player_name": "Wahbi Khazri",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1540
+    },
+    {
+      "player_id": 5540,
+      "player_name": "Valon Behrami",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 1533
+    },
+    {
+      "player_id": 3725,
+      "player_name": "José Holebas",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 1531
+    },
+    {
+      "player_id": 3590,
+      "player_name": "Rhu-endly Martina",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 1529
+    },
+    {
+      "player_id": 4831,
+      "player_name": "Nacer Chadli",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 1528
+    },
+    {
+      "player_id": 30702,
+      "player_name": "Brendan Joel Zibusiso Galloway",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 1519
+    },
+    {
+      "player_id": 3708,
+      "player_name": "Kelechi Promise Iheanacho",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 1500
+    },
+    {
+      "player_id": 9539,
+      "player_name": "Vito Mannone",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1497
+    },
+    {
+      "player_id": 3300,
+      "player_name": "Maya Yoshida",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 1488
+    },
+    {
+      "player_id": 3611,
+      "player_name": "Kevin Wimmer",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 1456
+    },
+    {
+      "player_id": 3651,
+      "player_name": "Matt Targett",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 1453
+    },
+    {
+      "player_id": 3309,
+      "player_name": "Sebastian Prödl",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 1437
+    },
+    {
+      "player_id": 20253,
+      "player_name": "Samir Nasri",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 1430
+    },
+    {
+      "player_id": 28559,
+      "player_name": "Enner Remberto Valencia Lastra",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 1423
+    },
+    {
+      "player_id": 3897,
+      "player_name": "Pedro Mba Obiang Avomo",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 1422
+    },
+    {
+      "player_id": 18751,
+      "player_name": "Jack Rodwell",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1421
+    },
+    {
+      "player_id": 9554,
+      "player_name": "Steven Fletcher",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1415
+    },
+    {
+      "player_id": 5581,
+      "player_name": "Joel Nathaniel Campbell Samuels",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 1408
+    },
+    {
+      "player_id": 11992,
+      "player_name": "Kevin Linford Stewart",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 1401
+    },
+    {
+      "player_id": 3963,
+      "player_name": "Victor Moses",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 1400
+    },
+    {
+      "player_id": 4045,
+      "player_name": "Leroy Fer",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 1396
+    },
+    {
+      "player_id": 9593,
+      "player_name": "Lewis Grabban",
+      "teams": [
+        "AFC Bournemouth",
+        "Norwich City"
+      ],
+      "actions": 1394
+    },
+    {
+      "player_id": 27053,
+      "player_name": "Alexandre Dimitri Song-Billong",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 1388
+    },
+    {
+      "player_id": 3665,
+      "player_name": "Andrew Philip King",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 1388
+    },
+    {
+      "player_id": 6871,
+      "player_name": "Costel Fane Pantilimon",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1387
+    },
+    {
+      "player_id": 4416,
+      "player_name": "Max-Alain Gradel",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 1385
+    },
+    {
+      "player_id": 3603,
+      "player_name": "Mame Biram Diouf",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 1367
+    },
+    {
+      "player_id": 9638,
+      "player_name": "Jack Grealish",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 1366
+    },
+    {
+      "player_id": 3647,
+      "player_name": "Alex Iwobi",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 1353
+    },
+    {
+      "player_id": 10931,
+      "player_name": "Joe Allen",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 1350
+    },
+    {
+      "player_id": 22594,
+      "player_name": "Matt Jarvis",
+      "teams": [
+        "Norwich City",
+        "West Ham United"
+      ],
+      "actions": 1346
+    },
+    {
+      "player_id": 3081,
+      "player_name": "Jamaal Lascelles",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 1330
+    },
+    {
+      "player_id": 27853,
+      "player_name": "Mauro Matías Zárate",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 1311
+    },
+    {
+      "player_id": 38412,
+      "player_name": "Kolo Habib Touré",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 1310
+    },
+    {
+      "player_id": 3448,
+      "player_name": "Martin Kelly",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 1292
+    },
+    {
+      "player_id": 10779,
+      "player_name": "Cameron Borthwick-Jackson",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 1255
+    },
+    {
+      "player_id": 10499,
+      "player_name": "Ivo Daniel Ferreira Mendonca Pinto",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 1248
+    },
+    {
+      "player_id": 23488,
+      "player_name": "Mario Suárez Mata",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 1245
+    },
+    {
+      "player_id": 9626,
+      "player_name": "Tommy Elphick",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 1236
+    },
+    {
+      "player_id": 15892,
+      "player_name": "Jordon Mutch",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 1219
+    },
+    {
+      "player_id": 40218,
+      "player_name": "Sylvain Distin",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 1215
+    },
+    {
+      "player_id": 16309,
+      "player_name": "Joel Robles Blázquez",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 1201
+    },
+    {
+      "player_id": 8251,
+      "player_name": "Marco van Ginkel",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 1196
+    },
+    {
+      "player_id": 13286,
+      "player_name": "Lamine Koné",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1194
+    },
+    {
+      "player_id": 3970,
+      "player_name": "Fraser Forster",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 1176
+    },
+    {
+      "player_id": 3278,
+      "player_name": "Benik Afobe",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 1174
+    },
+    {
+      "player_id": 9536,
+      "player_name": "Modou Barrow",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 1173
+    },
+    {
+      "player_id": 6300,
+      "player_name": "Sebastián Coates Nión",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1172
+    },
+    {
+      "player_id": 20201,
+      "player_name": "Maarten Stekelenburg",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 1158
+    },
+    {
+      "player_id": 13248,
+      "player_name": "Eunan O''Kane",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 1140
+    },
+    {
+      "player_id": 3476,
+      "player_name": "Muhamed Bešić",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 1129
+    },
+    {
+      "player_id": 3318,
+      "player_name": "Marcus Rashford",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 1126
+    },
+    {
+      "player_id": 22281,
+      "player_name": "Duncan Watmore",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 1120
+    },
+    {
+      "player_id": 3666,
+      "player_name": "Robert Kenedy Nunes do Nascimento",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 1120
+    },
+    {
+      "player_id": 4817,
+      "player_name": "Joe Ledley",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 1107
+    },
+    {
+      "player_id": 4808,
+      "player_name": "Andre Wisdom",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 1098
+    },
+    {
+      "player_id": 42699,
+      "player_name": "Gabriel Imuetinyan Agbonlahor",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 1094
+    },
+    {
+      "player_id": 11124,
+      "player_name": "Steven Whittaker",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 1077
+    },
+    {
+      "player_id": 3310,
+      "player_name": "Tom Carroll",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 1075
+    },
+    {
+      "player_id": 36983,
+      "player_name": "Juan Carlos Paredes Reasco",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 1073
+    },
+    {
+      "player_id": 40124,
+      "player_name": "Rickie Lambert",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 1059
+    },
+    {
+      "player_id": 24380,
+      "player_name": "Tetchi Jores Charlemagne Ulrich Okore",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 1054
+    },
+    {
+      "player_id": 9628,
+      "player_name": "James Grant Chester",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 1050
+    },
+    {
+      "player_id": 28100,
+      "player_name": "Ramires Santos do Nascimento",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 1050
+    },
+    {
+      "player_id": 26699,
+      "player_name": "Emmanuel Adebayor",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 1046
+    },
+    {
+      "player_id": 3339,
+      "player_name": "Asmir Begović",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 1032
+    },
+    {
+      "player_id": 3085,
+      "player_name": "Glenn Murray",
+      "teams": [
+        "AFC Bournemouth",
+        "Crystal Palace"
+      ],
+      "actions": 1013
+    },
+    {
+      "player_id": 3643,
+      "player_name": "Phil Bardsley",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 1013
+    },
+    {
+      "player_id": 16295,
+      "player_name": "Dame N''Doye",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 985
+    },
+    {
+      "player_id": 4747,
+      "player_name": "Divock Okoth Origi",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 984
+    },
+    {
+      "player_id": 4828,
+      "player_name": "Adlène Guédioura",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 977
+    },
+    {
+      "player_id": 42701,
+      "player_name": "Kieran Richardson",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 967
+    },
+    {
+      "player_id": 3382,
+      "player_name": "Luke Shaw",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 955
+    },
+    {
+      "player_id": 4053,
+      "player_name": "Ben Foster",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 947
+    },
+    {
+      "player_id": 3308,
+      "player_name": "Kieran Trippier",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 947
+    },
+    {
+      "player_id": 3504,
+      "player_name": "Ruben Loftus-Cheek",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 941
+    },
+    {
+      "player_id": 6950,
+      "player_name": "Alberto Paloschi",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 933
+    },
+    {
+      "player_id": 3722,
+      "player_name": "Steven Taylor",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 927
+    },
+    {
+      "player_id": 3616,
+      "player_name": "Callum Wilson",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 921
+    },
+    {
+      "player_id": 3302,
+      "player_name": "Nordin Amrabat",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 898
+    },
+    {
+      "player_id": 4840,
+      "player_name": "Massadio Haïdara",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 869
+    },
+    {
+      "player_id": 3092,
+      "player_name": "Dwight Gayle",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 859
+    },
+    {
+      "player_id": 3314,
+      "player_name": "Phil Jones",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 854
+    },
+    {
+      "player_id": 9014,
+      "player_name": "Declan Rudd",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 831
+    },
+    {
+      "player_id": 10007,
+      "player_name": "Jon Flanagan",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 823
+    },
+    {
+      "player_id": 3254,
+      "player_name": "Florian Thauvin",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 822
+    },
+    {
+      "player_id": 3569,
+      "player_name": "Daniel Nii Tackie Mensah Welbeck",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 821
+    },
+    {
+      "player_id": 28782,
+      "player_name": "Ritchie De Laet",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 801
+    },
+    {
+      "player_id": 9461,
+      "player_name": "Timm Klose",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 782
+    },
+    {
+      "player_id": 128704,
+      "player_name": "Emmanuel Emenike",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 767
+    },
+    {
+      "player_id": 3495,
+      "player_name": "Joe Gomez",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 765
+    },
+    {
+      "player_id": 4417,
+      "player_name": "Ola Toivonen",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 762
+    },
+    {
+      "player_id": 5617,
+      "player_name": "Sebastian Larsson",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 737
+    },
+    {
+      "player_id": 43695,
+      "player_name": "Brede Hangeland",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 704
+    },
+    {
+      "player_id": 3528,
+      "player_name": "Kieran Gibbs",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 703
+    },
+    {
+      "player_id": 9467,
+      "player_name": "Timothy Michael Krul",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 700
+    },
+    {
+      "player_id": 3326,
+      "player_name": "Chung-Yong Lee",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 674
+    },
+    {
+      "player_id": 8061,
+      "player_name": "Siem Stefan de Jong",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 671
+    },
+    {
+      "player_id": 13200,
+      "player_name": "Oluwaseyi Babajide Ojo",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 651
+    },
+    {
+      "player_id": 9648,
+      "player_name": "Paddy McNair",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 641
+    },
+    {
+      "player_id": 4040,
+      "player_name": "Peter Crouch",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 621
+    },
+    {
+      "player_id": 2956,
+      "player_name": "Bertrand Isidore Traoré",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 612
+    },
+    {
+      "player_id": 3649,
+      "player_name": "Karl Darlow",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 606
+    },
+    {
+      "player_id": 18672,
+      "player_name": "Mark Bunn",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 601
+    },
+    {
+      "player_id": 3713,
+      "player_name": "Calum Chambers",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 596
+    },
+    {
+      "player_id": 23742,
+      "player_name": "Vadis Odjidja-Ofoe",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 596
+    },
+    {
+      "player_id": 3391,
+      "player_name": "Rolando Aarons",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 567
+    },
+    {
+      "player_id": 3619,
+      "player_name": "Alex McCarthy",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 560
+    },
+    {
+      "player_id": 40366,
+      "player_name": "Wes Brown",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 549
+    },
+    {
+      "player_id": 40130,
+      "player_name": "Victor Chinedu Anichebe",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 543
+    },
+    {
+      "player_id": 4632,
+      "player_name": "Stephen Ireland",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 533
+    },
+    {
+      "player_id": 10457,
+      "player_name": "Patrick Bamford",
+      "teams": [
+        "Crystal Palace",
+        "Norwich City"
+      ],
+      "actions": 531
+    },
+    {
+      "player_id": 6652,
+      "player_name": "Jordi Amat Maas",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 530
+    },
+    {
+      "player_id": 5264,
+      "player_name": "Guillermo Varela Olivera",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 528
+    },
+    {
+      "player_id": 20067,
+      "player_name": "Darron Gibson",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 514
+    },
+    {
+      "player_id": 42947,
+      "player_name": "Leon Osman",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 497
+    },
+    {
+      "player_id": 4700,
+      "player_name": "Matthew Pennington",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 491
+    },
+    {
+      "player_id": 16932,
+      "player_name": "Youssouf Chafiq Mulumbu Ngangu",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 490
+    },
+    {
+      "player_id": 6623,
+      "player_name": "Loïc Rémy",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 486
+    },
+    {
+      "player_id": 3685,
+      "player_name": "Jay Rodriguez",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 481
+    },
+    {
+      "player_id": 13448,
+      "player_name": "Bradley Shaun Smith",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 468
+    },
+    {
+      "player_id": 20066,
+      "player_name": "Darren Randolph",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 456
+    },
+    {
+      "player_id": 4738,
+      "player_name": "Lee Tomlin",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 456
+    },
+    {
+      "player_id": 43627,
+      "player_name": "Jordi Gómez García-Penche",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 450
+    },
+    {
+      "player_id": 9551,
+      "player_name": "Callum McManaman",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 438
+    },
+    {
+      "player_id": 15996,
+      "player_name": "Éderzito António Macedo Lopes",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 438
+    },
+    {
+      "player_id": 7121,
+      "player_name": "Sandro Ranieri Guimarães Cordeiro",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 436
+    },
+    {
+      "player_id": 9629,
+      "player_name": "Stephen Kingsley",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 428
+    },
+    {
+      "player_id": 9641,
+      "player_name": "Fraizer Campbell",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 424
+    },
+    {
+      "player_id": 4217,
+      "player_name": "Danny Graham",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 409
+    },
+    {
+      "player_id": 3445,
+      "player_name": "Radamel Falcao García Zárate",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 397
+    },
+    {
+      "player_id": 20543,
+      "player_name": "Nikica Jelavić",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 395
+    },
+    {
+      "player_id": 3631,
+      "player_name": "Nathan Dyer",
+      "teams": [
+        "Leicester City",
+        "Swansea City"
+      ],
+      "actions": 393
+    },
+    {
+      "player_id": 7745,
+      "player_name": "Steven Berghuis",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 393
+    },
+    {
+      "player_id": 3465,
+      "player_name": "Timothy Evans Fosu-Mensah",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 393
+    },
+    {
+      "player_id": 4726,
+      "player_name": "Kyle Bartley",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 389
+    },
+    {
+      "player_id": 42899,
+      "player_name": "Gabriel Antoine Obertan",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 386
+    },
+    {
+      "player_id": 3312,
+      "player_name": "Demarai Gray",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 375
+    },
+    {
+      "player_id": 28247,
+      "player_name": "Libor Kozák",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 368
+    },
+    {
+      "player_id": 3586,
+      "player_name": "Samuel Mark Byram",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 367
+    },
+    {
+      "player_id": 4243,
+      "player_name": "Cameron Brannagan",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 365
+    },
+    {
+      "player_id": 50245,
+      "player_name": "Marouane Chamakh",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 362
+    },
+    {
+      "player_id": 11333,
+      "player_name": "Adama Traoré Diarra",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 361
+    },
+    {
+      "player_id": 41185,
+      "player_name": "Jakob Haugaard",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 361
+    },
+    {
+      "player_id": 4892,
+      "player_name": "Sergio Germán Romero",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 360
+    },
+    {
+      "player_id": 3654,
+      "player_name": "Daniel William John Ings",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 357
+    },
+    {
+      "player_id": 20230,
+      "player_name": "Gökhan İnler",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 357
+    },
+    {
+      "player_id": 3731,
+      "player_name": "Adrian Mariappa",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 354
+    },
+    {
+      "player_id": 22702,
+      "player_name": "Jonathan Leko",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 354
+    },
+    {
+      "player_id": 42703,
+      "player_name": "Mikel Arteta Amatriain",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 351
+    },
+    {
+      "player_id": 24888,
+      "player_name": "Adam Federici",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 347
+    },
+    {
+      "player_id": 75899,
+      "player_name": "Kevin Toner",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 344
+    },
+    {
+      "player_id": 13848,
+      "player_name": "Marc Wilson",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 330
+    },
+    {
+      "player_id": 42946,
+      "player_name": "Guangtai Jiang",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 329
+    },
+    {
+      "player_id": 43757,
+      "player_name": "Yoan Gouffran",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 326
+    },
+    {
+      "player_id": 3534,
+      "player_name": "Clinton Mua N''Jie",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 324
+    },
+    {
+      "player_id": 4276,
+      "player_name": "David Ospina Ramírez",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 301
+    },
+    {
+      "player_id": 3966,
+      "player_name": "Charlie Austin",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 299
+    },
+    {
+      "player_id": 3388,
+      "player_name": "Jack Wilshere",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 293
+    },
+    {
+      "player_id": 8520,
+      "player_name": "Nabil Bentaleb",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 290
+    },
+    {
+      "player_id": 4804,
+      "player_name": "Bradley Johnson",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 284
+    },
+    {
+      "player_id": 40125,
+      "player_name": "Steven Pienaar",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 282
+    },
+    {
+      "player_id": 22058,
+      "player_name": "Connor Steven Randall",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 267
+    },
+    {
+      "player_id": 4428,
+      "player_name": "Mathieu Debuchy",
+      "teams": [
+        "Arsenal"
+      ],
+      "actions": 259
+    },
+    {
+      "player_id": 7848,
+      "player_name": "Matt Miazga",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 246
+    },
+    {
+      "player_id": 5110,
+      "player_name": "Henri Saivet",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 245
+    },
+    {
+      "player_id": 20951,
+      "player_name": "Jordan Lyden",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 231
+    },
+    {
+      "player_id": 9958,
+      "player_name": "Steven Caulker",
+      "teams": [
+        "Liverpool",
+        "Southampton"
+      ],
+      "actions": 230
+    },
+    {
+      "player_id": 6330,
+      "player_name": "Adnan Januzaj",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 220
+    },
+    {
+      "player_id": 3659,
+      "player_name": "Wilfredo Daniel Caballero",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 220
+    },
+    {
+      "player_id": 6695,
+      "player_name": "Juan Miguel Jiménez López",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 217
+    },
+    {
+      "player_id": 5556,
+      "player_name": "Miguel Arturo Layún Prado",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 212
+    },
+    {
+      "player_id": 7884,
+      "player_name": "Marcin Ryszard Wasilewski",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 211
+    },
+    {
+      "player_id": 3709,
+      "player_name": "Daniel Amartey",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 209
+    },
+    {
+      "player_id": 3468,
+      "player_name": "Jordan Pickford",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 202
+    },
+    {
+      "player_id": 13573,
+      "player_name": "Yann Kermorgant",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 202
+    },
+    {
+      "player_id": 3442,
+      "player_name": "El-Hadji Baye Oumar Niasse",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 200
+    },
+    {
+      "player_id": 42901,
+      "player_name": "Osazemwinde Peter Odemwingie",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 198
+    },
+    {
+      "player_id": 6846,
+      "player_name": "Andreas Hoelgebaum Pereira",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 194
+    },
+    {
+      "player_id": 19847,
+      "player_name": "Alessandro Diamanti",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 181
+    },
+    {
+      "player_id": 16067,
+      "player_name": "Josh Onomah",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 177
+    },
+    {
+      "player_id": 20446,
+      "player_name": "Shay Given",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 177
+    },
+    {
+      "player_id": 9914,
+      "player_name": "Danny Ward",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 170
+    },
+    {
+      "player_id": 3652,
+      "player_name": "Tom Davies",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 166
+    },
+    {
+      "player_id": 4273,
+      "player_name": "Reece Oxford",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 163
+    },
+    {
+      "player_id": 3487,
+      "player_name": "Julián Speroni",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 157
+    },
+    {
+      "player_id": 16027,
+      "player_name": "Kevin Mbabu",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 157
+    },
+    {
+      "player_id": 5109,
+      "player_name": "Paulo Dino Gazzaniga",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 153
+    },
+    {
+      "player_id": 25351,
+      "player_name": "Alexandre Rodrigues da Silva",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 144
+    },
+    {
+      "player_id": 4097,
+      "player_name": "Matt Grimes",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 139
+    },
+    {
+      "player_id": 3165,
+      "player_name": "Emmanuel Rivière",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 138
+    },
+    {
+      "player_id": 45389,
+      "player_name": "Thomas Robson",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 137
+    },
+    {
+      "player_id": 3609,
+      "player_name": "Michel Vorm",
+      "teams": [
+        "Tottenham Hotspur"
+      ],
+      "actions": 128
+    },
+    {
+      "player_id": 22622,
+      "player_name": "Kieran O''Neill Dowell",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 127
+    },
+    {
+      "player_id": 3656,
+      "player_name": "Alex Pritchard",
+      "teams": [
+        "Tottenham Hotspur",
+        "West Bromwich Albion"
+      ],
+      "actions": 125
+    },
+    {
+      "player_id": 9985,
+      "player_name": "Ádám Bogdán",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 119
+    },
+    {
+      "player_id": 9630,
+      "player_name": "Andre Green",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 114
+    },
+    {
+      "player_id": 27949,
+      "player_name": "Juan Manuel Iturbe Arévalo",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 105
+    },
+    {
+      "player_id": 10772,
+      "player_name": "Donald Love",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 101
+    },
+    {
+      "player_id": 40453,
+      "player_name": "Segundo Víctor Ibarbo Guerrero",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 101
+    },
+    {
+      "player_id": 8485,
+      "player_name": "Pedro Chirivella Burgos",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 91
+    },
+    {
+      "player_id": 129559,
+      "player_name": "Rees Greenwood",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 87
+    },
+    {
+      "player_id": 7010,
+      "player_name": "Gastón Exequiel Ramírez Pereyra",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 76
+    },
+    {
+      "player_id": 43121,
+      "player_name": "Kelvin Davis",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 76
+    },
+    {
+      "player_id": 3440,
+      "player_name": "Tammy Bakumo-Abraham",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 75
+    },
+    {
+      "player_id": 9563,
+      "player_name": "Kristoffer Nordfeldt",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 74
+    },
+    {
+      "player_id": 43591,
+      "player_name": "Marvin Emnes",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 74
+    },
+    {
+      "player_id": 18404,
+      "player_name": "José Ángel Crespo Rincón",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 73
+    },
+    {
+      "player_id": 18947,
+      "player_name": "Sébastien Pocognoli",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 71
+    },
+    {
+      "player_id": 42702,
+      "player_name": "Modibo Maïga",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 70
+    },
+    {
+      "player_id": 4116,
+      "player_name": "Sullay Kaikai",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 70
+    },
+    {
+      "player_id": 3542,
+      "player_name": "Jonjoe Kenny",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 69
+    },
+    {
+      "player_id": 45014,
+      "player_name": "Tokelo Anthony Rantie",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 66
+    },
+    {
+      "player_id": 17276,
+      "player_name": "Seydou Doumbia",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 62
+    },
+    {
+      "player_id": 129558,
+      "player_name": "Tony Hibbert",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 58
+    },
+    {
+      "player_id": 8344,
+      "player_name": "Manuel García Alonso",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 57
+    },
+    {
+      "player_id": 10770,
+      "player_name": "Adam Matthews",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 55
+    },
+    {
+      "player_id": 5602,
+      "player_name": "Cristian Gamboa Luna",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 55
+    },
+    {
+      "player_id": 29382,
+      "player_name": "Shaun MacDonald",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 51
+    },
+    {
+      "player_id": 48634,
+      "player_name": "Charles N\"Zogbia",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 49
+    },
+    {
+      "player_id": 21540,
+      "player_name": "Kevin Nolan",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 49
+    },
+    {
+      "player_id": 5460,
+      "player_name": "Andrej Kramarić",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 47
+    },
+    {
+      "player_id": 4129,
+      "player_name": "Tyler Roberts",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 47
+    },
+    {
+      "player_id": 4826,
+      "player_name": "Yohan Benalouane",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 46
+    },
+    {
+      "player_id": 3058,
+      "player_name": "Javier Hernández Balcázar",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 44
+    },
+    {
+      "player_id": 9566,
+      "player_name": "Bersant Celina",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 42
+    },
+    {
+      "player_id": 8400,
+      "player_name": "Serge Gnabry",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 40
+    },
+    {
+      "player_id": 10458,
+      "player_name": "Fikayo Tomori",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 37
+    },
+    {
+      "player_id": 10484,
+      "player_name": "Callum Connolly",
+      "teams": [
+        "Everton"
+      ],
+      "actions": 36
+    },
+    {
+      "player_id": 4093,
+      "player_name": "Jay Fulton",
+      "teams": [
+        "Swansea City"
+      ],
+      "actions": 36
+    },
+    {
+      "player_id": 5689,
+      "player_name": "Juan Guillermo Cuadrado Bello",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 36
+    },
+    {
+      "player_id": 6296,
+      "player_name": "Joe Dodoo",
+      "teams": [
+        "Leicester City"
+      ],
+      "actions": 28
+    },
+    {
+      "player_id": 9070,
+      "player_name": "Hiram Boateng",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 27
+    },
+    {
+      "player_id": 6361,
+      "player_name": "James Wilson",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 27
+    },
+    {
+      "player_id": 3807,
+      "player_name": "Ryan Allsop",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 26
+    },
+    {
+      "player_id": 10771,
+      "player_name": "George Honeyman",
+      "teams": [
+        "Sunderland"
+      ],
+      "actions": 23
+    },
+    {
+      "player_id": 9519,
+      "player_name": "Kyle Lafferty",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 22
+    },
+    {
+      "player_id": 31904,
+      "player_name": "Giedrius Arlauskis",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 21
+    },
+    {
+      "player_id": 15542,
+      "player_name": "Jake-Liam Clarke-Salter",
+      "teams": [
+        "Chelsea"
+      ],
+      "actions": 21
+    },
+    {
+      "player_id": 41082,
+      "player_name": "Steve Sidwell",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 21
+    },
+    {
+      "player_id": 128703,
+      "player_name": "Dionatan do Nascimento Teixeira",
+      "teams": [
+        "Stoke City"
+      ],
+      "actions": 20
+    },
+    {
+      "player_id": 11936,
+      "player_name": "Harrison Reed",
+      "teams": [
+        "Southampton"
+      ],
+      "actions": 20
+    },
+    {
+      "player_id": 10932,
+      "player_name": "Jonathan Williams",
+      "teams": [
+        "Crystal Palace"
+      ],
+      "actions": 19
+    },
+    {
+      "player_id": 11295,
+      "player_name": "Patrick Roberts",
+      "teams": [
+        "Manchester City"
+      ],
+      "actions": 18
+    },
+    {
+      "player_id": 24743,
+      "player_name": "Gary Hooper",
+      "teams": [
+        "Norwich City"
+      ],
+      "actions": 17
+    },
+    {
+      "player_id": 3834,
+      "player_name": "Ivan Toney",
+      "teams": [
+        "Newcastle United"
+      ],
+      "actions": 16
+    },
+    {
+      "player_id": 20781,
+      "player_name": "Jordan Rossiter",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 16
+    },
+    {
+      "player_id": 3908,
+      "player_name": "Nick Powell",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 16
+    },
+    {
+      "player_id": 4762,
+      "player_name": "Sergi Canós Tenes",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 16
+    },
+    {
+      "player_id": 10326,
+      "player_name": "João Carlos Vilaça Teixeira",
+      "teams": [
+        "Liverpool"
+      ],
+      "actions": 12
+    },
+    {
+      "player_id": 22237,
+      "player_name": "Mamadou Obbi Oularé",
+      "teams": [
+        "Watford"
+      ],
+      "actions": 12
+    },
+    {
+      "player_id": 9636,
+      "player_name": "Rushian Hepburn-Murphy",
+      "teams": [
+        "Aston Villa"
+      ],
+      "actions": 8
+    },
+    {
+      "player_id": 3323,
+      "player_name": "Tyrone Mings",
+      "teams": [
+        "AFC Bournemouth"
+      ],
+      "actions": 8
+    },
+    {
+      "player_id": 3479,
+      "player_name": "Sam Field",
+      "teams": [
+        "West Bromwich Albion"
+      ],
+      "actions": 7
+    },
+    {
+      "player_id": 9635,
+      "player_name": "Will Keane",
+      "teams": [
+        "Manchester United"
+      ],
+      "actions": 4
+    },
+    {
+      "player_id": 4837,
+      "player_name": "Josh Cullen",
+      "teams": [
+        "West Ham United"
+      ],
+      "actions": 2
+    }
+  ],
+  "failed_matches": [],
+  "note": "Open event coverage is historical and intentionally separate from the current Understat model."
+}
