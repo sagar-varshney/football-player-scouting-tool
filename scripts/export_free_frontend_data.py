@@ -143,7 +143,7 @@ def main() -> None:
             "source_provider": "understat",
             "data_note": (
                 "Real free EPL player-season data from Understat, filtered to players with 450+ minutes. "
-                "Metrics cover attacking and creative style: xG, xA, shots, key passes, xGChain, and xGBuildup. "
+                "Metrics cover attacking and creative style: xG, xA, shots, key passes, move involvement, and buildup play. "
                 "Defensive actions, carries, pressures, and progressive passes are not available in this free source."
             ),
         },

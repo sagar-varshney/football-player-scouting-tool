@@ -63,8 +63,8 @@ const metricLabels: Record<Feature, string> = {
   xa_p90: "xA",
   shots_p90: "Shots",
   key_passes_p90: "Key Passes",
-  xg_chain_p90: "xGChain",
-  xg_buildup_p90: "xGBuildup",
+  xg_chain_p90: "Move Involvement",
+  xg_buildup_p90: "Buildup Play",
 };
 
 const compactLabels: Record<Feature, string> = {
@@ -74,8 +74,8 @@ const compactLabels: Record<Feature, string> = {
   xa_p90: "xA",
   shots_p90: "Shots",
   key_passes_p90: "KeyP",
-  xg_chain_p90: "Chain",
-  xg_buildup_p90: "Build",
+  xg_chain_p90: "Move Inv.",
+  xg_buildup_p90: "Buildup",
 };
 
 const radarMetrics: Feature[] = [
@@ -259,9 +259,16 @@ export default function Page() {
   const isShortlisted = shortlist.includes(playerKey(target));
 
   const visibleRadarMetrics = radarMetrics.filter((feature) => payload.metadata.features.includes(feature));
-  const tableMetrics = ["goals_p90", "xg_p90", "assists_p90", "xa_p90", "shots_p90", "key_passes_p90"].filter((feature) =>
-    payload.metadata.features.includes(feature),
-  );
+  const tableMetrics = [
+    "goals_p90",
+    "xg_p90",
+    "assists_p90",
+    "xa_p90",
+    "shots_p90",
+    "key_passes_p90",
+    "xg_chain_p90",
+    "xg_buildup_p90",
+  ].filter((feature) => payload.metadata.features.includes(feature));
 
   const radarData = visibleRadarMetrics.map((feature) => ({
     metric: compactLabel(feature),
@@ -391,9 +398,9 @@ export default function Page() {
         <section className="kpi-grid">
           <Kpi label="Goals /90" value={numberFormat(target.goals_p90)} detail={`xG ${numberFormat(target.xg_p90)}`} />
           <Kpi label="Assists /90" value={numberFormat(target.assists_p90)} detail={`xA ${numberFormat(target.xa_p90)}`} />
-          <Kpi label="Creation" value={numberFormat(target.key_passes_p90)} detail="key passes /90" />
-          <Kpi label="Shot Volume" value={numberFormat(target.shots_p90)} detail="shots /90" />
-          <Kpi label="Buildup" value={numberFormat(target.xg_buildup_p90)} detail="xGBuildup /90" />
+          <Kpi label="Chance Creation" value={numberFormat(target.key_passes_p90)} detail="key passes /90" />
+          <Kpi label="Move Involvement" value={numberFormat(target.xg_chain_p90)} detail="chance-sequence xG /90" />
+          <Kpi label="Buildup Play" value={numberFormat(target.xg_buildup_p90)} detail="pre-assist buildup xG /90" />
         </section>
 
         <section className="analysis-card">
@@ -406,6 +413,16 @@ export default function Page() {
             The closest match is {matches[0]?.player_name} at {matches[0]?.similarityPct.toFixed(1)}% similarity. Defensive,
             carrying, pressure, and progressive-pass metrics are intentionally excluded until we add a free source for them.
           </p>
+          <div className="metric-explainer">
+            <div>
+              <strong>Move Involvement</strong>
+              <span>How often the player is part of possessions that end in a shot or chance.</span>
+            </div>
+            <div>
+              <strong>Buildup Play</strong>
+              <span>Earlier possession value before the final pass or shot, useful for connectors and progressors.</span>
+            </div>
+          </div>
         </section>
 
         <section>
