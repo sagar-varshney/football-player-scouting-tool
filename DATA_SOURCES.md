@@ -12,6 +12,19 @@ The production web application uses real, cached Understat player-season and sho
 
 The API-Football integration is implemented as a local batch pipeline with an 80-request daily safety cap, persistent caching, and field-coverage reporting. It remains an enrichment experiment until actual EPL coverage and redistribution terms are verified.
 
+### API-Football free-plan validation
+
+The authenticated EPL test found:
+
+- Season `2025` is not available on the free plan; the API reported access from `2022` through `2024`.
+- League and team player queries are limited to pages 1–3.
+- The team-based 2024/25 collection produced 1,132 normalized rows and 388 rows with at least 450 minutes.
+- Seven additional club pages were inaccessible, so the collection is explicitly marked partial.
+- Among eligible rows, non-null coverage was 95.1% for tackles, 90.2% for interceptions, 99.5% for duels, 99.5% for duel wins, and 89.9% for successful dribbles.
+- The provider's season-level `passes.accuracy` field did not behave consistently enough to label as a percentage and is excluded from modelling.
+
+Conclusion: the free API is useful for testing defensive features and enriching matched historical players, but it should not replace the current dataset or power production similarity until the missing pages and current-season restriction are resolved.
+
 ## Scout-Grade Reality Check
 
 If the goal is accurate player scouting, generated data and fantasy data are not enough. The dataset needs to represent actual football actions by player, club, season, and ideally match context. That means minutes, positions played, team, competition, shot quality, passing profile, carrying, defensive events, pressure events, and role context.

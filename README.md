@@ -32,11 +32,11 @@ Goalkeepers are excluded from the current similarity model. The primary feature 
 
 ### Optional API-Football enrichment
 
-The repository includes a quota-safe API-Football pipeline for evaluating defensive and availability data before adding it to the model. It caches every page, preserves missing values, writes a coverage report, and stops at 80 requests per UTC day by default.
+The repository includes a quota-safe API-Football pipeline for evaluating defensive and availability data before adding it to the model. It caches every page, preserves missing values, writes a coverage report, stops at 80 requests per UTC day, and stays below nine calls per rolling minute by default.
 
 ```bash
 export API_FOOTBALL_KEY="your_key"
-python3 scripts/build_api_football_enrichment.py --seasons 2025
+python3 scripts/build_api_football_enrichment.py --seasons 2024
 ```
 
 Alternatively, copy `.env.example` to `.env` and place the key there; `.env` is ignored by Git.
@@ -44,10 +44,16 @@ Alternatively, copy `.env.example` to `.env` and place the key there; `.env` is 
 For a one-page coverage test that uses at most one request:
 
 ```bash
-python3 scripts/build_api_football_enrichment.py --seasons 2025 --max-pages 1
+python3 scripts/build_api_football_enrichment.py --seasons 2024 --strategy league --max-pages 1
 ```
 
 Raw and normalized API-Football data stay out of Git. The key is read only from the environment and is never written to generated files. Defensive fields are not activated in similarity until the quality report shows at least 80% coverage for the relevant season and position.
+
+The free plan currently exposes seasons 2022 through 2024 and limits every player query to three pages. The default team-based strategy collects up to three pages per EPL club and records any omitted pages in the quality report. A partial collection is never eligible for automatic model activation.
+
+The provider's season-level `passes.accuracy` field is retained under the neutral name `passes_accuracy_value` and excluded from similarity until its exact semantics are confirmed.
+
+The verified 2024/25 pull produced 1,132 normalized team-player rows and 388 rows above the 450-minute threshold. Defensive coverage was strong among eligible rows, but seven club pages were inaccessible on the free plan. For that reason, the data remains a local enrichment candidate rather than a production model input.
 
 ## How the analysis works
 

@@ -12,6 +12,7 @@ The production web application now uses real, cached football data. The legacy s
 - **Identity and availability supplement:** 658 current FPL player rows are available in the normalized data layer but are not used as similarity features.
 - **Model output:** standardized per-90 features, five KMeans clusters, cosine-similarity matches, global percentile ranks, and position-aware role labels are exported to the frontend.
 - **API-Football integration:** a cached, environment-keyed enrichment pipeline is ready for quota-safe coverage testing; its fields are not yet active in the production similarity model.
+- **API-Football free-plan result:** the 2024/25 team-based pull returned 1,132 normalized rows, including 388 above 450 minutes, but seven club pages were blocked and 2025/26 was unavailable.
 
 ### Known boundaries
 

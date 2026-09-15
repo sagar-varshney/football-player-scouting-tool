@@ -59,7 +59,7 @@ class ApiFootballEnrichmentTests(unittest.TestCase):
         row = MODULE.normalized_rows(records, season=2025, league_id=39)[0]
 
         self.assertEqual(row["season"], "2025-2026")
-        self.assertEqual(row["pass_accuracy_pct"], 82.0)
+        self.assertEqual(row["passes_accuracy_value"], 82.0)
         self.assertEqual(row["tackles_interceptions"], 50.0)
         self.assertEqual(row["tackles_interceptions_p90"], 5.0)
         self.assertEqual(row["duels_won_p90"], 6.1)
@@ -105,9 +105,48 @@ class ApiFootballEnrichmentTests(unittest.TestCase):
                     quota=quota,
                     cache_hours=168,
                     force=False,
+                    team_id=None,
                 )
 
                 self.assertTrue(was_cached)
+                self.assertEqual(quota.used, 0)
+            finally:
+                MODULE.RAW_DIR = old_raw_dir
+
+    def test_page_cap_is_reported_as_omitted_coverage(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            old_raw_dir = MODULE.RAW_DIR
+            try:
+                MODULE.RAW_DIR = pathlib.Path(directory) / "raw"
+                for page in range(1, 4):
+                    cache_path = MODULE.page_cache_path(2024, page, team_id=33)
+                    cache_path.parent.mkdir(parents=True, exist_ok=True)
+                    cache_path.write_text(
+                        json.dumps(
+                            {
+                                "paging": {"current": page, "total": 4},
+                                "response": [{"player": {"id": page}, "statistics": []}],
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                quota = MODULE.DailyQuota(pathlib.Path(directory) / "ledger.json", budget=5)
+
+                records, pages, cached_pages, omitted_pages = MODULE.fetch_player_scope(
+                    season=2024,
+                    league_id=39,
+                    api_key=None,
+                    quota=quota,
+                    cache_hours=168,
+                    force=False,
+                    max_pages=3,
+                    team_id=33,
+                )
+
+                self.assertEqual(len(records), 3)
+                self.assertEqual(pages, 3)
+                self.assertEqual(cached_pages, 3)
+                self.assertEqual(omitted_pages, 1)
                 self.assertEqual(quota.used, 0)
             finally:
                 MODULE.RAW_DIR = old_raw_dir
