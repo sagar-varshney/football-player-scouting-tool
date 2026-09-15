@@ -6,8 +6,8 @@ Primary source:
 Supplement:
 - Fantasy Premier League current-player metadata and availability.
 
-Outputs are written to `data/free_data/` and are intentionally separate from
-the app's current `data/players.csv` until we manually approve the source.
+Outputs are written to `data/free_data/`. The normalized Understat dataset is
+then exported to the production web application by `export_free_frontend_data.py`.
 """
 
 from __future__ import annotations

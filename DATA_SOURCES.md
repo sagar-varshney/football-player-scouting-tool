@@ -1,8 +1,14 @@
 # Data Sources For Player Scouting
 
-This project should move away from generated metrics. The scouting engine needs player-season or player-match rows with minutes, team, season, position, and repeatable performance fields.
+The production web application uses real, cached Understat player-season and shot data. StatsBomb Open Data powers a separate historical event lab, while FPL data is retained as a current-player metadata supplement. Generated metrics remain only in the legacy development path.
 
-## Recommended Path
+## Current implementation
+
+- **Primary scouting profiles:** Understat EPL player seasons from 2021/22 through 2025/26, filtered to 450+ minutes.
+- **Shot maps:** cached Understat attempt locations for each available player.
+- **Event lab:** StatsBomb Open Data for the complete 2015/16 EPL season available in its repository.
+- **Supplement:** normalized current FPL player and availability data.
+- **Next upgrade:** a licensed provider with consistent current event, defensive, carrying, contract, and availability coverage.
 
 ## Scout-Grade Reality Check
 
@@ -168,7 +174,7 @@ Gaps:
 
 ## Decision
 
-For the next real data implementation, start with **API-FOOTBALL** if the goal is a usable Premier League player scouting prototype quickly. Use **Sportmonks** if we decide to pay for a more production-oriented provider. Use **FPL API** as the free fallback to replace obviously fake output metrics while we evaluate paid APIs.
+Keep **Understat** as the free primary source and **StatsBomb Open Data** as the event-feature sandbox. Evaluate **API-FOOTBALL** or **Sportmonks** for broader structured coverage before taking on a professional scouting feed. Move to **Wyscout, Hudl StatsBomb, Opta, or another licensed provider** when current, complete event data becomes a product requirement.
 
 ## Local Test Results
 

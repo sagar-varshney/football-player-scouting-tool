@@ -1,58 +1,65 @@
 # Data Roadmap
 
-The current dataset is a product scaffold: real Premier League player names, season-aware club rows where we have local transfer rules, and generated per-90 metrics. It is useful for building the workflow and ML plumbing, but it should not be treated as real scouting evidence yet.
+## Current state
 
-## Current Fixes
+The production web application now uses real, cached football data. The legacy synthetic dataset is retained only for the Streamlit reference interface and development experiments; it does not power the Next.js scouting workspace.
 
-- Removed the live/current season from the working sample.
-- Limited the generated file to completed seasons: `2021-2022` through `2025-2026`.
-- Added Premier League club lists by season so promoted/relegated clubs are not assigned to impossible seasons.
-- Added a first pass of player club-history overrides for obvious transfers.
-- Replaced generic KMeans archetype labels with position-aware, row-level role labels.
+### Available today
 
-## Best Data Upgrade Paths
+- **Understat player seasons:** 1,854 Premier League player-season rows from 2021/22 through 2025/26 after a 450-minute filter.
+- **Understat shot locations:** 48,492 attempts across 819 cached player files.
+- **StatsBomb Open Data:** recorded on-ball actions for 548 players across all 380 matches in the 2015/16 Premier League season.
+- **Identity and availability supplement:** 658 current FPL player rows are available in the normalized data layer but are not used as similarity features.
+- **Model output:** standardized per-90 features, five KMeans clusters, cosine-similarity matches, global percentile ranks, and position-aware role labels are exported to the frontend.
 
-1. **football-data.org**
+### Known boundaries
 
-   Use for identity, squads, fixtures, teams, competitions, and match metadata. Keep it as the stable reference layer for player/team IDs once we have an API key.
+- The similarity model is strongest for attacking and creative profiles.
+- The free primary source does not provide complete defensive, pressure, carry, or progressive-pass metrics.
+- Current Understat profiles and historical StatsBomb events cannot be joined into one seasonally consistent event model.
+- Age, contract, fee, injury, physical, and off-ball data are not yet available with sufficient consistency.
+- Understat access is unofficial and should remain cached and rate-conscious.
 
-   Limitation: it does not cover the full scouting feature set we need, such as xG, xA, key passes, carries, pressures, progressive actions, and detailed defensive events.
+## Priorities
 
-2. **StatsBomb Open Data**
+### 1. Strengthen the model
 
-   Use for event-data prototyping and validating the model design. It is strong for learning how to build possession, pressure, shot, pass, and carry-derived features.
+- Add position-specific feature weights and user-adjustable recruitment priorities.
+- Evaluate similarity stability across seasons and minimum-minute thresholds.
+- Add explanations for the strongest matches and largest profile differences.
+- Track cluster quality with silhouette scores and monitor cluster drift after data refreshes.
+- Separate broad positions into more useful recruitment roles when the source supports them.
 
-   Limitation: public coverage is not a complete modern Premier League season feed.
+### 2. Expand recruitment context
 
-3. **API-FOOTBALL / API-Sports**
+- Add age and availability filters from a stable identity layer.
+- Add contract, fee, wage, and transfer-history data from a licensed source.
+- Add competition strength and team-style context before comparing across leagues.
+- Add low-sample and missing-data flags directly to player cards.
 
-   Candidate for broader live/stat coverage. Check player statistics, fixtures, lineups, events, league-season availability, and rate limits before committing.
+### 3. Improve event coverage
 
-4. **Sportmonks**
+- Use StatsBomb Open Data to validate feature engineering for passes, carries, pressures, and defensive actions.
+- Add a licensed current-season provider when full Premier League event coverage is affordable.
+- Keep event-derived features separated by competition and season until coverage is comparable.
 
-   Candidate for paid production data. Check whether the plan includes per-player season stats, expected goals, lineups, injuries, minutes, and fixture-level breakdowns.
+### 4. Improve delivery
 
-5. **FBref-style scouting data**
+- Add automated source validation and build checks.
+- Export shortlists and generate shareable player reports.
+- Record dataset and model versions in every generated payload.
+- Schedule controlled refreshes once source stability and terms are confirmed.
 
-   Good target schema for inspiration: standard, shooting, passing, passing types, goal/shot creation, possession, and defensive tables. For production, prefer a licensed or API-backed feed rather than brittle scraping.
-
-## Model Improvements
-
-- Add `minutes_played` and exclude low-minute outliers from similarity.
-- Store rows as `player_id + season + team_id + competition_id`, not just player name.
-- Add position-specific feature weights.
-- Split broad positions into scout roles: striker, wide forward, attacking midfielder, defensive midfielder, fullback, centre back.
-- Add age and contract filters separately from playing-style similarity.
-- Add explanations based on closest matching features and biggest differences.
-- Add data-quality flags: generated metric, API metric, missing metric, low sample, transferred mid-season.
-
-## Near-Term Target Schema
+## Target production schema
 
 ```text
 player_id
+provider_player_id
 player_name
 team_id
+provider_team_id
 club
+competition_id
 competition
 season
 position
@@ -65,13 +72,17 @@ assists_p90
 xa_p90
 shots_p90
 key_passes_p90
+passes_p90
+pass_accuracy_pct
 progressive_passes_p90
 progressive_carries_p90
-dribbles_completed_p90
+successful_take_ons_p90
 pressures_p90
 tackles_interceptions_p90
 clearances_p90
-pass_accuracy_pct
-source
+source_provider
 source_confidence
+dataset_version
 ```
+
+The next major data upgrade should prioritize consistency, licensing, and season coverage over simply adding more columns.

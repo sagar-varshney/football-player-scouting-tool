@@ -1,77 +1,62 @@
-# Player Scouting Tool
+# Football Player Scouting Tool
 
-Premier League scouting dashboard with a Python ML pipeline and a Next.js product UI.
+[![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111827)](https://react.dev/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Data](https://img.shields.io/badge/data-free%20football%20sources-b8ff3d)](#data-coverage-and-limitations)
 
-## Important Data Note
+An interactive Premier League recruitment workspace for discovering comparable players, understanding playing profiles, and exploring where players shoot and operate on the pitch.
 
-The production UI uses real, free football data with explicit boundaries:
+The project combines a Python data and machine-learning pipeline with a responsive Next.js dashboard. It is built entirely from free data and keeps source limitations visible instead of presenting estimates as recorded events.
 
-- Understat EPL player-seasons (`2021-2022` through `2025-2026`) power the current scouting model, percentiles, similarity search, and real shot-location maps.
-- StatsBomb Open Data powers a separate historical EPL `2015/2016` Event Lab with recorded on-ball action coordinates.
-- Shot locations are labelled as attempts, not touches. StatsBomb events are labelled as recorded actions, not touches.
-- Defensive actions, pressures, progressive passes, and carries are never inferred for the Understat model when the source does not provide them.
+## What you can do
 
-The legacy synthetic generator remains in the repository for development, but it does not power the production Next.js payload.
+- Find the closest stylistic matches for a selected player and season.
+- Compare percentile profiles with an overlaid radar chart.
+- Scan player strengths across an entire comparison group with a metric heatmap.
+- Explore real Understat shot-density maps and individual shot locations.
+- Inspect recorded on-ball activity from StatsBomb Open Data.
+- Compare players on any two available performance measures.
+- Save up to 12 players to a browser-based shortlist.
+- Filter the workspace by position, season, target player, and result count.
 
-## Stack
+## Current coverage
 
-- Next.js / React / Recharts
-- Pandas
-- Scikit-Learn
-- NumPy
-- Streamlit (legacy prototype)
+| Dataset | Coverage in this repository | Used for |
+| --- | --- | --- |
+| Understat | 1,854 EPL player-season profiles across 2021/22–2025/26, filtered to 450+ minutes | Similarity, percentiles, radar charts, role labels, and season profiles |
+| Understat shots | 48,492 attempts across 819 cached player files | Shot density, shot locations, goals, xG, and shot selection |
+| StatsBomb Open Data | 380 EPL matches and 548 players from 2015/16 | Recorded-action heatmaps and action-type summaries |
 
-## Structure
+Goalkeepers are excluded from the current similarity model. The primary feature set is attacking and creative because that is what the free Understat source supports consistently.
 
-```text
-Player Scouting Tool/
-├── app.py                 # Streamlit prototype/reference
-├── data/
-│   ├── generator.py
-│   └── players.csv
-├── frontend/              # Next.js production UI
-│   ├── app/
-│   ├── public/
-│   │   ├── scouting-data.json
-│   │   ├── shot-data/       # Lazy-loaded Understat shot files
-│   │   └── event-lab/       # Lazy-loaded StatsBomb action files
-│   └── package.json
-├── scripts/
-│   ├── build_free_data.py
-│   ├── export_free_frontend_data.py
-│   ├── build_understat_shot_data.py
-│   └── build_statsbomb_event_lab.py
-├── src/
-│   ├── preprocessing.py
-│   ├── scouting_engine.py
-│   └── evaluate.py
-├── requirements.txt
-└── README.md
+## How the analysis works
+
+```mermaid
+flowchart LR
+    A[Understat player seasons] --> B[Cleaning and 450-minute filter]
+    B --> C[Per-90 features]
+    C --> D[StandardScaler]
+    D --> E[Cosine similarity]
+    D --> F[KMeans clusters]
+    C --> G[Position-aware percentiles]
+    G --> H[Readable role archetypes]
+    E --> I[Next.js scouting workspace]
+    F --> I
+    H --> I
+    J[Understat shots] --> K[Shot maps]
+    L[StatsBomb Open Data] --> M[Action maps]
+    K --> I
+    M --> I
 ```
 
-## Build the Free Production Data
+The production export uses eight per-90 features: goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup. Features are standardized before a five-cluster KMeans model is fitted. Similarity is calculated with cosine similarity in standardized feature space. Human-readable archetypes are assigned from position-aware percentile rules, while radar and heatmap values use percentile ranks for easier interpretation.
 
-```bash
-python scripts/build_free_data.py
-python scripts/export_free_frontend_data.py
-python scripts/build_understat_shot_data.py
-python scripts/build_statsbomb_event_lab.py
-```
+The browser consumes precomputed JSON, so exploring players does not require a live Python server or external API calls.
 
-The location scripts cache per-player JSON in `frontend/public`, so the browser only downloads the selected player. Understat is a community data source rather than a guaranteed public API; keep the generated cache for reliable local use. StatsBomb data comes from the official [open-data repository](https://github.com/statsbomb/open-data).
+## Run locally
 
-## Run Dashboard
-
-Streamlit prototype:
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-Then open `http://localhost:8501`.
-
-Next.js product UI:
+### Web application
 
 ```bash
 cd frontend
@@ -79,26 +64,90 @@ pnpm install
 pnpm dev
 ```
 
-Then open `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Features
+Create a production build with:
 
-- Main-page workflow controls for position, season, target player, and top-N matches.
-- Premium responsive scouting workspace with season, position, and target controls.
-- Overview cards for goals, xG, assists, xA, chance creation, and sequence involvement.
-- Cosine similarity search over `StandardScaler`-scaled per-90 metrics.
-- KMeans clustering for hidden similarity grouping plus position-aware row-level archetype labels.
-- Real Understat shot-density maps for every cached player-season with attempts, plus xG-sized shot markers.
-- A separate StatsBomb Open Event Lab covering 548 players and 380 EPL matches from `2015/2016`.
-- Magenta/lime radar chart comparing percentile profiles.
-- Metric percentile profile heatmaps for the target and closest matches.
-- Scout-friendly 2-metric comparison map.
-- Shortlist utility in the browser.
+```bash
+cd frontend
+pnpm build
+pnpm start
+```
 
-## Next Steps
+### Python prototype
 
-- Add a licensed current-season event provider when true current touch, carry, pressure, and progressive-pass maps become affordable.
-- Add competition/season switching to the StatsBomb Event Lab as more open coverage is released.
-- Add role weights by position and recruitment constraints such as age, contract, and fee.
-- Add shortlist export and player report generation.
-- Deploy the Next.js UI on Vercel using precomputed Python JSON outputs.
+The original Streamlit interface remains available as a reference implementation:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Open [http://localhost:8501](http://localhost:8501).
+
+## Refresh the data
+
+The generated frontend assets are committed, so refreshing data is optional for normal local use.
+
+```bash
+python3 scripts/build_free_data.py
+python3 scripts/export_free_frontend_data.py
+python3 scripts/build_understat_shot_data.py
+python3 scripts/build_statsbomb_event_lab.py
+```
+
+You can also run the frontend shortcuts:
+
+```bash
+cd frontend
+pnpm export-data
+pnpm refresh-shot-data
+pnpm refresh-event-lab
+```
+
+Understat is accessed through an unofficial community endpoint, so the repository keeps a local cache and the refresh scripts should be run sparingly. StatsBomb event data comes from its official [open-data repository](https://github.com/statsbomb/open-data).
+
+## Project structure
+
+```text
+football-player-scouting-tool/
+├── frontend/                       # Next.js application
+│   ├── app/                        # Dashboard UI and styling
+│   └── public/
+│       ├── scouting-data.json      # Precomputed profiles and model output
+│       ├── shot-data/              # Lazy-loaded Understat shot files
+│       └── event-lab/              # Lazy-loaded StatsBomb action files
+├── scripts/                        # Data ingestion and export pipelines
+├── src/                            # Reusable preprocessing and ML utilities
+├── data/
+│   ├── free_data/                  # Normalized free-source data and quality report
+│   └── source_tests/               # Provider checks and sample responses
+├── app.py                          # Legacy Streamlit reference interface
+├── DATA_SOURCES.md                 # Provider research and trade-offs
+├── DATA_ROADMAP.md                 # Current data status and planned upgrades
+└── requirements.txt
+```
+
+## Data coverage and limitations
+
+- Understat shot locations are attempts, not player touches.
+- StatsBomb locations are recorded actions and are intentionally kept separate from current Understat player profiles because the available EPL season is 2015/16.
+- The free primary dataset does not contain defensive actions, pressures, carries, progressive passes, contracts, fees, or injury history.
+- Similarity indicates statistical resemblance within the selected feature space; it is not a prediction of transfer success or tactical fit.
+- Role labels are interpretable percentile-based heuristics, not ground-truth positions or model predictions.
+
+See [DATA_SOURCES.md](DATA_SOURCES.md) for provider research and [data/free_data/QUALITY_REPORT.md](data/free_data/QUALITY_REPORT.md) for the generated quality summary.
+
+## Roadmap
+
+- Add position-specific feature weighting and configurable recruitment priorities.
+- Add age, availability, contract, and estimated-fee filters when reliable data is available.
+- Expand current-season event coverage through a licensed provider.
+- Add shortlist export and shareable player reports.
+- Add automated data validation and model-quality tests.
+
+## Responsible use
+
+This is an analytical prototype for exploration and learning. Recruitment decisions should combine data with video, live scouting, medical information, personality assessment, and tactical context.

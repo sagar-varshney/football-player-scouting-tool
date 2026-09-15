@@ -20,7 +20,7 @@ from collections import defaultdict
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUTPUT_DIR = ROOT / "frontend" / "public" / "event-lab"
 RAW_BASE = "https://raw.githubusercontent.com/statsbomb/open-data/master/data"
-USER_AGENT = "PlayerScoutingTool/0.2 (+StatsBomb Open Data)"
+USER_AGENT = "FootballPlayerScoutingTool/1.0 (+StatsBomb Open Data)"
 COMPETITION_ID = 2
 SEASON_ID = 27
 SEASON_NAME = "2015/2016"

@@ -1,4 +1,4 @@
-"""Streamlit dashboard for the Premier League Player Scouting Tool."""
+"""Streamlit dashboard for the Football Player Scouting Tool."""
 
 from __future__ import annotations
 
@@ -79,7 +79,7 @@ TABLE_RENAME = {
 
 
 st.set_page_config(
-    page_title="Player Scouting Tool",
+    page_title="Football Player Scouting Tool",
     page_icon="ST",
     layout="wide",
     initial_sidebar_state="expanded",

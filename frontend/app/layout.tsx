@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Player Scouting Tool",
-  description: "Premier League player similarity and scouting intelligence dashboard.",
+  title: "Football Player Scouting Tool",
+  description: "Explore Premier League player similarity, percentile profiles, shot maps, and recorded-action heatmaps.",
 };
 
 export default function RootLayout({
