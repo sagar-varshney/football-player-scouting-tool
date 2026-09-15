@@ -24,7 +24,7 @@ from typing import Any
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "data" / "source_tests"
 
-USER_AGENT = "PlayerScoutingTool/0.1 (+local data-source evaluation)"
+USER_AGENT = "FootballPlayerScoutingTool/1.0 (+local data-source evaluation)"
 
 
 @dataclass

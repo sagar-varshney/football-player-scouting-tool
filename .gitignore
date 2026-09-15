@@ -5,6 +5,7 @@ __pycache__/
 *.pyc
 .DS_Store
 data/player_stats.csv
+data/api_football/
 
 # Node / Next.js
 frontend/node_modules/

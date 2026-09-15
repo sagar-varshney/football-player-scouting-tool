@@ -30,6 +30,25 @@ The project combines a Python data and machine-learning pipeline with a responsi
 
 Goalkeepers are excluded from the current similarity model. The primary feature set is attacking and creative because that is what the free Understat source supports consistently.
 
+### Optional API-Football enrichment
+
+The repository includes a quota-safe API-Football pipeline for evaluating defensive and availability data before adding it to the model. It caches every page, preserves missing values, writes a coverage report, and stops at 80 requests per UTC day by default.
+
+```bash
+export API_FOOTBALL_KEY="your_key"
+python3 scripts/build_api_football_enrichment.py --seasons 2025
+```
+
+Alternatively, copy `.env.example` to `.env` and place the key there; `.env` is ignored by Git.
+
+For a one-page coverage test that uses at most one request:
+
+```bash
+python3 scripts/build_api_football_enrichment.py --seasons 2025 --max-pages 1
+```
+
+Raw and normalized API-Football data stay out of Git. The key is read only from the environment and is never written to generated files. Defensive fields are not activated in similarity until the quality report shows at least 80% coverage for the relevant season and position.
+
 ## How the analysis works
 
 ```mermaid
@@ -103,6 +122,7 @@ You can also run the frontend shortcuts:
 ```bash
 cd frontend
 pnpm export-data
+pnpm refresh-api-football
 pnpm refresh-shot-data
 pnpm refresh-event-lab
 ```
@@ -135,6 +155,7 @@ football-player-scouting-tool/
 - Understat shot locations are attempts, not player touches.
 - StatsBomb locations are recorded actions and are intentionally kept separate from current Understat player profiles because the available EPL season is 2015/16.
 - The free primary dataset does not contain defensive actions, pressures, carries, progressive passes, contracts, fees, or injury history.
+- API-Football enrichment remains local and experimental until field coverage and publishing rights are validated.
 - Similarity indicates statistical resemblance within the selected feature space; it is not a prediction of transfer success or tactical fit.
 - Role labels are interpretable percentile-based heuristics, not ground-truth positions or model predictions.
 

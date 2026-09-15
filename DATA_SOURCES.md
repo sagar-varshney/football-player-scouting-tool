@@ -10,6 +10,8 @@ The production web application uses real, cached Understat player-season and sho
 - **Supplement:** normalized current FPL player and availability data.
 - **Next upgrade:** a licensed provider with consistent current event, defensive, carrying, contract, and availability coverage.
 
+The API-Football integration is implemented as a local batch pipeline with an 80-request daily safety cap, persistent caching, and field-coverage reporting. It remains an enrichment experiment until actual EPL coverage and redistribution terms are verified.
+
 ## Scout-Grade Reality Check
 
 If the goal is accurate player scouting, generated data and fantasy data are not enough. The dataset needs to represent actual football actions by player, club, season, and ideally match context. That means minutes, positions played, team, competition, shot quality, passing profile, carrying, defensive events, pressure events, and role context.
