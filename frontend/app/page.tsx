@@ -216,6 +216,8 @@ export default function Page() {
   const [eventManifest, setEventManifest] = useState<EventLabManifest | null>(null);
   const [eventPlayerId, setEventPlayerId] = useState(0);
   const [eventPlayer, setEventPlayer] = useState<EventLabPayload | null>(null);
+  const [urlReady, setUrlReady] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
 
   useEffect(() => {
     fetch("/scouting-data.json")
@@ -226,6 +228,18 @@ export default function Page() {
       .then((data: Payload) => setPayload(data))
       .catch(() => setLoadError("We couldn’t load the player profiles. Please refresh and try again."));
   }, []);
+
+  useEffect(() => {
+    if (!payload || urlReady) return;
+    const requestedKey = new URLSearchParams(window.location.search).get("player");
+    const requestedPlayer = requestedKey ? payload.players.find((player) => playerKey(player) === requestedKey) : null;
+    if (requestedPlayer) {
+      setPosition(requestedPlayer.position);
+      setSeason(requestedPlayer.season ?? "Latest");
+      setTargetKey(playerKey(requestedPlayer));
+    }
+    setUrlReady(true);
+  }, [payload, urlReady]);
 
   useEffect(() => {
     const saved = window.localStorage.getItem("player-scouting-shortlist");
@@ -263,6 +277,14 @@ export default function Page() {
   useEffect(() => {
     if (target && playerKey(target) !== targetKey) setTargetKey(playerKey(target));
   }, [target, targetKey]);
+
+  useEffect(() => {
+    if (!target || !urlReady) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set("player", playerKey(target));
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+    setShareCopied(false);
+  }, [target, urlReady]);
 
   useEffect(() => {
     const providerId = Number(target?.provider_player_id);
@@ -379,6 +401,19 @@ export default function Page() {
     window.localStorage.setItem("player-scouting-shortlist", JSON.stringify(next));
   }
 
+  async function shareProfile() {
+    if (!target) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set("player", playerKey(target));
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      setShareCopied(true);
+    } catch {
+      window.prompt("Copy this player profile link", url.toString());
+    }
+  }
+
   const shortlistPlayers = shortlist.map((key) => payload.players.find((player) => playerKey(player) === key)).filter(Boolean) as Player[];
 
   return (
@@ -422,6 +457,7 @@ export default function Page() {
           <div className="hero-actions">
             <button className={`shortlist-action ${isShortlisted ? "saved" : ""}`} onClick={() => toggleShortlist(target)}><span>{isShortlisted ? "✓" : "+"}</span>{isShortlisted ? "Shortlisted" : "Add to shortlist"}</button>
             <a href="#compare" className="compare-action">Compare players <span>↘</span></a>
+            <button className="share-action" onClick={shareProfile}>{shareCopied ? "Link copied ✓" : "Share profile"}<span>↗</span></button>
           </div>
         </section>
 
@@ -683,6 +719,7 @@ function surfaceColor(value: number) {
 }
 
 function EventLab({ manifest, player, selectedId, onSelect }: { manifest: EventLabManifest | null; player: EventLabPayload | null; selectedId: number; onSelect: (id: number) => void }) {
+  const [query, setQuery] = useState("");
   const actions = player?.actions ?? [];
   const density = useMemo(() => buildDensitySurface(actions.map((action) => ({ x: action[0], y: action[1] }))), [actions]);
   const matches = new Set(actions.map((action) => action[3])).size;
@@ -690,12 +727,27 @@ function EventLab({ manifest, player, selectedId, onSelect }: { manifest: EventL
   const carries = actions.filter((action) => action[2] === "Carry").length;
   const shots = actions.filter((action) => action[2] === "Shot").length;
   const heatId = `event-heat-${selectedId || "loading"}`;
+  const filteredPlayers = useMemo(() => {
+    const players = manifest?.players ?? [];
+    const normalizedQuery = query.trim().toLocaleLowerCase();
+    if (!normalizedQuery) return players;
+    return players.filter((item) => `${item.player_name} ${item.teams.join(" ")}`.toLocaleLowerCase().includes(normalizedQuery));
+  }, [manifest, query]);
+  useEffect(() => {
+    if (query.trim() && filteredPlayers.length && !filteredPlayers.some((item) => item.player_id === selectedId)) {
+      onSelect(filteredPlayers[0].player_id);
+    }
+  }, [filteredPlayers, onSelect, query, selectedId]);
+  const selectedManifestPlayer = manifest?.players.find((item) => item.player_id === selectedId);
+  const pickerPlayers = selectedManifestPlayer && !filteredPlayers.some((item) => item.player_id === selectedId)
+    ? [selectedManifestPlayer, ...filteredPlayers]
+    : filteredPlayers;
 
   return (
     <article className="event-lab-panel panel">
       <div className="event-lab-toolbar">
         <div><span className="eyebrow">Player activity</span><h2>{player?.player_name ?? "Loading player activity…"}</h2><p>{player ? `${player.teams.join(" / ")} · ${player.season}` : "Preparing the season view"}</p></div>
-        <label><span>Choose a player</span><select value={selectedId || ""} disabled={!manifest} onChange={(event) => onSelect(Number(event.target.value))}>{manifest?.players.map((item) => <option key={item.player_id} value={item.player_id}>{item.player_name} · {item.teams.join(" / ")} · {item.actions} actions</option>)}</select></label>
+        <div className="event-player-picker"><label><span>Find a historical player</span><input className="event-search" type="search" value={query} placeholder="Search player or club…" onChange={(event) => setQuery(event.target.value)} /></label><label><span>{filteredPlayers.length.toLocaleString()} players found</span><select value={selectedId || ""} disabled={!manifest || !pickerPlayers.length} onChange={(event) => onSelect(Number(event.target.value))}>{pickerPlayers.map((item) => <option key={item.player_id} value={item.player_id}>{item.player_name} · {item.teams.join(" / ")} · {item.actions} actions</option>)}</select></label></div>
       </div>
       <div className="event-lab-body">
         <div className="event-pitch-wrap">
