@@ -14,6 +14,7 @@ import argparse
 import concurrent.futures
 import json
 import pathlib
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -22,6 +23,10 @@ import pandas as pd
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from src.display_names import preferred_player_name
+
 INPUT_PATH = ROOT / "data" / "free_data" / "understat_epl_player_seasons.csv"
 OUTPUT_DIR = ROOT / "frontend" / "public" / "shot-data"
 ENDPOINT = "https://understat.com/getPlayerData/{player_id}"
@@ -81,7 +86,10 @@ def fetch_player(player_id: int, player_name: str, seasons: set[str], force: boo
             ]
             result = {
                 "player_id": player_id,
-                "player_name": payload.get("player", {}).get("name", player_name),
+                "player_name": preferred_player_name(
+                    payload.get("player", {}).get("name", player_name),
+                    player_id,
+                ),
                 "source": "Understat",
                 "coordinate_note": "Normalized attacking-direction shot locations; not player touches.",
                 "shots": shots,

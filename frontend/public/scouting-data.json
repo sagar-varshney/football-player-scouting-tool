@@ -102,6 +102,7 @@
       "xg_buildup_p90"
     ],
     "source_provider": "understat",
+    "player_name_policy": "Curated football display names; raw provider names remain in the normalized source data.",
     "data_note": "Real free EPL player-season data from Understat, filtered to players with 450+ minutes. Metrics cover attacking and creative style: xG, xA, shots, key passes, move involvement, and buildup play. Defensive actions, carries, pressures, and progressive passes are not available in this free source."
   },
   "players": [
@@ -2208,7 +2209,7 @@
     {
       "player_id": 43,
       "provider_player_id": 5613,
-      "player_name": "Gabriel",
+      "player_name": "Gabriel Magalhães",
       "season": "2021-2022",
       "competition": "ENG-Premier League",
       "club": "Arsenal",
@@ -4858,7 +4859,7 @@
     {
       "player_id": 96,
       "provider_player_id": 6674,
-      "player_name": "Rayan Ait Nouri",
+      "player_name": "Rayan Aït-Nouri",
       "season": "2021-2022",
       "competition": "ENG-Premier League",
       "club": "Wolverhampton Wanderers",
@@ -11558,7 +11559,7 @@
     {
       "player_id": 230,
       "provider_player_id": 8864,
-      "player_name": "Matthew Cash",
+      "player_name": "Matty Cash",
       "season": "2021-2022",
       "competition": "ENG-Premier League",
       "club": "Aston Villa",
@@ -11758,7 +11759,7 @@
     {
       "player_id": 234,
       "provider_player_id": 751,
-      "player_name": "N&#039;Golo Kanté",
+      "player_name": "N'Golo Kanté",
       "season": "2021-2022",
       "competition": "ENG-Premier League",
       "club": "Chelsea",
@@ -12558,7 +12559,7 @@
     {
       "player_id": 250,
       "provider_player_id": 2496,
-      "player_name": "Rodri",
+      "player_name": "Martin Ødegaard",
       "season": "2021-2022",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -20408,7 +20409,7 @@
     {
       "player_id": 407,
       "provider_player_id": 5613,
-      "player_name": "Gabriel",
+      "player_name": "Gabriel Magalhães",
       "season": "2022-2023",
       "competition": "ENG-Premier League",
       "club": "Arsenal",
@@ -21208,7 +21209,7 @@
     {
       "player_id": 423,
       "provider_player_id": 987,
-      "player_name": "Joseph Gomez",
+      "player_name": "Joe Gomez",
       "season": "2022-2023",
       "competition": "ENG-Premier League",
       "club": "Liverpool",
@@ -23358,7 +23359,7 @@
     {
       "player_id": 466,
       "provider_player_id": 6674,
-      "player_name": "Rayan Ait Nouri",
+      "player_name": "Rayan Aït-Nouri",
       "season": "2022-2023",
       "competition": "ENG-Premier League",
       "club": "Wolverhampton Wanderers",
@@ -30408,7 +30409,7 @@
     {
       "player_id": 607,
       "provider_player_id": 10759,
-      "player_name": "Lewis O&#039;Brien",
+      "player_name": "Lewis O'Brien",
       "season": "2022-2023",
       "competition": "ENG-Premier League",
       "club": "Nottingham Forest",
@@ -31008,7 +31009,7 @@
     {
       "player_id": 619,
       "provider_player_id": 8864,
-      "player_name": "Matthew Cash",
+      "player_name": "Matty Cash",
       "season": "2022-2023",
       "competition": "ENG-Premier League",
       "club": "Aston Villa",
@@ -31158,7 +31159,7 @@
     {
       "player_id": 622,
       "provider_player_id": 751,
-      "player_name": "N&#039;Golo Kanté",
+      "player_name": "N'Golo Kanté",
       "season": "2022-2023",
       "competition": "ENG-Premier League",
       "club": "Chelsea",
@@ -31908,7 +31909,7 @@
     {
       "player_id": 637,
       "provider_player_id": 2496,
-      "player_name": "Rodri",
+      "player_name": "Martin Ødegaard",
       "season": "2022-2023",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -37858,7 +37859,7 @@
     {
       "player_id": 756,
       "provider_player_id": 11713,
-      "player_name": "Amari&#039;i Bell",
+      "player_name": "Amari'i Bell",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Luton",
@@ -39158,7 +39159,7 @@
     {
       "player_id": 782,
       "provider_player_id": 8756,
-      "player_name": "Dara O&#039;Shea",
+      "player_name": "Dara O'Shea",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Burnley",
@@ -39658,7 +39659,7 @@
     {
       "player_id": 792,
       "provider_player_id": 5613,
-      "player_name": "Gabriel",
+      "player_name": "Gabriel Magalhães",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Arsenal",
@@ -40258,7 +40259,7 @@
     {
       "player_id": 804,
       "provider_player_id": 8831,
-      "player_name": "Iyenoma Destiny Udogie",
+      "player_name": "Destiny Udogie",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Tottenham",
@@ -49008,7 +49009,7 @@
     {
       "player_id": 979,
       "provider_player_id": 987,
-      "player_name": "Joseph Gomez",
+      "player_name": "Joe Gomez",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Liverpool",
@@ -50258,7 +50259,7 @@
     {
       "player_id": 1004,
       "provider_player_id": 8864,
-      "player_name": "Matthew Cash",
+      "player_name": "Matty Cash",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Aston Villa",
@@ -50908,7 +50909,7 @@
     {
       "player_id": 1017,
       "provider_player_id": 9021,
-      "player_name": "Pape Sarr",
+      "player_name": "Pape Matar Sarr",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Tottenham",
@@ -51158,7 +51159,7 @@
     {
       "player_id": 1022,
       "provider_player_id": 6674,
-      "player_name": "Rayan Ait Nouri",
+      "player_name": "Rayan Aït-Nouri",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Wolverhampton Wanderers",
@@ -51258,7 +51259,7 @@
     {
       "player_id": 1024,
       "provider_player_id": 2496,
-      "player_name": "Rodri",
+      "player_name": "Martin Ødegaard",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -52358,7 +52359,7 @@
     {
       "player_id": 1046,
       "provider_player_id": 11772,
-      "player_name": "Yehor Yarmolyuk",
+      "player_name": "Yehor Yarmoliuk",
       "season": "2023-2024",
       "competition": "ENG-Premier League",
       "club": "Brentford",
@@ -56158,7 +56159,7 @@
     {
       "player_id": 1122,
       "provider_player_id": 11763,
-      "player_name": "Abduqodir Khusanov",
+      "player_name": "Abdukodir Khusanov",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -57108,7 +57109,7 @@
     {
       "player_id": 1141,
       "provider_player_id": 8756,
-      "player_name": "Dara O&#039;Shea",
+      "player_name": "Dara O'Shea",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Ipswich",
@@ -57608,7 +57609,7 @@
     {
       "player_id": 1151,
       "provider_player_id": 5613,
-      "player_name": "Gabriel",
+      "player_name": "Gabriel Magalhães",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Arsenal",
@@ -57958,7 +57959,7 @@
     {
       "player_id": 1158,
       "provider_player_id": 8831,
-      "player_name": "Iyenoma Destiny Udogie",
+      "player_name": "Destiny Udogie",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Tottenham",
@@ -58108,7 +58109,7 @@
     {
       "player_id": 1161,
       "provider_player_id": 12014,
-      "player_name": "Jake O&#039;Brien",
+      "player_name": "Jake O'Brien",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Everton",
@@ -58808,7 +58809,7 @@
     {
       "player_id": 1175,
       "provider_player_id": 987,
-      "player_name": "Joseph Gomez",
+      "player_name": "Joe Gomez",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Liverpool",
@@ -60858,7 +60859,7 @@
     {
       "player_id": 1216,
       "provider_player_id": 11592,
-      "player_name": "Nico O&#039;Reilly",
+      "player_name": "Nico O'Reilly",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -67608,7 +67609,7 @@
     {
       "player_id": 1351,
       "provider_player_id": 13206,
-      "player_name": "Matt O&#039;Riley",
+      "player_name": "Matt O'Riley",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Brighton",
@@ -67658,7 +67659,7 @@
     {
       "player_id": 1352,
       "provider_player_id": 8864,
-      "player_name": "Matthew Cash",
+      "player_name": "Matty Cash",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Aston Villa",
@@ -68408,7 +68409,7 @@
     {
       "player_id": 1367,
       "provider_player_id": 9021,
-      "player_name": "Pape Sarr",
+      "player_name": "Pape Matar Sarr",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Tottenham",
@@ -68458,7 +68459,7 @@
     {
       "player_id": 1368,
       "provider_player_id": 6674,
-      "player_name": "Rayan Ait Nouri",
+      "player_name": "Rayan Aït-Nouri",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Wolverhampton Wanderers",
@@ -70308,7 +70309,7 @@
     {
       "player_id": 1405,
       "provider_player_id": 11772,
-      "player_name": "Yehor Yarmolyuk",
+      "player_name": "Yehor Yarmoliuk",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Brentford",
@@ -70758,7 +70759,7 @@
     {
       "player_id": 1414,
       "provider_player_id": 8127,
-      "player_name": "Amad Diallo Traore",
+      "player_name": "Amad Diallo",
       "season": "2024-2025",
       "competition": "ENG-Premier League",
       "club": "Manchester United",
@@ -74308,7 +74309,7 @@
     {
       "player_id": 1485,
       "provider_player_id": 11763,
-      "player_name": "Abduqodir Khusanov",
+      "player_name": "Abdukodir Khusanov",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -75608,7 +75609,7 @@
     {
       "player_id": 1511,
       "provider_player_id": 5613,
-      "player_name": "Gabriel",
+      "player_name": "Gabriel Magalhães",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Arsenal",
@@ -75908,7 +75909,7 @@
     {
       "player_id": 1517,
       "provider_player_id": 8831,
-      "player_name": "Iyenoma Destiny Udogie",
+      "player_name": "Destiny Udogie",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Tottenham",
@@ -76108,7 +76109,7 @@
     {
       "player_id": 1521,
       "provider_player_id": 12014,
-      "player_name": "Jake O&#039;Brien",
+      "player_name": "Jake O'Brien",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Everton",
@@ -76708,7 +76709,7 @@
     {
       "player_id": 1533,
       "provider_player_id": 987,
-      "player_name": "Joseph Gomez",
+      "player_name": "Joe Gomez",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Liverpool",
@@ -77558,7 +77559,7 @@
     {
       "player_id": 1550,
       "provider_player_id": 14099,
-      "player_name": "Luke O&#039;Nien",
+      "player_name": "Luke O'Nien",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Sunderland",
@@ -77958,7 +77959,7 @@
     {
       "player_id": 1558,
       "provider_player_id": 8864,
-      "player_name": "Matthew Cash",
+      "player_name": "Matty Cash",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Aston Villa",
@@ -81258,7 +81259,7 @@
     {
       "player_id": 1624,
       "provider_player_id": 13222,
-      "player_name": "Thiago",
+      "player_name": "Igor Thiago",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Brentford",
@@ -82108,7 +82109,7 @@
     {
       "player_id": 1641,
       "provider_player_id": 8127,
-      "player_name": "Amad Diallo Traore",
+      "player_name": "Amad Diallo",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Manchester United",
@@ -83858,7 +83859,7 @@
     {
       "player_id": 1676,
       "provider_player_id": 13066,
-      "player_name": "Ferdi Kadioglu",
+      "player_name": "Ferdi Kadıoğlu",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Brighton",
@@ -86858,7 +86859,7 @@
     {
       "player_id": 1736,
       "provider_player_id": 11592,
-      "player_name": "Nico O&#039;Reilly",
+      "player_name": "Nico O'Reilly",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -87058,7 +87059,7 @@
     {
       "player_id": 1740,
       "provider_player_id": 9021,
-      "player_name": "Pape Sarr",
+      "player_name": "Pape Matar Sarr",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Tottenham",
@@ -87308,7 +87309,7 @@
     {
       "player_id": 1745,
       "provider_player_id": 6674,
-      "player_name": "Rayan Ait Nouri",
+      "player_name": "Rayan Aït-Nouri",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -87458,7 +87459,7 @@
     {
       "player_id": 1748,
       "provider_player_id": 2496,
-      "player_name": "Rodri",
+      "player_name": "Martin Ødegaard",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Manchester City",
@@ -88708,7 +88709,7 @@
     {
       "player_id": 1773,
       "provider_player_id": 11772,
-      "player_name": "Yehor Yarmolyuk",
+      "player_name": "Yehor Yarmoliuk",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Brentford",
@@ -90858,7 +90859,7 @@
     {
       "player_id": 1816,
       "provider_player_id": 12410,
-      "player_name": "Joshua King",
+      "player_name": "Josh King",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Fulham",
@@ -91658,7 +91659,7 @@
     {
       "player_id": 1832,
       "provider_player_id": 8094,
-      "player_name": "Mathis Cherki",
+      "player_name": "Rayan Cherki",
       "season": "2025-2026",
       "competition": "ENG-Premier League",
       "club": "Manchester City",

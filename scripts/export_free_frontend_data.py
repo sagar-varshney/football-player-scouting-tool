@@ -8,6 +8,9 @@ import pathlib
 import sys
 import warnings
 
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(os.cpu_count() or 4))
+warnings.filterwarnings("ignore", message="Could not find the number of physical cores.*")
+
 import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
@@ -17,8 +20,7 @@ from sklearn.preprocessing import StandardScaler
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(os.cpu_count() or 4))
-warnings.filterwarnings("ignore", message="Could not find the number of physical cores.*")
+from src.display_names import preferred_player_name
 
 INPUT_PATH = ROOT / "data" / "free_data" / "understat_epl_player_seasons.csv"
 OUTPUT_PATH = ROOT / "frontend" / "public" / "scouting-data.json"
@@ -110,6 +112,10 @@ def main() -> None:
     players = pd.read_csv(INPUT_PATH)
     players = players[players["position"] != "Goalkeeper"].copy()
     players = players.dropna(subset=["player_name", "club", "season", "position"])
+    players["player_name"] = players.apply(
+        lambda row: preferred_player_name(row["player_name"], row.get("provider_player_id")),
+        axis=1,
+    )
     players[FREE_FEATURE_COLS] = players[FREE_FEATURE_COLS].fillna(0)
     players.insert(0, "player_id", range(1, len(players) + 1))
     players["age"] = 0
@@ -141,6 +147,7 @@ def main() -> None:
             "seasons": sorted(merged["season"].dropna().unique().tolist()),
             "features": FREE_FEATURE_COLS,
             "source_provider": "understat",
+            "player_name_policy": "Curated football display names; raw provider names remain in the normalized source data.",
             "data_note": (
                 "Real free EPL player-season data from Understat, filtered to players with 450+ minutes. "
                 "Metrics cover attacking and creative style: xG, xA, shots, key passes, move involvement, and buildup play. "

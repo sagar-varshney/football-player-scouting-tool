@@ -85,6 +85,8 @@ The production export uses eight per-90 features: goals, xG, assists, xA, shots,
 
 The browser consumes precomputed JSON, so exploring players does not require a live Python server or external API calls.
 
+Player identity and presentation are kept separate: provider IDs remain the stable identity, raw source names stay in the normalized datasets, and a small reviewed override table supplies recognisable football display names and correct diacritics in the product. HTML entities in provider names are decoded automatically. Add future corrections to `src/display_names.py` rather than editing generated JSON.
+
 ## Run locally
 
 ### Web application
