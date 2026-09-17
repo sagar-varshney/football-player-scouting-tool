@@ -62,20 +62,21 @@ flowchart LR
     A[Understat player seasons] --> B[Cleaning and 450-minute filter]
     B --> C[Per-90 features]
     C --> D[StandardScaler]
-    D --> E[Cosine similarity]
-    D --> F[KMeans clusters]
-    C --> G[Position-aware percentiles]
-    G --> H[Readable role archetypes]
-    E --> I[Next.js scouting workspace]
-    F --> I
-    H --> I
-    J[Understat shots] --> K[Shot maps]
-    L[StatsBomb Open Data] --> M[Action maps]
-    K --> I
-    M --> I
+    D --> E[KMeans role clusters]
+    C --> F[Season-and-position percentiles]
+    F --> G[Position-weighted profile matching]
+    G --> H[Explainable recommendations]
+    F --> I[Readable role archetypes]
+    E --> J[Next.js scouting workspace]
+    H --> J
+    I --> J
+    K[Understat shots] --> L[Shot maps]
+    M[StatsBomb Open Data] --> N[Action maps]
+    L --> J
+    N --> J
 ```
 
-The production export uses eight per-90 features: goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup. Features are standardized before a five-cluster KMeans model is fitted. Similarity is calculated with cosine similarity in standardized feature space. Human-readable archetypes are assigned from position-aware percentile rules, while radar and heatmap values use percentile ranks for easier interpretation.
+The production export uses eight per-90 features: goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup. Features are standardized before a five-cluster KMeans model is fitted. In the product, every player is re-ranked within the selected season and position, then compared with position-specific feature weights. This keeps a forward match focused on finishing, a winger match balanced between threat and creation, and a midfielder or defender match more sensitive to involvement and buildup. Each recommendation exposes finishing, creation and involvement fit plus a minutes-based evidence-strength label. Human-readable archetypes remain percentile-based heuristics.
 
 The browser consumes precomputed JSON, so exploring players does not require a live Python server or external API calls.
 

@@ -48,7 +48,19 @@ type Payload = {
   cluster_profiles: Array<{ archetype: string } & Record<Feature, number>>;
 };
 
-type Match = Player & { similarity: number; similarityPct: number; overlap: number };
+type Match = Player & {
+  similarity: number;
+  similarityPct: number;
+  overlap: number;
+  sampleScore: number;
+  sampleLabel: string;
+  finishingScore: number;
+  creationScore: number;
+  involvementScore: number;
+  sharedStrengthsLabel: string;
+};
+
+type PercentileLookup = Record<string, Record<Feature, number>>;
 
 type Shot = {
   season: string;
@@ -120,6 +132,19 @@ const radarMetrics: Feature[] = [
   "xg_buildup_p90",
 ];
 
+const positionMetricWeights: Record<string, Record<Feature, number>> = {
+  Forward: { goals_p90: 1.5, xg_p90: 1.4, shots_p90: 1.2, assists_p90: 0.7, xa_p90: 0.6, key_passes_p90: 0.5, xg_chain_p90: 0.8, xg_buildup_p90: 0.4 },
+  Winger: { goals_p90: 1.0, xg_p90: 1.0, shots_p90: 1.1, assists_p90: 1.1, xa_p90: 1.3, key_passes_p90: 1.4, xg_chain_p90: 1.0, xg_buildup_p90: 0.7 },
+  Midfielder: { goals_p90: 0.5, xg_p90: 0.6, shots_p90: 0.6, assists_p90: 0.9, xa_p90: 1.3, key_passes_p90: 1.5, xg_chain_p90: 1.3, xg_buildup_p90: 1.4 },
+  Defender: { goals_p90: 0.3, xg_p90: 0.4, shots_p90: 0.3, assists_p90: 0.5, xa_p90: 0.8, key_passes_p90: 1.0, xg_chain_p90: 1.3, xg_buildup_p90: 1.6 },
+};
+
+const similarityCategories: Record<string, Feature[]> = {
+  Finishing: ["goals_p90", "xg_p90", "shots_p90"],
+  Creation: ["assists_p90", "xa_p90", "key_passes_p90"],
+  Involvement: ["xg_chain_p90", "xg_buildup_p90"],
+};
+
 const clusterColors = ["#b8ff3d", "#27d8ff", "#ffcc3d", "#ff4f91", "#9b7bff", "#5ee6a8"];
 const targetColor = "#ff2d8d";
 const compareColor = "#83e63f";
@@ -128,40 +153,69 @@ function playerKey(player: Player) {
   return `${player.player_name}__${player.club}__${player.position}__${player.season ?? "single"}`;
 }
 
-function cosineSimilarity(a: number[], b: number[]) {
-  const dot = a.reduce((sum, value, index) => sum + value * b[index], 0);
-  const magA = Math.sqrt(a.reduce((sum, value) => sum + value * value, 0));
-  const magB = Math.sqrt(b.reduce((sum, value) => sum + value * value, 0));
-  return dot / ((magA || 1) * (magB || 1));
-}
-
 function metricValue(player: Player | undefined, feature: Feature) {
   if (!player) return 0;
   const value = player[feature];
   return typeof value === "number" ? value : Number(value ?? 0);
 }
 
-function scaledVector(player: Player, features: Feature[]) {
-  return features.map((feature) => metricValue(player, `scaled_${feature}`));
+function buildCohortPercentiles(players: Player[], features: Feature[]): PercentileLookup {
+  const lookup: PercentileLookup = {};
+  players.forEach((player) => { lookup[playerKey(player)] = {}; });
+  features.forEach((feature) => {
+    const sorted = players.map((player) => metricValue(player, feature)).sort((a, b) => a - b);
+    players.forEach((player) => {
+      const value = metricValue(player, feature);
+      const below = sorted.findIndex((item) => item >= value);
+      const first = below === -1 ? sorted.length - 1 : below;
+      let last = first;
+      while (last + 1 < sorted.length && sorted[last + 1] === value) last += 1;
+      lookup[playerKey(player)][feature] = sorted.length <= 1 ? 100 : ((first + last) / 2 / (sorted.length - 1)) * 100;
+    });
+  });
+  return lookup;
+}
+
+function percentileValue(lookup: PercentileLookup, player: Player | undefined, feature: Feature) {
+  if (!player) return 0;
+  return lookup[playerKey(player)]?.[feature] ?? metricValue(player, `pct_${feature}`);
+}
+
+function featureWeight(position: string, feature: Feature) {
+  return positionMetricWeights[position]?.[feature] ?? 1;
 }
 
 function metricOverlap(target: Player, candidate: Player, features: Feature[]) {
+  const totalWeight = features.reduce((sum, feature) => sum + featureWeight(target.position, feature), 0) || 1;
   return features.reduce((sum, feature) => {
     const targetValue = metricValue(target, feature);
     const candidateValue = metricValue(candidate, feature);
     const denominator = Math.abs(targetValue) || 1;
     const gap = Math.min(Math.abs(candidateValue - targetValue) / denominator, 1);
-    return sum + (1 - gap) * 100;
-  }, 0) / features.length;
+    return sum + (1 - gap) * 100 * featureWeight(target.position, feature);
+  }, 0) / totalWeight;
 }
 
-function findMatches(players: Player[], target: Player, topN: number, features: Feature[]) {
-  const targetVector = scaledVector(target, features);
+function findMatches(players: Player[], target: Player, topN: number, features: Feature[], percentiles: PercentileLookup) {
+  const totalWeight = features.reduce((sum, feature) => sum + featureWeight(target.position, feature), 0) || 1;
   return players
     .filter((player) => playerKey(player) !== playerKey(target) && player.position === target.position)
     .map((player) => {
-      const similarity = cosineSimilarity(targetVector, scaledVector(player, features));
-      return { ...player, similarity, similarityPct: similarity * 100, overlap: metricOverlap(target, player, features) };
+      const featureFits = features.map((feature) => ({
+        feature,
+        fit: 100 - Math.abs(percentileValue(percentiles, target, feature) - percentileValue(percentiles, player, feature)),
+        weight: featureWeight(target.position, feature),
+      }));
+      const similarityPct = featureFits.reduce((sum, item) => sum + item.fit * item.weight, 0) / totalWeight;
+      const categoryScores = Object.fromEntries(Object.entries(similarityCategories).map(([category, categoryFeatures]) => {
+        const available = featureFits.filter((item) => categoryFeatures.includes(item.feature));
+        const weight = available.reduce((sum, item) => sum + item.weight, 0) || 1;
+        return [category, available.reduce((sum, item) => sum + item.fit * item.weight, 0) / weight];
+      }));
+      const sharedStrengthsLabel = featureFits.slice().sort((a, b) => (b.fit * b.weight) - (a.fit * a.weight)).slice(0, 2).map((item) => compactLabel(item.feature)).join(" + ");
+      const sampleScore = Math.min(100, Math.max(25, (Math.min(Number(target.minutes ?? 0), Number(player.minutes ?? 0)) / 1800) * 100));
+      const sampleLabel = sampleScore >= 80 ? "Robust sample" : sampleScore >= 55 ? "Established sample" : "Developing sample";
+      return { ...player, similarity: similarityPct / 100, similarityPct, overlap: metricOverlap(target, player, features), sampleScore, sampleLabel, finishingScore: categoryScores.Finishing, creationScore: categoryScores.Creation, involvementScore: categoryScores.Involvement, sharedStrengthsLabel };
     })
     .sort((a, b) => b.similarity - a.similarity)
     .slice(0, topN);
@@ -206,6 +260,7 @@ export default function Page() {
   const [position, setPosition] = useState("Winger");
   const [season, setSeason] = useState("Latest");
   const [targetKey, setTargetKey] = useState("");
+  const [playerQuery, setPlayerQuery] = useState("");
   const [topN, setTopN] = useState(5);
   const [compareKey, setCompareKey] = useState("");
   const [xMetric, setXMetric] = useState<Feature>("shots_p90");
@@ -267,6 +322,12 @@ export default function Page() {
       .slice()
       .sort((a, b) => a.player_name.localeCompare(b.player_name));
   }, [payload, position, selectedSeason]);
+
+  const visibleCandidatePlayers = useMemo(() => {
+    const normalizedQuery = playerQuery.trim().toLocaleLowerCase();
+    if (!normalizedQuery) return candidatePlayers;
+    return candidatePlayers.filter((player) => `${player.player_name} ${player.club}`.toLocaleLowerCase().includes(normalizedQuery));
+  }, [candidatePlayers, playerQuery]);
 
   const target = useMemo(() => {
     if (!payload) return null;
@@ -359,10 +420,15 @@ export default function Page() {
     return payload.players.filter((player) => player.position === target.position && (!selectedSeason || player.season === selectedSeason));
   }, [payload, target, selectedSeason]);
 
+  const cohortPercentiles = useMemo(() => {
+    if (!payload) return {};
+    return buildCohortPercentiles(pool, payload.metadata.features);
+  }, [payload, pool]);
+
   const matches = useMemo(() => {
     if (!payload || !target) return [];
-    return findMatches(pool, target, topN, payload.metadata.features);
-  }, [payload, pool, target, topN]);
+    return findMatches(pool, target, topN, payload.metadata.features, cohortPercentiles);
+  }, [payload, pool, target, topN, cohortPercentiles]);
 
   useEffect(() => {
     if (matches.length) setCompareKey(playerKey(matches[0]));
@@ -377,17 +443,18 @@ export default function Page() {
   const isShortlisted = shortlist.includes(playerKey(target));
   const visibleRadarMetrics = radarMetrics.filter((feature) => payload.metadata.features.includes(feature));
   const radarData = visibleRadarMetrics.map((feature) => ({
-    metric: compactLabel(feature), target: metricValue(target, `pct_${feature}`), compare: metricValue(comparePlayer, `pct_${feature}`),
+    metric: compactLabel(feature), target: percentileValue(cohortPercentiles, target, feature), compare: percentileValue(cohortPercentiles, comparePlayer, feature),
   }));
   const strongestSignals = payload.metadata.features
-    .map((feature) => ({ feature, value: metricValue(target, `pct_${feature}`) }))
+    .map((feature) => ({ feature, value: percentileValue(cohortPercentiles, target, feature) }))
     .sort((a, b) => b.value - a.value).slice(0, 4);
   const differenceData = payload.metadata.features.map((feature) => ({
     feature,
-    target: metricValue(target, `pct_${feature}`),
-    compare: metricValue(comparePlayer, `pct_${feature}`),
-    gap: comparePlayer ? Math.abs(metricValue(target, `pct_${feature}`) - metricValue(comparePlayer, `pct_${feature}`)) : 0,
+    target: percentileValue(cohortPercentiles, target, feature),
+    compare: percentileValue(cohortPercentiles, comparePlayer, feature),
+    gap: comparePlayer ? Math.abs(percentileValue(cohortPercentiles, target, feature) - percentileValue(cohortPercentiles, comparePlayer, feature)) : 0,
   })).sort((a, b) => b.gap - a.gap);
+  const selectedMatch = comparePlayer ? matches.find((match) => playerKey(match) === playerKey(comparePlayer)) : undefined;
   const metricData = comparedPlayers.map((player) => ({
     ...player, key: playerKey(player), x: metricValue(player, xMetric), y: metricValue(player, yMetric),
     fill: playerKey(player) === playerKey(target) ? targetColor : clusterColors[player.cluster % clusterColors.length],
@@ -439,14 +506,14 @@ export default function Page() {
           <div className="workflow-controls">
             <label><span><b>01</b> Position</span><select value={position} onChange={(event) => setPosition(event.target.value)}>{positions.map((item) => <option key={item} value={item}>{item}</option>)}</select></label>
             <label><span><b>02</b> Season</span><select value={season} onChange={(event) => setSeason(event.target.value)}><option value="Latest">Latest season</option>{seasons.map((item) => <option key={item} value={item}>{item}</option>)}</select></label>
-            <label className="player-select"><span><b>03</b> Player to scout</span><select value={playerKey(target)} onChange={(event) => setTargetKey(event.target.value)}>{candidatePlayers.map((player) => <option key={playerKey(player)} value={playerKey(player)}>{player.player_name} · {player.club}</option>)}</select></label>
+            <label className="player-select"><span><b>03</b> Player to scout</span><div className="player-picker-row"><input type="search" value={playerQuery} placeholder="Search…" aria-label="Search current players" onChange={(event) => setPlayerQuery(event.target.value)} /><select aria-label="Player to scout" value={playerKey(target)} onChange={(event) => { setTargetKey(event.target.value); setPlayerQuery(""); }}>{visibleCandidatePlayers.some((player) => playerKey(player) === playerKey(target)) ? null : <option value={playerKey(target)}>{target.player_name} · {target.club}</option>}{visibleCandidatePlayers.map((player) => <option key={playerKey(player)} value={playerKey(player)}>{player.player_name} · {player.club}</option>)}</select></div></label>
             <div className="control-group"><span><b>04</b> Matches shown</span><div className="segment-row">{[3, 5, 10].map((value) => <button type="button" key={value} className={topN === value ? "active" : ""} onClick={() => setTopN(value)}>{value}</button>)}</div></div>
           </div>
         </section>
 
         <section className="hero">
           <div className="hero-gridline" />
-          <div className="player-orb" aria-hidden="true"><span>{initials(target.player_name)}</span><i>{Math.round(metricValue(target, "pct_xg_chain_p90"))}</i></div>
+          <div className="player-orb" aria-hidden="true"><span>{initials(target.player_name)}</span><i>{Math.round(percentileValue(cohortPercentiles, target, "xg_chain_p90"))}</i></div>
           <div className="hero-content">
             <div className="hero-breadcrumb"><span>Scouting focus</span><i />{target.season}</div>
             <h2>{target.player_name}</h2>
@@ -462,11 +529,11 @@ export default function Page() {
         </section>
 
         <section className="kpi-grid" aria-label="Key player metrics">
-          <Kpi label="Goals /90" value={numberFormat(target.goals_p90)} percentile={metricValue(target, "pct_goals_p90")} detail={`xG ${numberFormat(target.xg_p90)}`} />
-          <Kpi label="Assists /90" value={numberFormat(target.assists_p90)} percentile={metricValue(target, "pct_assists_p90")} detail={`xA ${numberFormat(target.xa_p90)}`} />
-          <Kpi label="Key passes /90" value={numberFormat(target.key_passes_p90)} percentile={metricValue(target, "pct_key_passes_p90")} detail="chances created" />
-          <Kpi label="Move involvement" value={numberFormat(target.xg_chain_p90)} percentile={metricValue(target, "pct_xg_chain_p90")} detail="involvement in scoring moves" />
-          <Kpi label="Buildup play" value={numberFormat(target.xg_buildup_p90)} percentile={metricValue(target, "pct_xg_buildup_p90")} detail="contribution before the final action" />
+          <Kpi label="Goals /90" value={numberFormat(target.goals_p90)} percentile={percentileValue(cohortPercentiles, target, "goals_p90")} detail={`xG ${numberFormat(target.xg_p90)}`} />
+          <Kpi label="Assists /90" value={numberFormat(target.assists_p90)} percentile={percentileValue(cohortPercentiles, target, "assists_p90")} detail={`xA ${numberFormat(target.xa_p90)}`} />
+          <Kpi label="Key passes /90" value={numberFormat(target.key_passes_p90)} percentile={percentileValue(cohortPercentiles, target, "key_passes_p90")} detail="chances created" />
+          <Kpi label="Move involvement" value={numberFormat(target.xg_chain_p90)} percentile={percentileValue(cohortPercentiles, target, "xg_chain_p90")} detail="involvement in scoring moves" />
+          <Kpi label="Buildup play" value={numberFormat(target.xg_buildup_p90)} percentile={percentileValue(cohortPercentiles, target, "xg_buildup_p90")} detail="contribution before the final action" />
         </section>
 
         <section className="analysis-card">
@@ -485,7 +552,8 @@ export default function Page() {
                   <span className="match-copy"><strong>{match.player_name}</strong><small>{match.club} · {match.season}</small></span>
                   <b className="match-score">{match.similarityPct.toFixed(1)}<i>%</i></b>
                 </button>
-                <MiniHeatStrip player={match} features={payload.metadata.features} />
+                <MiniHeatStrip player={match} features={payload.metadata.features} percentiles={cohortPercentiles} />
+                <div className="match-reasons"><span>{match.sampleLabel}</span><span>{match.sharedStrengthsLabel}</span></div>
                 <div className="match-footer"><span>{match.archetype}</span><button onClick={() => { setCompareKey(playerKey(match)); document.getElementById("compare")?.scrollIntoView(); }}>Compare ↘</button></div>
               </article>
             ))}
@@ -514,14 +582,14 @@ export default function Page() {
           <div className="heatmap-layout">
             <article className="profile-heatmap panel">
               <div className="panel-heading"><div><span className="eyebrow">Key strengths</span><h2>{target.player_name}</h2></div><span className="heatmap-season">{target.season}</span></div>
-              <div className="profile-heat-list">{payload.metadata.features.map((feature) => { const percentile = metricValue(target, `pct_${feature}`); return <div className="profile-heat-row" key={feature}><div><strong>{metricLabel(feature)}</strong><span>{numberFormat(metricValue(target, feature))} /90</span></div><div className="heat-track"><i style={{ width: `${percentile}%`, background: heatColor(percentile) }} /></div><b style={{ color: heatColor(percentile) }}>{Math.round(percentile)}</b></div>; })}</div>
+              <div className="profile-heat-list">{payload.metadata.features.map((feature) => { const percentile = percentileValue(cohortPercentiles, target, feature); return <div className="profile-heat-row" key={feature}><div><strong>{metricLabel(feature)}</strong><span>{numberFormat(metricValue(target, feature))} /90</span></div><div className="heat-track"><i style={{ width: `${percentile}%`, background: heatColor(percentile) }} /></div><b style={{ color: heatColor(percentile) }}>{Math.round(percentile)}</b></div>; })}</div>
               <div className="heat-legend"><span>Lower percentile</span><i /><i /><i /><i /><i /><span>Elite percentile</span></div>
             </article>
             <article className="matrix-heatmap panel">
               <div className="panel-heading"><div><span className="eyebrow">Performance comparison</span><h2>Selected player vs closest matches</h2></div><span className="matrix-note">Percentile among similar players</span></div>
               <div className="heatmap-scroll"><div className="heatmap-grid" style={{ gridTemplateColumns: `minmax(160px, 1.35fr) repeat(${payload.metadata.features.length}, minmax(62px, 1fr))` }}>
                 <div className="heat-corner">Player</div>{payload.metadata.features.map((feature) => <div className="heat-column" key={feature}>{compactLabel(feature)}</div>)}
-                {comparedPlayers.map((player, rowIndex) => <HeatmapRow key={playerKey(player)} player={player} features={payload.metadata.features} target={rowIndex === 0} onSelect={() => setTargetKey(playerKey(player))} />)}
+                {comparedPlayers.map((player, rowIndex) => <HeatmapRow key={playerKey(player)} player={player} features={payload.metadata.features} percentiles={cohortPercentiles} target={rowIndex === 0} onSelect={() => setTargetKey(playerKey(player))} />)}
               </div></div>
               <p className="heatmap-disclaimer">Higher scores show where each player ranks strongest against comparable players in the same season.</p>
             </article>
@@ -532,10 +600,11 @@ export default function Page() {
           <SectionHeading eyebrow="Head-to-head" title="How their strengths compare" aside="Percentile score · 0–100" />
           <article className="radar-panel panel">
             <div className="comparison-picker"><span>Compare with</span><select value={comparePlayer ? playerKey(comparePlayer) : ""} onChange={(event) => setCompareKey(event.target.value)}>{matches.map((match) => <option key={playerKey(match)} value={playerKey(match)}>{match.player_name} · {match.similarityPct.toFixed(1)}% match</option>)}</select></div>
+            {selectedMatch && <div className="match-explanation"><div><span>Position-aware match</span><strong>{selectedMatch.similarityPct.toFixed(1)}%</strong><small>Weighted for a {target.position.toLowerCase()} profile</small></div>{[["Finishing", selectedMatch.finishingScore], ["Creation", selectedMatch.creationScore], ["Involvement", selectedMatch.involvementScore]].map(([category, value]) => { const score = Number(value); return <div key={String(category)}><span>{category}</span><strong>{score.toFixed(0)}</strong><i><b style={{ width: `${score}%` }} /></i></div>; })}<div><span>Evidence strength</span><strong>{selectedMatch.sampleScore.toFixed(0)}</strong><small>{selectedMatch.sampleLabel} · {Math.min(Number(target.minutes ?? 0), Number(selectedMatch.minutes ?? 0)).toLocaleString()}+ shared-minute floor</small></div></div>}
             <div className="comparison-table">
               <div className="comparison-metrics-head"><span>Percentiles</span>{visibleRadarMetrics.map((feature) => <b key={feature}>{compactLabel(feature)}</b>)}</div>
-              <ComparisonRow player={target} features={visibleRadarMetrics} color={targetColor} />
-              {comparePlayer && <ComparisonRow player={comparePlayer} features={visibleRadarMetrics} color={compareColor} />}
+              <ComparisonRow player={target} features={visibleRadarMetrics} percentiles={cohortPercentiles} color={targetColor} />
+              {comparePlayer && <ComparisonRow player={comparePlayer} features={visibleRadarMetrics} percentiles={cohortPercentiles} color={compareColor} />}
             </div>
             <div className="radar-content">
               <div className="radar-chart-wrap">
@@ -564,7 +633,7 @@ export default function Page() {
 
         <section id="shortlist" className="shortlist-panel panel">
           <div className="panel-heading"><div><span className="eyebrow">Your recruitment list</span><h2>Players to watch</h2></div>{shortlistPlayers.length > 0 && <button className="ghost-action" onClick={() => { setShortlist([]); window.localStorage.removeItem("player-scouting-shortlist"); }}>Clear shortlist</button>}</div>
-          <div className="shortlist-grid">{shortlistPlayers.length ? shortlistPlayers.map((player, index) => <article key={playerKey(player)}><button onClick={() => setTargetKey(playerKey(player))}><span className="shortlist-number">0{index + 1}</span><span className="match-avatar">{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{player.club} · {player.position} · {player.season}</small><b>{player.archetype}</b></span></button><MiniHeatStrip player={player} features={payload.metadata.features} /></article>) : <div className="empty-shortlist"><span>＋</span><strong>No players shortlisted yet</strong><p>Save a promising match to start building your recruitment list.</p></div>}</div>
+          <div className="shortlist-grid">{shortlistPlayers.length ? shortlistPlayers.map((player, index) => <article key={playerKey(player)}><button onClick={() => setTargetKey(playerKey(player))}><span className="shortlist-number">0{index + 1}</span><span className="match-avatar">{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{player.club} · {player.position} · {player.season}</small><b>{player.archetype}</b></span></button><MiniHeatStrip player={player} features={payload.metadata.features} percentiles={cohortPercentiles} /></article>) : <div className="empty-shortlist"><span>＋</span><strong>No players shortlisted yet</strong><p>Save a promising match to start building your recruitment list.</p></div>}</div>
         </section>
 
         <details className="raw-panel panel"><summary>View full performance numbers <span>＋</span></summary><div className="raw-grid">{payload.metadata.features.map((feature) => <div key={feature}><span>{metricLabel(feature)}</span><strong>{numberFormat(target[feature])}</strong><small>per 90 minutes</small></div>)}</div></details>
@@ -790,16 +859,16 @@ function Kpi({ label, value, detail, percentile }: { label: string; value: strin
   return <article className="kpi-card"><div><span>{label}</span><b>{Math.round(percentile)}th</b></div><strong>{value}</strong><small>{detail}</small><i><span style={{ width: `${percentile}%` }} /></i></article>;
 }
 
-function MiniHeatStrip({ player, features }: { player: Player; features: Feature[] }) {
-  return <div className="mini-heat-strip" aria-label={`${player.player_name} metric percentiles`}>{features.map((feature) => { const value = metricValue(player, `pct_${feature}`); return <i key={feature} title={`${metricLabel(feature)}: ${Math.round(value)}th percentile`} style={{ background: heatColor(value) }} />; })}</div>;
+function MiniHeatStrip({ player, features, percentiles }: { player: Player; features: Feature[]; percentiles: PercentileLookup }) {
+  return <div className="mini-heat-strip" aria-label={`${player.player_name} metric percentiles`}>{features.map((feature) => { const value = percentileValue(percentiles, player, feature); return <i key={feature} title={`${metricLabel(feature)}: ${Math.round(value)}th percentile`} style={{ background: heatColor(value) }} />; })}</div>;
 }
 
-function HeatmapRow({ player, features, target, onSelect }: { player: Player; features: Feature[]; target: boolean; onSelect: () => void }) {
-  return <><button className={`heat-player ${target ? "target" : ""}`} onClick={onSelect}><span>{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{target ? "Target" : player.club}</small></span></button>{features.map((feature) => { const value = metricValue(player, `pct_${feature}`); return <div className="heat-cell" key={`${playerKey(player)}-${feature}`} title={`${metricLabel(feature)} · ${value.toFixed(1)}th percentile`} style={{ background: heatColor(value), color: heatTextColor(value) }}>{Math.round(value)}</div>; })}</>;
+function HeatmapRow({ player, features, percentiles, target, onSelect }: { player: Player; features: Feature[]; percentiles: PercentileLookup; target: boolean; onSelect: () => void }) {
+  return <><button className={`heat-player ${target ? "target" : ""}`} onClick={onSelect}><span>{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{target ? "Target" : player.club}</small></span></button>{features.map((feature) => { const value = percentileValue(percentiles, player, feature); return <div className="heat-cell" key={`${playerKey(player)}-${feature}`} title={`${metricLabel(feature)} · ${value.toFixed(1)}th percentile`} style={{ background: heatColor(value), color: heatTextColor(value) }}>{Math.round(value)}</div>; })}</>;
 }
 
-function ComparisonRow({ player, features, color }: { player: Player; features: Feature[]; color: string }) {
-  return <div className="comparison-player-row" style={{ color }}><div><span className="comparison-avatar" style={{ borderColor: color }}>{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{player.club} · {player.season}</small></span></div>{features.map((feature) => <b key={feature}>{metricValue(player, `pct_${feature}`).toFixed(1)}</b>)}</div>;
+function ComparisonRow({ player, features, percentiles, color }: { player: Player; features: Feature[]; percentiles: PercentileLookup; color: string }) {
+  return <div className="comparison-player-row" style={{ color }}><div><span className="comparison-avatar" style={{ borderColor: color }}>{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{player.club} · {player.season}</small></span></div>{features.map((feature) => <b key={feature}>{percentileValue(percentiles, player, feature).toFixed(1)}</b>)}</div>;
 }
 
 function RadarTick({ x, y, payload, textAnchor }: { x?: number; y?: number; payload?: { value: string }; textAnchor?: "start" | "middle" | "end" }) {
