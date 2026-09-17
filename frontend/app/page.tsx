@@ -2,6 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
+  CartesianGrid,
+  Line,
+  LineChart,
   PolarAngleAxis,
   PolarGrid,
   PolarRadiusAxis,
@@ -148,6 +151,7 @@ const similarityCategories: Record<string, Feature[]> = {
 const clusterColors = ["#b8ff3d", "#27d8ff", "#ffcc3d", "#ff4f91", "#9b7bff", "#5ee6a8"];
 const targetColor = "#ff2d8d";
 const compareColor = "#83e63f";
+const PRIOR_MINUTES = 900;
 
 function playerKey(player: Player) {
   return `${player.player_name}__${player.club}__${player.position}__${player.season ?? "single"}`;
@@ -159,13 +163,20 @@ function metricValue(player: Player | undefined, feature: Feature) {
   return typeof value === "number" ? value : Number(value ?? 0);
 }
 
+function adjustedMetricValue(player: Player, feature: Feature, cohortMean: number) {
+  const minutes = Math.max(0, Number(player.minutes ?? 0));
+  return ((metricValue(player, feature) * minutes) + (cohortMean * PRIOR_MINUTES)) / (minutes + PRIOR_MINUTES || 1);
+}
+
 function buildCohortPercentiles(players: Player[], features: Feature[]): PercentileLookup {
   const lookup: PercentileLookup = {};
   players.forEach((player) => { lookup[playerKey(player)] = {}; });
   features.forEach((feature) => {
-    const sorted = players.map((player) => metricValue(player, feature)).sort((a, b) => a - b);
+    const cohortMean = players.reduce((sum, player) => sum + metricValue(player, feature), 0) / (players.length || 1);
+    const adjustedValues = new Map(players.map((player) => [playerKey(player), adjustedMetricValue(player, feature, cohortMean)]));
+    const sorted = Array.from(adjustedValues.values()).sort((a, b) => a - b);
     players.forEach((player) => {
-      const value = metricValue(player, feature);
+      const value = adjustedValues.get(playerKey(player)) ?? 0;
       const below = sorted.findIndex((item) => item >= value);
       const first = below === -1 ? sorted.length - 1 : below;
       let last = first;
@@ -481,6 +492,14 @@ export default function Page() {
     }
   }
 
+  function scoutPlayer(player: Player) {
+    setPosition(player.position);
+    setSeason(player.season ?? "Latest");
+    setTargetKey(playerKey(player));
+    setPlayerQuery("");
+    window.setTimeout(() => document.getElementById("top")?.scrollIntoView(), 0);
+  }
+
   const shortlistPlayers = shortlist.map((key) => payload.players.find((player) => playerKey(player) === key)).filter(Boolean) as Player[];
 
   return (
@@ -491,7 +510,7 @@ export default function Page() {
           <div><strong>SCOUT//LAB</strong><span>Smarter player recruitment</span></div>
         </a>
         <nav className="nav-links" aria-label="Dashboard sections">
-          <a href="#similarity">Similar players</a><a href="#heatmaps">Shot map</a><a href="#event-lab">Action map</a><a href="#profiles">Strengths</a><a href="#compare">Compare</a><a href="#shortlist">Shortlist <b>{shortlist.length}</b></a>
+          <a href="#finder">Finder</a><a href="#similarity">Similar players</a><a href="#heatmaps">Shot map</a><a href="#event-lab">Action map</a><a href="#trends">Trends</a><a href="#compare">Compare</a><a href="#shortlist">Shortlist <b>{shortlist.length}</b></a>
         </nav>
         <div className="dataset-status"><i /><span>Ready to scout</span><strong>{payload.metadata.row_count.toLocaleString()} player profiles</strong></div>
       </header>
@@ -540,6 +559,11 @@ export default function Page() {
           <div className="analysis-icon">✦</div>
           <div><span className="eyebrow">Scouting summary</span><h2>What makes this player stand out</h2><p>{target.player_name} plays as a <strong>{target.archetype}</strong>. Their strongest qualities are {strongestSignals.map((signal, index) => <span key={signal.feature}>{index ? ", " : ""}{metricLabel(signal.feature)} ({Math.round(signal.value)}th percentile)</span>)}. Every comparison is made against other {target.position.toLowerCase()}s from {selectedSeason} using per-90 performance.</p></div>
           <div className="data-caveat"><span>What’s included</span><p>This profile focuses on attacking and creative performance. Defensive work, pressures, carries and progressive passing will appear when reliable coverage is available.</p></div>
+        </section>
+
+        <section id="finder" className="section-block">
+          <SectionHeading eyebrow="Recruitment finder" title="Build a data-led player search" aside={`${selectedSeason} · ${position}s`} />
+          <PlayerFinder players={pool} features={payload.metadata.features} percentiles={cohortPercentiles} onScout={scoutPlayer} onShortlist={toggleShortlist} shortlisted={shortlist} />
         </section>
 
         <section id="similarity" className="section-block">
@@ -596,6 +620,11 @@ export default function Page() {
           </div>
         </section>
 
+        <section id="trends" className="section-block">
+          <SectionHeading eyebrow="Development curve" title="Track performance across seasons" aside="Sample-adjusted percentile · recorded values remain visible" />
+          <PlayerTrends payload={payload} player={target} />
+        </section>
+
         <section id="compare" className="section-block">
           <SectionHeading eyebrow="Head-to-head" title="How their strengths compare" aside="Percentile score · 0–100" />
           <article className="radar-panel panel">
@@ -641,6 +670,76 @@ export default function Page() {
       </main>
     </div>
   );
+}
+
+function PlayerFinder({ players, features, percentiles, onScout, onShortlist, shortlisted }: { players: Player[]; features: Feature[]; percentiles: PercentileLookup; onScout: (player: Player) => void; onShortlist: (player: Player) => void; shortlisted: string[] }) {
+  const [query, setQuery] = useState("");
+  const [club, setClub] = useState("All");
+  const [archetype, setArchetype] = useState("All");
+  const [feature, setFeature] = useState<Feature>(features.includes("key_passes_p90") ? "key_passes_p90" : features[0]);
+  const [minimumPercentile, setMinimumPercentile] = useState(75);
+  const [minimumMinutes, setMinimumMinutes] = useState(900);
+  const clubs = useMemo(() => Array.from(new Set(players.flatMap((player) => player.club.split(",").map((item) => item.trim())))).sort(), [players]);
+  const archetypes = useMemo(() => Array.from(new Set(players.map((player) => player.archetype))).sort(), [players]);
+  const results = useMemo(() => {
+    const normalizedQuery = query.trim().toLocaleLowerCase();
+    return players.filter((player) => {
+      const matchesQuery = !normalizedQuery || `${player.player_name} ${player.club}`.toLocaleLowerCase().includes(normalizedQuery);
+      const matchesClub = club === "All" || player.club.split(",").map((item) => item.trim()).includes(club);
+      const matchesArchetype = archetype === "All" || player.archetype === archetype;
+      return matchesQuery && matchesClub && matchesArchetype && Number(player.minutes ?? 0) >= minimumMinutes && percentileValue(percentiles, player, feature) >= minimumPercentile;
+    }).sort((a, b) => percentileValue(percentiles, b, feature) - percentileValue(percentiles, a, feature) || Number(b.minutes ?? 0) - Number(a.minutes ?? 0)).slice(0, 12);
+  }, [players, query, club, archetype, minimumMinutes, minimumPercentile, percentiles, feature]);
+
+  return <article className="finder-panel panel">
+    <div className="finder-controls">
+      <label><span>Search player or club</span><input type="search" value={query} placeholder="Type a name…" onChange={(event) => setQuery(event.target.value)} /></label>
+      <label><span>Club</span><select value={club} onChange={(event) => setClub(event.target.value)}><option value="All">All clubs</option>{clubs.map((item) => <option key={item} value={item}>{item}</option>)}</select></label>
+      <label><span>Playing style</span><select value={archetype} onChange={(event) => setArchetype(event.target.value)}><option value="All">All styles</option>{archetypes.map((item) => <option key={item} value={item}>{item}</option>)}</select></label>
+      <label><span>Priority metric</span><select value={feature} onChange={(event) => setFeature(event.target.value)}>{features.map((item) => <option key={item} value={item}>{metricLabel(item)}</option>)}</select></label>
+      <label><span>Minimum percentile</span><select value={minimumPercentile} onChange={(event) => setMinimumPercentile(Number(event.target.value))}>{[0, 60, 75, 85, 90].map((value) => <option key={value} value={value}>{value === 0 ? "Any percentile" : `${value}th+`}</option>)}</select></label>
+      <label><span>Minimum minutes</span><select value={minimumMinutes} onChange={(event) => setMinimumMinutes(Number(event.target.value))}>{[450, 900, 1350, 1800].map((value) => <option key={value} value={value}>{value.toLocaleString()}+</option>)}</select></label>
+    </div>
+    <div className="finder-summary"><div><strong>{results.length}</strong><span>best results shown</span></div><p>Percentiles are adjusted toward the positional average when a player has fewer minutes, reducing small-sample noise.</p></div>
+    <div className="finder-results">{results.length ? results.map((player, index) => { const percentile = percentileValue(percentiles, player, feature); const saved = shortlisted.includes(playerKey(player)); return <article key={playerKey(player)} className="finder-card"><div className="finder-rank">{String(index + 1).padStart(2, "0")}</div><button className="finder-player" aria-label={`Scout ${player.player_name}`} onClick={() => onScout(player)}><span>{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{player.club} · {Number(player.minutes ?? 0).toLocaleString()} min</small></span></button><div className="finder-metric"><span>{metricLabel(feature)}</span><strong>{numberFormat(player[feature])}<small>/90</small></strong><b>{Math.round(percentile)}th</b></div><div className="finder-style">{player.archetype}</div><button className={`finder-save ${saved ? "saved" : ""}`} onClick={() => onShortlist(player)}>{saved ? "Saved ✓" : "+ Save"}</button></article>; }) : <div className="finder-empty"><strong>No players meet every filter</strong><span>Lower the percentile or minutes threshold to widen the search.</span></div>}</div>
+  </article>;
+}
+
+function PlayerTrends({ payload, player }: { payload: Payload; player: Player }) {
+  const [feature, setFeature] = useState<Feature>(payload.metadata.features.includes("key_passes_p90") ? "key_passes_p90" : payload.metadata.features[0]);
+  const history = useMemo(() => payload.players.filter((item) => item.player_name === player.player_name).sort((a, b) => String(a.season).localeCompare(String(b.season))), [payload, player.player_name]);
+  const trendData = useMemo(() => history.map((seasonPlayer) => {
+    const cohort = payload.players.filter((item) => item.season === seasonPlayer.season && item.position === seasonPlayer.position);
+    const lookup = buildCohortPercentiles(cohort, [feature]);
+    const cohortMean = cohort.reduce((sum, item) => sum + metricValue(item, feature), 0) / (cohort.length || 1);
+    return {
+      season: seasonPlayer.season,
+      percentile: Number(percentileValue(lookup, seasonPlayer, feature).toFixed(1)),
+      raw: metricValue(seasonPlayer, feature),
+      adjusted: adjustedMetricValue(seasonPlayer, feature, cohortMean),
+      minutes: Number(seasonPlayer.minutes ?? 0),
+      club: seasonPlayer.club,
+    };
+  }), [history, payload, feature]);
+  const first = trendData[0]?.percentile ?? 0;
+  const last = trendData.at(-1)?.percentile ?? 0;
+  const change = last - first;
+  const average = trendData.reduce((sum, item) => sum + item.percentile, 0) / (trendData.length || 1);
+  const deviation = Math.sqrt(trendData.reduce((sum, item) => sum + ((item.percentile - average) ** 2), 0) / (trendData.length || 1));
+  const trajectory = trendData.length < 2 ? "Single-season sample" : change >= 12 ? "Strong upward trend" : change >= 5 ? "Improving" : change <= -12 ? "Clear downward trend" : change <= -5 ? "Trending down" : "Stable profile";
+  const consistency = deviation <= 8 ? "Highly consistent" : deviation <= 16 ? "Generally consistent" : "Variable across seasons";
+
+  return <article className="trends-panel panel">
+    <div className="trends-toolbar"><div><span className="eyebrow">{player.player_name}</span><h2>{trajectory}</h2><p>{consistency} · {trendData.length} season{trendData.length === 1 ? "" : "s"} available</p></div><label><span>Track metric</span><select value={feature} onChange={(event) => setFeature(event.target.value)}>{payload.metadata.features.map((item) => <option key={item} value={item}>{metricLabel(item)}</option>)}</select></label></div>
+    <div className="trend-layout"><div className="trend-chart"><ResponsiveContainer width="100%" height={330}><LineChart data={trendData} margin={{ top: 28, right: 24, bottom: 8, left: 0 }}><CartesianGrid stroke="#243632" strokeDasharray="3 5" vertical={false} /><XAxis dataKey="season" tick={{ fill: "#82918e", fontSize: 11 }} axisLine={{ stroke: "#30423f" }} tickLine={false} /><YAxis domain={[0, 100]} tick={{ fill: "#82918e", fontSize: 11 }} axisLine={false} tickLine={false} width={34} /><Tooltip content={<TrendTooltip feature={feature} />} /><Line type="monotone" dataKey="percentile" stroke={compareColor} strokeWidth={4} dot={{ r: 6, fill: compareColor, stroke: "#0e1b19", strokeWidth: 3 }} activeDot={{ r: 8 }} /></LineChart></ResponsiveContainer><div className="trend-axis-note"><span>Sample-adjusted percentile among same-position players</span><b>{change >= 0 ? "+" : ""}{change.toFixed(0)} pts from first to latest</b></div></div><div className="trend-seasons">{trendData.map((item) => <div key={String(item.season)}><span>{item.season}</span><strong>{item.percentile.toFixed(0)}th</strong><p>{item.raw.toFixed(2)} /90 · {item.minutes.toLocaleString()} min</p><small>{item.club}</small></div>)}</div></div>
+    <div className="shrinkage-note"><span>How reliability works</span><p>The displayed per-90 value is always the recorded number. Ranking percentiles use an empirical-Bayes posterior mean with a 900-minute positional prior, so short samples move toward the cohort average and established samples retain more of their observed performance.</p></div>
+  </article>;
+}
+
+function TrendTooltip({ active, payload, feature }: { active?: boolean; payload?: Array<{ payload: { season: string; percentile: number; raw: number; adjusted: number; minutes: number } }>; feature: Feature }) {
+  if (!active || !payload?.length) return null;
+  const item = payload[0].payload;
+  return <div className="tooltip-card"><strong>{item.season}</strong><span>{metricLabel(feature)}: {item.raw.toFixed(2)} /90</span><span>Adjusted percentile: {item.percentile.toFixed(1)}</span><span>{item.minutes.toLocaleString()} minutes</span></div>;
 }
 
 function ShotHeatmap({ player, shots, status }: { player: Player; shots: Shot[]; status: "loading" | "ready" | "missing" }) {

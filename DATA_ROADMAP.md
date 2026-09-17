@@ -10,7 +10,8 @@ The production web application now uses real, cached football data. The legacy s
 - **Understat shot locations:** 48,492 attempts across 819 cached player files.
 - **StatsBomb Open Data:** recorded on-ball actions for 548 players across all 380 matches in the 2015/16 Premier League season.
 - **Identity and availability supplement:** 658 current FPL player rows are available in the normalized data layer but are not used as similarity features.
-- **Model output:** standardized per-90 features and five KMeans clusters are exported to the frontend. The product calculates season-and-position percentile ranks, position-weighted matches, category-level explanations, and minutes-based evidence strength at runtime.
+- **Model output:** standardized per-90 features and five KMeans clusters are exported to the frontend. The product calculates 900-minute reliability-adjusted season-and-position percentiles, position-weighted matches, category-level explanations, and evidence strength at runtime.
+- **Recruitment workflow:** the web app includes a filterable player finder and multi-season trend view. Both use the same reliability adjustment while keeping recorded per-90 values visible.
 - **API-Football integration:** a cached, environment-keyed enrichment pipeline is ready for quota-safe coverage testing; its fields are not yet active in the production similarity model.
 - **API-Football free-plan result:** the 2024/25 team-based pull returned 1,132 normalized rows, including 388 above 450 minutes, but seven club pages were blocked and 2025/26 was unavailable.
 
@@ -26,9 +27,9 @@ The production web application now uses real, cached football data. The legacy s
 
 ### 1. Strengthen the model
 
-- Add position-specific feature weights and user-adjustable recruitment priorities.
-- Evaluate similarity stability across seasons and minimum-minute thresholds.
-- Add explanations for the strongest matches and largest profile differences.
+- Add user-adjustable similarity priorities and saved recruitment searches.
+- Back-test the 900-minute prior across seasons and position groups, then tune it by metric if validation supports that complexity.
+- Add automated stability checks for the strongest matches and largest profile differences.
 - Track cluster quality with silhouette scores and monitor cluster drift after data refreshes.
 - Separate broad positions into more useful recruitment roles when the source supports them.
 

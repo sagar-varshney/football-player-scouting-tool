@@ -12,7 +12,9 @@ The project combines a Python data and machine-learning pipeline with a responsi
 ## What you can do
 
 - Find the closest stylistic matches for a selected player and season.
+- Search a season-and-position recruitment pool by club, playing style, priority metric, percentile, and minutes.
 - Compare percentile profiles with an overlaid radar chart.
+- Follow a player's multi-season trajectory with reliability-adjusted percentile trends.
 - Scan player strengths across an entire comparison group with a metric heatmap.
 - Explore real Understat shot-density maps and individual shot locations.
 - Inspect recorded on-ball activity from StatsBomb Open Data.
@@ -63,20 +65,23 @@ flowchart LR
     B --> C[Per-90 features]
     C --> D[StandardScaler]
     D --> E[KMeans role clusters]
-    C --> F[Season-and-position percentiles]
-    F --> G[Position-weighted profile matching]
-    G --> H[Explainable recommendations]
-    F --> I[Readable role archetypes]
-    E --> J[Next.js scouting workspace]
-    H --> J
-    I --> J
-    K[Understat shots] --> L[Shot maps]
-    M[StatsBomb Open Data] --> N[Action maps]
-    L --> J
-    N --> J
+    C --> F[900-minute reliability adjustment]
+    F --> G[Season-and-position percentiles]
+    G --> H[Position-weighted profile matching]
+    H --> I[Explainable recommendations]
+    G --> K[Recruitment finder and trends]
+    G --> J[Readable role archetypes]
+    E --> O[Next.js scouting workspace]
+    I --> O
+    J --> O
+    K --> O
+    L[Understat shots] --> M[Shot maps]
+    N[StatsBomb Open Data] --> P[Action maps]
+    M --> O
+    P --> O
 ```
 
-The production export uses eight per-90 features: goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup. Features are standardized before a five-cluster KMeans model is fitted. In the product, every player is re-ranked within the selected season and position, then compared with position-specific feature weights. This keeps a forward match focused on finishing, a winger match balanced between threat and creation, and a midfielder or defender match more sensitive to involvement and buildup. Each recommendation exposes finishing, creation and involvement fit plus a minutes-based evidence-strength label. Human-readable archetypes remain percentile-based heuristics.
+The production export uses eight per-90 features: goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup. Features are standardized before a five-cluster KMeans model is fitted. In the product, every rate is partially pooled toward its season-and-position average with a 900-minute prior before percentile ranking. This empirical-Bayes-style adjustment reduces small-sample extremes without changing the raw numbers shown to the user. Players are then compared with position-specific feature weights. This keeps a forward match focused on finishing, a winger match balanced between threat and creation, and a midfielder or defender match more sensitive to involvement and buildup. Each recommendation exposes finishing, creation and involvement fit plus a minutes-based evidence-strength label. The recruitment finder and trend chart use the same adjusted percentiles, while human-readable archetypes remain percentile-based heuristics.
 
 The browser consumes precomputed JSON, so exploring players does not require a live Python server or external API calls.
 
@@ -170,10 +175,10 @@ See [DATA_SOURCES.md](DATA_SOURCES.md) for provider research and [data/free_data
 
 ## Roadmap
 
-- Add position-specific feature weighting and configurable recruitment priorities.
+- Add user-adjustable similarity priorities and saved finder searches.
 - Add age, availability, contract, and estimated-fee filters when reliable data is available.
 - Expand current-season event coverage through a licensed provider.
-- Add shortlist export and shareable player reports.
+- Add shortlist export and printable player reports.
 - Add automated data validation and model-quality tests.
 
 ## Responsible use
