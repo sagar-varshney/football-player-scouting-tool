@@ -15,6 +15,7 @@ The project combines a Python data and machine-learning pipeline with a responsi
 - Search a season-and-position recruitment pool by club, playing style, priority metric, percentile, and minutes.
 - Compare percentile profiles with an overlaid radar chart.
 - Follow a player's multi-season trajectory with reliability-adjusted percentile trends.
+- See licence-verified player portraits where reusable photography is available, with initials as a safe fallback.
 - Scan player strengths across an entire comparison group with a metric heatmap.
 - Explore real Understat shot-density maps and individual shot locations.
 - Inspect recorded on-ball activity from StatsBomb Open Data.
@@ -29,6 +30,7 @@ The project combines a Python data and machine-learning pipeline with a responsi
 | Understat | 1,854 EPL player-season profiles across 2021/22–2025/26, filtered to 450+ minutes | Similarity, percentiles, radar charts, role labels, and season profiles |
 | Understat shots | 48,492 attempts across 819 cached player files | Shot density, shot locations, goals, xG, and shot selection |
 | StatsBomb Open Data | 380 EPL matches and 548 players from 2015/16 | Recorded-action heatmaps and action-type summaries |
+| Wikimedia Commons | 455 licence-verified portraits across 819 unique player identities | Player cards, comparisons, and profile photography |
 
 Goalkeepers are excluded from the current similarity model. The primary feature set is attacking and creative because that is what the free Understat source supports consistently.
 
@@ -129,6 +131,7 @@ python3 scripts/build_free_data.py
 python3 scripts/export_free_frontend_data.py
 python3 scripts/build_understat_shot_data.py
 python3 scripts/build_statsbomb_event_lab.py
+python3 scripts/build_commons_player_images.py
 ```
 
 You can also run the frontend shortcuts:
@@ -139,6 +142,7 @@ pnpm export-data
 pnpm refresh-api-football
 pnpm refresh-shot-data
 pnpm refresh-event-lab
+pnpm refresh-player-images
 ```
 
 Understat is accessed through an unofficial community endpoint, so the repository keeps a local cache and the refresh scripts should be run sparingly. StatsBomb event data comes from its official [open-data repository](https://github.com/statsbomb/open-data).
@@ -152,6 +156,7 @@ football-player-scouting-tool/
 │   └── public/
 │       ├── scouting-data.json      # Precomputed profiles and model output
 │       ├── shot-data/              # Lazy-loaded Understat shot files
+│       ├── player-images/           # Licence-verified portraits and manifest
 │       └── event-lab/              # Lazy-loaded StatsBomb action files
 ├── scripts/                        # Data ingestion and export pipelines
 ├── src/                            # Reusable preprocessing and ML utilities
@@ -170,10 +175,13 @@ football-player-scouting-tool/
 - StatsBomb locations are recorded actions and are intentionally kept separate from current Understat player profiles because the available EPL season is 2015/16.
 - The free primary dataset does not contain defensive actions, pressures, carries, progressive passes, contracts, fees, or injury history.
 - API-Football enrichment remains local and experimental until field coverage and publishing rights are validated.
+- Player portraits are used only after an exact Wikidata footballer match and per-file Commons licence check. Unmatched players retain an initials avatar.
 - Similarity indicates statistical resemblance within the selected feature space; it is not a prediction of transfer success or tactical fit.
 - Role labels are interpretable percentile-based heuristics, not ground-truth positions or model predictions.
 
 See [DATA_SOURCES.md](DATA_SOURCES.md) for provider research and [data/free_data/QUALITY_REPORT.md](data/free_data/QUALITY_REPORT.md) for the generated quality summary.
+
+Portrait attribution is available in the application and in [PLAYER_IMAGE_CREDITS.md](PLAYER_IMAGE_CREDITS.md). The importer accepts CC BY, CC BY-SA, CC0, and public-domain files; records the creator, source, licence, and modifications; and skips ambiguous identities. Do not replace these files with club, league, social-media, or search-engine images unless a separate reuse licence has been obtained.
 
 ## Roadmap
 

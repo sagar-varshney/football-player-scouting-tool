@@ -10,6 +10,7 @@
     "export-data": "cd .. && python3 scripts/export_free_frontend_data.py",
     "refresh-api-football": "cd .. && python3 scripts/build_api_football_enrichment.py",
     "refresh-shot-data": "cd .. && python3 scripts/build_understat_shot_data.py",
+    "refresh-player-images": "cd .. && python3 scripts/build_commons_player_images.py",
     "refresh-event-lab": "cd .. && python3 scripts/build_statsbomb_event_lab.py"
   },
   "dependencies": {

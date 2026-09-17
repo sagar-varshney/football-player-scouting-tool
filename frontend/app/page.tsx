@@ -102,6 +102,23 @@ type EventLabPayload = EventLabPlayer & {
   actions: OpenAction[];
 };
 
+type PlayerImage = {
+  player_name: string;
+  path: string;
+  creator: string;
+  license: string;
+  license_url: string;
+  source_url: string;
+  modifications: string;
+};
+type PlayerImageManifest = {
+  source: string;
+  policy: string;
+  total_players: number;
+  covered_players: number;
+  players: Record<string, PlayerImage>;
+};
+
 const metricLabels: Record<Feature, string> = {
   goals_p90: "Goals",
   xg_p90: "Expected goals",
@@ -155,6 +172,11 @@ const PRIOR_MINUTES = 900;
 
 function playerKey(player: Player) {
   return `${player.player_name}__${player.club}__${player.position}__${player.season ?? "single"}`;
+}
+
+function playerImage(player: Player | undefined, images: Record<string, PlayerImage>) {
+  const providerId = Number(player?.provider_player_id);
+  return providerId ? images[String(providerId)] : undefined;
 }
 
 function metricValue(player: Player | undefined, feature: Feature) {
@@ -284,6 +306,7 @@ export default function Page() {
   const [eventPlayer, setEventPlayer] = useState<EventLabPayload | null>(null);
   const [urlReady, setUrlReady] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
+  const [imageManifest, setImageManifest] = useState<PlayerImageManifest | null>(null);
 
   useEffect(() => {
     fetch("/scouting-data.json")
@@ -293,6 +316,16 @@ export default function Page() {
       })
       .then((data: Payload) => setPayload(data))
       .catch(() => setLoadError("We couldn’t load the player profiles. Please refresh and try again."));
+  }, []);
+
+  useEffect(() => {
+    fetch("/player-images/manifest.json")
+      .then((response) => {
+        if (!response.ok) throw new Error(`Player image manifest failed (${response.status})`);
+        return response.json();
+      })
+      .then((data: PlayerImageManifest) => setImageManifest(data))
+      .catch(() => setImageManifest(null));
   }, []);
 
   useEffect(() => {
@@ -501,6 +534,9 @@ export default function Page() {
   }
 
   const shortlistPlayers = shortlist.map((key) => payload.players.find((player) => playerKey(player) === key)).filter(Boolean) as Player[];
+  const playerImages = imageManifest?.players ?? {};
+  const targetImage = playerImage(target, playerImages);
+  const imageCredits = imageManifest ? Object.entries(playerImages).sort(([, a], [, b]) => a.player_name.localeCompare(b.player_name)) : [];
 
   return (
     <div className="app-shell">
@@ -532,7 +568,10 @@ export default function Page() {
 
         <section className="hero">
           <div className="hero-gridline" />
-          <div className="player-orb" aria-hidden="true"><span>{initials(target.player_name)}</span><i>{Math.round(percentileValue(cohortPercentiles, target, "xg_chain_p90"))}</i></div>
+          <div className="player-portrait-wrap">
+            <div className={`player-orb ${targetImage ? "with-photo" : ""}`}>{targetImage ? <img src={targetImage.path} alt={`${target.player_name} portrait`} /> : <span aria-hidden="true">{initials(target.player_name)}</span>}<i>{Math.round(percentileValue(cohortPercentiles, target, "xg_chain_p90"))}</i></div>
+            {targetImage && <div className="hero-photo-credit">Photo: <a href={targetImage.source_url} target="_blank" rel="noreferrer">{targetImage.creator || "Wikimedia contributor"}</a> · <a href={targetImage.license_url} target="_blank" rel="noreferrer">{targetImage.license}</a></div>}
+          </div>
           <div className="hero-content">
             <div className="hero-breadcrumb"><span>Scouting focus</span><i />{target.season}</div>
             <h2>{target.player_name}</h2>
@@ -563,7 +602,7 @@ export default function Page() {
 
         <section id="finder" className="section-block">
           <SectionHeading eyebrow="Recruitment finder" title="Build a data-led player search" aside={`${selectedSeason} · ${position}s`} />
-          <PlayerFinder players={pool} features={payload.metadata.features} percentiles={cohortPercentiles} onScout={scoutPlayer} onShortlist={toggleShortlist} shortlisted={shortlist} />
+          <PlayerFinder players={pool} features={payload.metadata.features} percentiles={cohortPercentiles} onScout={scoutPlayer} onShortlist={toggleShortlist} shortlisted={shortlist} images={playerImages} />
         </section>
 
         <section id="similarity" className="section-block">
@@ -572,7 +611,7 @@ export default function Page() {
             {matches.slice(0, 5).map((match, index) => (
               <article key={playerKey(match)} className="match-card">
                 <button className="match-main" onClick={() => setTargetKey(playerKey(match))} aria-label={`Scout ${match.player_name}`}>
-                  <span className="match-rank">0{index + 1}</span><span className="match-avatar">{initials(match.player_name)}</span>
+                  <span className="match-rank">0{index + 1}</span><PlayerAvatar player={match} images={playerImages} className="match-avatar" />
                   <span className="match-copy"><strong>{match.player_name}</strong><small>{match.club} · {match.season}</small></span>
                   <b className="match-score">{match.similarityPct.toFixed(1)}<i>%</i></b>
                 </button>
@@ -613,7 +652,7 @@ export default function Page() {
               <div className="panel-heading"><div><span className="eyebrow">Performance comparison</span><h2>Selected player vs closest matches</h2></div><span className="matrix-note">Percentile among similar players</span></div>
               <div className="heatmap-scroll"><div className="heatmap-grid" style={{ gridTemplateColumns: `minmax(160px, 1.35fr) repeat(${payload.metadata.features.length}, minmax(62px, 1fr))` }}>
                 <div className="heat-corner">Player</div>{payload.metadata.features.map((feature) => <div className="heat-column" key={feature}>{compactLabel(feature)}</div>)}
-                {comparedPlayers.map((player, rowIndex) => <HeatmapRow key={playerKey(player)} player={player} features={payload.metadata.features} percentiles={cohortPercentiles} target={rowIndex === 0} onSelect={() => setTargetKey(playerKey(player))} />)}
+                {comparedPlayers.map((player, rowIndex) => <HeatmapRow key={playerKey(player)} player={player} features={payload.metadata.features} percentiles={cohortPercentiles} target={rowIndex === 0} onSelect={() => setTargetKey(playerKey(player))} images={playerImages} />)}
               </div></div>
               <p className="heatmap-disclaimer">Higher scores show where each player ranks strongest against comparable players in the same season.</p>
             </article>
@@ -632,8 +671,8 @@ export default function Page() {
             {selectedMatch && <div className="match-explanation"><div><span>Position-aware match</span><strong>{selectedMatch.similarityPct.toFixed(1)}%</strong><small>Weighted for a {target.position.toLowerCase()} profile</small></div>{[["Finishing", selectedMatch.finishingScore], ["Creation", selectedMatch.creationScore], ["Involvement", selectedMatch.involvementScore]].map(([category, value]) => { const score = Number(value); return <div key={String(category)}><span>{category}</span><strong>{score.toFixed(0)}</strong><i><b style={{ width: `${score}%` }} /></i></div>; })}<div><span>Evidence strength</span><strong>{selectedMatch.sampleScore.toFixed(0)}</strong><small>{selectedMatch.sampleLabel} · {Math.min(Number(target.minutes ?? 0), Number(selectedMatch.minutes ?? 0)).toLocaleString()}+ shared-minute floor</small></div></div>}
             <div className="comparison-table">
               <div className="comparison-metrics-head"><span>Percentiles</span>{visibleRadarMetrics.map((feature) => <b key={feature}>{compactLabel(feature)}</b>)}</div>
-              <ComparisonRow player={target} features={visibleRadarMetrics} percentiles={cohortPercentiles} color={targetColor} />
-              {comparePlayer && <ComparisonRow player={comparePlayer} features={visibleRadarMetrics} percentiles={cohortPercentiles} color={compareColor} />}
+              <ComparisonRow player={target} features={visibleRadarMetrics} percentiles={cohortPercentiles} color={targetColor} images={playerImages} />
+              {comparePlayer && <ComparisonRow player={comparePlayer} features={visibleRadarMetrics} percentiles={cohortPercentiles} color={compareColor} images={playerImages} />}
             </div>
             <div className="radar-content">
               <div className="radar-chart-wrap">
@@ -662,17 +701,18 @@ export default function Page() {
 
         <section id="shortlist" className="shortlist-panel panel">
           <div className="panel-heading"><div><span className="eyebrow">Your recruitment list</span><h2>Players to watch</h2></div>{shortlistPlayers.length > 0 && <button className="ghost-action" onClick={() => { setShortlist([]); window.localStorage.removeItem("player-scouting-shortlist"); }}>Clear shortlist</button>}</div>
-          <div className="shortlist-grid">{shortlistPlayers.length ? shortlistPlayers.map((player, index) => <article key={playerKey(player)}><button onClick={() => setTargetKey(playerKey(player))}><span className="shortlist-number">0{index + 1}</span><span className="match-avatar">{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{player.club} · {player.position} · {player.season}</small><b>{player.archetype}</b></span></button><MiniHeatStrip player={player} features={payload.metadata.features} percentiles={cohortPercentiles} /></article>) : <div className="empty-shortlist"><span>＋</span><strong>No players shortlisted yet</strong><p>Save a promising match to start building your recruitment list.</p></div>}</div>
+          <div className="shortlist-grid">{shortlistPlayers.length ? shortlistPlayers.map((player, index) => <article key={playerKey(player)}><button onClick={() => setTargetKey(playerKey(player))}><span className="shortlist-number">0{index + 1}</span><PlayerAvatar player={player} images={playerImages} className="match-avatar" /><span><strong>{player.player_name}</strong><small>{player.club} · {player.position} · {player.season}</small><b>{player.archetype}</b></span></button><MiniHeatStrip player={player} features={payload.metadata.features} percentiles={cohortPercentiles} /></article>) : <div className="empty-shortlist"><span>＋</span><strong>No players shortlisted yet</strong><p>Save a promising match to start building your recruitment list.</p></div>}</div>
         </section>
 
         <details className="raw-panel panel"><summary>View full performance numbers <span>＋</span></summary><div className="raw-grid">{payload.metadata.features.map((feature) => <div key={feature}><span>{metricLabel(feature)}</span><strong>{numberFormat(target[feature])}</strong><small>per 90 minutes</small></div>)}</div></details>
+        {imageManifest && <details className="photo-credits panel"><summary><span><b>Licensed player photography</b><small>{imageManifest.covered_players} of {imageManifest.total_players} players · initials shown when no verified image is available</small></span><i>View credits ＋</i></summary><p>Portraits are sourced from Wikimedia Commons only after an exact footballer match and reusable licence check. Images are displayed with a centre crop.</p><div className="photo-credit-grid">{imageCredits.map(([providerId, image]) => <div key={providerId}><strong>{image.player_name}</strong><span>{image.creator || "Wikimedia contributor"}</span><a href={image.source_url} target="_blank" rel="noreferrer">Source</a><a href={image.license_url} target="_blank" rel="noreferrer">{image.license}</a></div>)}</div></details>}
         <footer className="data-note"><span>SCOUT//LAB · PLAYER INTELLIGENCE</span><p>Compare Premier League players using attacking and creative performance data, measured per 90 minutes for a fairer view.</p><div><b>{clubs.size}</b> clubs represented <i /> <b>{payload.metadata.features.length}</b> performance measures <i /> <b>450+</b> minutes to qualify</div></footer>
       </main>
     </div>
   );
 }
 
-function PlayerFinder({ players, features, percentiles, onScout, onShortlist, shortlisted }: { players: Player[]; features: Feature[]; percentiles: PercentileLookup; onScout: (player: Player) => void; onShortlist: (player: Player) => void; shortlisted: string[] }) {
+function PlayerFinder({ players, features, percentiles, onScout, onShortlist, shortlisted, images }: { players: Player[]; features: Feature[]; percentiles: PercentileLookup; onScout: (player: Player) => void; onShortlist: (player: Player) => void; shortlisted: string[]; images: Record<string, PlayerImage> }) {
   const [query, setQuery] = useState("");
   const [club, setClub] = useState("All");
   const [archetype, setArchetype] = useState("All");
@@ -701,7 +741,7 @@ function PlayerFinder({ players, features, percentiles, onScout, onShortlist, sh
       <label><span>Minimum minutes</span><select value={minimumMinutes} onChange={(event) => setMinimumMinutes(Number(event.target.value))}>{[450, 900, 1350, 1800].map((value) => <option key={value} value={value}>{value.toLocaleString()}+</option>)}</select></label>
     </div>
     <div className="finder-summary"><div><strong>{results.length}</strong><span>best results shown</span></div><p>Percentiles are adjusted toward the positional average when a player has fewer minutes, reducing small-sample noise.</p></div>
-    <div className="finder-results">{results.length ? results.map((player, index) => { const percentile = percentileValue(percentiles, player, feature); const saved = shortlisted.includes(playerKey(player)); return <article key={playerKey(player)} className="finder-card"><div className="finder-rank">{String(index + 1).padStart(2, "0")}</div><button className="finder-player" aria-label={`Scout ${player.player_name}`} onClick={() => onScout(player)}><span>{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{player.club} · {Number(player.minutes ?? 0).toLocaleString()} min</small></span></button><div className="finder-metric"><span>{metricLabel(feature)}</span><strong>{numberFormat(player[feature])}<small>/90</small></strong><b>{Math.round(percentile)}th</b></div><div className="finder-style">{player.archetype}</div><button className={`finder-save ${saved ? "saved" : ""}`} onClick={() => onShortlist(player)}>{saved ? "Saved ✓" : "+ Save"}</button></article>; }) : <div className="finder-empty"><strong>No players meet every filter</strong><span>Lower the percentile or minutes threshold to widen the search.</span></div>}</div>
+    <div className="finder-results">{results.length ? results.map((player, index) => { const percentile = percentileValue(percentiles, player, feature); const saved = shortlisted.includes(playerKey(player)); return <article key={playerKey(player)} className="finder-card"><div className="finder-rank">{String(index + 1).padStart(2, "0")}</div><button className="finder-player" aria-label={`Scout ${player.player_name}`} onClick={() => onScout(player)}><PlayerAvatar player={player} images={images} /><span><strong>{player.player_name}</strong><small>{player.club} · {Number(player.minutes ?? 0).toLocaleString()} min</small></span></button><div className="finder-metric"><span>{metricLabel(feature)}</span><strong>{numberFormat(player[feature])}<small>/90</small></strong><b>{Math.round(percentile)}th</b></div><div className="finder-style">{player.archetype}</div><button className={`finder-save ${saved ? "saved" : ""}`} onClick={() => onShortlist(player)}>{saved ? "Saved ✓" : "+ Save"}</button></article>; }) : <div className="finder-empty"><strong>No players meet every filter</strong><span>Lower the percentile or minutes threshold to widen the search.</span></div>}</div>
   </article>;
 }
 
@@ -958,16 +998,21 @@ function Kpi({ label, value, detail, percentile }: { label: string; value: strin
   return <article className="kpi-card"><div><span>{label}</span><b>{Math.round(percentile)}th</b></div><strong>{value}</strong><small>{detail}</small><i><span style={{ width: `${percentile}%` }} /></i></article>;
 }
 
+function PlayerAvatar({ player, images, className = "" }: { player: Player; images: Record<string, PlayerImage>; className?: string }) {
+  const image = playerImage(player, images);
+  return <span className={`${className} player-avatar ${image ? "has-photo" : ""}`} aria-hidden="true">{image ? <img src={image.path} alt="" loading="lazy" /> : initials(player.player_name)}</span>;
+}
+
 function MiniHeatStrip({ player, features, percentiles }: { player: Player; features: Feature[]; percentiles: PercentileLookup }) {
   return <div className="mini-heat-strip" aria-label={`${player.player_name} metric percentiles`}>{features.map((feature) => { const value = percentileValue(percentiles, player, feature); return <i key={feature} title={`${metricLabel(feature)}: ${Math.round(value)}th percentile`} style={{ background: heatColor(value) }} />; })}</div>;
 }
 
-function HeatmapRow({ player, features, percentiles, target, onSelect }: { player: Player; features: Feature[]; percentiles: PercentileLookup; target: boolean; onSelect: () => void }) {
-  return <><button className={`heat-player ${target ? "target" : ""}`} onClick={onSelect}><span>{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{target ? "Target" : player.club}</small></span></button>{features.map((feature) => { const value = percentileValue(percentiles, player, feature); return <div className="heat-cell" key={`${playerKey(player)}-${feature}`} title={`${metricLabel(feature)} · ${value.toFixed(1)}th percentile`} style={{ background: heatColor(value), color: heatTextColor(value) }}>{Math.round(value)}</div>; })}</>;
+function HeatmapRow({ player, features, percentiles, target, onSelect, images }: { player: Player; features: Feature[]; percentiles: PercentileLookup; target: boolean; onSelect: () => void; images: Record<string, PlayerImage> }) {
+  return <><button className={`heat-player ${target ? "target" : ""}`} onClick={onSelect}><PlayerAvatar player={player} images={images} /><span><strong>{player.player_name}</strong><small>{target ? "Target" : player.club}</small></span></button>{features.map((feature) => { const value = percentileValue(percentiles, player, feature); return <div className="heat-cell" key={`${playerKey(player)}-${feature}`} title={`${metricLabel(feature)} · ${value.toFixed(1)}th percentile`} style={{ background: heatColor(value), color: heatTextColor(value) }}>{Math.round(value)}</div>; })}</>;
 }
 
-function ComparisonRow({ player, features, percentiles, color }: { player: Player; features: Feature[]; percentiles: PercentileLookup; color: string }) {
-  return <div className="comparison-player-row" style={{ color }}><div><span className="comparison-avatar" style={{ borderColor: color }}>{initials(player.player_name)}</span><span><strong>{player.player_name}</strong><small>{player.club} · {player.season}</small></span></div>{features.map((feature) => <b key={feature}>{percentileValue(percentiles, player, feature).toFixed(1)}</b>)}</div>;
+function ComparisonRow({ player, features, percentiles, color, images }: { player: Player; features: Feature[]; percentiles: PercentileLookup; color: string; images: Record<string, PlayerImage> }) {
+  return <div className="comparison-player-row" style={{ color }}><div><PlayerAvatar player={player} images={images} className="comparison-avatar" /><span><strong>{player.player_name}</strong><small>{player.club} · {player.season}</small></span></div>{features.map((feature) => <b key={feature}>{percentileValue(percentiles, player, feature).toFixed(1)}</b>)}</div>;
 }
 
 function RadarTick({ x, y, payload, textAnchor }: { x?: number; y?: number; payload?: { value: string }; textAnchor?: "start" | "middle" | "end" }) {
