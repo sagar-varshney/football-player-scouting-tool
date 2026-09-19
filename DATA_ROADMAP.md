@@ -18,6 +18,10 @@ The production web application now uses real, cached football data. The legacy s
 - **Stability evidence:** every recommended match is ranked under balanced, goal-threat, chance-creation and link-player briefs, exposing its rank range and sensitivity label.
 - **Role system:** position-specific percentile rules now distinguish six forward roles, six winger roles, six midfielder roles and four defender roles without claiming unavailable defensive or tactical evidence.
 - **Shortlist comparison:** mixed-position shortlists are compared with percentiles recalculated inside each player's own season-and-position cohort.
+- **Completed-season validation:** 550 returning-player transitions show the 900-minute prior reduces normalized year-ahead error by 10.1% versus raw rates and remains within 0.26% of the best tested prior.
+- **Sensitivity and drift monitoring:** all 1,854 profiles are tested across four recruitment briefs; cluster silhouette and season-to-season distribution drift are generated on every export.
+- **Evidence flags:** early, building and established sample labels now appear directly on profiles and recruitment-finder cards.
+- **Automated delivery checks:** GitHub Actions regenerates model validation, runs the Python contracts and builds the production frontend on pushes and pull requests.
 - **API-Football integration:** a cached, environment-keyed enrichment pipeline is ready for quota-safe coverage testing; its fields are not yet active in the production similarity model.
 - **API-Football free-plan result:** the 2024/25 team-based pull returned 1,132 normalized rows, including 388 above 450 minutes, but seven club pages were blocked and 2025/26 was unavailable.
 
@@ -33,16 +37,15 @@ The production web application now uses real, cached football data. The legacy s
 
 ### 1. Strengthen the model
 
-- Back-test the 900-minute prior across seasons and position groups, then tune it by metric if validation supports that complexity.
-- Back-test the reliability prior and match stability across completed seasons.
-- Track cluster quality with silhouette scores and monitor cluster drift after data refreshes.
+- Expand the year-ahead back-test by position and metric only when the additional sample size supports stable conclusions.
+- Add transfer-outcome or tactical-fit validation only when a licensed ground-truth dataset is available.
 - Split defender and midfielder roles further only when comparable progression and defensive coverage supports it.
 
 ### 2. Expand recruitment context
 
 - Add contract, fee, wage, and transfer-history data from a licensed source.
 - Add competition strength and team-style context before comparing across leagues.
-- Add low-sample and missing-data flags directly to player cards.
+- Add contract and fee confidence labels when a licensed source becomes available.
 
 ### 3. Improve event coverage
 
@@ -52,7 +55,7 @@ The production web application now uses real, cached football data. The legacy s
 
 ### 4. Improve delivery
 
-- Add completed-season match-stability snapshots and automated source validation to continuous integration.
+- Add live source-health checks only after source terms and request limits support scheduled automation.
 - Add account-backed shortlist collaboration only when a hosted backend is justified.
 - Schedule controlled refreshes once source stability and terms are confirmed.
 

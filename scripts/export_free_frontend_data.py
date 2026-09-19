@@ -13,7 +13,8 @@ import warnings
 from datetime import date, datetime, timezone
 from html import unescape
 
-os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(os.cpu_count() or 4))
+if not os.environ.get("LOKY_MAX_CPU_COUNT"):
+    os.environ["LOKY_MAX_CPU_COUNT"] = "4"
 warnings.filterwarnings("ignore", message="Could not find the number of physical cores.*")
 
 import numpy as np
@@ -26,10 +27,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from src.display_names import preferred_player_name
+from src.model_validation import build_validation, write_validation_reports
 
 INPUT_PATH = ROOT / "data" / "free_data" / "understat_epl_player_seasons.csv"
 FPL_INPUT_PATH = ROOT / "data" / "free_data" / "fpl_current_players.csv"
 OUTPUT_PATH = ROOT / "frontend" / "public" / "scouting-data.json"
+VALIDATION_JSON_PATH = ROOT / "data" / "free_data" / "MODEL_VALIDATION.json"
+VALIDATION_REPORT_PATH = ROOT / "data" / "free_data" / "MODEL_VALIDATION.md"
 
 FREE_FEATURE_COLS = [
     "goals_p90",
@@ -41,7 +45,7 @@ FREE_FEATURE_COLS = [
     "xg_chain_p90",
     "xg_buildup_p90",
 ]
-MODEL_VERSION = "understat-profile-v2.2"
+MODEL_VERSION = "understat-profile-v2.3"
 MINIMUM_MINUTES = 450
 RELIABILITY_PRIOR_MINUTES = 900
 
@@ -246,6 +250,8 @@ def main() -> None:
         axis=1,
     )
     players[FREE_FEATURE_COLS] = players[FREE_FEATURE_COLS].fillna(0)
+    validation = build_validation(players, current_prior=RELIABILITY_PRIOR_MINUTES, cluster_count=5)
+    write_validation_reports(validation, VALIDATION_JSON_PATH, VALIDATION_REPORT_PATH)
     players.insert(0, "player_id", range(1, len(players) + 1))
     players, fpl_context_players, fpl_context_as_of = enrich_current_fpl_context(players)
     players["age"] = players["current_age"]
@@ -286,6 +292,7 @@ def main() -> None:
             "current_context_players": fpl_context_players,
             "minimum_minutes": MINIMUM_MINUTES,
             "reliability_prior_minutes": RELIABILITY_PRIOR_MINUTES,
+            "validation": validation,
             "player_name_policy": "Curated football display names; raw provider names remain in the normalized source data.",
             "data_note": (
                 "Real free EPL player-season data from Understat, filtered to players with 450+ minutes. "

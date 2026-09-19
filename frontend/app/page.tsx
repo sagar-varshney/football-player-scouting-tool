@@ -61,6 +61,32 @@ type Payload = {
     context_version?: string;
     current_context_as_of?: string;
     current_context_players?: number;
+    validation?: {
+      method: string;
+      reliability: {
+        transition_pairs: number;
+        current_prior_minutes: number;
+        current_prior_error_reduction_pct: number;
+        best_tested_prior_minutes: number;
+        current_to_best_error_gap_pct: number;
+        decision: string;
+      };
+      brief_stability: {
+        evaluated_profiles: number;
+        all_brief_top10_retention_pct: number;
+        mean_pairwise_top10_jaccard_pct: number;
+        interpretation: string;
+      };
+      clusters: {
+        cluster_count: number;
+        silhouette_score: number;
+        separation_label: string;
+        latest_distribution_drift_pct: number;
+        latest_distribution_drift_period: string;
+        interpretation: string;
+      };
+      coverage: { profiles: number; feature_completeness_pct: number; minimum_minutes: number };
+    };
     data_note: string;
   };
   players: Player[];
@@ -358,6 +384,13 @@ function availabilityClass(status: string | undefined) {
   if (status === "Available") return "available";
   if (status === "Doubtful") return "doubtful";
   return status ? "unavailable" : "unknown";
+}
+
+function profileEvidence(player: Player) {
+  const minutes = Number(player.minutes ?? 0);
+  if (minutes >= 1800) return { label: "Established sample", className: "established" };
+  if (minutes >= 900) return { label: "Building sample", className: "building" };
+  return { label: "Early sample", className: "early" };
 }
 
 function buildShortlistPercentiles(payload: Payload, players: Player[]) {
@@ -674,6 +707,7 @@ export default function Page() {
   const activePreset = priorityPresets.find((preset) => (Object.keys(defaultPriorities) as Array<keyof SimilarityPriorities>).every((category) => preset.values[category] === priorities[category]));
   const playerImages = imageManifest?.players ?? {};
   const targetImage = playerImage(target, playerImages);
+  const targetEvidence = profileEvidence(target);
   const imageCredits = imageManifest ? Object.entries(playerImages).sort(([, a], [, b]) => a.player_name.localeCompare(b.player_name)) : [];
 
   return (
@@ -684,7 +718,7 @@ export default function Page() {
           <div><strong>SCOUT//LAB</strong><span>Smarter player recruitment</span></div>
         </a>
         <nav className="nav-links" aria-label="Dashboard sections">
-          <a href="#finder">Finder</a><a href="#similarity">Similar players</a><a href="#heatmaps">Shot map</a><a href="#event-lab">Action map</a><a href="#trends">Trends</a><a href="#compare">Compare</a><a href="#shortlist">Shortlist <b>{shortlist.length}</b></a>
+          <a href="#finder">Finder</a><a href="#similarity">Similar players</a><a href="#model-validation">Model check</a><a href="#heatmaps">Shot map</a><a href="#event-lab">Action map</a><a href="#trends">Trends</a><a href="#compare">Compare</a><a href="#shortlist">Shortlist <b>{shortlist.length}</b></a>
         </nav>
         <div className="dataset-status"><i /><span>Ready to scout</span><strong>{payload.metadata.row_count.toLocaleString()} profiles · {payload.metadata.model_version ?? "profile model"}</strong></div>
       </header>
@@ -716,6 +750,7 @@ export default function Page() {
             <p className="hero-meta">{target.club} <i /> {target.position} <i /> {target.minutes?.toLocaleString() ?? 0} minutes</p>
             <div className="role-lockup"><span>Playing style</span><strong>{target.archetype}</strong></div>
             {target.current_status && <div className="current-context"><span className={availabilityClass(target.current_status)}>{target.current_status}</span>{target.current_age && <b>Age {target.current_age}</b>}<b>Current club: {target.current_club}</b><small>{target.current_news || `Current squad context checked ${target.current_context_as_of}`}</small></div>}
+            <div className={`profile-evidence ${targetEvidence.className}`}><span>{targetEvidence.label}</span><b>{Number(target.minutes ?? 0).toLocaleString()} recorded minutes</b><small>{Number(target.minutes ?? 0) < 900 ? "Treat extreme percentiles with extra caution." : "Reliability adjustment still applies to every percentile."}</small></div>
             <div className="hero-pills"><span><b>{matches[0]?.similarityPct.toFixed(1) ?? "0.0"}%</b> closest match</span><span><b>{pool.length}</b> comparable players</span><span><b>#{target.cluster + 1}</b> style group</span></div>
           </div>
           <div className="hero-actions">
@@ -745,6 +780,17 @@ export default function Page() {
           <div className="intent-sliders">{(Object.keys(priorities) as Array<keyof SimilarityPriorities>).map((category) => <label key={category}><span><b>{category}</b><strong>{priorities[category]}%</strong></span><input type="range" min="25" max="200" step="5" value={priorities[category]} onChange={(event) => setPriorities({ ...priorities, [category]: Number(event.target.value) })} /></label>)}</div>
           <div className="intent-status"><span>{activePreset?.name ?? "Custom brief"}</span><p>Rankings and match explanations update instantly. Shared profile links preserve this brief.</p><button type="button" onClick={() => setPriorities(defaultPriorities)}>Reset priorities</button></div>
         </section>
+
+        {payload.metadata.validation && <section id="model-validation" className="validation-panel panel">
+          <div className="validation-heading"><div><span className="eyebrow">Model validation</span><h2>See how the ranking holds up</h2></div><p>Completed-season tests check the reliability adjustment, recruitment-brief sensitivity and style-group drift using only the committed free dataset.</p></div>
+          <div className="validation-grid">
+            <article><span>YEAR-AHEAD ERROR REDUCTION</span><strong>{payload.metadata.validation.reliability.current_prior_error_reduction_pct.toFixed(1)}%</strong><p>The 900-minute adjustment reduced normalized error versus raw per-90 rates across {payload.metadata.validation.reliability.transition_pairs.toLocaleString()} returning-player transitions.</p></article>
+            <article><span>TOP-10 RETENTION</span><strong>{payload.metadata.validation.brief_stability.all_brief_top10_retention_pct.toFixed(1)}%</strong><p>Average share of recommendations that stayed in the top 10 under all four recruitment briefs.</p></article>
+            <article><span>STYLE-GROUP CONFIDENCE</span><strong>{payload.metadata.validation.clusters.separation_label.replace(" separation", "")}</strong><p>Silhouette score {payload.metadata.validation.clusters.silhouette_score.toFixed(3)}. Style groups describe profiles; they are not player grades.</p></article>
+            <article><span>LATEST GROUP DRIFT</span><strong>{payload.metadata.validation.clusters.latest_distribution_drift_pct.toFixed(1)}%</strong><p>Change in style-group distribution from {payload.metadata.validation.clusters.latest_distribution_drift_period}. Monitored after every refresh.</p></article>
+          </div>
+          <div className="validation-decision"><span>Why the model still uses 900 minutes</span><p>{payload.metadata.validation.reliability.decision}</p><a href="https://github.com/sagar-varshney/football-player-scouting-tool/blob/main/data/free_data/MODEL_VALIDATION.md" target="_blank" rel="noreferrer">Read the validation report ↗</a></div>
+        </section>}
 
         <section id="finder" className="section-block">
           <SectionHeading eyebrow="Recruitment finder" title="Build a data-led player search" aside={`${selectedSeason} · ${position}s`} />
@@ -924,7 +970,7 @@ function PlayerFinder({ players, features, percentiles, position, season, onLoad
     </div>
     <div className="saved-search-bar"><button type="button" className="save-search" onClick={saveSearch}>{searchSaved ? "Search saved ✓" : "+ Save this search"}</button>{savedSearches.length > 0 && <div className="saved-searches"><span>Saved briefs</span>{savedSearches.map((saved) => <div key={saved.id} className={saved.position !== position || saved.season !== season ? "out-of-context" : ""}><button type="button" title={saved.position !== position || saved.season !== season ? `Created for ${saved.position}s · ${saved.season}` : "Load saved search"} onClick={() => loadSearch(saved)}>{saved.label}</button><button type="button" aria-label={`Delete ${saved.label}`} onClick={() => persistSearches(savedSearches.filter((item) => item.id !== saved.id))}>×</button></div>)}</div>}</div>
     <div className="finder-summary"><div><strong>{results.length}</strong><span>best results shown</span></div><p>Performance percentiles are sample-adjusted. Age and availability appear only for conservatively matched current FPL identities.</p></div>
-    <div className="finder-results">{results.length ? results.map((player, index) => { const percentile = percentileValue(percentiles, player, feature); const saved = shortlisted.includes(playerKey(player)); return <article key={playerKey(player)} className="finder-card"><div className="finder-rank">{String(index + 1).padStart(2, "0")}</div><button className="finder-player" aria-label={`Scout ${player.player_name}`} onClick={() => onScout(player)}><PlayerAvatar player={player} images={images} /><span><strong>{player.player_name}</strong><small>{player.club} · {Number(player.minutes ?? 0).toLocaleString()} min</small></span></button><div className="finder-metric"><span>{metricLabel(feature)}</span><strong>{numberFormat(player[feature])}<small>/90</small></strong><b>{Math.round(percentile)}th</b></div><div className="finder-style"><span>{player.archetype}</span>{player.current_status && <small className={availabilityClass(player.current_status)}>Age {player.current_age} · {player.current_status}</small>}</div><button className={`finder-save ${saved ? "saved" : ""}`} onClick={() => onShortlist(player)}>{saved ? "Saved ✓" : "+ Save"}</button></article>; }) : <div className="finder-empty"><strong>No players meet every filter</strong><span>Broaden the age, availability, percentile or minutes criteria.</span></div>}</div>
+    <div className="finder-results">{results.length ? results.map((player, index) => { const percentile = percentileValue(percentiles, player, feature); const saved = shortlisted.includes(playerKey(player)); const evidence = profileEvidence(player); return <article key={playerKey(player)} className="finder-card"><div className="finder-rank">{String(index + 1).padStart(2, "0")}</div><button className="finder-player" aria-label={`Scout ${player.player_name}`} onClick={() => onScout(player)}><PlayerAvatar player={player} images={images} /><span><strong>{player.player_name}</strong><small>{player.club} · {Number(player.minutes ?? 0).toLocaleString()} min</small></span></button><div className="finder-metric"><span>{metricLabel(feature)}</span><strong>{numberFormat(player[feature])}<small>/90</small></strong><b>{Math.round(percentile)}th</b></div><div className="finder-style"><span>{player.archetype}</span><small className={`evidence-${evidence.className}`}>{evidence.label}</small>{player.current_status && <small className={availabilityClass(player.current_status)}>Age {player.current_age} · {player.current_status}</small>}</div><button className={`finder-save ${saved ? "saved" : ""}`} onClick={() => onShortlist(player)}>{saved ? "Saved ✓" : "+ Save"}</button></article>; }) : <div className="finder-empty"><strong>No players meet every filter</strong><span>Broaden the age, availability, percentile or minutes criteria.</span></div>}</div>
   </article>;
 }
 

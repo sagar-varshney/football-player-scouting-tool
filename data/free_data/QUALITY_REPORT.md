@@ -117,3 +117,14 @@ Generated from free sources.
 ## Verdict
 
 Use Understat as the first replacement for generated attacking and creative metrics. Use FPL as a supplement for current squad context and availability. This is free and usable, but it is still not a complete defensive/carrying/pressure scouting dataset.
+
+## Model validation
+
+- Completed-season returning-player transitions: 550
+- 900-minute prior error reduction versus raw per-90 rates: 10.1%
+- Current-prior error gap to the best tested prior: 0.26%
+- Top-10 recommendations retained across all four briefs: 57.8%
+- Five-cluster silhouette score: 0.294 (moderate separation)
+- Latest cluster-distribution drift: 10.9%
+
+The full generated methodology and caveats are in [MODEL_VALIDATION.md](MODEL_VALIDATION.md).

@@ -14,6 +14,7 @@ The project combines a Python data and machine-learning pipeline with a responsi
 - Find the closest stylistic matches for a selected player and season.
 - Tune every search toward goal threat, chance creation, link play, or a custom recruitment brief.
 - See whether a recommendation stays highly ranked across four different recruitment briefs.
+- Inspect completed-season model checks for reliability error, brief sensitivity, cluster separation, and drift.
 - Search a season-and-position recruitment pool by club, playing style, priority metric, percentile, and minutes.
 - Filter verified current-player identities by age and FPL availability status.
 - Save reusable finder searches in the browser.
@@ -27,6 +28,7 @@ The project combines a Python data and machine-learning pipeline with a responsi
 - Save up to 12 players to a browser-based shortlist, add decision statuses and scout notes, then export CSV or a printable report.
 - Compare a mixed-role shortlist with role-relative season-and-position percentiles.
 - Filter the workspace by position, season, target player, and result count.
+- See an early, building, or established sample flag directly on player profiles and finder cards.
 
 ## Current coverage
 
@@ -97,6 +99,8 @@ Recruitment intent is transparent and user-controlled. The default ranking uses 
 
 Recommendation stability is evaluated against all four named recruitment briefs. The product reports the candidate's best-to-worst rank range and labels stable, generally stable and brief-sensitive matches. This is sensitivity evidence, not a claim that the transfer itself is low risk.
 
+The committed model-validation report tests the reliability prior on 550 completed-season returning-player transitions. The 900-minute adjustment reduced normalized year-ahead error by 10.1% versus raw per-90 rates and finished within 0.26% of the best tested prior. Across all 1,854 profiles, 57.8% of top-10 recommendations remained present under every named recruitment brief. The five descriptive KMeans groups currently have a 0.294 silhouette score, so the product explicitly presents them as moderate-separation style groups rather than natural player categories. See [MODEL_VALIDATION.md](data/free_data/MODEL_VALIDATION.md) for the generated evidence.
+
 Current age and availability context comes from the free FPL public feed. Identities are linked only by an exact normalized name or a unique football name within the same club, each FPL identity can be assigned only once, and unmatched players remain blank. The FPL fields are clearly separated from the historical Understat season used for performance analysis.
 
 Every generated payload includes a source-derived dataset version, model version, minimum-minute rule and reliability prior. These identifiers appear in the product footer and make exported or shared recommendations easier to reproduce.
@@ -143,6 +147,7 @@ The generated frontend assets are committed, so refreshing data is optional for 
 ```bash
 python3 scripts/build_free_data.py
 python3 scripts/export_free_frontend_data.py
+python3 scripts/validate_free_model.py
 python3 scripts/build_understat_shot_data.py
 python3 scripts/build_statsbomb_event_lab.py
 python3 scripts/build_commons_player_images.py
@@ -187,6 +192,7 @@ football-player-scouting-tool/
 ├── app.py                          # Legacy Streamlit reference interface
 ├── DATA_SOURCES.md                 # Provider research and trade-offs
 ├── DATA_ROADMAP.md                 # Current data status and planned upgrades
+├── .github/workflows/validate.yml  # Automated data tests and production build
 └── requirements.txt
 ```
 
@@ -211,7 +217,7 @@ Portrait attribution is available in the application and in [PLAYER_IMAGE_CREDIT
 - Add contract and estimated-fee filters when reliable licensed data is available.
 - Expand current-season event coverage through a licensed provider.
 - Add account-backed collaboration if the local-first prototype graduates into a hosted product.
-- Back-test the reliability prior and ranking stability across completed seasons.
+- Add richer tactical and defensive validation when a comparable licensed current-season event source becomes affordable.
 
 ## Responsible use
 

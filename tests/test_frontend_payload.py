@@ -64,6 +64,15 @@ class FrontendPayloadTests(unittest.TestCase):
         for player in self.players:
             self.assertIn(player["archetype"], allowed[player["position"]])
 
+    def test_completed_season_validation_is_embedded(self):
+        validation = self.metadata["validation"]
+        self.assertGreaterEqual(validation["reliability"]["transition_pairs"], 500)
+        self.assertGreater(validation["reliability"]["current_prior_error_reduction_pct"], 0)
+        self.assertEqual(validation["brief_stability"]["evaluated_profiles"], len(self.players))
+        self.assertEqual(validation["clusters"]["cluster_count"], 5)
+        self.assertGreaterEqual(validation["clusters"]["silhouette_score"], -1)
+        self.assertLessEqual(validation["clusters"]["silhouette_score"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
