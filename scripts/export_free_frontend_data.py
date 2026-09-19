@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 import pathlib
 import sys
 import warnings
+from datetime import datetime, timezone
 
 os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(os.cpu_count() or 4))
 warnings.filterwarnings("ignore", message="Could not find the number of physical cores.*")
@@ -35,6 +37,9 @@ FREE_FEATURE_COLS = [
     "xg_chain_p90",
     "xg_buildup_p90",
 ]
+MODEL_VERSION = "understat-profile-v2.1"
+MINIMUM_MINUTES = 450
+RELIABILITY_PRIOR_MINUTES = 900
 
 
 def rounded_record(record: dict) -> dict:
@@ -109,6 +114,9 @@ def main() -> None:
     if not INPUT_PATH.exists():
         raise FileNotFoundError(f"Missing {INPUT_PATH}. Run `python scripts/build_free_data.py` first.")
 
+    source_bytes = INPUT_PATH.read_bytes()
+    dataset_version = f"epl-{hashlib.sha256(source_bytes).hexdigest()[:10]}"
+    generated_at = datetime.fromtimestamp(INPUT_PATH.stat().st_mtime, tz=timezone.utc).isoformat(timespec="seconds")
     players = pd.read_csv(INPUT_PATH)
     players = players[players["position"] != "Goalkeeper"].copy()
     players = players.dropna(subset=["player_name", "club", "season", "position"])
@@ -147,6 +155,11 @@ def main() -> None:
             "seasons": sorted(merged["season"].dropna().unique().tolist()),
             "features": FREE_FEATURE_COLS,
             "source_provider": "understat",
+            "dataset_version": dataset_version,
+            "model_version": MODEL_VERSION,
+            "generated_at": generated_at,
+            "minimum_minutes": MINIMUM_MINUTES,
+            "reliability_prior_minutes": RELIABILITY_PRIOR_MINUTES,
             "player_name_policy": "Curated football display names; raw provider names remain in the normalized source data.",
             "data_note": (
                 "Real free EPL player-season data from Understat, filtered to players with 450+ minutes. "

@@ -102,6 +102,11 @@
       "xg_buildup_p90"
     ],
     "source_provider": "understat",
+    "dataset_version": "epl-060ab89ca7",
+    "model_version": "understat-profile-v2.1",
+    "generated_at": "2026-09-14T15:23:59+00:00",
+    "minimum_minutes": 450,
+    "reliability_prior_minutes": 900,
     "player_name_policy": "Curated football display names; raw provider names remain in the normalized source data.",
     "data_note": "Real free EPL player-season data from Understat, filtered to players with 450+ minutes. Metrics cover attacking and creative style: xG, xA, shots, key passes, move involvement, and buildup play. Defensive actions, carries, pressures, and progressive passes are not available in this free source."
   },

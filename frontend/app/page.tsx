@@ -45,6 +45,11 @@ type Payload = {
     seasons?: string[];
     features: Feature[];
     source_provider?: string;
+    dataset_version?: string;
+    model_version?: string;
+    generated_at?: string;
+    minimum_minutes?: number;
+    reliability_prior_minutes?: number;
     data_note: string;
   };
   players: Player[];
@@ -64,6 +69,26 @@ type Match = Player & {
 };
 
 type PercentileLookup = Record<string, Record<Feature, number>>;
+
+type SimilarityPriorities = Record<"Finishing" | "Creation" | "Involvement", number>;
+
+type ShortlistDetail = {
+  status: "Watching" | "Review" | "Priority";
+  note: string;
+};
+
+type SavedFinderSearch = {
+  id: string;
+  label: string;
+  position: string;
+  season: string;
+  query: string;
+  club: string;
+  archetype: string;
+  feature: Feature;
+  minimumPercentile: number;
+  minimumMinutes: number;
+};
 
 type Shot = {
   season: string;
@@ -169,6 +194,13 @@ const clusterColors = ["#b8ff3d", "#27d8ff", "#ffcc3d", "#ff4f91", "#9b7bff", "#
 const targetColor = "#ff2d8d";
 const compareColor = "#83e63f";
 const PRIOR_MINUTES = 900;
+const defaultPriorities: SimilarityPriorities = { Finishing: 100, Creation: 100, Involvement: 100 };
+const priorityPresets: Array<{ name: string; description: string; values: SimilarityPriorities }> = [
+  { name: "Balanced role", description: "Keep the position-aware baseline", values: defaultPriorities },
+  { name: "Goal threat", description: "Prioritise scoring and shot profile", values: { Finishing: 165, Creation: 65, Involvement: 80 } },
+  { name: "Chance creator", description: "Prioritise assists and chance quality", values: { Finishing: 70, Creation: 165, Involvement: 95 } },
+  { name: "Link player", description: "Prioritise involvement and buildup", values: { Finishing: 65, Creation: 100, Involvement: 170 } },
+];
 
 function playerKey(player: Player) {
   return `${player.player_name}__${player.club}__${player.position}__${player.season ?? "single"}`;
@@ -214,30 +246,35 @@ function percentileValue(lookup: PercentileLookup, player: Player | undefined, f
   return lookup[playerKey(player)]?.[feature] ?? metricValue(player, `pct_${feature}`);
 }
 
-function featureWeight(position: string, feature: Feature) {
-  return positionMetricWeights[position]?.[feature] ?? 1;
+function featureCategory(feature: Feature) {
+  return (Object.entries(similarityCategories).find(([, features]) => features.includes(feature))?.[0] ?? "Involvement") as keyof SimilarityPriorities;
 }
 
-function metricOverlap(target: Player, candidate: Player, features: Feature[]) {
-  const totalWeight = features.reduce((sum, feature) => sum + featureWeight(target.position, feature), 0) || 1;
+function featureWeight(position: string, feature: Feature, priorities: SimilarityPriorities = defaultPriorities) {
+  const intentWeight = priorities[featureCategory(feature)] / 100;
+  return (positionMetricWeights[position]?.[feature] ?? 1) * intentWeight;
+}
+
+function metricOverlap(target: Player, candidate: Player, features: Feature[], priorities: SimilarityPriorities) {
+  const totalWeight = features.reduce((sum, feature) => sum + featureWeight(target.position, feature, priorities), 0) || 1;
   return features.reduce((sum, feature) => {
     const targetValue = metricValue(target, feature);
     const candidateValue = metricValue(candidate, feature);
     const denominator = Math.abs(targetValue) || 1;
     const gap = Math.min(Math.abs(candidateValue - targetValue) / denominator, 1);
-    return sum + (1 - gap) * 100 * featureWeight(target.position, feature);
+    return sum + (1 - gap) * 100 * featureWeight(target.position, feature, priorities);
   }, 0) / totalWeight;
 }
 
-function findMatches(players: Player[], target: Player, topN: number, features: Feature[], percentiles: PercentileLookup) {
-  const totalWeight = features.reduce((sum, feature) => sum + featureWeight(target.position, feature), 0) || 1;
+function findMatches(players: Player[], target: Player, topN: number, features: Feature[], percentiles: PercentileLookup, priorities: SimilarityPriorities) {
+  const totalWeight = features.reduce((sum, feature) => sum + featureWeight(target.position, feature, priorities), 0) || 1;
   return players
     .filter((player) => playerKey(player) !== playerKey(target) && player.position === target.position)
     .map((player) => {
       const featureFits = features.map((feature) => ({
         feature,
         fit: 100 - Math.abs(percentileValue(percentiles, target, feature) - percentileValue(percentiles, player, feature)),
-        weight: featureWeight(target.position, feature),
+        weight: featureWeight(target.position, feature, priorities),
       }));
       const similarityPct = featureFits.reduce((sum, item) => sum + item.fit * item.weight, 0) / totalWeight;
       const categoryScores = Object.fromEntries(Object.entries(similarityCategories).map(([category, categoryFeatures]) => {
@@ -248,7 +285,7 @@ function findMatches(players: Player[], target: Player, topN: number, features: 
       const sharedStrengthsLabel = featureFits.slice().sort((a, b) => (b.fit * b.weight) - (a.fit * a.weight)).slice(0, 2).map((item) => compactLabel(item.feature)).join(" + ");
       const sampleScore = Math.min(100, Math.max(25, (Math.min(Number(target.minutes ?? 0), Number(player.minutes ?? 0)) / 1800) * 100));
       const sampleLabel = sampleScore >= 80 ? "Robust sample" : sampleScore >= 55 ? "Established sample" : "Developing sample";
-      return { ...player, similarity: similarityPct / 100, similarityPct, overlap: metricOverlap(target, player, features), sampleScore, sampleLabel, finishingScore: categoryScores.Finishing, creationScore: categoryScores.Creation, involvementScore: categoryScores.Involvement, sharedStrengthsLabel };
+      return { ...player, similarity: similarityPct / 100, similarityPct, overlap: metricOverlap(target, player, features, priorities), sampleScore, sampleLabel, finishingScore: categoryScores.Finishing, creationScore: categoryScores.Creation, involvementScore: categoryScores.Involvement, sharedStrengthsLabel };
     })
     .sort((a, b) => b.similarity - a.similarity)
     .slice(0, topN);
@@ -299,6 +336,8 @@ export default function Page() {
   const [xMetric, setXMetric] = useState<Feature>("shots_p90");
   const [yMetric, setYMetric] = useState<Feature>("key_passes_p90");
   const [shortlist, setShortlist] = useState<string[]>([]);
+  const [shortlistDetails, setShortlistDetails] = useState<Record<string, ShortlistDetail>>({});
+  const [priorities, setPriorities] = useState<SimilarityPriorities>(defaultPriorities);
   const [shots, setShots] = useState<Shot[]>([]);
   const [shotStatus, setShotStatus] = useState<"loading" | "ready" | "missing">("loading");
   const [eventManifest, setEventManifest] = useState<EventLabManifest | null>(null);
@@ -330,12 +369,17 @@ export default function Page() {
 
   useEffect(() => {
     if (!payload || urlReady) return;
-    const requestedKey = new URLSearchParams(window.location.search).get("player");
+    const params = new URLSearchParams(window.location.search);
+    const requestedKey = params.get("player");
     const requestedPlayer = requestedKey ? payload.players.find((player) => playerKey(player) === requestedKey) : null;
     if (requestedPlayer) {
       setPosition(requestedPlayer.position);
       setSeason(requestedPlayer.season ?? "Latest");
       setTargetKey(playerKey(requestedPlayer));
+    }
+    const requestedWeights = params.get("weights")?.split(",").map(Number);
+    if (requestedWeights?.length === 3 && requestedWeights.every((value) => Number.isFinite(value) && value >= 25 && value <= 200)) {
+      setPriorities({ Finishing: requestedWeights[0], Creation: requestedWeights[1], Involvement: requestedWeights[2] });
     }
     setUrlReady(true);
   }, [payload, urlReady]);
@@ -348,6 +392,17 @@ export default function Page() {
       if (Array.isArray(parsed)) setShortlist(parsed.filter((item) => typeof item === "string"));
     } catch {
       window.localStorage.removeItem("player-scouting-shortlist");
+    }
+  }, []);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("player-scouting-shortlist-details");
+    if (!saved) return;
+    try {
+      const parsed = JSON.parse(saved);
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) setShortlistDetails(parsed);
+    } catch {
+      window.localStorage.removeItem("player-scouting-shortlist-details");
     }
   }, []);
 
@@ -387,9 +442,10 @@ export default function Page() {
     if (!target || !urlReady) return;
     const url = new URL(window.location.href);
     url.searchParams.set("player", playerKey(target));
+    url.searchParams.set("weights", `${priorities.Finishing},${priorities.Creation},${priorities.Involvement}`);
     window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
     setShareCopied(false);
-  }, [target, urlReady]);
+  }, [target, urlReady, priorities]);
 
   useEffect(() => {
     const providerId = Number(target?.provider_player_id);
@@ -471,8 +527,8 @@ export default function Page() {
 
   const matches = useMemo(() => {
     if (!payload || !target) return [];
-    return findMatches(pool, target, topN, payload.metadata.features, cohortPercentiles);
-  }, [payload, pool, target, topN, cohortPercentiles]);
+    return findMatches(pool, target, topN, payload.metadata.features, cohortPercentiles, priorities);
+  }, [payload, pool, target, topN, cohortPercentiles, priorities]);
 
   useEffect(() => {
     if (matches.length) setCompareKey(playerKey(matches[0]));
@@ -512,6 +568,29 @@ export default function Page() {
     window.localStorage.setItem("player-scouting-shortlist", JSON.stringify(next));
   }
 
+  function updateShortlistDetail(key: string, detail: Partial<ShortlistDetail>) {
+    const current = shortlistDetails[key] ?? { status: "Watching" as const, note: "" };
+    const next = { ...shortlistDetails, [key]: { ...current, ...detail } };
+    setShortlistDetails(next);
+    window.localStorage.setItem("player-scouting-shortlist-details", JSON.stringify(next));
+  }
+
+  function exportShortlist() {
+    if (!payload) return;
+    const columns = ["Player", "Club", "Position", "Season", "Playing style", "Minutes", "Status", "Scout notes", ...payload.metadata.features.map((feature) => `${metricLabel(feature)} /90`)];
+    const quote = (value: unknown) => `"${String(value ?? "").replaceAll('"', '""')}"`;
+    const rows = shortlistPlayers.map((player) => {
+      const detail = shortlistDetails[playerKey(player)] ?? { status: "Watching", note: "" };
+      return [player.player_name, player.club, player.position, player.season, player.archetype, player.minutes, detail.status, detail.note, ...payload.metadata.features.map((feature) => numberFormat(player[feature]))];
+    });
+    const blob = new Blob([[columns, ...rows].map((row) => row.map(quote).join(",")).join("\n")], { type: "text/csv;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `scoutlab-shortlist-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
   async function shareProfile() {
     if (!target) return;
     const url = new URL(window.location.href);
@@ -534,6 +613,7 @@ export default function Page() {
   }
 
   const shortlistPlayers = shortlist.map((key) => payload.players.find((player) => playerKey(player) === key)).filter(Boolean) as Player[];
+  const activePreset = priorityPresets.find((preset) => (Object.keys(defaultPriorities) as Array<keyof SimilarityPriorities>).every((category) => preset.values[category] === priorities[category]));
   const playerImages = imageManifest?.players ?? {};
   const targetImage = playerImage(target, playerImages);
   const imageCredits = imageManifest ? Object.entries(playerImages).sort(([, a], [, b]) => a.player_name.localeCompare(b.player_name)) : [];
@@ -548,7 +628,7 @@ export default function Page() {
         <nav className="nav-links" aria-label="Dashboard sections">
           <a href="#finder">Finder</a><a href="#similarity">Similar players</a><a href="#heatmaps">Shot map</a><a href="#event-lab">Action map</a><a href="#trends">Trends</a><a href="#compare">Compare</a><a href="#shortlist">Shortlist <b>{shortlist.length}</b></a>
         </nav>
-        <div className="dataset-status"><i /><span>Ready to scout</span><strong>{payload.metadata.row_count.toLocaleString()} player profiles</strong></div>
+        <div className="dataset-status"><i /><span>Ready to scout</span><strong>{payload.metadata.row_count.toLocaleString()} profiles · {payload.metadata.model_version ?? "profile model"}</strong></div>
       </header>
 
       <main className="workspace" id="top">
@@ -600,13 +680,20 @@ export default function Page() {
           <div className="data-caveat"><span>What’s included</span><p>This profile focuses on attacking and creative performance. Defensive work, pressures, carries and progressive passing will appear when reliable coverage is available.</p></div>
         </section>
 
+        <section className="intent-panel panel" aria-label="Similarity priorities">
+          <div className="intent-copy"><span className="eyebrow">Recruitment intent</span><h2>Tell the model what matters for this search</h2><p>The position-aware baseline still applies. These priorities change how strongly each part of the profile influences the ranking.</p></div>
+          <div className="intent-presets">{priorityPresets.map((preset) => <button type="button" key={preset.name} className={activePreset?.name === preset.name ? "active" : ""} onClick={() => setPriorities(preset.values)}><strong>{preset.name}</strong><span>{preset.description}</span></button>)}</div>
+          <div className="intent-sliders">{(Object.keys(priorities) as Array<keyof SimilarityPriorities>).map((category) => <label key={category}><span><b>{category}</b><strong>{priorities[category]}%</strong></span><input type="range" min="25" max="200" step="5" value={priorities[category]} onChange={(event) => setPriorities({ ...priorities, [category]: Number(event.target.value) })} /></label>)}</div>
+          <div className="intent-status"><span>{activePreset?.name ?? "Custom brief"}</span><p>Rankings and match explanations update instantly. Shared profile links preserve this brief.</p><button type="button" onClick={() => setPriorities(defaultPriorities)}>Reset priorities</button></div>
+        </section>
+
         <section id="finder" className="section-block">
           <SectionHeading eyebrow="Recruitment finder" title="Build a data-led player search" aside={`${selectedSeason} · ${position}s`} />
-          <PlayerFinder players={pool} features={payload.metadata.features} percentiles={cohortPercentiles} onScout={scoutPlayer} onShortlist={toggleShortlist} shortlisted={shortlist} images={playerImages} />
+          <PlayerFinder players={pool} features={payload.metadata.features} percentiles={cohortPercentiles} position={position} season={String(selectedSeason)} onLoadContext={(nextPosition, nextSeason) => { setPosition(nextPosition); setSeason(nextSeason); }} onScout={scoutPlayer} onShortlist={toggleShortlist} shortlisted={shortlist} images={playerImages} />
         </section>
 
         <section id="similarity" className="section-block">
-          <SectionHeading eyebrow="Similar players" title="Players who match this profile" aside={`${matches.length} recommendations · same role and season`} />
+          <SectionHeading eyebrow="Similar players" title="Players who match this profile" aside={`${matches.length} recommendations · ${activePreset?.name ?? "custom brief"}`} />
           <div className="match-strip">
             {matches.slice(0, 5).map((match, index) => (
               <article key={playerKey(match)} className="match-card">
@@ -700,25 +787,53 @@ export default function Page() {
         </section>
 
         <section id="shortlist" className="shortlist-panel panel">
-          <div className="panel-heading"><div><span className="eyebrow">Your recruitment list</span><h2>Players to watch</h2></div>{shortlistPlayers.length > 0 && <button className="ghost-action" onClick={() => { setShortlist([]); window.localStorage.removeItem("player-scouting-shortlist"); }}>Clear shortlist</button>}</div>
-          <div className="shortlist-grid">{shortlistPlayers.length ? shortlistPlayers.map((player, index) => <article key={playerKey(player)}><button onClick={() => setTargetKey(playerKey(player))}><span className="shortlist-number">0{index + 1}</span><PlayerAvatar player={player} images={playerImages} className="match-avatar" /><span><strong>{player.player_name}</strong><small>{player.club} · {player.position} · {player.season}</small><b>{player.archetype}</b></span></button><MiniHeatStrip player={player} features={payload.metadata.features} percentiles={cohortPercentiles} /></article>) : <div className="empty-shortlist"><span>＋</span><strong>No players shortlisted yet</strong><p>Save a promising match to start building your recruitment list.</p></div>}</div>
+          <div className="panel-heading"><div><span className="eyebrow">Your recruitment list</span><h2>Players to watch</h2><p className="panel-subtitle">Add a decision status and scout notes, then export the list for review.</p></div>{shortlistPlayers.length > 0 && <div className="shortlist-actions"><button className="ghost-action" onClick={exportShortlist}>Export CSV ↓</button><button className="ghost-action" onClick={() => window.print()}>Print report ↗</button><button className="ghost-action danger" onClick={() => { setShortlist([]); setShortlistDetails({}); window.localStorage.removeItem("player-scouting-shortlist"); window.localStorage.removeItem("player-scouting-shortlist-details"); }}>Clear</button></div>}</div>
+          <div className="shortlist-grid">{shortlistPlayers.length ? shortlistPlayers.map((player, index) => { const key = playerKey(player); const detail = shortlistDetails[key] ?? { status: "Watching", note: "" }; return <article key={key} className={`shortlist-card status-${detail.status.toLowerCase()}`}><div className="shortlist-player-row"><button onClick={() => scoutPlayer(player)}><span className="shortlist-number">{String(index + 1).padStart(2, "0")}</span><PlayerAvatar player={player} images={playerImages} className="match-avatar" /><span><strong>{player.player_name}</strong><small>{player.club} · {player.position} · {player.season}</small><b>{player.archetype}</b></span></button><button className="remove-player" onClick={() => toggleShortlist(player)} aria-label={`Remove ${player.player_name}`}>×</button></div><MiniHeatStrip player={player} features={payload.metadata.features} percentiles={cohortPercentiles} /><div className="shortlist-detail"><label><span>Decision status</span><select value={detail.status} onChange={(event) => updateShortlistDetail(key, { status: event.target.value as ShortlistDetail["status"] })}><option>Watching</option><option>Review</option><option>Priority</option></select></label><label><span>Scout notes</span><textarea value={detail.note} maxLength={240} placeholder="Add fit, risk or follow-up notes…" onChange={(event) => updateShortlistDetail(key, { note: event.target.value })} /></label></div></article>; }) : <div className="empty-shortlist"><span>＋</span><strong>No players shortlisted yet</strong><p>Save a promising match to start building your recruitment list.</p></div>}</div>
         </section>
 
         <details className="raw-panel panel"><summary>View full performance numbers <span>＋</span></summary><div className="raw-grid">{payload.metadata.features.map((feature) => <div key={feature}><span>{metricLabel(feature)}</span><strong>{numberFormat(target[feature])}</strong><small>per 90 minutes</small></div>)}</div></details>
         {imageManifest && <details className="photo-credits panel"><summary><span><b>Licensed player photography</b><small>{imageManifest.covered_players} of {imageManifest.total_players} players · initials shown when no verified image is available</small></span><i>View credits ＋</i></summary><p>Portraits are sourced from Wikimedia Commons only after an exact footballer match and reusable licence check. Images are displayed with a centre crop.</p><div className="photo-credit-grid">{imageCredits.map(([providerId, image]) => <div key={providerId}><strong>{image.player_name}</strong><span>{image.creator || "Wikimedia contributor"}</span><a href={image.source_url} target="_blank" rel="noreferrer">Source</a><a href={image.license_url} target="_blank" rel="noreferrer">{image.license}</a></div>)}</div></details>}
-        <footer className="data-note"><span>SCOUT//LAB · PLAYER INTELLIGENCE</span><p>Compare Premier League players using attacking and creative performance data, measured per 90 minutes for a fairer view.</p><div><b>{clubs.size}</b> clubs represented <i /> <b>{payload.metadata.features.length}</b> performance measures <i /> <b>450+</b> minutes to qualify</div></footer>
+        <footer className="data-note"><span>SCOUT//LAB · PLAYER INTELLIGENCE</span><p>Compare Premier League players using attacking and creative performance data, measured per 90 minutes for a fairer view.</p><div><b>{clubs.size}</b> clubs <i /> <b>{payload.metadata.features.length}</b> measures <i /> <b>{payload.metadata.minimum_minutes ?? 450}+</b> minutes <i /> <b>{payload.metadata.dataset_version ?? "dataset"}</b></div></footer>
       </main>
     </div>
   );
 }
 
-function PlayerFinder({ players, features, percentiles, onScout, onShortlist, shortlisted, images }: { players: Player[]; features: Feature[]; percentiles: PercentileLookup; onScout: (player: Player) => void; onShortlist: (player: Player) => void; shortlisted: string[]; images: Record<string, PlayerImage> }) {
+function PlayerFinder({ players, features, percentiles, position, season, onLoadContext, onScout, onShortlist, shortlisted, images }: { players: Player[]; features: Feature[]; percentiles: PercentileLookup; position: string; season: string; onLoadContext: (position: string, season: string) => void; onScout: (player: Player) => void; onShortlist: (player: Player) => void; shortlisted: string[]; images: Record<string, PlayerImage> }) {
   const [query, setQuery] = useState("");
   const [club, setClub] = useState("All");
   const [archetype, setArchetype] = useState("All");
   const [feature, setFeature] = useState<Feature>(features.includes("key_passes_p90") ? "key_passes_p90" : features[0]);
   const [minimumPercentile, setMinimumPercentile] = useState(75);
   const [minimumMinutes, setMinimumMinutes] = useState(900);
+  const [savedSearches, setSavedSearches] = useState<SavedFinderSearch[]>([]);
+  const [searchSaved, setSearchSaved] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(window.localStorage.getItem("player-scouting-saved-searches") ?? "[]");
+      if (Array.isArray(saved)) setSavedSearches(saved.slice(0, 6));
+    } catch {
+      window.localStorage.removeItem("player-scouting-saved-searches");
+    }
+  }, []);
+
+  function persistSearches(next: SavedFinderSearch[]) {
+    setSavedSearches(next);
+    window.localStorage.setItem("player-scouting-saved-searches", JSON.stringify(next));
+  }
+
+  function saveSearch() {
+    const saved: SavedFinderSearch = { id: String(Date.now()), label: `${position} · ${metricLabel(feature)} ${minimumPercentile ? `${minimumPercentile}th+` : "any"}`, position, season, query, club, archetype, feature, minimumPercentile, minimumMinutes };
+    persistSearches([saved, ...savedSearches.filter((item) => item.label !== saved.label)].slice(0, 6));
+    setSearchSaved(true);
+    window.setTimeout(() => setSearchSaved(false), 1600);
+  }
+
+  function loadSearch(saved: SavedFinderSearch) {
+    onLoadContext(saved.position, saved.season);
+    setQuery(saved.query); setClub(saved.club); setArchetype(saved.archetype); setFeature(saved.feature); setMinimumPercentile(saved.minimumPercentile); setMinimumMinutes(saved.minimumMinutes);
+  }
   const clubs = useMemo(() => Array.from(new Set(players.flatMap((player) => player.club.split(",").map((item) => item.trim())))).sort(), [players]);
   const archetypes = useMemo(() => Array.from(new Set(players.map((player) => player.archetype))).sort(), [players]);
   const results = useMemo(() => {
@@ -740,6 +855,7 @@ function PlayerFinder({ players, features, percentiles, onScout, onShortlist, sh
       <label><span>Minimum percentile</span><select value={minimumPercentile} onChange={(event) => setMinimumPercentile(Number(event.target.value))}>{[0, 60, 75, 85, 90].map((value) => <option key={value} value={value}>{value === 0 ? "Any percentile" : `${value}th+`}</option>)}</select></label>
       <label><span>Minimum minutes</span><select value={minimumMinutes} onChange={(event) => setMinimumMinutes(Number(event.target.value))}>{[450, 900, 1350, 1800].map((value) => <option key={value} value={value}>{value.toLocaleString()}+</option>)}</select></label>
     </div>
+    <div className="saved-search-bar"><button type="button" className="save-search" onClick={saveSearch}>{searchSaved ? "Search saved ✓" : "+ Save this search"}</button>{savedSearches.length > 0 && <div className="saved-searches"><span>Saved briefs</span>{savedSearches.map((saved) => <div key={saved.id} className={saved.position !== position || saved.season !== season ? "out-of-context" : ""}><button type="button" title={saved.position !== position || saved.season !== season ? `Created for ${saved.position}s · ${saved.season}` : "Load saved search"} onClick={() => loadSearch(saved)}>{saved.label}</button><button type="button" aria-label={`Delete ${saved.label}`} onClick={() => persistSearches(savedSearches.filter((item) => item.id !== saved.id))}>×</button></div>)}</div>}</div>
     <div className="finder-summary"><div><strong>{results.length}</strong><span>best results shown</span></div><p>Percentiles are adjusted toward the positional average when a player has fewer minutes, reducing small-sample noise.</p></div>
     <div className="finder-results">{results.length ? results.map((player, index) => { const percentile = percentileValue(percentiles, player, feature); const saved = shortlisted.includes(playerKey(player)); return <article key={playerKey(player)} className="finder-card"><div className="finder-rank">{String(index + 1).padStart(2, "0")}</div><button className="finder-player" aria-label={`Scout ${player.player_name}`} onClick={() => onScout(player)}><PlayerAvatar player={player} images={images} /><span><strong>{player.player_name}</strong><small>{player.club} · {Number(player.minutes ?? 0).toLocaleString()} min</small></span></button><div className="finder-metric"><span>{metricLabel(feature)}</span><strong>{numberFormat(player[feature])}<small>/90</small></strong><b>{Math.round(percentile)}th</b></div><div className="finder-style">{player.archetype}</div><button className={`finder-save ${saved ? "saved" : ""}`} onClick={() => onShortlist(player)}>{saved ? "Saved ✓" : "+ Save"}</button></article>; }) : <div className="finder-empty"><strong>No players meet every filter</strong><span>Lower the percentile or minutes threshold to widen the search.</span></div>}</div>
   </article>;

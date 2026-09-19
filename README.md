@@ -12,7 +12,9 @@ The project combines a Python data and machine-learning pipeline with a responsi
 ## What you can do
 
 - Find the closest stylistic matches for a selected player and season.
+- Tune every search toward goal threat, chance creation, link play, or a custom recruitment brief.
 - Search a season-and-position recruitment pool by club, playing style, priority metric, percentile, and minutes.
+- Save reusable finder searches in the browser.
 - Compare percentile profiles with an overlaid radar chart.
 - Follow a player's multi-season trajectory with reliability-adjusted percentile trends.
 - See licence-verified player portraits where reusable photography is available, with initials as a safe fallback.
@@ -20,7 +22,7 @@ The project combines a Python data and machine-learning pipeline with a responsi
 - Explore real Understat shot-density maps and individual shot locations.
 - Inspect recorded on-ball activity from StatsBomb Open Data.
 - Compare players on any two available performance measures.
-- Save up to 12 players to a browser-based shortlist.
+- Save up to 12 players to a browser-based shortlist, add decision statuses and scout notes, then export CSV or a printable report.
 - Filter the workspace by position, season, target player, and result count.
 
 ## Current coverage
@@ -86,6 +88,10 @@ flowchart LR
 The production export uses eight per-90 features: goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup. Features are standardized before a five-cluster KMeans model is fitted. In the product, every rate is partially pooled toward its season-and-position average with a 900-minute prior before percentile ranking. This empirical-Bayes-style adjustment reduces small-sample extremes without changing the raw numbers shown to the user. Players are then compared with position-specific feature weights. This keeps a forward match focused on finishing, a winger match balanced between threat and creation, and a midfielder or defender match more sensitive to involvement and buildup. Each recommendation exposes finishing, creation and involvement fit plus a minutes-based evidence-strength label. The recruitment finder and trend chart use the same adjusted percentiles, while human-readable archetypes remain percentile-based heuristics.
 
 The browser consumes precomputed JSON, so exploring players does not require a live Python server or external API calls.
+
+Recruitment intent is transparent and user-controlled. The default ranking uses position-specific feature weights; goal-threat, chance-creation and link-player presets multiply the relevant feature families without changing the underlying recorded values. Custom weights are preserved in shared profile URLs so another reviewer sees the same brief.
+
+Every generated payload includes a source-derived dataset version, model version, minimum-minute rule and reliability prior. These identifiers appear in the product footer and make exported or shared recommendations easier to reproduce.
 
 Player identity and presentation are kept separate: provider IDs remain the stable identity, raw source names stay in the normalized datasets, and a small reviewed override table supplies recognisable football display names and correct diacritics in the product. HTML entities in provider names are decoded automatically. Add future corrections to `src/display_names.py` rather than editing generated JSON.
 
@@ -185,11 +191,11 @@ Portrait attribution is available in the application and in [PLAYER_IMAGE_CREDIT
 
 ## Roadmap
 
-- Add user-adjustable similarity priorities and saved finder searches.
+- Add team tactical context and role-specific defensive features when comparable licensed data is available.
 - Add age, availability, contract, and estimated-fee filters when reliable data is available.
 - Expand current-season event coverage through a licensed provider.
-- Add shortlist export and printable player reports.
-- Add automated data validation and model-quality tests.
+- Add account-backed collaboration if the local-first prototype graduates into a hosted product.
+- Expand automated match-stability and model-quality tests.
 
 ## Responsible use
 

@@ -12,6 +12,9 @@ The production web application now uses real, cached football data. The legacy s
 - **Identity and availability supplement:** 658 current FPL player rows are available in the normalized data layer but are not used as similarity features.
 - **Model output:** standardized per-90 features and five KMeans clusters are exported to the frontend. The product calculates 900-minute reliability-adjusted season-and-position percentiles, position-weighted matches, category-level explanations, and evidence strength at runtime.
 - **Recruitment workflow:** the web app includes a filterable player finder and multi-season trend view. Both use the same reliability adjustment while keeping recorded per-90 values visible.
+- **Recruitment briefs:** users can tune similarity toward finishing, creation or involvement, use named presets, save finder searches, and share profile links that preserve the selected weights.
+- **Decision workflow:** shortlisted players support review statuses, scout notes, CSV export and printable reports in local browser storage.
+- **Reproducibility:** generated payloads expose source-derived dataset and model versions, and automated contract tests validate every committed player profile.
 - **API-Football integration:** a cached, environment-keyed enrichment pipeline is ready for quota-safe coverage testing; its fields are not yet active in the production similarity model.
 - **API-Football free-plan result:** the 2024/25 team-based pull returned 1,132 normalized rows, including 388 above 450 minutes, but seven club pages were blocked and 2025/26 was unavailable.
 
@@ -27,7 +30,6 @@ The production web application now uses real, cached football data. The legacy s
 
 ### 1. Strengthen the model
 
-- Add user-adjustable similarity priorities and saved recruitment searches.
 - Back-test the 900-minute prior across seasons and position groups, then tune it by metric if validation supports that complexity.
 - Add automated stability checks for the strongest matches and largest profile differences.
 - Track cluster quality with silhouette scores and monitor cluster drift after data refreshes.
@@ -48,9 +50,8 @@ The production web application now uses real, cached football data. The legacy s
 
 ### 4. Improve delivery
 
-- Add automated source validation and build checks.
-- Export shortlists and generate shareable player reports.
-- Record dataset and model versions in every generated payload.
+- Add match-stability snapshots and automated source validation to continuous integration.
+- Add account-backed shortlist collaboration only when a hosted backend is justified.
 - Schedule controlled refreshes once source stability and terms are confirmed.
 
 ## Target production schema
