@@ -86,6 +86,11 @@ FPL_COLUMNS = [
     "selected_by_percent",
     "now_cost",
     "status",
+    "birth_date",
+    "news",
+    "news_added",
+    "chance_of_playing_next_round",
+    "chance_of_playing_this_round",
     "source_provider",
 ]
 
@@ -245,6 +250,11 @@ def build_fpl_dataset() -> pd.DataFrame:
                 "selected_by_percent": to_float(player.get("selected_by_percent")),
                 "now_cost": to_int(player.get("now_cost")) / 10,
                 "status": player.get("status"),
+                "birth_date": player.get("birth_date"),
+                "news": player.get("news") or "",
+                "news_added": player.get("news_added"),
+                "chance_of_playing_next_round": player.get("chance_of_playing_next_round"),
+                "chance_of_playing_this_round": player.get("chance_of_playing_this_round"),
                 "source_provider": "fpl",
             }
         )
@@ -341,17 +351,25 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build normalized free football data samples.")
     parser.add_argument("--understat-seasons", default="2021-2025", help="Start years, e.g. 2021-2025 or 2021,2022,2023")
     parser.add_argument("--min-minutes", type=int, default=450)
+    parser.add_argument("--fpl-only", action="store_true", help="Refresh FPL context while preserving the cached Understat dataset.")
     args = parser.parse_args()
 
     start_years = parse_years(args.understat_seasons)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    understat = build_understat_dataset(start_years, min_minutes=args.min_minutes)
+    understat_path = OUT_DIR / "understat_epl_player_seasons.csv"
+    if args.fpl_only:
+        if not understat_path.exists():
+            raise FileNotFoundError(f"Missing {understat_path}; a full build is required first.")
+        understat = pd.read_csv(understat_path)
+        start_years = sorted({int(str(season).split("-", 1)[0]) for season in understat["season"].unique()})
+    else:
+        understat = build_understat_dataset(start_years, min_minutes=args.min_minutes)
     fpl = build_fpl_dataset()
 
-    understat_path = OUT_DIR / "understat_epl_player_seasons.csv"
     fpl_path = OUT_DIR / "fpl_current_players.csv"
-    understat.to_csv(understat_path, index=False)
+    if not args.fpl_only:
+        understat.to_csv(understat_path, index=False)
     fpl.to_csv(fpl_path, index=False)
 
     metadata = {
@@ -370,7 +388,8 @@ def main() -> int:
     (OUT_DIR / "metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     report_path = write_quality_report(understat, fpl, start_years, args.min_minutes)
 
-    print(f"Wrote {understat_path.relative_to(ROOT)} ({len(understat)} rows)")
+    action = "Preserved" if args.fpl_only else "Wrote"
+    print(f"{action} {understat_path.relative_to(ROOT)} ({len(understat)} rows)")
     print(f"Wrote {fpl_path.relative_to(ROOT)} ({len(fpl)} rows)")
     print(f"Wrote {report_path.relative_to(ROOT)}")
     return 0

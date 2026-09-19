@@ -9,12 +9,15 @@ The production web application now uses real, cached football data. The legacy s
 - **Understat player seasons:** 1,854 Premier League player-season rows from 2021/22 through 2025/26 after a 450-minute filter.
 - **Understat shot locations:** 48,492 attempts across 819 cached player files.
 - **StatsBomb Open Data:** recorded on-ball actions for 548 players across all 380 matches in the 2015/16 Premier League season.
-- **Identity and availability supplement:** 658 current FPL player rows are available in the normalized data layer but are not used as similarity features.
+- **Identity and availability supplement:** 662 current FPL player rows retain birth date, status and availability news. A conservative one-to-one linker currently connects 283 identities to the latest Understat cohort; these fields are not similarity features.
 - **Model output:** standardized per-90 features and five KMeans clusters are exported to the frontend. The product calculates 900-minute reliability-adjusted season-and-position percentiles, position-weighted matches, category-level explanations, and evidence strength at runtime.
 - **Recruitment workflow:** the web app includes a filterable player finder and multi-season trend view. Both use the same reliability adjustment while keeping recorded per-90 values visible.
 - **Recruitment briefs:** users can tune similarity toward finishing, creation or involvement, use named presets, save finder searches, and share profile links that preserve the selected weights.
 - **Decision workflow:** shortlisted players support review statuses, scout notes, CSV export and printable reports in local browser storage.
 - **Reproducibility:** generated payloads expose source-derived dataset and model versions, and automated contract tests validate every committed player profile.
+- **Stability evidence:** every recommended match is ranked under balanced, goal-threat, chance-creation and link-player briefs, exposing its rank range and sensitivity label.
+- **Role system:** position-specific percentile rules now distinguish six forward roles, six winger roles, six midfielder roles and four defender roles without claiming unavailable defensive or tactical evidence.
+- **Shortlist comparison:** mixed-position shortlists are compared with percentiles recalculated inside each player's own season-and-position cohort.
 - **API-Football integration:** a cached, environment-keyed enrichment pipeline is ready for quota-safe coverage testing; its fields are not yet active in the production similarity model.
 - **API-Football free-plan result:** the 2024/25 team-based pull returned 1,132 normalized rows, including 388 above 450 minutes, but seven club pages were blocked and 2025/26 was unavailable.
 
@@ -31,13 +34,12 @@ The production web application now uses real, cached football data. The legacy s
 ### 1. Strengthen the model
 
 - Back-test the 900-minute prior across seasons and position groups, then tune it by metric if validation supports that complexity.
-- Add automated stability checks for the strongest matches and largest profile differences.
+- Back-test the reliability prior and match stability across completed seasons.
 - Track cluster quality with silhouette scores and monitor cluster drift after data refreshes.
-- Separate broad positions into more useful recruitment roles when the source supports them.
+- Split defender and midfielder roles further only when comparable progression and defensive coverage supports it.
 
 ### 2. Expand recruitment context
 
-- Add age and availability filters from a stable identity layer.
 - Add contract, fee, wage, and transfer-history data from a licensed source.
 - Add competition strength and team-style context before comparing across leagues.
 - Add low-sample and missing-data flags directly to player cards.
@@ -50,7 +52,7 @@ The production web application now uses real, cached football data. The legacy s
 
 ### 4. Improve delivery
 
-- Add match-stability snapshots and automated source validation to continuous integration.
+- Add completed-season match-stability snapshots and automated source validation to continuous integration.
 - Add account-backed shortlist collaboration only when a hosted backend is justified.
 - Schedule controlled refreshes once source stability and terms are confirmed.
 

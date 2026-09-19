@@ -98,7 +98,7 @@ Best free source for a quick real-data bridge, especially because we may build a
 Why:
 
 - No public auth required for common endpoints.
-- `bootstrap-static` gives all current players, clubs, positions, price, ownership, total points, xG, xA, ICT, form, and availability.
+- `bootstrap-static` gives all current players, clubs, positions, birth dates, price, ownership, total points, xG, xA, ICT, form, availability and public status news.
 - `element-summary/{id}` gives per-player gameweek history plus past-season summaries.
 - `event/{gw}/live` gives gameweek player performance for all players.
 
@@ -223,7 +223,7 @@ Current findings:
 - FPL player history works without a key and returned gameweek-level player rows plus past-season summaries.
 - Understat works without a key and returned EPL player-season rows with minutes, goals, xG, assists, xA, shots, key passes, xGChain, and xGBuildup.
 - The multi-season free-data builder produced `1,854` Understat player-season rows across `2021-2022` through `2025-2026` after a `450` minute filter.
-- The same builder produced `658` current FPL player rows for current Premier League metadata and availability checks.
+- The latest cached refresh produced `662` current FPL player rows. `283` identities were conservatively joined one-to-one to the latest Understat cohort for age and availability context; ambiguous and unmatched identities remain blank.
 - StatsBomb Open Data works without a key and returned real event-data competition metadata.
 - FBref direct access returned `403` from the local probe, so do not build the product around scraping it.
 - football-data.org, API-FOOTBALL/API-Sports, and Sportmonks need credentials before we can judge actual plan coverage.

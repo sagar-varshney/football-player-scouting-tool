@@ -71,8 +71,8 @@ Generated from free sources.
 
 ## FPL
 
-- Rows: 658
-- Unique players: 658
+- Rows: 662
+- Unique players: 662
 - Clubs: 20
 - Source role: current Premier League metadata, availability, minutes, and fantasy-facing current stats.
 
@@ -107,6 +107,11 @@ Generated from free sources.
 | selected_by_percent | 0.0 |
 | now_cost | 0.0 |
 | status | 0.0 |
+| birth_date | 2.42 |
+| news | 0.0 |
+| news_added | 58.01 |
+| chance_of_playing_next_round | 58.01 |
+| chance_of_playing_this_round | 58.46 |
 | source_provider | 0.0 |
 
 ## Verdict

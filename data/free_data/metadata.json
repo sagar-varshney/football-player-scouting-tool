@@ -9,8 +9,8 @@
     "2025-2026"
   ],
   "understat_min_minutes": 450,
-  "fpl_rows": 658,
-  "fpl_unique_players": 658,
+  "fpl_rows": 662,
+  "fpl_unique_players": 662,
   "outputs": {
     "understat": "data/free_data/understat_epl_player_seasons.csv",
     "fpl": "data/free_data/fpl_current_players.csv",

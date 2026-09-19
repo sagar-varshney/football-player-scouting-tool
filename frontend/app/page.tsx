@@ -27,6 +27,13 @@ type Player = {
   player_name: string;
   position: string;
   age?: number;
+  current_age?: number;
+  current_fpl_player_id?: number;
+  current_status?: string;
+  current_status_code?: string;
+  current_news?: string;
+  current_club?: string;
+  current_context_as_of?: string;
   club: string;
   season?: string;
   minutes?: number;
@@ -50,6 +57,10 @@ type Payload = {
     generated_at?: string;
     minimum_minutes?: number;
     reliability_prior_minutes?: number;
+    context_provider?: string;
+    context_version?: string;
+    current_context_as_of?: string;
+    current_context_players?: number;
     data_note: string;
   };
   players: Player[];
@@ -66,6 +77,10 @@ type Match = Player & {
   creationScore: number;
   involvementScore: number;
   sharedStrengthsLabel: string;
+  stabilityScore: number;
+  stabilityLabel: string;
+  stabilityRange: string;
+  briefAppearances: number;
 };
 
 type PercentileLookup = Record<string, Record<Feature, number>>;
@@ -88,6 +103,8 @@ type SavedFinderSearch = {
   feature: Feature;
   minimumPercentile: number;
   minimumMinutes: number;
+  ageBand: string;
+  availability: string;
 };
 
 type Shot = {
@@ -291,6 +308,23 @@ function findMatches(players: Player[], target: Player, topN: number, features: 
     .slice(0, topN);
 }
 
+function buildStabilityMap(players: Player[], target: Player, features: Feature[], percentiles: PercentileLookup) {
+  const rankings = priorityPresets.map((preset) => findMatches(players, target, Math.max(0, players.length - 1), features, percentiles, preset.values));
+  const keys = new Set(rankings.flatMap((ranking) => ranking.map(playerKey)));
+  return Object.fromEntries(Array.from(keys).map((key) => {
+    const ranks = rankings.map((ranking) => {
+      const index = ranking.findIndex((player) => playerKey(player) === key);
+      return index < 0 ? ranking.length + 1 : index + 1;
+    });
+    const bestRank = Math.min(...ranks);
+    const worstRank = Math.max(...ranks);
+    const averageRank = ranks.reduce((sum, rank) => sum + rank, 0) / ranks.length;
+    const stabilityScore = Math.max(0, Math.min(100, 100 - ((worstRank - bestRank) * 7) - (Math.max(0, averageRank - 3) * 3)));
+    const stabilityLabel = stabilityScore >= 82 ? "Stable across briefs" : stabilityScore >= 62 ? "Generally stable" : "Brief-sensitive match";
+    return [key, { stabilityScore, stabilityLabel, stabilityRange: `#${bestRank}–#${worstRank}`, briefAppearances: ranks.filter((rank) => rank <= 10).length }];
+  }));
+}
+
 function metricLabel(feature: Feature) {
   return metricLabels[feature] ?? feature.replaceAll("_", " ").replace(" p90", " /90");
 }
@@ -318,6 +352,24 @@ function heatColor(value: number) {
 
 function heatTextColor(value: number) {
   return value >= 60 ? "#07110b" : "#ffffff";
+}
+
+function availabilityClass(status: string | undefined) {
+  if (status === "Available") return "available";
+  if (status === "Doubtful") return "doubtful";
+  return status ? "unavailable" : "unknown";
+}
+
+function buildShortlistPercentiles(payload: Payload, players: Player[]) {
+  const cohorts = new Map<string, PercentileLookup>();
+  return Object.fromEntries(players.map((player) => {
+    const cohortKey = `${player.season}__${player.position}`;
+    if (!cohorts.has(cohortKey)) {
+      const cohort = payload.players.filter((item) => item.season === player.season && item.position === player.position);
+      cohorts.set(cohortKey, buildCohortPercentiles(cohort, payload.metadata.features));
+    }
+    return [playerKey(player), cohorts.get(cohortKey)?.[playerKey(player)] ?? {}];
+  }));
 }
 
 function loading(error?: string) {
@@ -525,10 +577,15 @@ export default function Page() {
     return buildCohortPercentiles(pool, payload.metadata.features);
   }, [payload, pool]);
 
+  const stabilityMap = useMemo(() => {
+    if (!payload || !target) return {};
+    return buildStabilityMap(pool, target, payload.metadata.features, cohortPercentiles);
+  }, [payload, pool, target, cohortPercentiles]);
+
   const matches = useMemo(() => {
     if (!payload || !target) return [];
-    return findMatches(pool, target, topN, payload.metadata.features, cohortPercentiles, priorities);
-  }, [payload, pool, target, topN, cohortPercentiles, priorities]);
+    return findMatches(pool, target, topN, payload.metadata.features, cohortPercentiles, priorities).map((match) => ({ ...match, ...(stabilityMap[playerKey(match)] ?? { stabilityScore: 0, stabilityLabel: "Not enough evidence", stabilityRange: "—", briefAppearances: 0 }) }));
+  }, [payload, pool, target, topN, cohortPercentiles, priorities, stabilityMap]);
 
   useEffect(() => {
     if (matches.length) setCompareKey(playerKey(matches[0]));
@@ -577,11 +634,11 @@ export default function Page() {
 
   function exportShortlist() {
     if (!payload) return;
-    const columns = ["Player", "Club", "Position", "Season", "Playing style", "Minutes", "Status", "Scout notes", ...payload.metadata.features.map((feature) => `${metricLabel(feature)} /90`)];
+    const columns = ["Player", "Club", "Position", "Season", "Playing style", "Minutes", "Current age", "Current availability", "Availability note", "Decision status", "Scout notes", "Dataset version", "Model version", ...payload.metadata.features.map((feature) => `${metricLabel(feature)} /90`)];
     const quote = (value: unknown) => `"${String(value ?? "").replaceAll('"', '""')}"`;
     const rows = shortlistPlayers.map((player) => {
       const detail = shortlistDetails[playerKey(player)] ?? { status: "Watching", note: "" };
-      return [player.player_name, player.club, player.position, player.season, player.archetype, player.minutes, detail.status, detail.note, ...payload.metadata.features.map((feature) => numberFormat(player[feature]))];
+      return [player.player_name, player.club, player.position, player.season, player.archetype, player.minutes, player.current_age, player.current_status, player.current_news, detail.status, detail.note, payload.metadata.dataset_version, payload.metadata.model_version, ...payload.metadata.features.map((feature) => numberFormat(player[feature]))];
     });
     const blob = new Blob([[columns, ...rows].map((row) => row.map(quote).join(",")).join("\n")], { type: "text/csv;charset=utf-8" });
     const link = document.createElement("a");
@@ -613,6 +670,7 @@ export default function Page() {
   }
 
   const shortlistPlayers = shortlist.map((key) => payload.players.find((player) => playerKey(player) === key)).filter(Boolean) as Player[];
+  const shortlistPercentiles = buildShortlistPercentiles(payload, shortlistPlayers);
   const activePreset = priorityPresets.find((preset) => (Object.keys(defaultPriorities) as Array<keyof SimilarityPriorities>).every((category) => preset.values[category] === priorities[category]));
   const playerImages = imageManifest?.players ?? {};
   const targetImage = playerImage(target, playerImages);
@@ -657,6 +715,7 @@ export default function Page() {
             <h2>{target.player_name}</h2>
             <p className="hero-meta">{target.club} <i /> {target.position} <i /> {target.minutes?.toLocaleString() ?? 0} minutes</p>
             <div className="role-lockup"><span>Playing style</span><strong>{target.archetype}</strong></div>
+            {target.current_status && <div className="current-context"><span className={availabilityClass(target.current_status)}>{target.current_status}</span>{target.current_age && <b>Age {target.current_age}</b>}<b>Current club: {target.current_club}</b><small>{target.current_news || `Current squad context checked ${target.current_context_as_of}`}</small></div>}
             <div className="hero-pills"><span><b>{matches[0]?.similarityPct.toFixed(1) ?? "0.0"}%</b> closest match</span><span><b>{pool.length}</b> comparable players</span><span><b>#{target.cluster + 1}</b> style group</span></div>
           </div>
           <div className="hero-actions">
@@ -703,7 +762,7 @@ export default function Page() {
                   <b className="match-score">{match.similarityPct.toFixed(1)}<i>%</i></b>
                 </button>
                 <MiniHeatStrip player={match} features={payload.metadata.features} percentiles={cohortPercentiles} />
-                <div className="match-reasons"><span>{match.sampleLabel}</span><span>{match.sharedStrengthsLabel}</span></div>
+                <div className="match-reasons"><span>{match.sampleLabel}</span><span className={match.stabilityScore >= 82 ? "stable" : ""}>{match.stabilityLabel} · {match.stabilityRange}</span><span>{match.sharedStrengthsLabel}</span></div>
                 <div className="match-footer"><span>{match.archetype}</span><button onClick={() => { setCompareKey(playerKey(match)); document.getElementById("compare")?.scrollIntoView(); }}>Compare ↘</button></div>
               </article>
             ))}
@@ -712,8 +771,8 @@ export default function Page() {
 
         <section className="table-panel">
           <div className="table-titlebar"><div><span className="eyebrow">Full ranking</span><h2>How the matches compare</h2></div><span>Performance shown per 90 minutes</span></div>
-          <div className="table-scroll"><table><thead><tr><th>Player</th><th>Playing style</th><th>Match</th><th>Metric fit</th>{payload.metadata.features.map((feature) => <th key={feature}>{compactLabel(feature)}</th>)}<th>Shortlist</th></tr></thead>
-            <tbody>{matches.map((match) => <tr key={playerKey(match)}><td onClick={() => setTargetKey(playerKey(match))}><strong>{match.player_name}</strong><span>{match.club} · {match.season}</span></td><td><span className="role-chip">{match.archetype}</span></td><td><b className="score-pill">{match.similarityPct.toFixed(1)}%</b></td><td>{match.overlap.toFixed(1)}%</td>{payload.metadata.features.map((feature) => <td key={feature}>{numberFormat(metricValue(match, feature))}</td>)}<td><button className="mini-action" onClick={() => toggleShortlist(match)}>{shortlist.includes(playerKey(match)) ? "Shortlisted ✓" : "+ Shortlist"}</button></td></tr>)}</tbody>
+          <div className="table-scroll"><table><thead><tr><th>Player</th><th>Playing style</th><th>Match</th><th>Stability</th><th>Metric fit</th>{payload.metadata.features.map((feature) => <th key={feature}>{compactLabel(feature)}</th>)}<th>Shortlist</th></tr></thead>
+            <tbody>{matches.map((match) => <tr key={playerKey(match)}><td onClick={() => setTargetKey(playerKey(match))}><strong>{match.player_name}</strong><span>{match.club} · {match.season}</span></td><td><span className="role-chip">{match.archetype}</span></td><td><b className="score-pill">{match.similarityPct.toFixed(1)}%</b></td><td><span className={`stability-chip ${match.stabilityScore >= 82 ? "stable" : match.stabilityScore < 62 ? "sensitive" : ""}`}>{match.stabilityLabel}<small>{match.stabilityRange} across four briefs</small></span></td><td>{match.overlap.toFixed(1)}%</td>{payload.metadata.features.map((feature) => <td key={feature}>{numberFormat(metricValue(match, feature))}</td>)}<td><button className="mini-action" onClick={() => toggleShortlist(match)}>{shortlist.includes(playerKey(match)) ? "Shortlisted ✓" : "+ Shortlist"}</button></td></tr>)}</tbody>
           </table></div>
         </section>
 
@@ -755,7 +814,7 @@ export default function Page() {
           <SectionHeading eyebrow="Head-to-head" title="How their strengths compare" aside="Percentile score · 0–100" />
           <article className="radar-panel panel">
             <div className="comparison-picker"><span>Compare with</span><select value={comparePlayer ? playerKey(comparePlayer) : ""} onChange={(event) => setCompareKey(event.target.value)}>{matches.map((match) => <option key={playerKey(match)} value={playerKey(match)}>{match.player_name} · {match.similarityPct.toFixed(1)}% match</option>)}</select></div>
-            {selectedMatch && <div className="match-explanation"><div><span>Position-aware match</span><strong>{selectedMatch.similarityPct.toFixed(1)}%</strong><small>Weighted for a {target.position.toLowerCase()} profile</small></div>{[["Finishing", selectedMatch.finishingScore], ["Creation", selectedMatch.creationScore], ["Involvement", selectedMatch.involvementScore]].map(([category, value]) => { const score = Number(value); return <div key={String(category)}><span>{category}</span><strong>{score.toFixed(0)}</strong><i><b style={{ width: `${score}%` }} /></i></div>; })}<div><span>Evidence strength</span><strong>{selectedMatch.sampleScore.toFixed(0)}</strong><small>{selectedMatch.sampleLabel} · {Math.min(Number(target.minutes ?? 0), Number(selectedMatch.minutes ?? 0)).toLocaleString()}+ shared-minute floor</small></div></div>}
+            {selectedMatch && <div className="match-explanation"><div><span>Position-aware match</span><strong>{selectedMatch.similarityPct.toFixed(1)}%</strong><small>Weighted for a {target.position.toLowerCase()} profile</small></div>{[["Finishing", selectedMatch.finishingScore], ["Creation", selectedMatch.creationScore], ["Involvement", selectedMatch.involvementScore]].map(([category, value]) => { const score = Number(value); return <div key={String(category)}><span>{category}</span><strong>{score.toFixed(0)}</strong><i><b style={{ width: `${score}%` }} /></i></div>; })}<div><span>Evidence strength</span><strong>{selectedMatch.sampleScore.toFixed(0)}</strong><small>{selectedMatch.sampleLabel} · {Math.min(Number(target.minutes ?? 0), Number(selectedMatch.minutes ?? 0)).toLocaleString()}+ shared-minute floor</small></div><div className="stability-evidence"><span>Ranking stability</span><strong>{selectedMatch.stabilityScore.toFixed(0)}</strong><small>{selectedMatch.stabilityLabel} · ranked {selectedMatch.stabilityRange} across four briefs</small></div></div>}
             <div className="comparison-table">
               <div className="comparison-metrics-head"><span>Percentiles</span>{visibleRadarMetrics.map((feature) => <b key={feature}>{compactLabel(feature)}</b>)}</div>
               <ComparisonRow player={target} features={visibleRadarMetrics} percentiles={cohortPercentiles} color={targetColor} images={playerImages} />
@@ -788,7 +847,8 @@ export default function Page() {
 
         <section id="shortlist" className="shortlist-panel panel">
           <div className="panel-heading"><div><span className="eyebrow">Your recruitment list</span><h2>Players to watch</h2><p className="panel-subtitle">Add a decision status and scout notes, then export the list for review.</p></div>{shortlistPlayers.length > 0 && <div className="shortlist-actions"><button className="ghost-action" onClick={exportShortlist}>Export CSV ↓</button><button className="ghost-action" onClick={() => window.print()}>Print report ↗</button><button className="ghost-action danger" onClick={() => { setShortlist([]); setShortlistDetails({}); window.localStorage.removeItem("player-scouting-shortlist"); window.localStorage.removeItem("player-scouting-shortlist-details"); }}>Clear</button></div>}</div>
-          <div className="shortlist-grid">{shortlistPlayers.length ? shortlistPlayers.map((player, index) => { const key = playerKey(player); const detail = shortlistDetails[key] ?? { status: "Watching", note: "" }; return <article key={key} className={`shortlist-card status-${detail.status.toLowerCase()}`}><div className="shortlist-player-row"><button onClick={() => scoutPlayer(player)}><span className="shortlist-number">{String(index + 1).padStart(2, "0")}</span><PlayerAvatar player={player} images={playerImages} className="match-avatar" /><span><strong>{player.player_name}</strong><small>{player.club} · {player.position} · {player.season}</small><b>{player.archetype}</b></span></button><button className="remove-player" onClick={() => toggleShortlist(player)} aria-label={`Remove ${player.player_name}`}>×</button></div><MiniHeatStrip player={player} features={payload.metadata.features} percentiles={cohortPercentiles} /><div className="shortlist-detail"><label><span>Decision status</span><select value={detail.status} onChange={(event) => updateShortlistDetail(key, { status: event.target.value as ShortlistDetail["status"] })}><option>Watching</option><option>Review</option><option>Priority</option></select></label><label><span>Scout notes</span><textarea value={detail.note} maxLength={240} placeholder="Add fit, risk or follow-up notes…" onChange={(event) => updateShortlistDetail(key, { note: event.target.value })} /></label></div></article>; }) : <div className="empty-shortlist"><span>＋</span><strong>No players shortlisted yet</strong><p>Save a promising match to start building your recruitment list.</p></div>}</div>
+          <div className="shortlist-grid">{shortlistPlayers.length ? shortlistPlayers.map((player, index) => { const key = playerKey(player); const detail = shortlistDetails[key] ?? { status: "Watching", note: "" }; return <article key={key} className={`shortlist-card status-${detail.status.toLowerCase()}`}><div className="shortlist-player-row"><button onClick={() => scoutPlayer(player)}><span className="shortlist-number">{String(index + 1).padStart(2, "0")}</span><PlayerAvatar player={player} images={playerImages} className="match-avatar" /><span><strong>{player.player_name}</strong><small>{player.club} · {player.position} · {player.season}</small><b>{player.archetype}</b></span></button><button className="remove-player" onClick={() => toggleShortlist(player)} aria-label={`Remove ${player.player_name}`}>×</button></div><MiniHeatStrip player={player} features={payload.metadata.features} percentiles={{ [key]: shortlistPercentiles[key] ?? {} }} /><div className="shortlist-detail"><label><span>Decision status</span><select value={detail.status} onChange={(event) => updateShortlistDetail(key, { status: event.target.value as ShortlistDetail["status"] })}><option>Watching</option><option>Review</option><option>Priority</option></select></label><label><span>Scout notes</span><textarea value={detail.note} maxLength={240} placeholder="Add fit, risk or follow-up notes…" onChange={(event) => updateShortlistDetail(key, { note: event.target.value })} /></label></div></article>; }) : <div className="empty-shortlist"><span>＋</span><strong>No players shortlisted yet</strong><p>Save a promising match to start building your recruitment list.</p></div>}</div>
+          {shortlistPlayers.length >= 2 && <div className="shortlist-comparison"><div className="shortlist-comparison-heading"><div><span className="eyebrow">Role-relative comparison</span><h3>Compare the entire shortlist</h3></div><p>Each percentile is calculated within that player’s own season and position, making mixed-role shortlists easier to review.</p></div><div className="shortlist-matrix-scroll"><div className="shortlist-matrix" style={{ gridTemplateColumns: `minmax(170px,1.4fr) repeat(${payload.metadata.features.length},minmax(64px,1fr))` }}><div className="heat-corner">Player</div>{payload.metadata.features.map((feature) => <div className="heat-column" key={feature}>{compactLabel(feature)}</div>)}{shortlistPlayers.map((player) => <div className="shortlist-matrix-row" key={playerKey(player)} style={{ display: "contents" }}><button onClick={() => scoutPlayer(player)}><PlayerAvatar player={player} images={playerImages} /><span><strong>{player.player_name}</strong><small>{player.position} · {player.season}</small></span></button>{payload.metadata.features.map((feature) => { const value = shortlistPercentiles[playerKey(player)]?.[feature] ?? 0; return <div className="heat-cell" key={feature} style={{ background: heatColor(value), color: heatTextColor(value) }}>{Math.round(value)}</div>; })}</div>)}</div></div></div>}
         </section>
 
         <details className="raw-panel panel"><summary>View full performance numbers <span>＋</span></summary><div className="raw-grid">{payload.metadata.features.map((feature) => <div key={feature}><span>{metricLabel(feature)}</span><strong>{numberFormat(target[feature])}</strong><small>per 90 minutes</small></div>)}</div></details>
@@ -806,6 +866,8 @@ function PlayerFinder({ players, features, percentiles, position, season, onLoad
   const [feature, setFeature] = useState<Feature>(features.includes("key_passes_p90") ? "key_passes_p90" : features[0]);
   const [minimumPercentile, setMinimumPercentile] = useState(75);
   const [minimumMinutes, setMinimumMinutes] = useState(900);
+  const [ageBand, setAgeBand] = useState("All");
+  const [availability, setAvailability] = useState("All");
   const [savedSearches, setSavedSearches] = useState<SavedFinderSearch[]>([]);
   const [searchSaved, setSearchSaved] = useState(false);
 
@@ -824,7 +886,7 @@ function PlayerFinder({ players, features, percentiles, position, season, onLoad
   }
 
   function saveSearch() {
-    const saved: SavedFinderSearch = { id: String(Date.now()), label: `${position} · ${metricLabel(feature)} ${minimumPercentile ? `${minimumPercentile}th+` : "any"}`, position, season, query, club, archetype, feature, minimumPercentile, minimumMinutes };
+    const saved: SavedFinderSearch = { id: String(Date.now()), label: `${position} · ${metricLabel(feature)} ${minimumPercentile ? `${minimumPercentile}th+` : "any"}`, position, season, query, club, archetype, feature, minimumPercentile, minimumMinutes, ageBand, availability };
     persistSearches([saved, ...savedSearches.filter((item) => item.label !== saved.label)].slice(0, 6));
     setSearchSaved(true);
     window.setTimeout(() => setSearchSaved(false), 1600);
@@ -832,7 +894,7 @@ function PlayerFinder({ players, features, percentiles, position, season, onLoad
 
   function loadSearch(saved: SavedFinderSearch) {
     onLoadContext(saved.position, saved.season);
-    setQuery(saved.query); setClub(saved.club); setArchetype(saved.archetype); setFeature(saved.feature); setMinimumPercentile(saved.minimumPercentile); setMinimumMinutes(saved.minimumMinutes);
+    setQuery(saved.query); setClub(saved.club); setArchetype(saved.archetype); setFeature(saved.feature); setMinimumPercentile(saved.minimumPercentile); setMinimumMinutes(saved.minimumMinutes); setAgeBand(saved.ageBand ?? "All"); setAvailability(saved.availability ?? "All");
   }
   const clubs = useMemo(() => Array.from(new Set(players.flatMap((player) => player.club.split(",").map((item) => item.trim())))).sort(), [players]);
   const archetypes = useMemo(() => Array.from(new Set(players.map((player) => player.archetype))).sort(), [players]);
@@ -842,9 +904,12 @@ function PlayerFinder({ players, features, percentiles, position, season, onLoad
       const matchesQuery = !normalizedQuery || `${player.player_name} ${player.club}`.toLocaleLowerCase().includes(normalizedQuery);
       const matchesClub = club === "All" || player.club.split(",").map((item) => item.trim()).includes(club);
       const matchesArchetype = archetype === "All" || player.archetype === archetype;
-      return matchesQuery && matchesClub && matchesArchetype && Number(player.minutes ?? 0) >= minimumMinutes && percentileValue(percentiles, player, feature) >= minimumPercentile;
+      const age = Number(player.current_age || 0);
+      const matchesAge = ageBand === "All" || (age > 0 && (ageBand === "U21" ? age <= 21 : ageBand === "U23" ? age <= 23 : ageBand === "U25" ? age <= 25 : ageBand === "26-29" ? age >= 26 && age <= 29 : age >= 30));
+      const matchesAvailability = availability === "All" || (availability === "Available" ? player.current_status_code === "a" : availability === "Flagged" ? Boolean(player.current_status_code && player.current_status_code !== "a") : Boolean(player.current_status_code));
+      return matchesQuery && matchesClub && matchesArchetype && matchesAge && matchesAvailability && Number(player.minutes ?? 0) >= minimumMinutes && percentileValue(percentiles, player, feature) >= minimumPercentile;
     }).sort((a, b) => percentileValue(percentiles, b, feature) - percentileValue(percentiles, a, feature) || Number(b.minutes ?? 0) - Number(a.minutes ?? 0)).slice(0, 12);
-  }, [players, query, club, archetype, minimumMinutes, minimumPercentile, percentiles, feature]);
+  }, [players, query, club, archetype, minimumMinutes, minimumPercentile, percentiles, feature, ageBand, availability]);
 
   return <article className="finder-panel panel">
     <div className="finder-controls">
@@ -854,10 +919,12 @@ function PlayerFinder({ players, features, percentiles, position, season, onLoad
       <label><span>Priority metric</span><select value={feature} onChange={(event) => setFeature(event.target.value)}>{features.map((item) => <option key={item} value={item}>{metricLabel(item)}</option>)}</select></label>
       <label><span>Minimum percentile</span><select value={minimumPercentile} onChange={(event) => setMinimumPercentile(Number(event.target.value))}>{[0, 60, 75, 85, 90].map((value) => <option key={value} value={value}>{value === 0 ? "Any percentile" : `${value}th+`}</option>)}</select></label>
       <label><span>Minimum minutes</span><select value={minimumMinutes} onChange={(event) => setMinimumMinutes(Number(event.target.value))}>{[450, 900, 1350, 1800].map((value) => <option key={value} value={value}>{value.toLocaleString()}+</option>)}</select></label>
+      <label><span>Current age</span><select value={ageBand} onChange={(event) => setAgeBand(event.target.value)}><option value="All">Any age</option><option value="U21">21 or younger</option><option value="U23">23 or younger</option><option value="U25">25 or younger</option><option value="26-29">26–29</option><option value="30+">30 or older</option></select></label>
+      <label><span>Availability</span><select value={availability} onChange={(event) => setAvailability(event.target.value)}><option value="All">Any status</option><option value="Available">Available now</option><option value="Flagged">Flagged</option><option value="Verified">Verified context only</option></select></label>
     </div>
     <div className="saved-search-bar"><button type="button" className="save-search" onClick={saveSearch}>{searchSaved ? "Search saved ✓" : "+ Save this search"}</button>{savedSearches.length > 0 && <div className="saved-searches"><span>Saved briefs</span>{savedSearches.map((saved) => <div key={saved.id} className={saved.position !== position || saved.season !== season ? "out-of-context" : ""}><button type="button" title={saved.position !== position || saved.season !== season ? `Created for ${saved.position}s · ${saved.season}` : "Load saved search"} onClick={() => loadSearch(saved)}>{saved.label}</button><button type="button" aria-label={`Delete ${saved.label}`} onClick={() => persistSearches(savedSearches.filter((item) => item.id !== saved.id))}>×</button></div>)}</div>}</div>
-    <div className="finder-summary"><div><strong>{results.length}</strong><span>best results shown</span></div><p>Percentiles are adjusted toward the positional average when a player has fewer minutes, reducing small-sample noise.</p></div>
-    <div className="finder-results">{results.length ? results.map((player, index) => { const percentile = percentileValue(percentiles, player, feature); const saved = shortlisted.includes(playerKey(player)); return <article key={playerKey(player)} className="finder-card"><div className="finder-rank">{String(index + 1).padStart(2, "0")}</div><button className="finder-player" aria-label={`Scout ${player.player_name}`} onClick={() => onScout(player)}><PlayerAvatar player={player} images={images} /><span><strong>{player.player_name}</strong><small>{player.club} · {Number(player.minutes ?? 0).toLocaleString()} min</small></span></button><div className="finder-metric"><span>{metricLabel(feature)}</span><strong>{numberFormat(player[feature])}<small>/90</small></strong><b>{Math.round(percentile)}th</b></div><div className="finder-style">{player.archetype}</div><button className={`finder-save ${saved ? "saved" : ""}`} onClick={() => onShortlist(player)}>{saved ? "Saved ✓" : "+ Save"}</button></article>; }) : <div className="finder-empty"><strong>No players meet every filter</strong><span>Lower the percentile or minutes threshold to widen the search.</span></div>}</div>
+    <div className="finder-summary"><div><strong>{results.length}</strong><span>best results shown</span></div><p>Performance percentiles are sample-adjusted. Age and availability appear only for conservatively matched current FPL identities.</p></div>
+    <div className="finder-results">{results.length ? results.map((player, index) => { const percentile = percentileValue(percentiles, player, feature); const saved = shortlisted.includes(playerKey(player)); return <article key={playerKey(player)} className="finder-card"><div className="finder-rank">{String(index + 1).padStart(2, "0")}</div><button className="finder-player" aria-label={`Scout ${player.player_name}`} onClick={() => onScout(player)}><PlayerAvatar player={player} images={images} /><span><strong>{player.player_name}</strong><small>{player.club} · {Number(player.minutes ?? 0).toLocaleString()} min</small></span></button><div className="finder-metric"><span>{metricLabel(feature)}</span><strong>{numberFormat(player[feature])}<small>/90</small></strong><b>{Math.round(percentile)}th</b></div><div className="finder-style"><span>{player.archetype}</span>{player.current_status && <small className={availabilityClass(player.current_status)}>Age {player.current_age} · {player.current_status}</small>}</div><button className={`finder-save ${saved ? "saved" : ""}`} onClick={() => onShortlist(player)}>{saved ? "Saved ✓" : "+ Save"}</button></article>; }) : <div className="finder-empty"><strong>No players meet every filter</strong><span>Broaden the age, availability, percentile or minutes criteria.</span></div>}</div>
   </article>;
 }
 

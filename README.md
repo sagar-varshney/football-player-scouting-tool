@@ -13,7 +13,9 @@ The project combines a Python data and machine-learning pipeline with a responsi
 
 - Find the closest stylistic matches for a selected player and season.
 - Tune every search toward goal threat, chance creation, link play, or a custom recruitment brief.
+- See whether a recommendation stays highly ranked across four different recruitment briefs.
 - Search a season-and-position recruitment pool by club, playing style, priority metric, percentile, and minutes.
+- Filter verified current-player identities by age and FPL availability status.
 - Save reusable finder searches in the browser.
 - Compare percentile profiles with an overlaid radar chart.
 - Follow a player's multi-season trajectory with reliability-adjusted percentile trends.
@@ -23,6 +25,7 @@ The project combines a Python data and machine-learning pipeline with a responsi
 - Inspect recorded on-ball activity from StatsBomb Open Data.
 - Compare players on any two available performance measures.
 - Save up to 12 players to a browser-based shortlist, add decision statuses and scout notes, then export CSV or a printable report.
+- Compare a mixed-role shortlist with role-relative season-and-position percentiles.
 - Filter the workspace by position, season, target player, and result count.
 
 ## Current coverage
@@ -30,6 +33,7 @@ The project combines a Python data and machine-learning pipeline with a responsi
 | Dataset | Coverage in this repository | Used for |
 | --- | --- | --- |
 | Understat | 1,854 EPL player-season profiles across 2021/22–2025/26, filtered to 450+ minutes | Similarity, percentiles, radar charts, role labels, and season profiles |
+| Fantasy Premier League | 662 current player identities; 283 conservatively linked to the latest Understat cohort | Current age, club, availability and public player news; never used as a similarity feature |
 | Understat shots | 48,492 attempts across 819 cached player files | Shot density, shot locations, goals, xG, and shot selection |
 | StatsBomb Open Data | 380 EPL matches and 548 players from 2015/16 | Recorded-action heatmaps and action-type summaries |
 | Wikimedia Commons | 455 licence-verified portraits across 819 unique player identities | Player cards, comparisons, and profile photography |
@@ -91,6 +95,10 @@ The browser consumes precomputed JSON, so exploring players does not require a l
 
 Recruitment intent is transparent and user-controlled. The default ranking uses position-specific feature weights; goal-threat, chance-creation and link-player presets multiply the relevant feature families without changing the underlying recorded values. Custom weights are preserved in shared profile URLs so another reviewer sees the same brief.
 
+Recommendation stability is evaluated against all four named recruitment briefs. The product reports the candidate's best-to-worst rank range and labels stable, generally stable and brief-sensitive matches. This is sensitivity evidence, not a claim that the transfer itself is low risk.
+
+Current age and availability context comes from the free FPL public feed. Identities are linked only by an exact normalized name or a unique football name within the same club, each FPL identity can be assigned only once, and unmatched players remain blank. The FPL fields are clearly separated from the historical Understat season used for performance analysis.
+
 Every generated payload includes a source-derived dataset version, model version, minimum-minute rule and reliability prior. These identifiers appear in the product footer and make exported or shared recommendations easier to reproduce.
 
 Player identity and presentation are kept separate: provider IDs remain the stable identity, raw source names stay in the normalized datasets, and a small reviewed override table supplies recognisable football display names and correct diacritics in the product. HTML entities in provider names are decoded automatically. Add future corrections to `src/display_names.py` rather than editing generated JSON.
@@ -140,6 +148,13 @@ python3 scripts/build_statsbomb_event_lab.py
 python3 scripts/build_commons_player_images.py
 ```
 
+To refresh only the free current-player context without making new Understat requests:
+
+```bash
+python3 scripts/build_free_data.py --fpl-only
+python3 scripts/export_free_frontend_data.py
+```
+
 You can also run the frontend shortcuts:
 
 ```bash
@@ -181,6 +196,7 @@ football-player-scouting-tool/
 - StatsBomb locations are recorded actions and are intentionally kept separate from current Understat player profiles because the available EPL season is 2015/16.
 - The free primary dataset does not contain defensive actions, pressures, carries, progressive passes, contracts, fees, or injury history.
 - API-Football enrichment remains local and experimental until field coverage and publishing rights are validated.
+- FPL age and availability describe the current public feed, not the player's status during an older Understat season; uncertain identities are intentionally left unmatched.
 - Player portraits are used only after an exact Wikidata footballer match and per-file Commons licence check. Unmatched players retain an initials avatar.
 - Similarity indicates statistical resemblance within the selected feature space; it is not a prediction of transfer success or tactical fit.
 - Role labels are interpretable percentile-based heuristics, not ground-truth positions or model predictions.
@@ -192,10 +208,10 @@ Portrait attribution is available in the application and in [PLAYER_IMAGE_CREDIT
 ## Roadmap
 
 - Add team tactical context and role-specific defensive features when comparable licensed data is available.
-- Add age, availability, contract, and estimated-fee filters when reliable data is available.
+- Add contract and estimated-fee filters when reliable licensed data is available.
 - Expand current-season event coverage through a licensed provider.
 - Add account-backed collaboration if the local-first prototype graduates into a hosted product.
-- Expand automated match-stability and model-quality tests.
+- Back-test the reliability prior and ranking stability across completed seasons.
 
 ## Responsible use
 

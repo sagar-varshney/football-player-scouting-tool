@@ -37,6 +37,33 @@ class FrontendPayloadTests(unittest.TestCase):
             for feature in self.metadata["features"]:
                 self.assertTrue(math.isfinite(float(player[feature])), f"{player['player_name']} has invalid {feature}")
 
+    def test_current_context_is_versioned_and_conservative(self):
+        self.assertRegex(self.metadata["context_version"], r"^fpl-[0-9a-f]{10}$")
+        self.assertGreaterEqual(self.metadata["current_context_players"], 250)
+        latest_season = max(player["season"] for player in self.players)
+        latest = [player for player in self.players if player["season"] == latest_season]
+        matched = [player for player in latest if player.get("current_status")]
+        self.assertEqual(len(matched), self.metadata["current_context_players"])
+        self.assertTrue(all(15 <= player["current_age"] <= 45 for player in matched))
+        fpl_ids = [player["current_fpl_player_id"] for player in matched]
+        self.assertEqual(len(fpl_ids), len(set(fpl_ids)))
+        self.assertTrue(all(player["current_context_match"] in {"exact name", "club + unique football name"} for player in matched))
+
+    def test_display_name_override_never_renames_rodri(self):
+        rodri_rows = [player for player in self.players if player["provider_player_id"] == 2496]
+        self.assertTrue(rodri_rows)
+        self.assertEqual({player["player_name"] for player in rodri_rows}, {"Rodri"})
+
+    def test_role_labels_are_position_specific(self):
+        allowed = {
+            "Forward": {"Complete Forward", "Penalty Box Finisher", "Link Forward", "Connecting Forward", "Shot-Focused Forward", "Balanced Forward"},
+            "Winger": {"Goal-Creating Winger", "Inside Forward", "Wide Playmaker", "Chance-Creating Winger", "Combination Winger", "Wide Outlet"},
+            "Midfielder": {"Goal-Creating Midfielder", "Advanced Playmaker", "Possession Controller", "Buildup Connector", "Possession Hub", "Support Midfielder"},
+            "Defender": {"Attacking Defender", "Possession Defender", "Buildup Defender", "Low-Usage Defender"},
+        }
+        for player in self.players:
+            self.assertIn(player["archetype"], allowed[player["position"]])
+
 
 if __name__ == "__main__":
     unittest.main()

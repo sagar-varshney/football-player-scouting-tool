@@ -15,6 +15,10 @@ class DisplayNameTests(unittest.TestCase):
     def test_unknown_player_keeps_clean_provider_name(self) -> None:
         self.assertEqual(preferred_player_name("  Bukayo Saka  ", 999999), "Bukayo Saka")
 
+    def test_odegaard_override_does_not_rename_rodri(self) -> None:
+        self.assertEqual(preferred_player_name("Rodri", 2496), "Rodri")
+        self.assertEqual(preferred_player_name("Martin Odegaard", 2517), "Martin Ødegaard")
+
 
 if __name__ == "__main__":
     unittest.main()

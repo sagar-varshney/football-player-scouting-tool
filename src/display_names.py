@@ -12,7 +12,7 @@ from html import unescape
 
 UNDERSTAT_DISPLAY_NAMES: dict[int, str] = {
     987: "Joe Gomez",
-    2496: "Martin Ødegaard",
+    2517: "Martin Ødegaard",
     5613: "Gabriel Magalhães",
     6674: "Rayan Aït-Nouri",
     8094: "Rayan Cherki",
