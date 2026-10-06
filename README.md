@@ -4,7 +4,9 @@ SCOUT//LAB is an open-source scouting workspace for player comparisons, recruitm
 
 The public release starts with **128 fictional player-season profiles** across four positions and two demo seasons. These are original synthetic fixtures, not current Premier League statistics. Provider datasets, portraits and event files are not distributed with this release. You can import a compatible dataset you are permitted to use locally.
 
-![SCOUT//LAB demo workspace showing player selection and a player profile](docs/screenshots/01-player-profile.jpg)
+The screenshots below show a separate local installation using real-player data from the preserved **2025/26 snapshot**. A fresh clone opens with fictional demo profiles; the photographed screens are not the bundled demo dataset or live 2026/27 coverage.
+
+![SCOUT//LAB local workspace showing Bukayo Saka's 2025/26 player profile](docs/screenshots/01-player-profile.jpg)
 
 ## Run on your device
 
@@ -23,33 +25,35 @@ For a production build, run `npm run build` followed by `npm run start -- --port
 
 ## Try the scouting workflow
 
-These screenshots were captured from the local app in **demo mode**. All players, clubs and statistics shown are fictional. You can follow the same steps immediately after installation.
+These screenshots were captured from the local app with an imported dataset, using **Bukayo Saka and Mohamed Salah** as examples. Performance data shown covers **2025/26**; any displayed squad context was last checked **19 September 2026** and may be stale. Statistical source: [Understat](https://understat.com/). Supplemental squad context: [Fantasy Premier League](https://fantasy.premierleague.com/). Screenshots illustrate the interface; publication permissions for these sources remain unresolved, as recorded in [the source review](docs/permissions/STATUS.md).
+
+You can follow the same workflow with fictional players immediately after installation. Real-player examples require your own compatible, permitted import; those datasets are not included in this repository.
 
 ### 1. Choose a player
 
-Select **Winger**, keep **Latest season**, and choose **Demo Winger 01** in the player selector. The profile shows their playing-style label, minutes and strongest metrics. Set **Matches shown** to 3, 5 or 10 to control the recommendation list. The workspace preview above shows these controls.
+Select **Winger** and **2025-2026**, then choose **Bukayo Saka** in the player selector if your imported dataset contains him. The profile shows his playing-style label, minutes and strongest metrics. Set **Matches shown** to 3, 5 or 10 to control the recommendation list. The workspace preview above shows these controls. In demo mode, use **Demo Winger 01** instead.
 
 ### 2. Find candidates for a recruitment brief
 
 Open **Finder** in the navigation. Choose a priority metric such as **Key passes**, then set a minimum percentile and minutes threshold. Add club or playing-style filters to narrow the pool. Click a player's name to scout them, **+ Save** to shortlist them, or **+ Save this search** to revisit the filters later.
 
-![Recruitment finder with metric, percentile and minutes filters and candidate cards](docs/screenshots/02-recruitment-finder.jpg)
+![2025/26 recruitment finder showing real-player candidates including Rayan Cherki, Jeremy Doku and Bukayo Saka](docs/screenshots/02-recruitment-finder.jpg)
 
 For another view of fit, use **Balanced role**, **Goal threat**, **Chance creator** or **Link player** above the finder. These priorities change similarity rankings; they do not change the underlying recorded or imported values.
 
 ### 3. Compare player profiles
 
-Open **Compare**, then select a recommendation in **Compare with**. Pink marks the selected player and green marks the comparison. The radar and table show percentiles within the selected season and position; the difference bars highlight where the profiles diverge. Similarity describes a statistical match, not an overall player-quality score.
+Open **Compare**, then select a recommendation in **Compare with**. The screenshot compares **Bukayo Saka (pink)** with **Mohamed Salah (green)**. The radar and table show percentiles within the selected season and position; the difference bars highlight where the profiles diverge. Similarity describes a statistical match, not an overall player-quality score.
 
-![Player comparison with percentile table, pink and green radar overlays and metric differences](docs/screenshots/03-radar-comparison.jpg)
+![Bukayo Saka and Mohamed Salah compared using 2025/26 position-relative percentiles and radar overlays](docs/screenshots/03-radar-comparison.jpg)
 
 ### 4. Build a shortlist and record your decision
 
-Save two players, then open **Shortlist**. Set a decision status (**Watching**, **Review** or **Priority**) and add scout notes. With at least two players, a comparison matrix appears. Use **Export CSV** for a spreadsheet or **Print report** for a printable view. Saves and notes persist in the same browser; they are not synced between devices.
+Save two players, then open **Shortlist**. This example saves **Saka and Salah**, sets Salah's status to **Review**, and adds an illustrative scout note. Set a decision status (**Watching**, **Review** or **Priority**) and add your own notes. With at least two players, a comparison matrix appears. Use **Export CSV** for a spreadsheet or **Print report** for a printable view. Saves and notes persist in the same browser; they are not synced between devices.
 
-![Two shortlisted demo players with a priority decision, example scout note and comparison matrix](docs/screenshots/04-shortlist.jpg)
+![Mohamed Salah and Bukayo Saka shortlisted with an example review note and percentile comparison matrix](docs/screenshots/04-shortlist.jpg)
 
-Shot maps, portraits and action maps require suitable optional data assets. The demo leaves unavailable observations empty rather than inventing them. To move beyond the fictional walkthrough, follow the import instructions below.
+These captures use initials rather than player photographs. Shot maps, portraits and action maps require suitable optional data assets. The demo leaves unavailable observations empty rather than inventing them. Follow the import instructions below to use a dataset you are permitted to use.
 
 ## Use your own dataset
 
