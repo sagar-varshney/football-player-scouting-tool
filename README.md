@@ -6,6 +6,13 @@ The public release starts with **128 fictional player-season profiles** across f
 
 The real-player screenshots below show a separate local installation using the preserved **2025/26 Premier League snapshot**. A fresh clone opens with fictional demo profiles, not these real-player records or live 2026/27 coverage.
 
+## Start here
+
+1. [Run the demo](#run-on-your-device) — no provider account or API key required.
+2. [Follow the screenshot walkthrough](#try-the-scouting-workflow) — select a player, find candidates, compare profiles and build a shortlist.
+3. [Understand the analysis](#how-the-analysis-works) — learn what percentiles and similarity scores mean.
+4. [Import your own compatible dataset](#use-your-own-dataset) when you are ready, or check [troubleshooting](#troubleshooting) if something does not work.
+
 ### Demo and real-player examples, side by side
 
 <table width="100%">
@@ -51,6 +58,23 @@ npm run dev -- --port 3011
 Open http://localhost:3011. Search example players, adjust recruitment priorities, compare radars, save finder searches and build a shortlist with decision notes. Saved searches and shortlists live in your browser.
 
 For a production build, run `npm run build` followed by `npm run start -- --port 3011`.
+
+## What the tool does—and does not do
+
+Use SCOUT//LAB to explore attacking and creative profiles, find statistically similar players, compare strengths, track season-to-season changes and organize recruitment notes.
+
+It is **decision support, not a player-quality ranking, transfer recommendation or prediction of future performance**. A high similarity score means two profiles resemble each other on the available metrics; it does not mean they are equally good or would perform the same in your team. Pair the results with video, tactical context and your own scouting judgment.
+
+Defensive actions, off-ball movement, physical attributes and team tactical context are not comprehensively represented in the current comparison. A defender's attacking profile is not a full assessment of their defending. Fictional demo results demonstrate the interface, not real football findings; local imports are only as accurate and current as their inputs.
+
+## How the analysis works
+
+1. **Per-90 inputs:** compare output relative to playing time rather than totals. Imports must supply compatible per-90 values; the importer does not convert raw totals for you.
+2. **Small-sample adjustment:** ranking values blend a player's per-90 value with the position/season cohort average using a **900-minute prior**. Short samples move more toward the average; recorded per-90 values remain visible unchanged.
+3. **Position/season percentiles:** adjusted values are ranked within the selected position and season. A 90th percentile is a relative rank in that dataset, not a 90/100 overall ability rating.
+4. **Weighted similarity:** the tool compares percentile gaps using position-specific weights. **Goal threat**, **Chance creator**, **Link player** and the sliders change those weights—not the underlying statistics.
+
+Playing-style labels and clusters come from the supplied dataset. The public demo uses fictional labels; importing a file does not train a new model. Similarity is calculated in the interface, and stability indicators show sensitivity to the predefined recruitment briefs—not a probability of scouting success. See [the analysis guide](docs/ANALYSIS.md) for the formulas, examples and interpretation limits.
 
 ## Try the scouting workflow
 
@@ -114,6 +138,20 @@ npm run import-data -- /absolute/path/to/scouting-data.json
 Copy `.env.example` to `.env.local`, set `SCOUTING_DATA_MODE=local`, and restart. Profiles live in ignored `.local-data/`; the importer does not download provider data. See [the schema and local setup](docs/LOCAL_DATA.md).
 
 Only import material you are permitted to obtain, retain and use. Browser-visible data remains accessible. Hosting imported data requires applicable display/export permissions. Open-source code does not grant provider-data rights.
+
+## Troubleshooting
+
+| What you see | What to check |
+| --- | --- |
+| Installation or startup fails | Run `node --version` and `npm --version`. Use Node.js 22, run commands inside `frontend/`, and install dependencies with `npm install`. For production startup, run `npm run build` first. |
+| Port 3011 is already in use | Choose another port: `npm run dev -- --port 3012`, then open `http://localhost:3012`. Browser-saved lists are separate on different ports. |
+| Import is rejected | Follow [the JSON contract](docs/LOCAL_DATA.md): at least two profiles, supported numeric per-90 features, valid identities and positions, and no duplicate profiles. Supply a JSON file, not a CSV or raw API response. Read the import command's error before retrying. |
+| Local profiles are unavailable, or the demo still appears | Import successfully, set `SCOUTING_DATA_MODE=local` in `frontend/.env.local`, then stop and restart the server from `frontend/`. To return to the demo, set the mode to `demo` and restart. |
+| No players match the Finder filters | Broaden the percentile/minutes criteria and reset club/style filters. Leave age and availability unrestricted if your dataset does not supply that context. |
+| Photos, shot maps or action maps are unavailable | Profile imports do not include these optional assets. Initials and unavailable-map notices are expected on a clean clone; statistics alone cannot create observed touch locations. |
+| A saved shortlist or search has disappeared | Use the same browser, host and port. Saves are browser-local, not account-synced; private browsing or clearing site storage can remove them. |
+
+**Resetting saved items:** export your shortlist CSV first if you want to keep a reference. In **Shortlist**, use **Clear** to remove saved players, statuses and notes for that browser origin. In **Finder**, use the **×** beside an individual saved brief to delete it. These actions do not change the imported dataset. Clearing all browser site storage also removes saved items and cannot be undone through the tool.
 
 ## Scouting workflows
 
