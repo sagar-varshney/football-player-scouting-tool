@@ -4,6 +4,8 @@ SCOUT//LAB is an open-source scouting workspace for player comparisons, recruitm
 
 The public release starts with **128 fictional player-season profiles** across four positions and two demo seasons. These are original synthetic fixtures, not current Premier League statistics. Provider datasets, portraits and event files are not distributed with this release. You can import a compatible dataset you are permitted to use locally.
 
+![SCOUT//LAB demo workspace showing player selection and a player profile](docs/screenshots/01-player-profile.jpg)
+
 ## Run on your device
 
 Requirements: Git, Node.js 22 and npm. No provider account or API key is needed for demo mode.
@@ -18,6 +20,36 @@ npm run dev -- --port 3011
 Open http://localhost:3011. Search example players, adjust recruitment priorities, compare radars, save finder searches and build a shortlist with decision notes. Saved searches and shortlists live in your browser.
 
 For a production build, run `npm run build` followed by `npm run start -- --port 3011`.
+
+## Try the scouting workflow
+
+These screenshots were captured from the local app in **demo mode**. All players, clubs and statistics shown are fictional. You can follow the same steps immediately after installation.
+
+### 1. Choose a player
+
+Select **Winger**, keep **Latest season**, and choose **Demo Winger 01** in the player selector. The profile shows their playing-style label, minutes and strongest metrics. Set **Matches shown** to 3, 5 or 10 to control the recommendation list. The workspace preview above shows these controls.
+
+### 2. Find candidates for a recruitment brief
+
+Open **Finder** in the navigation. Choose a priority metric such as **Key passes**, then set a minimum percentile and minutes threshold. Add club or playing-style filters to narrow the pool. Click a player's name to scout them, **+ Save** to shortlist them, or **+ Save this search** to revisit the filters later.
+
+![Recruitment finder with metric, percentile and minutes filters and candidate cards](docs/screenshots/02-recruitment-finder.jpg)
+
+For another view of fit, use **Balanced role**, **Goal threat**, **Chance creator** or **Link player** above the finder. These priorities change similarity rankings; they do not change the underlying recorded or imported values.
+
+### 3. Compare player profiles
+
+Open **Compare**, then select a recommendation in **Compare with**. Pink marks the selected player and green marks the comparison. The radar and table show percentiles within the selected season and position; the difference bars highlight where the profiles diverge. Similarity describes a statistical match, not an overall player-quality score.
+
+![Player comparison with percentile table, pink and green radar overlays and metric differences](docs/screenshots/03-radar-comparison.jpg)
+
+### 4. Build a shortlist and record your decision
+
+Save two players, then open **Shortlist**. Set a decision status (**Watching**, **Review** or **Priority**) and add scout notes. With at least two players, a comparison matrix appears. Use **Export CSV** for a spreadsheet or **Print report** for a printable view. Saves and notes persist in the same browser; they are not synced between devices.
+
+![Two shortlisted demo players with a priority decision, example scout note and comparison matrix](docs/screenshots/04-shortlist.jpg)
+
+Shot maps, portraits and action maps require suitable optional data assets. The demo leaves unavailable observations empty rather than inventing them. To move beyond the fictional walkthrough, follow the import instructions below.
 
 ## Use your own dataset
 
