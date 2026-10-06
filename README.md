@@ -4,9 +4,32 @@ SCOUT//LAB is an open-source scouting workspace for player comparisons, recruitm
 
 The public release starts with **128 fictional player-season profiles** across four positions and two demo seasons. These are original synthetic fixtures, not current Premier League statistics. Provider datasets, portraits and event files are not distributed with this release. You can import a compatible dataset you are permitted to use locally.
 
-The screenshots below show a separate local installation using real-player data from the preserved **2025/26 snapshot**. A fresh clone opens with fictional demo profiles; the photographed screens are not the bundled demo dataset or live 2026/27 coverage.
+The real-player screenshots below show a separate local installation using the preserved **2025/26 Premier League snapshot**. A fresh clone opens with fictional demo profiles, not these real-player records or live 2026/27 coverage.
 
-![SCOUT//LAB local workspace showing Bukayo Saka's 2025/26 player profile](docs/screenshots/01-saka-profile-2025-26.jpg)
+### Demo and real-player examples, side by side
+
+| Included fictional demo | Local real-player example |
+| --- | --- |
+| ![Bundled fictional demo showing Demo Winger 01](docs/screenshots/00-fictional-demo-profile.jpg) | ![Local imported snapshot showing Bukayo Saka's 2025/26 profile](docs/screenshots/01-saka-profile-2025-26.jpg) |
+| **Demo Winger 01** — synthetic values, two demo seasons. Runs immediately without a provider account or API key. | **Bukayo Saka** — preserved 2025/26 performance data. Requires a separate compatible import; records are not bundled. |
+
+Both examples use the same scouting interface. The fictional profiles demonstrate the workflow; they are not estimates of real players. The real-player captures illustrate a historical local setup, not a live data service or evidence of publication permission.
+
+## Data sources and coverage
+
+| Source or mode | What it contributes | Coverage and limitations |
+| --- | --- | --- |
+| **Public demo** | 128 original fictional player-season profiles across four positions and two demo seasons. | Included in the repository. No real football observations or provider credentials required. |
+| **Real-player screenshots** | Examples featuring Saka, Salah and other Premier League players from the preserved local snapshot. | Performance data is **2025/26**, not live 2026/27. Displayed squad context was last checked **19 September 2026**. Real datasets are not included. |
+| [Understat](https://understat.com/) | Historical attacking statistics: goals, expected goals (xG), assists, expected assists (xA), shots, key passes, xGChain and xGBuildup. | Statistical source for the local real-player examples. Does not supply the defensive or full touch-location coverage needed for comprehensive scouting. Current-season access and publication permission remain unverified. |
+| [Fantasy Premier League](https://fantasy.premierleague.com/) | Supporting player identity, club and availability context in the local prototype. | Supplemental, fantasy-oriented information—not a complete tactical dataset. Context can become stale; publication permission remains unconfirmed. |
+| [API-Football](https://www.api-football.com/) | Optional historical enrichment experiments for defensive and other player statistics. | Not required for the demo and not the primary source for the screenshots. The existing free account rejected 2026/27 access on **4 October 2026**; historical pagination limits also produced partial coverage. |
+
+**Calculated by the tool:** per-90 features, season/position-relative percentiles, reliability adjustments and weighted similarity results are derived from the available inputs. They are not provider-endorsed ratings. Imported playing-style labels are supplied with the dataset; importing does not train or validate a new model.
+
+**Known gaps:** defensive coverage is limited, so attacking-profile similarity should not be treated as a complete assessment of defenders. Touch/action heatmaps require separate event-location observations; shot locations alone are not a touch heatmap. No verified free, permission-cleared live 2026/27 Premier League feed is bundled.
+
+Source attribution describes provenance, not permission, partnership or endorsement. **Permission to publish the real-data screenshots remains unconfirmed**; keeping raw files out of GitHub does not resolve that question. See [the recorded permission and coverage review](docs/permissions/STATUS.md). The importer uses a file you supply and makes no provider downloads; see [the JSON schema and local setup](docs/LOCAL_DATA.md).
 
 ## Run on your device
 
@@ -90,4 +113,6 @@ Python source and legacy tests are optional and require `requirements.txt` plus 
 
 ## Publication and licences
 
-Original code and synthetic fixtures are covered by the MIT licence. Dependencies retain their own licences. Provider data and visual assets are excluded. Keep secrets and imported files out of commits. Review [source status](DATA_SOURCES.md) before enabling collectors or hosting imported data. Ignoring files does not remove older copies in Git history.
+Original code, original documentation and synthetic fixtures are covered by [the MIT licence](LICENSE). Dependencies retain their own licences. This licence does not grant rights to third-party datasets, photographs, trademarks or any third-party content shown in screenshots. The included real-player screenshots are demonstrations, not a grant of provider-data rights or confirmation of publication permission.
+
+Keep secrets and imported datasets out of commits. Review [permission and coverage status](docs/permissions/STATUS.md) before enabling collectors or hosting imported data. Ignoring files does not remove older copies in Git history.
