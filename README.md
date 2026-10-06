@@ -8,10 +8,16 @@ The real-player screenshots below show a separate local installation using the p
 
 ### Demo and real-player examples, side by side
 
-| Included fictional demo | Local real-player example |
-| --- | --- |
-| ![Bundled fictional demo showing Demo Winger 01](docs/screenshots/00-fictional-demo-profile.jpg) | ![Local imported snapshot showing Bukayo Saka's 2025/26 profile](docs/screenshots/01-saka-profile-2025-26.jpg) |
-| **Demo Winger 01** — synthetic values, two demo seasons. Runs immediately without a provider account or API key. | **Bukayo Saka** — preserved 2025/26 performance data. Requires a separate compatible import; records are not bundled. |
+<table width="100%">
+  <tr><th width="50%">Included fictional demo</th><th width="50%">Local real-player example</th></tr>
+  <tr>
+    <td width="50%" valign="top"><a href="docs/screenshots/05-demo-profile-aligned.jpg"><img src="docs/screenshots/05-demo-profile-aligned.jpg" width="600" alt="Complete fictional Demo Winger 01 profile, controls and key metrics"></a></td>
+    <td width="50%" valign="top"><a href="docs/screenshots/05-real-profile-aligned.jpg"><img src="docs/screenshots/05-real-profile-aligned.jpg" width="600" alt="Complete local Bukayo Saka 2025/26 profile, controls and key metrics"></a></td>
+  </tr>
+  <tr><td valign="top"><strong>Demo Winger 01</strong> — synthetic values; included with a fresh clone.</td><td valign="top"><strong>Bukayo Saka</strong> — historical 2025/26 values; requires a separate local import.</td></tr>
+</table>
+
+Each pair uses the same capture width and top-aligned layout. Images retain their natural proportions rather than being stretched or cropped to match heights. **Click any screenshot to open its complete full-size view.**
 
 Both examples use the same scouting interface. The fictional profiles demonstrate the workflow; they are not estimates of real players. The real-player captures illustrate a historical local setup, not a live data service or evidence of publication permission.
 
@@ -60,7 +66,15 @@ Select **Winger** and **2025-2026**, then choose **Bukayo Saka** in the player s
 
 Open **Finder** in the navigation. Choose a priority metric such as **Key passes**, then set a minimum percentile and minutes threshold. Add club or playing-style filters to narrow the pool. Click a player's name to scout them, **+ Save** to shortlist them, or **+ Save this search** to revisit the filters later.
 
-![2025/26 recruitment finder showing real-player candidates including Rayan Cherki, Jeremy Doku and Bukayo Saka](docs/screenshots/02-pl-recruitment-finder-2025-26.jpg)
+The fictional example uses **Key passes, 75th+ and 900+ minutes**. The real-player example adds **Wide Playmaker** and raises the threshold to **90th+**, showing Cherki, Doku, Foden and Szoboszlai. These are separate search examples, not equivalent player pools.
+
+<table width="100%">
+  <tr><th width="50%">Fictional recruitment search</th><th width="50%">Real-player recruitment search · 2025/26</th></tr>
+  <tr>
+    <td width="50%" valign="top"><a href="docs/screenshots/06-demo-finder-aligned.jpg"><img src="docs/screenshots/06-demo-finder-aligned.jpg" width="600" alt="Complete fictional recruitment finder with filters and all four results"></a></td>
+    <td width="50%" valign="top"><a href="docs/screenshots/06-real-finder-aligned.jpg"><img src="docs/screenshots/06-real-finder-aligned.jpg" width="600" alt="Complete real-player recruitment finder with filters and Cherki, Doku, Foden and Szoboszlai"></a></td>
+  </tr>
+</table>
 
 For another view of fit, use **Balanced role**, **Goal threat**, **Chance creator** or **Link player** above the finder. These priorities change similarity rankings; they do not change the underlying recorded or imported values.
 
@@ -68,13 +82,25 @@ For another view of fit, use **Balanced role**, **Goal threat**, **Chance creato
 
 Open **Compare**, then select a recommendation in **Compare with**. The screenshot compares **Bukayo Saka (pink)** with **Mohamed Salah (green)**. The radar and table show percentiles within the selected season and position; the difference bars highlight where the profiles diverge. Similarity describes a statistical match, not an overall player-quality score.
 
-![Bukayo Saka and Mohamed Salah compared using 2025/26 position-relative percentiles and radar overlays](docs/screenshots/03-saka-salah-radar-2025-26.jpg)
+<table width="100%">
+  <tr><th width="50%">Demo Winger 01 vs Demo Winger 12</th><th width="50%">Bukayo Saka vs Mohamed Salah · 2025/26</th></tr>
+  <tr>
+    <td width="50%" valign="top"><a href="docs/screenshots/07-demo-radar-aligned.jpg"><img src="docs/screenshots/07-demo-radar-aligned.jpg" width="600" alt="Complete fictional comparison with percentile table, radar, legend and difference bars"></a></td>
+    <td width="50%" valign="top"><a href="docs/screenshots/07-real-radar-aligned.jpg"><img src="docs/screenshots/07-real-radar-aligned.jpg" width="600" alt="Complete Saka versus Salah comparison with percentile table, radar, legend and difference bars"></a></td>
+  </tr>
+</table>
 
 ### 4. Build a shortlist and record your decision
 
 Save two players, then open **Shortlist**. This example saves **Saka and Salah**, sets Salah's status to **Review**, and adds an illustrative scout note. Set a decision status (**Watching**, **Review** or **Priority**) and add your own notes. With at least two players, a comparison matrix appears. Use **Export CSV** for a spreadsheet or **Print report** for a printable view. Saves and notes persist in the same browser; they are not synced between devices.
 
-![Mohamed Salah and Bukayo Saka shortlisted with an example review note and percentile comparison matrix](docs/screenshots/04-saka-salah-shortlist-2025-26.jpg)
+<table width="100%">
+  <tr><th width="50%">Fictional shortlist and example notes</th><th width="50%">Salah and Saka shortlist · 2025/26</th></tr>
+  <tr>
+    <td width="50%" valign="top"><a href="docs/screenshots/08-demo-shortlist-aligned.jpg"><img src="docs/screenshots/08-demo-shortlist-aligned.jpg" width="600" alt="Complete fictional shortlist with status, example notes, export controls and comparison matrix"></a></td>
+    <td width="50%" valign="top"><a href="docs/screenshots/08-real-shortlist-aligned.jpg"><img src="docs/screenshots/08-real-shortlist-aligned.jpg" width="600" alt="Complete Salah and Saka shortlist with status, example notes, export controls and comparison matrix"></a></td>
+  </tr>
+</table>
 
 These captures use initials rather than player photographs. Shot maps, portraits and action maps require suitable optional data assets. The demo leaves unavailable observations empty rather than inventing them. Follow the import instructions below to use a dataset you are permitted to use.
 
@@ -114,5 +140,3 @@ Python source and legacy tests are optional and require `requirements.txt` plus 
 ## Publication and licences
 
 Original code, original documentation and synthetic fixtures are covered by [the MIT licence](LICENSE). Dependencies retain their own licences. This licence does not grant rights to third-party datasets, photographs, trademarks or any third-party content shown in screenshots. The included real-player screenshots are demonstrations, not a grant of provider-data rights or confirmation of publication permission.
-
-Keep secrets and imported datasets out of commits. Review [permission and coverage status](docs/permissions/STATUS.md) before enabling collectors or hosting imported data. Ignoring files does not remove older copies in Git history.
