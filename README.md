@@ -6,7 +6,7 @@ The public release starts with **128 fictional player-season profiles** across f
 
 The screenshots below show a separate local installation using real-player data from the preserved **2025/26 snapshot**. A fresh clone opens with fictional demo profiles; the photographed screens are not the bundled demo dataset or live 2026/27 coverage.
 
-![SCOUT//LAB local workspace showing Bukayo Saka's 2025/26 player profile](docs/screenshots/01-player-profile.jpg)
+![SCOUT//LAB local workspace showing Bukayo Saka's 2025/26 player profile](docs/screenshots/01-saka-profile-2025-26.jpg)
 
 ## Run on your device
 
@@ -37,7 +37,7 @@ Select **Winger** and **2025-2026**, then choose **Bukayo Saka** in the player s
 
 Open **Finder** in the navigation. Choose a priority metric such as **Key passes**, then set a minimum percentile and minutes threshold. Add club or playing-style filters to narrow the pool. Click a player's name to scout them, **+ Save** to shortlist them, or **+ Save this search** to revisit the filters later.
 
-![2025/26 recruitment finder showing real-player candidates including Rayan Cherki, Jeremy Doku and Bukayo Saka](docs/screenshots/02-recruitment-finder.jpg)
+![2025/26 recruitment finder showing real-player candidates including Rayan Cherki, Jeremy Doku and Bukayo Saka](docs/screenshots/02-pl-recruitment-finder-2025-26.jpg)
 
 For another view of fit, use **Balanced role**, **Goal threat**, **Chance creator** or **Link player** above the finder. These priorities change similarity rankings; they do not change the underlying recorded or imported values.
 
@@ -45,13 +45,13 @@ For another view of fit, use **Balanced role**, **Goal threat**, **Chance creato
 
 Open **Compare**, then select a recommendation in **Compare with**. The screenshot compares **Bukayo Saka (pink)** with **Mohamed Salah (green)**. The radar and table show percentiles within the selected season and position; the difference bars highlight where the profiles diverge. Similarity describes a statistical match, not an overall player-quality score.
 
-![Bukayo Saka and Mohamed Salah compared using 2025/26 position-relative percentiles and radar overlays](docs/screenshots/03-radar-comparison.jpg)
+![Bukayo Saka and Mohamed Salah compared using 2025/26 position-relative percentiles and radar overlays](docs/screenshots/03-saka-salah-radar-2025-26.jpg)
 
 ### 4. Build a shortlist and record your decision
 
 Save two players, then open **Shortlist**. This example saves **Saka and Salah**, sets Salah's status to **Review**, and adds an illustrative scout note. Set a decision status (**Watching**, **Review** or **Priority**) and add your own notes. With at least two players, a comparison matrix appears. Use **Export CSV** for a spreadsheet or **Print report** for a printable view. Saves and notes persist in the same browser; they are not synced between devices.
 
-![Mohamed Salah and Bukayo Saka shortlisted with an example review note and percentile comparison matrix](docs/screenshots/04-shortlist.jpg)
+![Mohamed Salah and Bukayo Saka shortlisted with an example review note and percentile comparison matrix](docs/screenshots/04-saka-salah-shortlist-2025-26.jpg)
 
 These captures use initials rather than player photographs. Shot maps, portraits and action maps require suitable optional data assets. The demo leaves unavailable observations empty rather than inventing them. Follow the import instructions below to use a dataset you are permitted to use.
 
