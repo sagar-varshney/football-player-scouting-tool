@@ -7,7 +7,8 @@ export type Percentiles = Record<string, Record<string, number>>;
 export type BriefRule = { feature: string; minimum: number; unit: "percentile" | "per90"; required: boolean; weight: number };
 export type RecruitmentBrief = { name: string; position: string; season: string; minimumMinutes: number; rules: BriefRule[] };
 export type DecisionRecord = { at: string; status: ProjectEntry["status"]; note: string; nextAction: string; reviewDate: string };
-export type ProjectEntry = { key: string; status: "Longlist" | "Review" | "Priority" | "Passed"; strengths: string; concerns: string; note: string; evidenceUrl: string; reviewDate?: string; nextAction?: string; history?: DecisionRecord[] };
+export type MatchObservation = { id: string; date: string; opponent: string; role: string; category: "Positioning" | "Tracking runners" | "Receiving under pressure" | "Decision-making" | "Other"; outcome: "Observed" | "Not observed"; timestamp: string; note: string; evidenceUrl: string };
+export type ProjectEntry = { key: string; status: "Longlist" | "Review" | "Priority" | "Passed"; strengths: string; concerns: string; note: string; evidenceUrl: string; reviewDate?: string; nextAction?: string; history?: DecisionRecord[]; observations?: MatchObservation[]; profileSignature?: string; reviewedDatasetVersion?: string };
 export type RecruitmentProject = { id: string; name: string; brief: RecruitmentBrief; entries: ProjectEntry[]; datasetVersion: string; createdAt: string };
 export const labels: Record<string, string> = { goals_p90: "Goals", xg_p90: "Expected goals", assists_p90: "Assists", xa_p90: "Expected assists", shots_p90: "Shots", key_passes_p90: "Key passes", xg_chain_p90: "Move involvement", xg_buildup_p90: "Buildup play" };
 export const baseWeights: Record<string, Record<string, number>> = {
@@ -86,8 +87,14 @@ export function validateProject(value: unknown): RecruitmentProject {
     if (e.reviewDate !== undefined && (typeof e.reviewDate !== "string" || !validReviewDate(e.reviewDate))) throw new Error("Invalid review date.");
     if (e.nextAction !== undefined && (typeof e.nextAction !== "string" || e.nextAction.length > 5000)) throw new Error("Invalid next action.");
     if (e.history !== undefined && (!Array.isArray(e.history) || e.history.length > 100 || e.history.some(h => !h || typeof h.at !== "string" || !Number.isFinite(Date.parse(h.at)) || !["Longlist","Review","Priority","Passed"].includes(h.status) || typeof h.note !== "string" || h.note.length > 5000 || typeof h.nextAction !== "string" || h.nextAction.length > 5000 || typeof h.reviewDate !== "string" || !validReviewDate(h.reviewDate)))) throw new Error("Invalid decision history.");
+    if(e.observations !== undefined && (!Array.isArray(e.observations) || e.observations.length > 100)) throw new Error("Invalid match observation list.");
+    const observationIds = new Set<string>();
+    const observations = e.observations?.map(o=>{const clean=validateObservation(o);if(observationIds.has(clean.id))throw new Error("Duplicate match observation.");observationIds.add(clean.id);return clean;});
+    if(e.profileSignature !== undefined && (typeof e.profileSignature !== "string" || !/^v1-[0-9a-f]{8}$/.test(e.profileSignature))) throw new Error("Invalid profile signature.");
+    if(e.reviewedDatasetVersion !== undefined && (typeof e.reviewedDatasetVersion !== "string" || e.reviewedDatasetVersion.length > 200)) throw new Error("Invalid reviewed dataset version.");
     seen.add(e.key); return { key: e.key, status: e.status, strengths: e.strengths, concerns: e.concerns, note: e.note, evidenceUrl: e.evidenceUrl,
       ...(e.reviewDate !== undefined ? { reviewDate: e.reviewDate } : {}), ...(e.nextAction !== undefined ? { nextAction: e.nextAction } : {}),
+      ...(observations !== undefined ? { observations } : {}), ...(e.profileSignature !== undefined ? {profileSignature:e.profileSignature} : {}), ...(e.reviewedDatasetVersion !== undefined ? {reviewedDatasetVersion:e.reviewedDatasetVersion} : {}),
       ...(e.history !== undefined ? { history: e.history.map(h => ({ at:h.at,status:h.status,note:h.note,nextAction:h.nextAction,reviewDate:h.reviewDate })) } : {}) };
   });
   return { id: typeof p.id === "string" && /^[\w-]{1,100}$/.test(p.id) ? p.id : "imported", name: p.name.trim(), brief: validateBrief(p.brief), entries, datasetVersion: p.datasetVersion, createdAt: p.createdAt };
@@ -101,6 +108,40 @@ export function validReviewDate(value: string) {
 }
 export function localDate(now = new Date()) {
   return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
+}
+export const observationCategories = ["Positioning","Tracking runners","Receiving under pressure","Decision-making","Other"] as const;
+export function validateObservation(value: unknown): MatchObservation {
+  const o=value as MatchObservation;
+  if(!o || typeof o.id!=="string" || !/^[\w-]{1,100}$/.test(o.id) || typeof o.date!=="string" || !o.date || !validReviewDate(o.date) || !observationCategories.includes(o.category) || !["Observed","Not observed"].includes(o.outcome)) throw new Error("Check the match date and observation category.");
+  for(const field of ["opponent","role","timestamp","note","evidenceUrl"] as const) if(typeof o[field]!=="string" || o[field].length>(field==="note"||field==="evidenceUrl"?5000:200))throw new Error("Invalid match observation fields.");
+  if(!o.opponent.trim() || !o.role.trim() || !o.note.trim())throw new Error("Add an opponent, the player's role and an observation note.");
+  if(o.evidenceUrl && !safeEvidenceUrl(o.evidenceUrl))throw new Error("Observation links must use http or https.");
+  return {id:o.id,date:o.date,opponent:o.opponent.trim(),role:o.role.trim(),category:o.category,outcome:o.outcome,timestamp:o.timestamp.trim(),note:o.note.trim(),evidenceUrl:o.evidenceUrl};
+}
+// Change detector only, not a security hash or a copy of the underlying metrics.
+export function profileSignature(p: ScoutPlayer, features: string[]) {
+  const text=JSON.stringify([identity(p),observed(p,"minutes"),...features.slice().sort().map(f=>[f,observed(p,f)]),p.last_match_date??null]);
+  let hash=2166136261;for(let i=0;i<text.length;i++){hash^=text.charCodeAt(i);hash=Math.imul(hash,16777619);}
+  return `v1-${(hash>>>0).toString(16).padStart(8,"0")}`;
+}
+export function reviewReasons(entry: ProjectEntry, player: ScoutPlayer|undefined, features: string[], projectVersion: string, datasetVersion: string, today=localDate()) {
+  if(entry.status==="Passed")return [];
+  const reasons:string[]=[];
+  if(entry.reviewDate && entry.reviewDate<=today) reasons.push(entry.reviewDate<today?"Review overdue":"Review due today");
+  if(!player)reasons.push("Player record unavailable");
+  else {
+    if(entry.profileSignature ? entry.profileSignature!==profileSignature(player,features) : (entry.reviewedDatasetVersion??projectVersion)!==datasetVersion)reasons.push(entry.profileSignature?"Imported record changed":"Dataset changed; record needs checking");
+    if(features.some(f=>observed(player,f)===null))reasons.push("Supplied metric evidence missing");
+  }
+  if(!entry.observations?.some(o=>o.outcome==="Observed"))reasons.push("Awaiting a match observation");
+  return reasons;
+}
+export function measuredSummary(p: ScoutPlayer, features: string[], lookup: Percentiles, brief: RecruitmentBrief) {
+  const signals=features.map(feature=>({feature,raw:observed(p,feature),rank:percentile(p,feature,lookup)})).filter(s=>s.raw!==null&&s.rank!==null).sort((a,b)=>b.rank!-a.rank!||a.feature.localeCompare(b.feature));
+  const findings=signals.filter(s=>s.rank!>=75).slice(0,2).map(s=>({title:`${labels[s.feature]??s.feature}: top-quarter rank`,evidence:`Recorded ${s.raw!.toFixed(2)} /90; sample-adjusted ${s.rank!.toFixed(1)} percentile.`,feature:s.feature}));
+  const assessment=assessBrief(p,brief,lookup);
+  const gaps=assessment.checks.filter(c=>!c.met).map(c=>({title:`${labels[c.feature]}: ${c.value===null?"cannot be verified":`below your ${c.required?"required":"preferred"} target`}`,evidence:`${c.value===null?"Unavailable":c.value.toFixed(2)} ${c.unit==="per90"?"/90":"percentile"}; target ≥ ${c.minimum}.`,feature:c.feature}));
+  return {findings,gaps,gates:assessment.gates,missing:features.filter(f=>observed(p,f)===null),minutes:observed(p,"minutes")};
 }
 export function recordDecision(entry: ProjectEntry, at = new Date().toISOString()): ProjectEntry {
   if ((entry.history?.length ?? 0) >= 100) throw new Error("This candidate has 100 recorded decisions. Export the history before starting a new project.");

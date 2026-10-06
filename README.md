@@ -2,6 +2,8 @@
 
 SCOUT//LAB is an open-source scouting workspace for player comparisons, recruitment searches and shortlists. It retains the original interface, role-relative radars, similarity explanations and multi-season trends.
 
+The recruitment workspace also includes quick player previews, traceable measured summaries, interactive scatter discovery, saved analysis lenses, a cross-project review inbox and structured match observations. Everything runs locally without paid AI/API calls. [Explore the workflow](docs/RECRUITMENT_DESK.md#player-exploration-and-evidence-workflow).
+
 The public release starts with **128 fictional player-season profiles** across four positions and two demo seasons. These are original synthetic fixtures, not current Premier League statistics. Provider datasets, portraits and event files are not distributed with this release. You can import a compatible dataset you are permitted to use locally.
 
 The real-player screenshots below show a separate local installation using the preserved **2025/26 Premier League snapshot**. A fresh clone opens with fictional demo profiles, not these real-player records or live 2026/27 coverage.
@@ -55,7 +57,7 @@ npm install
 npm run dev -- --port 3011
 ```
 
-Open http://localhost:3011. Search example players, adjust recruitment priorities, compare radars, save finder searches and build a shortlist with decision notes. Saved searches, shortlists and recruitment projects live in your browser.
+Open [localhost:3011](http://localhost:3011). Start in **Recruitment desk**: define a search, review candidates and build your shortlist. You can also explore profiles, adjust similarity priorities and compare radars. Saved searches, shortlists, recruitment projects and analysis lenses live in your browser—not a cloud account.
 
 For a production build, run `npm run build` followed by `npm run start -- --port 3011`.
 
@@ -82,16 +84,29 @@ Playing-style labels and clusters come from the supplied dataset. The public dem
 
 Open **Recruitment desk** to try the full workflow with the included fictional profiles—no provider account or API key is required.
 
-1. **Brief:** set mandatory and preferred metric thresholds, then review qualifying candidates and explained near-misses.
-2. **Brief compare:** compare up to four candidates against identical requirements, with threshold margins separate from similarity and attainment.
-3. **Report / Compare:** inspect measured strengths, trade-offs, radars, distributions and cohort context. Evidence panels distinguish sample size, supplied-metric coverage and source/performance freshness.
-4. **Projects:** save candidates, notes, next actions and review dates; record decision checkpoints and back up projects with JSON export/import.
-5. **Dossiers:** preview a printable brief, comparison, charts, project notes and limitations. Use your browser's **Save as PDF** destination to save it.
-6. **Checks:** run selected-player diagnostics or a whole-dataset ranking sensitivity audit by position, season and sample band; export full audit results as JSON.
+1. **Define your search:** choose a plain-language starting point, position, season and playing time. Expand **Fine-tune targets** for exact thresholds and weights.
+2. **Review candidates:** browse fit/trade-off cards and use **View player** for a quick side-panel preview without losing your filters or position. Expand summary findings to inspect the supporting numbers. Select up to four players and choose **Compare selected**; **Met / Missed / Unknown** summaries lead, with exact numbers available on demand.
+3. **Your shortlist:** save directly from a card or preview. Open **Notes & next steps** for observations, actions, review dates and decision history. The **Scouting review inbox** brings outstanding tasks across your projects together. Export/import project backups or preview a printable dossier.
+
+### Explore, observe and follow up
+
+| Feature | How to use it |
+| --- | --- |
+| **Quick previews and measured summaries** | Use **View player** on a candidate card. Expand a finding to see the recorded /90 value, adjusted percentile and comparison group. Close the drawer to return to the same search; choose **Full report** for detailed analysis. |
+| **Interactive scatter discovery** | Open **Profile charts → Explore the player pool**. Choose an axis preset, search a name/club, or size dots by minutes. Click a dot to preview the player. The expandable **Accessible player table** offers keyboard-friendly preview, shortlist and comparison actions. |
+| **Saved analysis lenses** | In **Profile charts**, expand **Customize this view** to select radar metrics and similarity category priorities. **Saved analysis lenses** stores the current chart settings under a name for that position. Applying a lens does not change your search requirements or raw data. |
+| **Scouting review inbox** | Open **Your shortlist** to filter tasks by deadlines, changed imported records, missing evidence or pending observations. **Open review** takes you to that candidate's notes. These are local reminders, not live alerts or a scheduled monitoring service. |
+| **Structured match observations** | Open a candidate's **Notes & next steps → Add match observation**. Record match date, opponent, role, category, timestamp, note and an optional evidence link. Choose **Not observed** when the viewed material cannot support an assessment. Observations can be edited and travel with project JSON exports and dossiers. |
+
+Manual observations do not feed statistical scores. Automated summaries use explicit rules, not a paid AI service, and do not invent defensive ability, tactical fit or transfer predictions. Lenses select chart metrics and similarity priorities; they do not retrain a model or change the similarity feature set.
+
+**Keep your work:** project JSON exports preserve search settings, notes, observations and decision history. Importing creates a separate copy and requires a compatible dataset to resolve player references. Lenses are stored separately in the browser and are not included in project exports. Use the same browser, host and port; clearing site storage removes saved work.
+
+Optional **Analysis tools** contains selected-player diagnostics and whole-dataset audits. Dossiers use the browser's **Save as PDF** destination; audits export JSON. No external AI or provider requests are required.
 
 The demo's numbers and dates are synthetic, not current football evidence. These features make no provider requests and do not change the source statistics or train a model. See [the recruitment desk guide](docs/RECRUITMENT_DESK.md) for details and limits. Export project backups before clearing browser storage.
 
-![Fictional demo: four candidates compared against a shared recruitment brief, with threshold margins and separate evidence panels](docs/screenshots/09-demo-recruitment-desk.jpg)
+![Fictional demo: the guided Define your search screen with plain-language presets, position, season, playing-time controls and expandable targets](docs/screenshots/09-demo-recruitment-desk.jpg)
 
 These screenshots were captured from the local app with an imported dataset, using **Bukayo Saka and Mohamed Salah** as examples. Performance data shown covers **2025/26**; any displayed squad context was last checked **19 September 2026** and may be stale. Statistical source: [Understat](https://understat.com/). Supplemental squad context: [Fantasy Premier League](https://fantasy.premierleague.com/). Screenshots illustrate the interface; publication permissions for these sources remain unresolved, as recorded in [the source review](docs/permissions/STATUS.md).
 
@@ -165,6 +180,8 @@ Only import material you are permitted to obtain, retain and use. Browser-visibl
 | No players match the Finder filters | Broaden the percentile/minutes criteria and reset club/style filters. Leave age and availability unrestricted if your dataset does not supply that context. |
 | Photos, shot maps or action maps are unavailable | Profile imports do not include these optional assets. Initials and unavailable-map notices are expected on a clean clone; statistics alone cannot create observed touch locations. |
 | A saved shortlist or search has disappeared | Use the same browser, host and port. Saves are browser-local, not account-synced; private browsing or clearing site storage can remove them. |
+| A saved lens is not listed | Lenses are position-specific. Choose the position used when saving it, and use the same browser, host and port. Project imports do not restore lenses. |
+| The inbox still asks for an observation | **Not observed** records the evidence gap; it does not count as an observed match assessment. Acknowledging a dataset update also does not clear overdue dates or missing observations. |
 
 **Resetting saved items:** export your shortlist CSV first if you want to keep a reference. In **Shortlist**, use **Clear** to remove saved players, statuses and notes for that browser origin. In **Finder**, use the **×** beside an individual saved brief to delete it. These actions do not change the imported dataset. Clearing all browser site storage also removes saved items and cannot be undone through the tool.
 
@@ -178,6 +195,9 @@ Only import material you are permitted to obtain, retain and use. Browser-visibl
 - Threshold-based briefs, explained near-misses and four-candidate requirement comparisons.
 - Recruitment projects with review dates, next actions, decision history and portable JSON backups.
 - Printable dossiers and local, dataset-wide ranking sensitivity audits.
+- Quick previews with expandable, numerical evidence behind measured summaries.
+- Interactive whole-cohort scatter discovery and position-specific saved analysis lenses.
+- Cross-project review inbox and structured manual match observations.
 - Dataset-mode/season labels and recoverable loading errors.
 - Optional portrait, shot-map and historical event modules when suitable local assets are supplied.
 
@@ -191,7 +211,7 @@ npm test
 npm run build
 ```
 
-Python source and legacy tests are optional and require `requirements.txt` plus compatible local inputs. Dataset-dependent tests cannot run on a clean demo-only clone. CI checks the import boundary, absence of provider assets and frontend build without calling providers.
+Python source and legacy tests are optional and require `requirements.txt` plus compatible local inputs. Dataset-dependent tests cannot run on a clean demo-only clone. CI checks the import boundary, absence of provider assets and frontend build without calling providers. Frontend tests cover missing-data handling, search presets, project/observation validation and round trips, lens validation, review-task detection and ranking diagnostics.
 
 ## Publication and licences
 
