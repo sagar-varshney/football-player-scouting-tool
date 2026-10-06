@@ -1,0 +1,32 @@
+{
+  "name": "football-player-scouting-tool",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "import-data": "node scripts/import-data.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "lint": "next lint",
+    "export-data": "cd .. && python3 scripts/export_free_frontend_data.py",
+    "refresh-api-football": "cd .. && python3 scripts/build_api_football_enrichment.py",
+    "refresh-shot-data": "cd .. && python3 scripts/build_understat_shot_data.py",
+    "refresh-player-images": "cd .. && python3 scripts/build_commons_player_images.py",
+    "refresh-event-lab": "cd .. && python3 scripts/build_statsbomb_event_lab.py"
+  },
+  "dependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^2.15.0",
+    "typescript": "^5.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "eslint-config-next": "^15.1.0"
+  }
+}

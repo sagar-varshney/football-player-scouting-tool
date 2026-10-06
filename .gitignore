@@ -1,0 +1,34 @@
+__pycache__/
+.venv/
+.streamlit/
+.cache/
+frontend/.local-data/
+data/free_data/
+data/source_tests/
+frontend/public/scouting-data.json
+frontend/public/shot-data/
+frontend/public/event-lab/
+frontend/public/player-images/
+*.pyc
+.DS_Store
+data/player_stats.csv
+data/players.csv
+data/api_football/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/node_modules
+frontend/.next/
+frontend/out/
+frontend/.vercel/
+frontend/app/page 2.tsx
+
+# Python artifacts
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Local secrets
+.env
+.env.*
+!.env.example

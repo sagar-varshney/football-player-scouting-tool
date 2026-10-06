@@ -1,0 +1,24 @@
+name: Validate public scouting app
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check public data boundary
+        run: |
+          python -c 'import pathlib; roots=["data/free_data", "data/source_tests", "frontend/.local-data", "frontend/public/scouting-data.json", "frontend/public/shot-data", "frontend/public/event-lab", "frontend/public/player-images"]; assert not any(pathlib.Path(p).exists() for p in roots), "Provider assets must not be published"'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: frontend
+      - run: pnpm test
+        working-directory: frontend
+      - run: pnpm build
+        working-directory: frontend
