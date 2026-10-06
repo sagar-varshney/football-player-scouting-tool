@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { quoteCsv } from "../lib/csv";
+import RecruitmentDesk from "../components/RecruitmentDesk";
 import {
   CartesianGrid,
   Line,
@@ -728,7 +729,7 @@ export default function Page() {
           <div><strong>SCOUT//LAB</strong><span>Smarter player recruitment</span></div>
         </a>
         <nav className="nav-links" aria-label="Dashboard sections">
-          <a href="#finder">Finder</a><a href="#similarity">Similar players</a><a href="#model-validation">Model check</a><a href="#heatmaps">Shot map</a><a href="#event-lab">Action map</a><a href="#trends">Trends</a><a href="#compare">Compare</a><a href="#shortlist">Shortlist <b>{shortlist.length}</b></a>
+          <a href="#recruitment-desk">Recruitment desk</a><a href="#finder">Finder</a><a href="#similarity">Similar players</a><a href="#model-validation">Model check</a><a href="#heatmaps">Shot map</a><a href="#event-lab">Action map</a><a href="#trends">Trends</a><a href="#compare">Compare</a><a href="#shortlist">Shortlist <b>{shortlist.length}</b></a>
         </nav>
         <div className="dataset-status"><i /><span>Ready to scout</span><strong>{payload.metadata.row_count.toLocaleString()} profiles · {payload.metadata.model_version ?? "profile model"}</strong></div>
       </header>
@@ -802,6 +803,8 @@ export default function Page() {
           </div>
           <div className="validation-decision"><span>Why the model still uses 900 minutes</span><p>{payload.metadata.validation.reliability.decision}</p><a href="https://github.com/sagar-varshney/football-player-scouting-tool/blob/main/data/free_data/MODEL_VALIDATION.md" target="_blank" rel="noreferrer">Read the validation report ↗</a></div>
         </section>}
+
+        <RecruitmentDesk players={payload.players} pool={pool} target={target} features={payload.metadata.features} datasetVersion={payload.metadata.dataset_version ?? "unversioned import"} generatedAt={payload.metadata.generated_at} dataMode={payload.metadata.data_mode} priorities={priorities} quickShortlist={shortlistPlayers} onScout={scoutPlayer} />
 
         <section id="finder" className="section-block">
           <SectionHeading eyebrow="Recruitment finder" title="Build a data-led player search" aside={`${selectedSeason} · ${position}s`} />

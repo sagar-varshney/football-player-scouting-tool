@@ -19,6 +19,7 @@ data/api_football/
 frontend/node_modules/
 frontend/node_modules
 frontend/.next/
+frontend/*.tsbuildinfo
 frontend/out/
 frontend/.vercel/
 frontend/app/page 2.tsx

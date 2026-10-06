@@ -55,7 +55,7 @@ npm install
 npm run dev -- --port 3011
 ```
 
-Open http://localhost:3011. Search example players, adjust recruitment priorities, compare radars, save finder searches and build a shortlist with decision notes. Saved searches and shortlists live in your browser.
+Open http://localhost:3011. Search example players, adjust recruitment priorities, compare radars, save finder searches and build a shortlist with decision notes. Saved searches, shortlists and recruitment projects live in your browser.
 
 For a production build, run `npm run build` followed by `npm run start -- --port 3011`.
 
@@ -77,6 +77,21 @@ Defensive actions, off-ball movement, physical attributes and team tactical cont
 Playing-style labels and clusters come from the supplied dataset. The public demo uses fictional labels; importing a file does not train a new model. Similarity is calculated in the interface, and stability indicators show sensitivity to the predefined recruitment briefs—not a probability of scouting success. See [the analysis guide](docs/ANALYSIS.md) for the formulas, examples and interpretation limits.
 
 ## Try the scouting workflow
+
+### Recruitment desk
+
+Open **Recruitment desk** to try the full workflow with the included fictional profiles—no provider account or API key is required.
+
+1. **Brief:** set mandatory and preferred metric thresholds, then review qualifying candidates and explained near-misses.
+2. **Brief compare:** compare up to four candidates against identical requirements, with threshold margins separate from similarity and attainment.
+3. **Report / Compare:** inspect measured strengths, trade-offs, radars, distributions and cohort context. Evidence panels distinguish sample size, supplied-metric coverage and source/performance freshness.
+4. **Projects:** save candidates, notes, next actions and review dates; record decision checkpoints and back up projects with JSON export/import.
+5. **Dossiers:** preview a printable brief, comparison, charts, project notes and limitations. Use your browser's **Save as PDF** destination to save it.
+6. **Checks:** run selected-player diagnostics or a whole-dataset ranking sensitivity audit by position, season and sample band; export full audit results as JSON.
+
+The demo's numbers and dates are synthetic, not current football evidence. These features make no provider requests and do not change the source statistics or train a model. See [the recruitment desk guide](docs/RECRUITMENT_DESK.md) for details and limits. Export project backups before clearing browser storage.
+
+![Fictional demo: four candidates compared against a shared recruitment brief, with threshold margins and separate evidence panels](docs/screenshots/09-demo-recruitment-desk.jpg)
 
 These screenshots were captured from the local app with an imported dataset, using **Bukayo Saka and Mohamed Salah** as examples. Performance data shown covers **2025/26**; any displayed squad context was last checked **19 September 2026** and may be stale. Statistical source: [Understat](https://understat.com/). Supplemental squad context: [Fantasy Premier League](https://fantasy.premierleague.com/). Screenshots illustrate the interface; publication permissions for these sources remain unresolved, as recorded in [the source review](docs/permissions/STATUS.md).
 
@@ -160,6 +175,9 @@ Only import material you are permitted to obtain, retain and use. Browser-visibl
 - Weighted similarity with finishing, creation and involvement explanations.
 - Recruitment finder, saved searches, scatter plots and radar comparisons.
 - Multi-season trends, shortlist notes/status, CSV exports and printable views.
+- Threshold-based briefs, explained near-misses and four-candidate requirement comparisons.
+- Recruitment projects with review dates, next actions, decision history and portable JSON backups.
+- Printable dossiers and local, dataset-wide ranking sensitivity audits.
 - Dataset-mode/season labels and recoverable loading errors.
 - Optional portrait, shot-map and historical event modules when suitable local assets are supplied.
 
