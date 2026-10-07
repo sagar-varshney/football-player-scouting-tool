@@ -57,3 +57,10 @@ Clusters and archetypes are supplied labels. The synthetic demo's groups are ori
 - Observed touch heatmaps: these require separate positional events. Shot-location density is a different view.
 
 Use results to guide further scouting, not replace it. For dataset preparation and the import contract, see [local data setup](LOCAL_DATA.md); for the demonstrated workflow, return to [the README](../README.md#try-the-scouting-workflow).
+# Fictional demo model
+
+The bundled demo contains 1,280 independently generated profiles. Its eight per-90 metrics are standardized with population z-scores, then clustered using seeded K-means++ and Lloyd updates: five clusters, seed 42, ten restarts, maximum 300 iterations per restart. The lowest-inertia run is retained. Fitting is server-side when the demo module initializes, not an API call or paid service. Cluster IDs are arbitrary, and the pooled fit can reflect position differences; it is not a within-position tactical classification.
+
+Readable labels use the local exporter's ordered rules on raw position-relative average-rank percentiles across both demo seasons, independently of K-means. UI percentiles instead compare sample-adjusted statistics within a position and season. These are intentionally distinct calculations. Context fields and availability do not enter either model or statistical score. Simulated ages/availability support Finder filters but never count as verified real-world context.
+
+This demonstrates an unsupervised learning pipeline, not predictive validation. Synthetic profile construction influences the patterns K-means discovers. The TypeScript implementation uses the same conceptual preprocessing and configuration as the original scikit-learn exporter, not the identical numerical initialization or stopping behavior. No provider dataset is fitted, mapped or perturbed to create the demo.

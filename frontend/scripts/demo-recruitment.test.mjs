@@ -8,9 +8,9 @@ test("bundled fictional demo completes the recruitment audit without imported da
   const result = await auditDataset(demoData.players, demoData.metadata.features);
   assert.equal(demoData.metadata.data_mode, "demo");
   assert.equal(demoData.metadata.source_provider, "synthetic");
-  assert.equal(result.profiles, 128);
-  assert.equal(result.tested, 128);
+  assert.equal(result.profiles, 1280);
+  assert.equal(result.tested, 1280);
   assert.equal(result.cohorts, 8);
-  assert.equal(result.rows.length, 128);
+  assert.equal(result.rows.length, 1280);
   assert.equal(JSON.stringify(demoData), before);
 });

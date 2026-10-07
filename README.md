@@ -4,7 +4,7 @@ SCOUT//LAB is an open-source scouting workspace for player comparisons, recruitm
 
 The recruitment workspace also includes quick player previews, traceable measured summaries, interactive scatter discovery, saved analysis lenses, a cross-project review inbox and structured match observations. Everything runs locally without paid AI/API calls. [Explore the workflow](docs/RECRUITMENT_DESK.md#player-exploration-and-evidence-workflow).
 
-The public release starts with **128 fictional player-season profiles** across four positions and two demo seasons. These are original synthetic fixtures, not current Premier League statistics. Provider datasets, portraits and event files are not distributed with this release. You can import a compatible dataset you are permitted to use locally.
+The public release starts with **1,280 fictional player-season profiles** (640 fictional players) across four positions and two demo seasons. These are original synthetic fixtures, not current Premier League statistics. Provider datasets, portraits and event files are not distributed with this release. You can import a compatible dataset you are permitted to use locally.
 
 The real-player screenshots below show a separate local installation using the preserved **2025/26 Premier League snapshot**. A fresh clone opens with fictional demo profiles, not these real-player records or live 2026/27 coverage.
 
@@ -34,7 +34,7 @@ Both examples use the same scouting interface. The fictional profiles demonstrat
 
 | Source or mode | What it contributes | Coverage and limitations |
 | --- | --- | --- |
-| **Public demo** | 128 original fictional player-season profiles across four positions and two demo seasons. | Included in the repository. No real football observations or provider credentials required. |
+| **Public demo** | 1,280 original fictional player-season profiles (640 fictional players) across four positions and two demo seasons. | Included in the repository. No real football observations or provider credentials required. |
 | **Real-player screenshots** | Examples featuring Saka, Salah and other Premier League players from the preserved local snapshot. | Performance data is **2025/26**, not live 2026/27. Displayed squad context was last checked **19 September 2026**. Real datasets are not included. |
 | [Understat](https://understat.com/) | Historical attacking statistics: goals, expected goals (xG), assists, expected assists (xA), shots, key passes, xGChain and xGBuildup. | Statistical source for the local real-player examples. Does not supply the defensive or full touch-location coverage needed for comprehensive scouting. Current-season access and publication permission remain unverified. |
 | [Fantasy Premier League](https://fantasy.premierleague.com/) | Supporting player identity, club and availability context in the local prototype. | Supplemental, fantasy-oriented information—not a complete tactical dataset. Context can become stale; publication permission remains unconfirmed. |
@@ -45,6 +45,27 @@ Both examples use the same scouting interface. The fictional profiles demonstrat
 **Known gaps:** defensive coverage is limited, so attacking-profile similarity should not be treated as a complete assessment of defenders. Touch/action heatmaps require separate event-location observations; shot locations alone are not a touch heatmap. No verified free, permission-cleared live 2026/27 Premier League feed is bundled.
 
 Source attribution describes provenance, not permission, partnership or endorsement. **Permission to publish the real-data screenshots remains unconfirmed**; keeping raw files out of GitHub does not resolve that question. See [the recorded permission and coverage review](docs/permissions/STATUS.md). The importer uses a file you supply and makes no provider downloads; see [the JSON schema and local setup](docs/LOCAL_DATA.md).
+
+## How the fictional demo is generated
+
+The demo is an independently authored, seeded simulation—not renamed real players or lightly altered provider records. Its generator has no provider inputs, network requests or fitted real-player distributions. The default seed (`20261007`) reproduces the same 1,280 profiles; player names and IDs remain stable across both demo seasons.
+
+Authored scoring, creation and buildup tendencies produce related statistics: goals cannot exceed shots, assists cannot exceed key passes, and per-90 values are calculated from totals and playing time. The generator then **fits five K-means clusters** to all 1,280 profiles after population z-score standardization. Seeded K-means++ initialization, 10 restarts and Lloyd updates make the results reproducible. The TypeScript implementation follows the local exporter's analysis approach but is not bit-identical to scikit-learn.
+
+**Playing-style labels are separate from cluster IDs.** The same ordered metric-based rules as the local exporter use raw average-rank percentiles within each position across both seasons. For example, high creation and buildup can yield **Wide Playmaker**. These label ranks are not the sample-adjusted position/season percentiles used in the interface. Cluster numbers are arbitrary group identifiers, not quality rankings; neither clustering nor labels validate the demo against real football.
+
+**Simulated player context:** profiles include age, nationality, preferred foot, primary/secondary positions, club-unique shirt numbers and scripted availability. Age advances by one between demo seasons; nationality, foot and shirt number remain consistent. All fields are explicitly fictional and carry no verified squad/medical dates or provider identities. Age and availability can filter Finder results, but do not alter similarity, metric attainment or clustering. **Verified context only** excludes demo profiles. Portraits remain initials; no shot locations, touch events or defensive statistics are invented.
+
+Try these fictional examples in any position:
+
+| Player suffix | Example to explore |
+| --- | --- |
+| **03 / 04** | Increasing / decreasing attacking involvement between Demo 01 and Demo 02. |
+| **06 / 07** | A scoring streak in only 180 minutes / an early 620-minute sample in Demo 02. Compare raw output with adjusted percentiles. |
+| **08 / 09 / 11** | Creation, shooting volume and buildup involvement respectively. |
+| **13 / 14** | Finishing above simulated xG / genuine zero recorded goals. |
+
+For example, select **Demo Winger 06** to see why a high scoring rate in a tiny sample needs caution. The existing screenshot walkthrough captures earlier demo values; names and workflows still apply, but exact numbers, labels and search results may differ in this updated generator. The local real-player snapshot is unchanged. No event locations, portraits or defensive statistics are fabricated.
 
 ## Run on your device
 
@@ -76,7 +97,7 @@ Defensive actions, off-ball movement, physical attributes and team tactical cont
 3. **Position/season percentiles:** adjusted values are ranked within the selected position and season. A 90th percentile is a relative rank in that dataset, not a 90/100 overall ability rating.
 4. **Weighted similarity:** the tool compares percentile gaps using position-specific weights. **Goal threat**, **Chance creator**, **Link player** and the sliders change those weights—not the underlying statistics.
 
-Playing-style labels and clusters come from the supplied dataset. The public demo uses fictional labels; importing a file does not train a new model. Similarity is calculated in the interface, and stability indicators show sensitivity to the predefined recruitment briefs—not a probability of scouting success. See [the analysis guide](docs/ANALYSIS.md) for the formulas, examples and interpretation limits.
+Playing-style labels and clusters come from the supplied dataset. The public demo fits K-means to independently generated statistics and assigns readable labels using the local exporter's metric-based rules; importing a file does not train a new model. Similarity is calculated in the interface, and stability indicators show sensitivity to the predefined recruitment briefs—not a probability of scouting success. See [the analysis guide](docs/ANALYSIS.md) for the formulas, examples and interpretation limits.
 
 ## Try the scouting workflow
 
