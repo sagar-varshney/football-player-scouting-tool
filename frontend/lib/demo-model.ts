@@ -68,42 +68,49 @@ export function fitDemoKMeans(players: MetricProfile[], features: string[], seed
 
 // Same position-relative average ranks and ordered thresholds as the local exporter.
 // These label rules are separate from both K-means and sample-adjusted UI ranks.
-export function styleLabel(position: string, p: Record<string, number>) {
+export function styleRules(position: string, p: Record<string, number>) {
   const finishing = (p.goals_p90 + p.xg_p90 + p.shots_p90) / 3;
   const scoring = (p.goals_p90 + p.xg_p90) / 2;
   const creation = (p.assists_p90 + p.xa_p90 + p.key_passes_p90) / 3;
   const involvement = p.xg_chain_p90, buildup = p.xg_buildup_p90, shots = p.shots_p90;
-  if (position === "Forward") {
-    if (finishing >= 72 && creation >= 66) return "Complete Forward";
-    if (scoring >= 74 && creation < 58) return "Penalty Box Finisher";
-    if (creation >= 68 && involvement >= 58) return "Link Forward";
-    if (buildup >= 68 || involvement >= 72) return "Connecting Forward";
-    if (shots >= 68) return "Shot-Focused Forward";
-    return "Balanced Forward";
-  }
-  if (position === "Winger") {
-    if (creation >= 70 && finishing >= 68) return "Goal-Creating Winger";
-    if (scoring >= 72 && shots >= 66) return "Inside Forward";
-    if (creation >= 74 && buildup >= 62) return "Wide Playmaker";
-    if (creation >= 68) return "Chance-Creating Winger";
-    if (involvement >= 72) return "Combination Winger";
-    return "Wide Outlet";
-  }
-  if (position === "Midfielder") {
-    if (finishing >= 68 && creation >= 64) return "Goal-Creating Midfielder";
-    if (creation >= 76) return "Advanced Playmaker";
-    if (buildup >= 75 && involvement >= 68) return "Possession Controller";
-    if (buildup >= 68) return "Buildup Connector";
-    if (involvement >= 72) return "Possession Hub";
-    return "Support Midfielder";
-  }
-  if (position === "Defender") {
-    if (creation >= 68 && buildup >= 58) return "Attacking Defender";
-    if (buildup >= 74 && involvement >= 62) return "Possession Defender";
-    if (buildup >= 66 || involvement >= 68) return "Buildup Defender";
-    return "Low-Usage Defender";
-  }
-  return "Unclassified Role";
+  const min = (name: string, value: number, threshold: number) => ({ name, value, threshold, operator: ">=", met: value >= threshold, gap: Math.max(0, threshold - value) });
+  const max = (name: string, value: number, threshold: number) => ({ name, value, threshold, operator: "<", met: value < threshold, gap: value < threshold ? 0 : value - threshold + .001 });
+  const rule = (label: string, checks: ReturnType<typeof min>[], any = false) => ({ label, checks, any, met: checks.length === 0 || (any ? checks.some(c => c.met) : checks.every(c => c.met)), gap: checks.length ? (any ? Math.min(...checks.map(c => c.gap)) : Math.max(...checks.map(c => c.gap))) : 0 });
+  if (position === "Forward") return [
+    rule("Complete Forward", [min("Finishing", finishing, 72), min("Creation", creation, 66)]),
+    rule("Penalty Box Finisher", [min("Scoring", scoring, 74), max("Creation", creation, 58)]),
+    rule("Link Forward", [min("Creation", creation, 68), min("Move involvement", involvement, 58)]),
+    rule("Connecting Forward", [min("Buildup", buildup, 68), min("Move involvement", involvement, 72)], true),
+    rule("Shot-Focused Forward", [min("Shots", shots, 68)]),
+    rule("Balanced Forward", []),
+  ];
+  if (position === "Winger") return [
+    rule("Goal-Creating Winger", [min("Creation", creation, 70), min("Finishing", finishing, 68)]),
+    rule("Inside Forward", [min("Scoring", scoring, 72), min("Shots", shots, 66)]),
+    rule("Wide Playmaker", [min("Creation", creation, 74), min("Buildup", buildup, 62)]),
+    rule("Chance-Creating Winger", [min("Creation", creation, 68)]),
+    rule("Combination Winger", [min("Move involvement", involvement, 72)]),
+    rule("Wide Outlet", []),
+  ];
+  if (position === "Midfielder") return [
+    rule("Goal-Creating Midfielder", [min("Finishing", finishing, 68), min("Creation", creation, 64)]),
+    rule("Advanced Playmaker", [min("Creation", creation, 76)]),
+    rule("Possession Controller", [min("Buildup", buildup, 75), min("Move involvement", involvement, 68)]),
+    rule("Buildup Connector", [min("Buildup", buildup, 68)]),
+    rule("Possession Hub", [min("Move involvement", involvement, 72)]),
+    rule("Support Midfielder", []),
+  ];
+  if (position === "Defender") return [
+    rule("Attacking Defender", [min("Creation", creation, 68), min("Buildup", buildup, 58)]),
+    rule("Possession Defender", [min("Buildup", buildup, 74), min("Move involvement", involvement, 62)]),
+    rule("Buildup Defender", [min("Buildup", buildup, 66), min("Move involvement", involvement, 68)], true),
+    rule("Low-Usage Defender", []),
+  ];
+  return [rule("Unclassified Role", [])];
+}
+
+export function styleLabel(position: string, p: Record<string, number>) {
+  return styleRules(position, p).find(rule => rule.met)!.label;
 }
 
 export function deriveDemoStyles(players: MetricProfile[], features: string[]) {

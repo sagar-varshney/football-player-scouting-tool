@@ -631,3 +631,13 @@ td > span:not(.role-chip) { margin-top: 3px; color: var(--muted); font-size: .63
 .fictional-context dt { color: #9aaba1; font-size: 11px; }
 .fictional-context dd { margin: 4px 0 0; color: #eff6f0; font-size: 13px; overflow-wrap: anywhere; }
 .fictional-context small { display: block; color: #b0bfb4; font-size: 11px; line-height: 1.5; }
+.insight-panel { margin: 18px 0; padding: 20px; border: 1px solid #30453b; border-radius: 16px; background: #0b1712; }
+.insight-panel > h3 { margin: 0 0 10px; font-size: 22px; }
+.insight-panel > p { color: #b6c3bc; line-height: 1.6; }
+.insight-panel select { display: block; margin: 8px 0 16px; min-width: 180px; max-width: 100%; padding: 10px; border: 1px solid #405449; border-radius: 8px; color: #e8f2eb; background: #12231a; }
+.insight-check { display: block; white-space: normal; line-height: 1.6; }
+.review-side-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.review-side-grid > article { min-width: 0; background: #14231b; border: 1px solid #354b3e; border-radius: 12px; padding: 16px; }
+.review-side-grid h4 { margin-top: 0; color: #b8ff3d; }
+.review-side-grid h5 { margin: 16px 0 6px; color: #a1b9a8; }
+.review-side-grid p { overflow-wrap: anywhere; }

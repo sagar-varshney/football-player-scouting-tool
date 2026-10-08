@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { quoteCsv } from "../lib/csv";
 import RecruitmentDesk from "../components/RecruitmentDesk";
 import { FictionalContext } from "../components/FictionalContext";
+import { SeasonComparison, StyleExplanation } from "../components/AnalysisPanels";
 import {
   CartesianGrid,
   Line,
@@ -783,6 +784,8 @@ export default function Page() {
           <Kpi label="Buildup play" value={numberFormat(target.xg_buildup_p90)} percentile={percentileValue(cohortPercentiles, target, "xg_buildup_p90")} detail="contribution before the final action" />
         </section>
 
+        <StyleExplanation players={payload.players} player={target}/>
+
         <section className="analysis-card">
           <div className="analysis-icon">✦</div>
           <div><span className="eyebrow">Scouting summary</span><h2>What makes this player stand out</h2><p>{target.player_name} plays as a <strong>{target.archetype}</strong>. Their strongest qualities are {strongestSignals.map((signal, index) => <span key={signal.feature}>{index ? ", " : ""}{metricLabel(signal.feature)} ({Math.round(signal.value)}th percentile)</span>)}. Every comparison is made against other {target.position.toLowerCase()}s from {selectedSeason} using per-90 performance.</p></div>
@@ -993,7 +996,7 @@ function PlayerFinder({ players, features, percentiles, position, season, onLoad
 
 function PlayerTrends({ payload, player }: { payload: Payload; player: Player }) {
   const [feature, setFeature] = useState<Feature>(payload.metadata.features.includes("key_passes_p90") ? "key_passes_p90" : payload.metadata.features[0]);
-  const history = useMemo(() => payload.players.filter((item) => item.player_name === player.player_name).sort((a, b) => String(a.season).localeCompare(String(b.season))), [payload, player.player_name]);
+  const history = useMemo(() => payload.players.filter((item) => item.player_id === player.player_id).sort((a, b) => String(a.season).localeCompare(String(b.season))), [payload, player.player_id]);
   const trendData = useMemo(() => history.map((seasonPlayer) => {
     const cohort = payload.players.filter((item) => item.season === seasonPlayer.season && item.position === seasonPlayer.position);
     const lookup = buildCohortPercentiles(cohort, [feature]);
@@ -1016,6 +1019,7 @@ function PlayerTrends({ payload, player }: { payload: Payload; player: Player })
   const consistency = deviation <= 8 ? "Highly consistent" : deviation <= 16 ? "Generally consistent" : "Variable across seasons";
 
   return <article className="trends-panel panel">
+    <SeasonComparison players={payload.players} player={player} features={payload.metadata.features}/>
     <div className="trends-toolbar"><div><span className="eyebrow">{player.player_name}</span><h2>{trajectory}</h2><p>{consistency} · {trendData.length} season{trendData.length === 1 ? "" : "s"} available</p></div><label><span>Track metric</span><select value={feature} onChange={(event) => setFeature(event.target.value)}>{payload.metadata.features.map((item) => <option key={item} value={item}>{metricLabel(item)}</option>)}</select></label></div>
     <div className="trend-layout"><div className="trend-chart"><ResponsiveContainer width="100%" height={330}><LineChart data={trendData} margin={{ top: 28, right: 24, bottom: 8, left: 0 }}><CartesianGrid stroke="#243632" strokeDasharray="3 5" vertical={false} /><XAxis dataKey="season" tick={{ fill: "#82918e", fontSize: 11 }} axisLine={{ stroke: "#30423f" }} tickLine={false} /><YAxis domain={[0, 100]} tick={{ fill: "#82918e", fontSize: 11 }} axisLine={false} tickLine={false} width={34} /><Tooltip content={<TrendTooltip feature={feature} />} /><Line type="monotone" dataKey="percentile" stroke={compareColor} strokeWidth={4} dot={{ r: 6, fill: compareColor, stroke: "#0e1b19", strokeWidth: 3 }} activeDot={{ r: 8 }} /></LineChart></ResponsiveContainer><div className="trend-axis-note"><span>Sample-adjusted percentile among same-position players</span><b>{change >= 0 ? "+" : ""}{change.toFixed(0)} pts from first to latest</b></div></div><div className="trend-seasons">{trendData.map((item) => <div key={String(item.season)}><span>{item.season}</span><strong>{item.percentile.toFixed(0)}th</strong><p>{item.raw.toFixed(2)} /90 · {item.minutes.toLocaleString()} min</p><small>{item.club}</small></div>)}</div></div>
     <div className="shrinkage-note"><span>How reliability works</span><p>The displayed per-90 value is always the recorded number. Ranking percentiles use an empirical-Bayes posterior mean with a 900-minute positional prior, so short samples move toward the cohort average and established samples retain more of their observed performance.</p></div>

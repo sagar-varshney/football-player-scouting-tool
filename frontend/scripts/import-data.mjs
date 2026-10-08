@@ -1,6 +1,7 @@
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { inspectDataset } from "../lib/data-quality.mjs";
 
 export function validateDataset(data) {
   const features = data?.metadata?.features;
@@ -18,6 +19,8 @@ export function validateDataset(data) {
     seen.add(key);
   }
   if (!Array.isArray(data.cluster_profiles)) throw new Error("Missing cluster_profiles array.");
+  const quality = inspectDataset(data.players, features);
+  if (quality.errors) throw new Error(quality.issues.find(i => i.severity === "error").message);
   return { ...data, metadata: { ...data.metadata, row_count: data.players.length, positions: [...new Set(data.players.map(p => p.position))], clubs: [...new Set(data.players.map(p => p.club))], seasons: [...new Set(data.players.map(p => p.season))], data_mode: "local" } };
 }
 
@@ -27,6 +30,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const input = await readFile(path.resolve(process.argv[2]), "utf8");
     if (Buffer.byteLength(input) > 30 * 1024 * 1024) throw new Error("Dataset exceeds 30 MB.");
     const data = validateDataset(JSON.parse(input));
+    const quality = inspectDataset(data.players, data.metadata.features);
+    if (quality.warnings) console.warn(`${quality.warnings} data-quality warnings. Review Analysis tools → Data quality before relying on results. Transfer spells are retained; no names or metrics were rewritten.`);
     const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../.local-data");
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, "scouting-data.json"), JSON.stringify(data));

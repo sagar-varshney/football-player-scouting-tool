@@ -125,6 +125,17 @@ Manual observations do not feed statistical scores. Automated summaries use expl
 
 Optional **Analysis tools** contains selected-player diagnostics and whole-dataset audits. Dossiers use the browser's **Save as PDF** destination; audits export JSON. No external AI or provider requests are required.
 
+### Understand and revisit a decision
+
+- **Why this playing style?** Expand a profile's explanation to see ordered rule thresholds, the first matching rule and nearby alternatives. Imported labels are never overwritten; a mismatch with the current rule replay is shown explicitly.
+- **Cluster quality & stability:** under **Analysis tools**, run the bounded diagnostic for 2–7 clusters. It reports sampled silhouette, inertia, seed agreement and 80%-sample agreement using adjusted Rand index. It does not automatically choose a cluster count or change the fitted model. Diagnostic fits use up to 800 complete profiles and three restarts; silhouette uses up to 160 sampled points.
+- **Data quality:** inspect duplicate/ambiguous identities, name variants, multiple club spells and screening warnings. The importer rejects ambiguous interface identities, retains transfer spells and warns without rewriting data.
+- **Season comparison:** see recorded output, minutes, adjusted rank, cohort size and cohort averages together. An anchored replay compares the latest output/minutes against first-season peers; it is a sensitivity check, not a causal explanation or forecast.
+- **Side-by-side shortlist review:** open **Your shortlist** to compare up to four saved candidates' notes, evidence gaps, review dates, next actions and metric evidence. Missing imported profiles remain visible with their notes.
+- **Analysis snapshots:** export/replay the precise brief, filters, weights, cohort metric records and ordered results locally. **Unlike portable project backups, these JSON files contain data records**; review redistribution permissions before sharing. Replay does not modify your current workspace. The fingerprint detects changes; it is not a cryptographic signature.
+
+The **Guided fictional walkthrough** introduces a creator, shooter and tiny-sample player. Exploring the lessons does not save candidates or invent match observations.
+
 The demo's numbers and dates are synthetic, not current football evidence. These features make no provider requests and do not change the source statistics or train a model. See [the recruitment desk guide](docs/RECRUITMENT_DESK.md) for details and limits. Export project backups before clearing browser storage.
 
 ![Fictional demo: the guided Define your search screen with plain-language presets, position, season, playing-time controls and expandable targets](docs/screenshots/09-demo-recruitment-desk.jpg)

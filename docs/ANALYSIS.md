@@ -59,6 +59,16 @@ Clusters and archetypes are supplied labels. The synthetic demo's groups are ori
 Use results to guide further scouting, not replace it. For dataset preparation and the import contract, see [local data setup](LOCAL_DATA.md); for the demonstrated workflow, return to [the README](../README.md#try-the-scouting-workflow).
 # Fictional demo model
 
+## Explanations and diagnostics
+
+The style explanation replays the same ordered thresholds used by the local exporter. All eight recorded features are required; incomplete evidence is not filled with zero. Raw average ranks are pooled within position across available seasons, distinct from season-specific adjusted UI ranks. Near an alternative means required failing conditions are within eight raw-rank points, not a classification probability. Replay mismatches are shown without rewriting imported labels.
+
+Cluster diagnostics refit temporary models for k=2…7 on a deterministic sample of up to 800 complete profiles. Each fit uses three restarts; seed stability compares 42 vs 43, and sample stability fits an 80% subset with seed 44 and projects all diagnostic records through that subset's scaler and centroids. Adjusted Rand index is label invariant. Sample silhouette uses up to 160 points with within-sample distances; it is an estimate, not the exact full-dataset silhouette. The diagnostic does not replace the saved five-cluster model or automatically select k. Inertia decreases with added clusters, so interpreting it alone is misleading. These descriptive checks do not validate real-world scouting outcomes.
+
+Season evidence uses stable player IDs. Multiple club spells are displayed separately without adding per-90 rates. An anchored replay substitutes the latest player output/minutes into the first-season cohort and recomputes the prior mean while keeping peer records fixed; changing position or ambiguous endpoint spells withhold the anchored calculation.
+
+Analysis snapshots contain the cohort metric records, brief, display filters, category weights, method version, dataset version and ordered results. Local replay verifies a non-cryptographic change fingerprint and compares the recomputed results with the stored results. Exporting does not confer permission to redistribute imported provider records. Project backups remain a separate, references-and-notes-only format.
+
 The bundled demo contains 1,280 independently generated profiles. Its eight per-90 metrics are standardized with population z-scores, then clustered using seeded K-means++ and Lloyd updates: five clusters, seed 42, ten restarts, maximum 300 iterations per restart. The lowest-inertia run is retained. Fitting is server-side when the demo module initializes, not an API call or paid service. Cluster IDs are arbitrary, and the pooled fit can reflect position differences; it is not a within-position tactical classification.
 
 Readable labels use the local exporter's ordered rules on raw position-relative average-rank percentiles across both demo seasons, independently of K-means. UI percentiles instead compare sample-adjusted statistics within a position and season. These are intentionally distinct calculations. Context fields and availability do not enter either model or statistical score. Simulated ages/availability support Finder filters but never count as verified real-world context.

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { CartesianGrid, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from "recharts";
 import { quoteCsv } from "../lib/csv";
 import { EvidenceSummary, LensManager, ObservationEditor, PlayerPreview, ReviewInbox, ScatterDiscovery } from "./ScoutingTools";
+import { AnalysisSnapshots, ClusterQuality, DataQuality, DemoWalkthrough, SeasonComparison, ShortlistReview, StyleExplanation } from "./AnalysisPanels";
 import type { AnalysisLens } from "../lib/lenses";
 import { CandidateCards, SearchPresets } from "./WorkflowViews";
 import { BriefDecisionCompare, DatasetAudit, Dossier, EvidencePanel, NearMisses, ProjectReview } from "./DecisionTools";
@@ -158,6 +159,8 @@ export default function RecruitmentDesk(props: Props) {
     <nav className="flow-steps" aria-label="Recruitment workflow">{([{key:"Brief",name:"Define your search",detail:"Choose what matters"},{key:"Candidates",name:"Review candidates",detail:"Explore & compare"},{key:"Projects",name:"Your shortlist",detail:`${activeProject?.entries.length??0} saved in this project`}] as const).map((step,i)=>{const active=step.key==="Brief"?tab==="Brief":step.key==="Projects"?tab==="Projects":["Candidates","Report","Brief compare","Compare"].includes(tab);return <button key={step.key} aria-current={active?"step":undefined} onClick={()=>setTab(step.key)}><b>0{i+1}</b><span><strong>{step.name}</strong><small>{step.detail}</small></span><i aria-hidden="true">→</i></button>;})}</nav>
     {previewPlayer&&<PlayerPreview player={previewPlayer} features={features} lookup={previewLookup} brief={brief} cohortSize={previewPool.length} generatedAt={generatedAt} saved={activeProject?.entries.some(e=>e.key===identity(previewPlayer))??false} selected={preview?.context==="charts"?comparePlayers.some(p=>identity(p)===identity(previewPlayer)):briefComparisonKeys.includes(identity(previewPlayer))} comparisonCount={preview?.context==="charts"?comparePlayers.length:briefComparisonKeys.length} comparisonLimit={4} onClose={closePreview} onSave={()=>addCandidate(previewPlayer)} onCompare={preview?.context==="charts"&&identity(previewPlayer)===identity(target)?undefined:()=>preview?.context==="charts"?toggleChartPlayer(previewPlayer):toggleBriefPlayer(previewPlayer)} onReport={()=>{setReportKey(identity(previewPlayer));closePreview();setTab("Report");}}/>}
     {notice && <p className="desk-notice" role="status">{notice}</p>}
+    {dataMode === "demo" && <DemoWalkthrough players={players} onScout={onScout}/>}
+    <AnalysisSnapshots players={players} target={target} features={features} brief={brief} priorities={lensPriorities ?? priorities} datasetVersion={datasetVersion} showFailures={showFailures} sort={sort}/>
     {["Candidates","Report","Brief compare","Compare"].includes(tab)&&<div className="flow-review-nav"><div><span className="eyebrow">{brief.position} · {brief.season}</span><p>{brief.name} · {brief.minimumMinutes}+ minutes</p></div><div><button aria-pressed={tab==="Candidates"} onClick={()=>setTab("Candidates")}>{tab==="Candidates"?"Candidates":"← Candidates"}</button><button disabled={briefComparisonKeys.length<2} aria-pressed={tab==="Brief compare"} onClick={()=>setTab("Brief compare")}>Compare selected ({briefComparisonKeys.length}/4)</button><button aria-pressed={tab==="Compare"} onClick={()=>setTab("Compare")}>Profile charts</button></div></div>}
     <div role="region" id={`desk-view-${tab}`} aria-label={tab==="Brief"?"Define your search":tab==="Projects"?"Your shortlist":tab==="Checks"?"Analysis tools":tab==="Candidates"?"Review candidates":tab}>
     {tab === "Brief compare" && <BriefDecisionCompare pool={briefPool} brief={brief} lookup={briefLookup} selected={briefComparisonKeys} onSelected={setBriefComparisonKeys} features={features} generatedAt={generatedAt} onReport={p=>{setReportKey(identity(p));setTab("Report");}} onDossier={setDossierPlayers}/>}
@@ -182,6 +185,8 @@ export default function RecruitmentDesk(props: Props) {
       <div className="flow-next"><p>Your shortlist keeps notes, next actions and reports together.</p><button onClick={()=>setTab("Projects")}>View your shortlist →</button></div>
     </>}
     {tab === "Report" && <>
+      <StyleExplanation players={players} player={reportPlayer}/>
+      <SeasonComparison players={players} player={reportPlayer} features={features}/>
       <div className="desk-toolbar"><button onClick={()=>setDossierPlayers([reportPlayer])}>Preview player dossier</button><span>Includes the brief, measured profile, trade-offs and active project notes.</span></div>
       <details className="flow-advanced"><summary>Sample & source details <span>Coverage, minutes & freshness</span></summary><EvidencePanel player={reportPlayer} features={features} generatedAt={generatedAt}/></details>
       <div className="desk-toolbar"><label>Player report<select aria-label="Report player" value={identity(reportPlayer)} onChange={e=>setReportKey(e.target.value)}>{[target,...pool.filter(p=>identity(p)!==identity(target))].map(p=><option key={identity(p)} value={identity(p)}>{p.player_name}</option>)}{!pool.some(p=>identity(p)===identity(reportPlayer))&&<option value={identity(reportPlayer)}>{reportPlayer.player_name}</option>}</select></label><button onClick={exportReport}>Download report</button><button onClick={()=>addCandidate(reportPlayer)}>+ Add to project</button><button onClick={()=>onScout(reportPlayer)}>Open profile</button></div>
@@ -201,6 +206,7 @@ export default function RecruitmentDesk(props: Props) {
       <ScatterDiscovery pool={pool} features={features} x={xFeature} y={yFeature} onAxes={(x,y)=>{setXFeature(x);setYFeature(y);}} selected={comparePlayers.map(identity)} saved={savedKeys} onPreview={p=>setPreview({key:identity(p),context:"charts"})} onSave={addCandidate} onCompare={toggleChartPlayer}/>
     </>}
     {tab === "Projects" && <>
+      {activeProject && <ShortlistReview key={activeProject.id} project={activeProject} players={players} features={features} onReview={key => setExpandedEntry(key)}/>}
       <ReviewInbox projects={projects} players={players} features={features} datasetVersion={datasetVersion} onOpen={(projectId,key)=>{switchProject(projectId);setExpandedEntry(key);}} onAcknowledge={(projectId,key)=>{const player=players.find(p=>identity(p)===key);if(!player)return;setProjects(current=>current.map(project=>project.id===projectId?{...project,entries:project.entries.map(e=>e.key===key?{...e,profileSignature:profileSignature(player,features),reviewedDatasetVersion:datasetVersion}:e)}:project));setNotice("Record update acknowledged. Review dates, observations and missing-evidence tasks are unchanged.");}}/>
       <div className="flow-intro"><h3>Keep your best options together.</h3><p>{activeProject?`Working shortlist: ${activeProject.name}. Open a player to add notes or plan your next review.`:"Save a candidate from Review candidates to start a shortlist automatically, or create your own below."}</p></div>
       {activeProject&&<div className="desk-toolbar"><button onClick={()=>setDossierPlayers(activeProject.entries.map(e=>players.find(p=>identity(p)===e.key)).filter((p):p is ScoutPlayer=>Boolean(p)).slice(0,4))}>Preview project dossier</button><span>Charts cover the first four available candidates; all project notes and history are included.</span></div>}
@@ -222,6 +228,8 @@ export default function RecruitmentDesk(props: Props) {
       </article>;})}</div></>}
     </>}
     {tab === "Checks" && diagnostics && <>
+      <DataQuality players={players} features={features}/>
+      <ClusterQuality key={datasetVersion} players={players} features={features} datasetVersion={datasetVersion}/>
       <DatasetAudit players={players} features={features} datasetVersion={datasetVersion}/>
       <div className="desk-report-head"><span className="eyebrow">Model behaviour · not predictive validation</span><h3>How stable are this player's matches?</h3><p>{target.player_name} · {target.season} · {target.position} · {diagnostics.profiles} profiles · {diagnostics.incomplete} incomplete profiles</p></div>
       <p className="desk-footnote">These checks run locally on the active cohort and current category weights. Baseline: 900-minute prior. Top-{diagnostics.k} retention measures overlap, not rank order or transfer-success confidence. No model is retrained or changed.</p>
