@@ -5,6 +5,7 @@ import { quoteCsv } from "../lib/csv";
 import RecruitmentDesk from "../components/RecruitmentDesk";
 import { FictionalContext } from "../components/FictionalContext";
 import { SeasonComparison, StyleExplanation } from "../components/AnalysisPanels";
+import { buildPercentiles, rankSimilar } from "../lib/recruitment";
 import {
   CartesianGrid,
   Line,
@@ -271,22 +272,7 @@ function adjustedMetricValue(player: Player, feature: Feature, cohortMean: numbe
 }
 
 function buildCohortPercentiles(players: Player[], features: Feature[]): PercentileLookup {
-  const lookup: PercentileLookup = {};
-  players.forEach((player) => { lookup[playerKey(player)] = {}; });
-  features.forEach((feature) => {
-    const cohortMean = players.reduce((sum, player) => sum + metricValue(player, feature), 0) / (players.length || 1);
-    const adjustedValues = new Map(players.map((player) => [playerKey(player), adjustedMetricValue(player, feature, cohortMean)]));
-    const sorted = Array.from(adjustedValues.values()).sort((a, b) => a - b);
-    players.forEach((player) => {
-      const value = adjustedValues.get(playerKey(player)) ?? 0;
-      const below = sorted.findIndex((item) => item >= value);
-      const first = below === -1 ? sorted.length - 1 : below;
-      let last = first;
-      while (last + 1 < sorted.length && sorted[last + 1] === value) last += 1;
-      lookup[playerKey(player)][feature] = sorted.length <= 1 ? 100 : ((first + last) / 2 / (sorted.length - 1)) * 100;
-    });
-  });
-  return lookup;
+  return buildPercentiles(players, features, PRIOR_MINUTES);
 }
 
 function percentileValue(lookup: PercentileLookup, player: Player | undefined, feature: Feature) {
@@ -315,16 +301,13 @@ function metricOverlap(target: Player, candidate: Player, features: Feature[], p
 }
 
 function findMatches(players: Player[], target: Player, topN: number, features: Feature[], percentiles: PercentileLookup, priorities: SimilarityPriorities) {
-  const totalWeight = features.reduce((sum, feature) => sum + featureWeight(target.position, feature, priorities), 0) || 1;
-  return players
-    .filter((player) => playerKey(player) !== playerKey(target) && player.position === target.position)
-    .map((player) => {
+  return rankSimilar(players, target, features, percentiles, priorities).slice(0, topN)
+    .map(({ player, score: similarityPct }) => {
       const featureFits = features.map((feature) => ({
         feature,
         fit: 100 - Math.abs(percentileValue(percentiles, target, feature) - percentileValue(percentiles, player, feature)),
         weight: featureWeight(target.position, feature, priorities),
       }));
-      const similarityPct = featureFits.reduce((sum, item) => sum + item.fit * item.weight, 0) / totalWeight;
       const categoryScores = Object.fromEntries(Object.entries(similarityCategories).map(([category, categoryFeatures]) => {
         const available = featureFits.filter((item) => categoryFeatures.includes(item.feature));
         const weight = available.reduce((sum, item) => sum + item.weight, 0) || 1;
@@ -334,9 +317,7 @@ function findMatches(players: Player[], target: Player, topN: number, features: 
       const sampleScore = Math.min(100, Math.max(25, (Math.min(Number(target.minutes ?? 0), Number(player.minutes ?? 0)) / 1800) * 100));
       const sampleLabel = sampleScore >= 80 ? "Robust sample" : sampleScore >= 55 ? "Established sample" : "Developing sample";
       return { ...player, similarity: similarityPct / 100, similarityPct, overlap: metricOverlap(target, player, features, priorities), sampleScore, sampleLabel, finishingScore: categoryScores.Finishing, creationScore: categoryScores.Creation, involvementScore: categoryScores.Involvement, sharedStrengthsLabel };
-    })
-    .sort((a, b) => b.similarity - a.similarity)
-    .slice(0, topN);
+    });
 }
 
 function buildStabilityMap(players: Player[], target: Player, features: Feature[], percentiles: PercentileLookup) {
@@ -755,7 +736,7 @@ export default function Page() {
         <section className="hero">
           <div className="hero-gridline" />
           <div className="player-portrait-wrap">
-            <div className={`player-orb ${targetImage ? "with-photo" : ""}`}>{targetImage ? <img src={targetImage.path} alt={`${target.player_name} portrait`} /> : <span aria-hidden="true">{initials(target.player_name)}</span>}<i>{Math.round(percentileValue(cohortPercentiles, target, "xg_chain_p90"))}</i></div>
+            <div className={`player-orb ${targetImage ? "with-photo" : ""}`}>{targetImage ? <img src={targetImage.path} alt={`${target.player_name} portrait`} /> : <span aria-hidden="true">{initials(target.player_name)}</span>}</div>
             {targetImage && <div className="hero-photo-credit">Photo: <a href={targetImage.source_url} target="_blank" rel="noreferrer">{targetImage.creator || "Wikimedia contributor"}</a> · <a href={targetImage.license_url} target="_blank" rel="noreferrer">{targetImage.license}</a></div>}
           </div>
           <div className="hero-content">
@@ -810,7 +791,7 @@ export default function Page() {
           <div className="validation-decision"><span>Why the model still uses 900 minutes</span><p>{payload.metadata.validation.reliability.decision}</p><a href="https://github.com/sagar-varshney/football-player-scouting-tool/blob/main/data/free_data/MODEL_VALIDATION.md" target="_blank" rel="noreferrer">Read the validation report ↗</a></div>
         </section>}
 
-        <RecruitmentDesk players={payload.players} pool={pool} target={target} features={payload.metadata.features} datasetVersion={payload.metadata.dataset_version ?? "unversioned import"} generatedAt={payload.metadata.generated_at} dataMode={payload.metadata.data_mode} priorities={priorities} quickShortlist={shortlistPlayers} onScout={scoutPlayer} />
+        <RecruitmentDesk players={payload.players} pool={pool} target={target} features={payload.metadata.features} datasetVersion={payload.metadata.dataset_version ?? "unversioned import"} datasetMetadata={payload.metadata} generatedAt={payload.metadata.generated_at} dataMode={payload.metadata.data_mode} priorities={priorities} quickShortlist={shortlistPlayers} onScout={scoutPlayer} />
 
         <section id="finder" className="section-block">
           <SectionHeading eyebrow="Recruitment finder" title="Build a data-led player search" aside={`${selectedSeason} · ${position}s`} />

@@ -4,14 +4,16 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { CartesianGrid, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from "recharts";
 import { quoteCsv } from "../lib/csv";
 import { EvidenceSummary, LensManager, ObservationEditor, PlayerPreview, ReviewInbox, ScatterDiscovery } from "./ScoutingTools";
-import { AnalysisSnapshots, ClusterQuality, DataQuality, DemoWalkthrough, SeasonComparison, ShortlistReview, StyleExplanation } from "./AnalysisPanels";
+import { AnalysisSnapshots, ClusterQuality, DemoWalkthrough, SeasonComparison, ShortlistReview, StyleExplanation } from "./AnalysisPanels";
+import { DatasetVersions, ImportValidation, RecommendationBehavior } from "./IngestionPanels";
+import type { Dataset } from "../lib/dataset-contract.mjs";
 import type { AnalysisLens } from "../lib/lenses";
 import { CandidateCards, SearchPresets } from "./WorkflowViews";
 import { BriefDecisionCompare, DatasetAudit, Dossier, EvidencePanel, NearMisses, ProjectReview } from "./DecisionTools";
 import { assessBrief, buildPercentiles, identity, initialBrief, labels, observed, percentile, rankingDiagnostics, resemblance, profileSignature, safeEvidenceUrl, validateProject, weights } from "../lib/recruitment";
 import type { BriefRule, ProjectEntry, RecruitmentBrief, RecruitmentProject, ScoutPlayer } from "../lib/recruitment";
 
-type Props = { players: ScoutPlayer[]; pool: ScoutPlayer[]; target: ScoutPlayer; features: string[]; datasetVersion: string; generatedAt?: string; dataMode?: string; priorities: Record<string, number>; quickShortlist: ScoutPlayer[]; onScout: (p: ScoutPlayer) => void };
+type Props = { players: ScoutPlayer[]; pool: ScoutPlayer[]; target: ScoutPlayer; features: string[]; datasetVersion: string; datasetMetadata: Dataset["metadata"]; generatedAt?: string; dataMode?: string; priorities: Record<string, number>; quickShortlist: ScoutPlayer[]; onScout: (p: ScoutPlayer) => void };
 const colors = ["#ff2d8d", "#83e63f", "#27d8ff", "#ffcc3d"];
 const storageKey = "scoutlab-recruitment-projects-v1";
 const tabs = ["Brief", "Candidates", "Brief compare", "Report", "Compare", "Projects", "Checks"] as const;
@@ -228,7 +230,9 @@ export default function RecruitmentDesk(props: Props) {
       </article>;})}</div></>}
     </>}
     {tab === "Checks" && diagnostics && <>
-      <DataQuality players={players} features={features}/>
+      <ImportValidation players={players} features={features} metadata={props.datasetMetadata} dataMode={dataMode}/>
+      <DatasetVersions players={players} features={features} metadata={props.datasetMetadata} dataMode={dataMode}/>
+      <RecommendationBehavior key={datasetVersion + "-behavior"} players={players} features={features} datasetVersion={datasetVersion}/>
       <ClusterQuality key={datasetVersion} players={players} features={features} datasetVersion={datasetVersion}/>
       <DatasetAudit players={players} features={features} datasetVersion={datasetVersion}/>
       <div className="desk-report-head"><span className="eyebrow">Model behaviour · not predictive validation</span><h3>How stable are this player's matches?</h3><p>{target.player_name} · {target.season} · {target.position} · {diagnostics.profiles} profiles · {diagnostics.incomplete} incomplete profiles</p></div>

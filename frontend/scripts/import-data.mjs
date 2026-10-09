@@ -1,40 +1,45 @@
-import { readFile, mkdir, writeFile } from "node:fs/promises";
+import { readFile, mkdir, writeFile, rename, unlink } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { inspectDataset } from "../lib/data-quality.mjs";
+import { compareDatasets, inspectImport, validateDataset } from "../lib/dataset-contract.mjs";
+export { validateDataset } from "../lib/dataset-contract.mjs";
 
-export function validateDataset(data) {
-  const features = data?.metadata?.features;
-  const allowed = ["goals_p90", "xg_p90", "assists_p90", "xa_p90", "shots_p90", "key_passes_p90", "xg_chain_p90", "xg_buildup_p90"];
-  if (!Array.isArray(features) || !features.length || features.some(f => !allowed.includes(f)) || new Set(features).size !== features.length) throw new Error("Provide unique supported per-90 features.");
-  if (!Array.isArray(data.players) || data.players.length < 2 || data.players.length > 50000) throw new Error("Provide between 2 and 50,000 profiles.");
-  const seen = new Set();
-  for (const player of data.players) {
-    if (!Number.isSafeInteger(player.player_id) || !["Forward", "Winger", "Midfielder", "Defender"].includes(player.position)) throw new Error("Invalid player ID or position.");
-    for (const field of ["player_name", "club", "season", "archetype"]) if (typeof player[field] !== "string" || !player[field].trim()) throw new Error(`Missing ${field}.`);
-    if (!Number.isInteger(player.cluster) || player.cluster < 0 || player.cluster > 4 || !Number.isFinite(player.minutes) || player.minutes < 0) throw new Error("Invalid cluster or minutes.");
-    for (const feature of features) if (typeof player[feature] !== "number" || !Number.isFinite(player[feature]) || player[feature] < 0) throw new Error(`Invalid ${feature}.`);
-    const key = `${player.player_id}-${player.season}-${player.club}-${player.position}`;
-    if (seen.has(key)) throw new Error("Duplicate profile identity.");
-    seen.add(key);
-  }
-  if (!Array.isArray(data.cluster_profiles)) throw new Error("Missing cluster_profiles array.");
-  const quality = inspectDataset(data.players, features);
-  if (quality.errors) throw new Error(quality.issues.find(i => i.severity === "error").message);
-  return { ...data, metadata: { ...data.metadata, row_count: data.players.length, positions: [...new Set(data.players.map(p => p.position))], clubs: [...new Set(data.players.map(p => p.club))], seasons: [...new Set(data.players.map(p => p.season))], data_mode: "local" } };
+async function atomicJson(destination, value) {
+  const temporary = `${destination}.${randomUUID()}.tmp`;
+  try { await writeFile(temporary, JSON.stringify(value), { flag: "wx", mode: 0o600 }); await rename(temporary, destination); }
+  finally { await unlink(temporary).catch(error => { if (error.code !== "ENOENT") throw error; }); }
+}
+
+export async function importDataset(inputPath, { directory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../.local-data"), dryRun = false, reportPath } = {}) {
+  const input = await readFile(path.resolve(inputPath), "utf8");
+  if (Buffer.byteLength(input) > 30 * 1024 * 1024) throw new Error("Dataset exceeds 30 MB.");
+  const parsed = JSON.parse(input), validation = inspectImport(parsed);
+  const data = validateDataset(parsed);
+  const destination = path.join(directory, "scouting-data.json");
+  if (reportPath && [path.resolve(destination), path.resolve(inputPath)].includes(path.resolve(reportPath))) throw new Error("Report path cannot overwrite the input or active dataset.");
+  let previous = null;
+  try { previous = JSON.parse(await readFile(destination, "utf8")); }
+  catch (error) { if (error.code !== "ENOENT") throw new Error("Existing dataset could not be read; it was left untouched. Resolve it before importing."); }
+  const comparison = previous ? compareDatasets(previous, data) : null;
+  const report = { schemaVersion: 1, validation, comparison, note: "Read-only assessment of the proposed import, not proof that an import was applied. Contains changed data values; retain/share only within source permissions. No prior dataset is archived automatically." };
+  if (reportPath) await atomicJson(path.resolve(reportPath), report);
+  if (!dryRun) { await mkdir(directory, { recursive: true }); await atomicJson(destination, data); }
+  return { data, report, applied: !dryRun };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    if (process.argv.length !== 3) throw new Error("Usage: npm run import-data -- /absolute/path/to/scouting-data.json");
-    const input = await readFile(path.resolve(process.argv[2]), "utf8");
-    if (Buffer.byteLength(input) > 30 * 1024 * 1024) throw new Error("Dataset exceeds 30 MB.");
-    const data = validateDataset(JSON.parse(input));
-    const quality = inspectDataset(data.players, data.metadata.features);
-    if (quality.warnings) console.warn(`${quality.warnings} data-quality warnings. Review Analysis tools → Data quality before relying on results. Transfer spells are retained; no names or metrics were rewritten.`);
-    const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../.local-data");
-    await mkdir(dir, { recursive: true });
-    await writeFile(path.join(dir, "scouting-data.json"), JSON.stringify(data));
-    console.log(`Imported ${data.players.length} profiles into private local storage. Start with SCOUTING_DATA_MODE=local.`);
-  } catch (error) { console.error(error.message); process.exitCode = 1; }
+    const args = process.argv.slice(2), inputPath = args.shift(); let dryRun = false, reportPath;
+    if (!inputPath || inputPath.startsWith("--")) throw new Error("Usage: npm run import-data -- /path/data.json [--dry-run] [--report /path/report.json]");
+    while (args.length) {
+      const option = args.shift();
+      if (option === "--dry-run" && !dryRun) dryRun = true;
+      else if (option === "--report" && !reportPath && args[0] && !args[0].startsWith("--")) reportPath = args.shift();
+      else throw new Error(`Unknown, repeated or incomplete option: ${option}`);
+    }
+    const result = await importDataset(inputPath, { dryRun, reportPath });
+    console.log(JSON.stringify(result.report, null, 2));
+    console.log(result.applied ? `Imported ${result.data.players.length} profiles atomically. Start with SCOUTING_DATA_MODE=local.` : "Dry run complete. Active dataset and source file unchanged.");
+  } catch (error) { console.error(error.message); if (error.report) console.error(JSON.stringify(error.report, null, 2)); process.exitCode = 1; }
 }

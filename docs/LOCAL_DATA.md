@@ -9,7 +9,7 @@ cd frontend
 npm run import-data -- /absolute/path/to/scouting-data.json
 ```
 
-Copy `frontend/.env.example` to `frontend/.env.local`, set `SCOUTING_DATA_MODE=local`, and restart the server. Imports replace the previously imported private profile file, so keep your own source copy. The importer makes no network calls and does not verify legal permission or football accuracy.
+Copy `frontend/.env.example` to `frontend/.env.local`, set `SCOUTING_DATA_MODE=local`, and restart the server. Imports replace the previously imported private profile file atomically after validation, so keep your own permitted source/baseline copy. Preview first with `npm run import-data -- /absolute/path/to/scouting-data.json --dry-run`; optionally add `--report /absolute/path/review.json`. No previous dataset is archived automatically. The importer makes no network calls and does not verify legal permission or football accuracy. See [import checks, units and version comparisons](INGESTION_AND_CHECKS.md).
 
 The JSON contract has three top-level fields:
 

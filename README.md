@@ -136,6 +136,12 @@ Optional **Analysis tools** contains selected-player diagnostics and whole-datas
 
 The **Guided fictional walkthrough** introduces a creator, shooter and tiny-sample player. Exploring the lessons does not save candidates or invent match observations.
 
+### Check data changes before trusting results
+
+Under **Analysis tools**, **Import validation** previews files without replacing the workspace and checks schema/types, identities, missing metrics, declared units and total/rate consistency. **Dataset-version comparison** reads a permitted earlier baseline locally and explains changed records, coverage and downstream scoring dependencies. **Recommendation behavior checks** exercise the shared scoring functions with controlled fictional changes and bounded active-data samples, grouped by position, minutes and completeness. Passing these checks is not prediction accuracy.
+
+The CLI supports `npm run import-data -- /path/new-data.json --dry-run` and an optional `--report /path/review.json`. Valid imports replace the active file atomically; invalid imports leave it untouched. Legacy unit declarations remain warning-only, and no historical datasets are archived automatically. See [the ingestion and checks guide](docs/INGESTION_AND_CHECKS.md) for the contract, comparison limits and interpretation.
+
 The demo's numbers and dates are synthetic, not current football evidence. These features make no provider requests and do not change the source statistics or train a model. See [the recruitment desk guide](docs/RECRUITMENT_DESK.md) for details and limits. Export project backups before clearing browser storage.
 
 ![Fictional demo: the guided Define your search screen with plain-language presets, position, season, playing-time controls and expandable targets](docs/screenshots/09-demo-recruitment-desk.jpg)
@@ -230,6 +236,9 @@ Only import material you are permitted to obtain, retain and use. Browser-visibl
 - Quick previews with expandable, numerical evidence behind measured summaries.
 - Interactive whole-cohort scatter discovery and position-specific saved analysis lenses.
 - Cross-project review inbox and structured manual match observations.
+- Import previews and dry runs with schema, identity, metric and unit checks.
+- Local dataset-version comparisons with coverage changes and affected scouting features.
+- Controlled recommendation checks across positions, playing time and data completeness.
 - Dataset-mode/season labels and recoverable loading errors.
 - Optional portrait, shot-map and historical event modules when suitable local assets are supplied.
 
@@ -243,7 +252,7 @@ npm test
 npm run build
 ```
 
-Python source and legacy tests are optional and require `requirements.txt` plus compatible local inputs. Dataset-dependent tests cannot run on a clean demo-only clone. CI checks the import boundary, absence of provider assets and frontend build without calling providers. Frontend tests cover missing-data handling, search presets, project/observation validation and round trips, lens validation, review-task detection and ranking diagnostics.
+Python source and legacy tests are optional and require `requirements.txt` plus compatible local inputs. Dataset-dependent tests cannot run on a clean demo-only clone. CI checks the import boundary, absence of provider assets and frontend build without calling providers. Frontend tests cover missing-data handling, search presets, project/observation validation and round trips, lens validation, review-task detection, ranking diagnostics, import safety, dataset comparisons and controlled recommendation behavior.
 
 ## Publication and licences
 

@@ -100,6 +100,7 @@ export function createDemoData(seed = 20261007) {
       row_count: players.length, positions, clubs: [...new Set(players.map(p => String(p.club)))], seasons, features,
       source_provider: "synthetic", data_mode: "demo", dataset_version: "synthetic-v4", model_version: "synthetic-kmeans-rules-v1",
       generator_seed: seed, minimum_minutes: 0, reliability_prior_minutes: 900,
+      feature_units: Object.fromEntries(features.map(f => [f, "per90"])), minutes_unit: "minutes",
       clustering: { method: "standardized-kmeans++-lloyd", clusters: fitted.k, seed: fitted.seed, restarts: fitted.restarts, iterations: fitted.iterations, inertia: round(fitted.inertia), fit_scope: "all fictional player-season profiles", standardization: "population z-score", implementation: "TypeScript; not bit-identical to scikit-learn", labels: "local-exporter position-relative rank rules; separate from clusters" },
       data_note: "Independently generated fictional metrics and context. K-means fits only this simulation; style labels use metric-based rules. No provider records, live data or validated real-football predictions.",
     }, players,

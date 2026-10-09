@@ -1,0 +1,10 @@
+import type { ScoutPlayer } from "./recruitment";
+export type Dataset = { metadata: { features: string[]; dataset_version?: string; [key: string]: unknown }; players: ScoutPlayer[]; cluster_profiles: Array<Record<string, unknown>> };
+export type ImportIssue = { severity: "error" | "warning"; code: string; message: string; path: string; rows?: number[]; field?: string };
+export type ImportReport = { profiles: number; errors: number; warnings: number; issues: ImportIssue[]; truncated: boolean };
+export const supportedFeatures: string[];
+export function inspectImport(data: unknown): ImportReport;
+export function validateDataset(data: unknown): Dataset;
+type FieldChange = { field: string; before: unknown; after: unknown; impact: string };
+export type DatasetComparison = { schemaVersion: number; previousVersion: string; currentVersion: string; previousProfiles: number; currentProfiles: number; matched: number; changed: number; unchanged: number; added: number; removed: number; addedFeatures: string[]; removedFeatures: string[]; metricChanges: Record<string, { changed: number; increased: number; decreased: number; unavailableBefore: number; unavailableAfter: number; coverageBefore: number; coverageAfter: number }>; metadataChanges: Array<{field: string; before: unknown; after: unknown}>; affectedCohorts: Array<{position: string; season: string; fields: string[]}>; changes: Array<{kind: string; playerId: number; name: string; season: string; previousClub: string | null; currentClub: string | null; fields: FieldChange[]}>; truncated: boolean; note: string };
+export function compareDatasets(previous: unknown, current: unknown): DatasetComparison;

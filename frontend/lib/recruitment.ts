@@ -43,6 +43,14 @@ export function resemblance(a: ScoutPlayer, b: ScoutPlayer, features: string[], 
   if (!total) return null;
   return features.reduce((s, f) => s + (100 - Math.abs(percentile(a, f, lookup)! - percentile(b, f, lookup)!)) * (metricWeights[f] ?? 1), 0) / total;
 }
+// Shared by the main match list and behavioral audit. Missing evidence is never scored as zero.
+export function rankSimilar(players: ScoutPlayer[], target: ScoutPlayer, features: string[], lookup: Percentiles, priorities?: Record<string, number>) {
+  const metricWeights = weights(target.position, priorities);
+  return players.filter(p => identity(p) !== identity(target) && p.position === target.position && p.season === target.season)
+    .map(player => ({ player, score: resemblance(target, player, features, lookup, metricWeights) }))
+    .filter((r): r is { player: ScoutPlayer; score: number } => r.score !== null)
+    .sort((a, b) => b.score - a.score || identity(a.player).localeCompare(identity(b.player)));
+}
 export function assessBrief(p: ScoutPlayer, brief: RecruitmentBrief, lookup: Percentiles) {
   const gates: string[] = [];
   if (p.position !== brief.position) gates.push("Different position");
